@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  qqbothub.web:
+    image: ${DOCKER_REGISTRY-}qqbothubweb
+    build:
+      context: .
+      dockerfile: src/QQBotHub.Web/Dockerfile
