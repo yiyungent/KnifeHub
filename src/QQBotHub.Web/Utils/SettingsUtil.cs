@@ -1,6 +1,6 @@
-﻿namespace QQBot.Web.Utils
+﻿namespace QQBotHub.Web.Utils
 {
-    public class SettingUtil
+    public class SettingsUtil
     {
         public static SettingsModel Get()
         {

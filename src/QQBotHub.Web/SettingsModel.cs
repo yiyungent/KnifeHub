@@ -1,5 +1,5 @@
 ﻿
-namespace QQBot.Web
+namespace QQBotHub.Web
 {
     public class SettingsModel 
     {

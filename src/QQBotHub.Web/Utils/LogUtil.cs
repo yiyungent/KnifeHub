@@ -4,11 +4,11 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace QQBot.Web.Utils
+namespace QQBotHub.Web.Utils
 {
     public class LogUtil
     {
-        public const string Sign = nameof(QQBot.Web);
+        public const string Sign = nameof(QQBotHub.Web);
 
         public static void Info(string message)
         {

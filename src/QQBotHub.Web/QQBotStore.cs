@@ -1,9 +1,9 @@
 ﻿using Konata.Core;
 using Konata.Core.Common;
 
-namespace QQBot.Web
+namespace QQBotHub.Web
 {
-    public class BotPluginStore
+    public class QQBotStore
     {
         public static Bot Bot { get; set; }
 
@@ -82,7 +82,7 @@ namespace QQBot.Web
         {
             get
             {
-                SettingsModel settingsModel = Utils.SettingUtil.Get();
+                SettingsModel settingsModel = Utils.SettingsUtil.Get();
                 string account = settingsModel.QQ;
                 string password = settingsModel.Password;
                 BotKeyStore botKeyStore = new BotKeyStore(uin: account, password: password);

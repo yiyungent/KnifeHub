@@ -1,7 +1,7 @@
 ﻿//using Newtonsoft.Json;
 using System.Text.Json;
 
-namespace QQBot.Web.Utils
+namespace QQBotHub.Web.Utils
 {
     public class JsonUtil
     {

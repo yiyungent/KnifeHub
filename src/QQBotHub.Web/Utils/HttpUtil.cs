@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQBot.Web.Utils
+namespace QQBotHub.Web.Utils
 {
     public class HttpUtil
     {

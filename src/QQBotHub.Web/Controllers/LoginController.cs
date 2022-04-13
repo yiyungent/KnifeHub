@@ -2,11 +2,13 @@
 using Konata.Core.Interfaces.Api;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QQBot.Web.ResponseModels;
+using PluginCore.Interfaces;
+using PluginCore.IPlugins;
+using QQBotHub.Web.ResponseModels;
 using System.Threading.Tasks;
 using static Konata.Core.Events.Model.CaptchaEvent;
 
-namespace QQBot.Web.Controllers
+namespace QQBotHub.Web.Controllers
 {
     [Route("api/[controller]")]
     [Authorize("PluginCoreAdmin")]
@@ -17,12 +19,15 @@ namespace QQBot.Web.Controllers
 
         public static string CaptchaMessage { get; set; }
 
-        public LoginController()
+        private readonly IPluginFinder _pluginFinder;
+
+        public LoginController(IPluginFinder pluginFinder)
         {
-            if (BotPluginStore.Bot == null)
+            if (QQBotStore.Bot == null)
             {
                 InitQQBot();
             }
+            _pluginFinder = pluginFinder;
         }
 
         /// <summary>
@@ -35,7 +40,7 @@ namespace QQBot.Web.Controllers
         {
             BaseResponseModel responseModel = new BaseResponseModel();
 
-            if (BotPluginStore.Bot.IsOnline())
+            if (QQBotStore.Bot.IsOnline())
             {
                 responseModel.Code = 1;
                 responseModel.Message = "已处于登录状态, 无需验证";
@@ -86,10 +91,10 @@ namespace QQBot.Web.Controllers
                 switch (CaptchaType)
                 {
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
-                        BotPluginStore.Bot.SubmitSmsCode(captcha);
+                        QQBotStore.Bot.SubmitSmsCode(captcha);
                         break;
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
-                        BotPluginStore.Bot.SubmitSliderTicket(captcha);
+                        QQBotStore.Bot.SubmitSliderTicket(captcha);
                         break;
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
                         break;
@@ -117,7 +122,7 @@ namespace QQBot.Web.Controllers
         public async Task<BaseResponseModel> IsOnline()
         {
             BaseResponseModel responseModel = new BaseResponseModel();
-            bool isOnline = BotPluginStore.Bot.IsOnline();
+            bool isOnline = QQBotStore.Bot.IsOnline();
             responseModel.Data = isOnline;
 
             return await Task.FromResult(responseModel);
@@ -128,9 +133,9 @@ namespace QQBot.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            if (!BotPluginStore.Bot.IsOnline())
+            if (!QQBotStore.Bot.IsOnline())
             {
-                Task<bool> taskLogin = BotPluginStore.Bot.Login();
+                Task<bool> taskLogin = QQBotStore.Bot.Login();
             }
 
             string indexFilePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "login.html");
@@ -139,12 +144,12 @@ namespace QQBot.Web.Controllers
         }
 
 
-        public static void InitQQBot()
+        public void InitQQBot()
         {
             #region Bot
 
             // Create a bot instance
-            var bot = BotFather.Create(BotPluginStore.BotConfig, BotPluginStore.BotDevice, BotPluginStore.BotKeyStore);
+            var bot = BotFather.Create(QQBotStore.BotConfig, QQBotStore.BotDevice, QQBotStore.BotKeyStore);
             {
                 // Print the log
                 bot.OnLog += (s, e) =>
@@ -178,22 +183,46 @@ namespace QQBot.Web.Controllers
                 bot.OnGroupMessage += (s, e) =>
                 {
                     Utils.LogUtil.Info($"群消息: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
+                    }
                 };
 
                 // Handle messages from friend
                 bot.OnFriendMessage += (s, e) =>
                 {
                     Utils.LogUtil.Info($"好友消息: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnFriendMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.FriendUin);
+                    }
                 };
 
                 bot.OnBotOnline += (s, e) =>
                 {
                     Utils.LogUtil.Info($"{s.Name} 上线");
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnBotOnline((s, e), s.Name, s.Uin);
+                    }
                 };
 
                 bot.OnBotOffline += (s, e) =>
                 {
                     Utils.LogUtil.Info($"{s.Name} 离线");
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnBotOffline((s, e), s.Name, s.Uin);
+                    }
                 };
                 // ... More handlers
             }
@@ -215,7 +244,7 @@ namespace QQBot.Web.Controllers
             #endregion
 
             // 登录成功, 保存起来
-            BotPluginStore.Bot = bot;
+            QQBotStore.Bot = bot;
         }
 
     }

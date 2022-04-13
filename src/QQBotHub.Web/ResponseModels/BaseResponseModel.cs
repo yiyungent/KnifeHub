@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQBot.Web.ResponseModels
+namespace QQBotHub.Web.ResponseModels
 {
     public class BaseResponseModel
     {
