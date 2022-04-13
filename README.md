@@ -48,12 +48,6 @@ QQ 机器人 | 基于 Konata.Core | 一键免费部署
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
 
-> 部署完成后
-> > 一定要先登录 `PluginCore Admin`   
-> 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
-> 2. 访问: <https://your-domain/login> 进行 QQ机器人 登录
-
-
 #### 方式2: 使用 Docker
 
 ```bash
@@ -66,6 +60,11 @@ docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" --name qqbothub yiyung
 
 ### QQ 登录
 
+> 部署完成后
+> > 一定要先登录 `PluginCore Admin`   
+> 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
+> 2. 访问: <https://your-domain/login> 进行 QQ机器人 登录
+
 > 若为 `短信验证` , 则直接输入收到的验证码, 点击 `提交验证` 即可
 
 > 若为 `滑动验证` , 则 `点击前往验证`, 浏览器在 `滑动验证` 页面 `F12`, 再选择 `Network`, 通过滑动验证后, 复制 `ticket` 如下 (不要包括双引号), 将 `ticket` 粘贴到输入框, 点击 `提交验证` 即可
@@ -76,7 +75,9 @@ docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" --name qqbothub yiyung
 
 
 
-### 插件
+### 插件管理
+
+访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
 
 > 插件:   
 > 下载插件包, 
