@@ -26,4 +26,4 @@ cat '/app/settings.json' | sed "s/BOT_QQ/${BOT_QQ}/g" | tee '/app/settings.json'
 cat '/app/settings.json' | sed "s/BOT_PASSWORD/${BOT_PASSWORD}/g" | tee '/app/settings.json'
 # endregion QQ Bot
 
-dotnet WebApi.dll
+dotnet QQBotHub.Web.dll
