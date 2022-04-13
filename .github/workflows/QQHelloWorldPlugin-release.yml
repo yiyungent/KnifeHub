@@ -1,0 +1,49 @@
+name: QQHelloWorldPlugin Release
+
+on: 
+  push:
+    tags:
+      - 'QQHelloWorldPlugin-v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.100
+        
+    - name: Build
+      run: |
+        cd ./plugins/QQHelloWorldPlugin
+        dotnet build --configuration Release
+        ls
+        ls ./bin/Release/
+      
+    - name: Zip the Build
+      run: |
+        cd ./plugins/QQHelloWorldPlugin/bin/Release
+        zip -r QQHelloWorldPlugin-net6.0.zip ./net6.0/ 
+        cd ../../../../
+        mv ./src/QQHelloWorldPlugin/bin/Release/*.zip ./
+      
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        #tag_name: ${{ github.ref }}
+        #name: ${{ github.ref }}
+        body: TODO New Release.
+        #body_path: CHANGELOG.txt
+        draft: false
+        prerelease: false
+        files: |
+          QQHelloWorldPlugin-net6.0.zip
+          LICENSE 
+          README.md

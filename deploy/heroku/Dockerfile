@@ -1,0 +1,13 @@
+# Heroku Dockerfile
+
+FROM yiyungent/qqbothub:v0.0.1
+
+# 处于 /app 目录下
+ADD heroku-entrypoint.sh ./heroku-entrypoint.sh
+RUN chmod +x ./heroku-entrypoint.sh
+ADD heroku-PluginCore.Config.json ./heroku-PluginCore.Config.json
+
+RUN rm /app/settings.json
+ADD settings.json ./settings.json
+
+ENTRYPOINT ["/bin/sh", "./heroku-entrypoint.sh"]

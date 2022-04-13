@@ -1,0 +1,32 @@
+{
+  "name": "QQBotHub",
+  "description": "QQ 机器人 | 基于 Konata.Core - Heroku Deploy",
+  "keywords": ["yiyungent", "QQBotHub"],
+  "website": "https://github.com/yiyungent/QQBotHub",
+  "repository": "https://github.com/yiyungent/QQBotHub",
+  "success_url": "/",
+  "env": {
+    "PLUGINCORE_ADMIN_USERNAME": {
+      "description": "PluginCore Admin 用户名",
+      "value": "admin",
+      "required": true
+    },
+    "PLUGINCORE_ADMIN_PASSWORD": {
+      "description": "PluginCore Admin 密码",
+      "value": "ABC12345",
+      "required": true
+    },
+    "BOT_QQ": {
+      "description": "机器人 QQ",
+      "value": "",
+      "required": true
+    },
+    "BOT_PASSWORD": {
+      "description": "机器人 QQ 密码",
+      "value": "",
+      "required": true
+    }
+  },
+
+  "stack": "container"
+}
