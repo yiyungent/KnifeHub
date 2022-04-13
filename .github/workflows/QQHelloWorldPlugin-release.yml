@@ -28,10 +28,10 @@ jobs:
       
     - name: Zip the Build
       run: |
-        cd ./plugins/QQHelloWorldPlugin/bin/Release
-        zip -r QQHelloWorldPlugin-net6.0.zip ./net6.0/ 
-        cd ../../../../
-        mv ./plugins/QQHelloWorldPlugin/bin/Release/*.zip ./
+        cd ./plugins/QQHelloWorldPlugin/bin/Release/net6.0
+        zip -r QQHelloWorldPlugin-net6.0.zip *
+        cd ../../../../../
+        mv ./plugins/QQHelloWorldPlugin/bin/Release/net6.0/*.zip ./
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
