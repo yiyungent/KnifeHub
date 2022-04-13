@@ -13,7 +13,7 @@
 
 ## 前端视图
 
-- [/Plugins/HelloWorldPlugin](/Plugins/HelloWorldPlugin)
+- [/Plugins/HelloWorldPlugin](/Plugins/QQHelloWorldPlugin)
 
 ## 挂件
 

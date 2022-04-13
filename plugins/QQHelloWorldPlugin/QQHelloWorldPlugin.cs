@@ -62,8 +62,8 @@ namespace QQHelloWorldPlugin
                     Console.WriteLine(string.Join(",", extraPars));
                 }
                 rtnStr = @"<div style=""border:1px solid green;width:300px;"">
-                                <h3>HelloWorldPlugin 注入</h3>
-                                <div>HelloWorldPlugin 挂件</div>
+                                <h3>QQHelloWorldPlugin 注入</h3>
+                                <div>QQHelloWorldPlugin 挂件</div>
                            </div>";
 
             }
