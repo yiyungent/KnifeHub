@@ -1,16 +1,17 @@
 
+<h1 align="center">QQBotHub</h1>
 
-
-> Dragonfly QQ 机器人 插件
+> QQ 机器人 | 基于 Konata.Core | 一键免费部署
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotPlugin.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotPlugin.svg?style=flat)](https://github.com/yiyungent/QQBotPlugin/blob/master/LICENSE)
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-894031109-deepgreen)](https://jq.qq.com/?_wv=1027&k=q5R82fYN)
+![hits](https://api-onetree.moeci.com/hits.svg?id=QQBotHub)
 
 ## Introduce
 
 
-Dragonfly QQ 机器人 插件
+QQ 机器人 | 基于 Konata.Core | 一键免费部署
 
 > 本项目基于以下:    
 > - [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core)
