@@ -54,6 +54,18 @@ QQ 机器人 | 基于 Konata.Core | 一键免费部署
 docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" --name qqbothub yiyungent/qqbothub
 ```
 
+```bash
+docker exec -it qqbothub bash
+
+# 或者使用 docker cp , 从宿主机复制进容器, 或者 run 时就用挂载
+apt-get update
+apt-get install vim
+vi /app/settings.json
+```
+
+> 进入容器, 修改 `/app/settings.json`,      
+> 若没有此文件, 则 使用 [settings.json](https://github.com/yiyungent/QQBotHub/blob/main/deploy/railway/settings.json) 此示例, 修改为你的机器人 QQ 和密码
+
 > 现在访问: <http://localhost:5004/PluginCore/Admin>
 
 
