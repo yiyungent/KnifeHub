@@ -5,8 +5,9 @@ using QQHelloWorldPlugin;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using PluginCore;
 
-namespace PluginCore.IPlugins.Controllers
+namespace QQHelloWorldPlugin.Controllers
 {
     [Route("api/plugins/[controller]")]
     [ApiController]
@@ -15,7 +16,7 @@ namespace PluginCore.IPlugins.Controllers
 
         public ActionResult Get()
         {
-            SettingsModel settingsModel = PluginSettingsModelFactory.Create<SettingsModel>("HelloWorldPlugin");
+            SettingsModel settingsModel = PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQHelloWorldPlugin));
             string str = $"Hello PluginCore ! {settingsModel.Hello}";
 
             return Ok(str);
