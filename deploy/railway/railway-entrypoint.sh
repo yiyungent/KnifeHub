@@ -18,12 +18,4 @@ cat '/app/railway-PluginCore.Config.json' | sed "s/PLUGINCORE_ADMIN_USERNAME/${P
 cat '/app/App_Data/PluginCore.Config.json' | sed "s/PLUGINCORE_ADMIN_PASSWORD/${PLUGINCORE_ADMIN_PASSWORD}/g" | tee '/app/App_Data/PluginCore.Config.json'
 # endregion PluginCore
 
-# region QQ Bot
-echo ${BOT_QQ}
-echo ${BOT_PASSWORD}
-
-cat '/app/settings.json' | sed "s/BOT_QQ/${BOT_QQ}/g" | tee '/app/settings.json'
-cat '/app/settings.json' | sed "s/BOT_PASSWORD/${BOT_PASSWORD}/g" | tee '/app/settings.json'
-# endregion QQ Bot
-
 dotnet QQBotHub.Web.dll
