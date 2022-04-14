@@ -22,12 +22,23 @@ namespace QQBotHub.Web.Controllers
 
         private readonly IPluginFinder _pluginFinder;
 
+        private readonly bool _debug;
+
         #endregion
 
         #region Ctor
         public HomeController(IPluginFinder pluginFinder)
         {
             _pluginFinder = pluginFinder;
+            string debugStr = Utils.EnvUtil.GetEnv("DEBUG");
+            if (!string.IsNullOrEmpty(debugStr) && bool.TryParse(debugStr, out bool debug))
+            {
+                _debug = debug;
+            }
+            else
+            {
+                _debug = false;
+            }
         }
         #endregion
 
@@ -254,30 +265,32 @@ namespace QQBotHub.Web.Controllers
                 // Print the log
                 bot.OnLog += (s, e) =>
                 {
-                    //Utils.LogUtil.Info(e.EventMessage);
+#if DEBUG
+                    Utils.LogUtil.Info(e.EventMessage);
+#endif
+                    if (_debug)
+                    {
+                        Utils.LogUtil.Info(e.EventMessage);
+                    }
                 };
 
                 // Handle the captcha
                 bot.OnCaptcha += (s, e) =>
                 {
                     Utils.LogUtil.Info("QQ 登录验证:");
+                    CaptchaStore.UpdateTime = DateTime.Now;
+                    CaptchaStore.CaptchaType = e.Type;
                     if (e.Type == CaptchaType.Slider)
                     {
                         Utils.LogUtil.Info(e.SliderUrl);
                         //((Bot)s).SubmitSliderTicket(Console.ReadLine());
-
-                        CaptchaStore.CaptchaType = CaptchaType.Slider;
                         CaptchaStore.CaptchaTip = $"{e.SliderUrl}";
-                        CaptchaStore.UpdateTime = DateTime.Now;
                     }
                     else if (e.Type == CaptchaType.Sms)
                     {
                         Utils.LogUtil.Info(e.Phone);
                         //((Bot)s).SubmitSmsCode(Console.ReadLine());
-
-                        CaptchaStore.CaptchaType = CaptchaType.Sms;
                         CaptchaStore.CaptchaTip = $"{e.Phone}";
-                        CaptchaStore.UpdateTime = DateTime.Now;
                     }
                 };
 
