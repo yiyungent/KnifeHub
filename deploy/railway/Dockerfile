@@ -1,6 +1,6 @@
 # Railway Dockerfile
 
-FROM yiyungent/qqbothub:v0.0.2
+FROM yiyungent/qqbothub:v0.1.0
 
 # 处于 /app 目录下
 ADD railway-entrypoint.sh ./railway-entrypoint.sh
