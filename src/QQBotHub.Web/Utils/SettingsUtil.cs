@@ -2,6 +2,16 @@
 {
     public class SettingsUtil
     {
+
+        public static void EnsureExist()
+        {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "settings.json");
+            if (!File.Exists(filePath))
+            {
+                Set(new SettingsModel());
+            }
+        }
+
         public static SettingsModel Get()
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "settings.json");

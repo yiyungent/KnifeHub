@@ -1,70 +1,135 @@
-﻿using Konata.Core.Interfaces;
+﻿using Konata.Core.Common;
+using Konata.Core.Interfaces;
 using Konata.Core.Interfaces.Api;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore.Interfaces;
 using PluginCore.IPlugins;
+using QQBotHub.Web.RequestModels;
 using QQBotHub.Web.ResponseModels;
 using System.Threading.Tasks;
 using static Konata.Core.Events.Model.CaptchaEvent;
 
 namespace QQBotHub.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[action]")]
     [Authorize("PluginCoreAdmin")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class HomeController : ControllerBase
     {
-        public static Konata.Core.Events.Model.CaptchaEvent.CaptchaType CaptchaType { get; set; }
 
-        public static string CaptchaMessage { get; set; }
+        #region Fields
 
         private readonly IPluginFinder _pluginFinder;
 
-        public LoginController(IPluginFinder pluginFinder)
+        #endregion
+
+        #region Ctor
+        public HomeController(IPluginFinder pluginFinder)
         {
-            if (QQBotStore.Bot == null)
-            {
-                InitQQBot();
-            }
             _pluginFinder = pluginFinder;
+        }
+        #endregion
+
+
+        #region Actions
+
+        [Route("/")]
+        [HttpGet]
+        public async Task<ActionResult> Index()
+        {
+            string indexFilePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index.html");
+
+            return PhysicalFile(indexFilePath, "text/html");
+        }
+
+
+        [HttpGet]
+        public async Task<BaseResponseModel> Uin()
+        {
+            BaseResponseModel responseModel = new BaseResponseModel();
+            try
+            {
+                string uin = Utils.SettingsUtil.Get()?.Uin ?? "";
+
+                responseModel.Code = 1;
+                responseModel.Message = "获取成功";
+                responseModel.Data = uin;
+            }
+            catch (Exception ex)
+            {
+                responseModel.Code = -1;
+                responseModel.Message = "获取失败";
+                responseModel.Data = ex.ToString();
+            }
+
+            return await Task.FromResult(responseModel);
         }
 
         /// <summary>
-        /// 登录后，定时访问此api, 获取验证
+        /// 登录后，定时访问此api, 获取验证等信息
         /// </summary>
         /// <returns></returns>
-        [Route(nameof(Captcha))]
         [HttpGet]
-        public async Task<BaseResponseModel> Captcha()
+        public async Task<BaseResponseModel> Info()
         {
             BaseResponseModel responseModel = new BaseResponseModel();
+            InfoResponseDataModel dataModel = new InfoResponseDataModel();
 
-            if (QQBotStore.Bot.IsOnline())
+            if (QQBotStore.Bot == null)
             {
+                // 未点击登录过
                 responseModel.Code = 1;
-                responseModel.Message = "已处于登录状态, 无需验证";
+                responseModel.Message = "未登录";
+
+                dataModel.CaptchaTip = "";
+                dataModel.IsOnline = false;
+                dataModel.CaptchaType = "";
+                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                responseModel.Data = dataModel;
 
                 return responseModel;
             }
 
-            responseModel.Code = 2;
-            responseModel.Data = CaptchaMessage;
-            switch (CaptchaType)
+            if (QQBotStore.Bot.IsOnline())
+            {
+                responseModel.Code = 2;
+                responseModel.Message = "已处于登录状态, 无需验证";
+
+                dataModel.CaptchaTip = "";
+                dataModel.IsOnline = true;
+                dataModel.CaptchaType = "";
+                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                responseModel.Data = dataModel;
+
+                return responseModel;
+            }
+
+            // 已经点击登录过一次
+            responseModel.Code = 3;
+            responseModel.Message = "需要验证";
+            switch (CaptchaStore.CaptchaType)
             {
                 case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
-                    responseModel.Message = "短信验证";
+                    dataModel.CaptchaType = "短信验证";
                     break;
                 case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
-                    responseModel.Message = "滑块验证";
+                    dataModel.CaptchaType = "滑块验证";
                     break;
                 case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
-                    responseModel.Message = "未知验证";
+                    dataModel.CaptchaType = "未知验证";
                     break;
                 default:
-                    responseModel.Message = "未知验证-不匹配的验证类型";
+                    dataModel.CaptchaType = "未知验证-不匹配的验证类型";
                     break;
             }
+            dataModel.IsOnline = false;
+            dataModel.CaptchaTip = CaptchaStore.CaptchaTip;
+            dataModel.CaptchaUpdateTime = CaptchaStore.UpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+            responseModel.Data = dataModel;
 
             return await Task.FromResult(responseModel);
         }
@@ -74,11 +139,11 @@ namespace QQBotHub.Web.Controllers
         /// </summary>
         /// <param name="captcha"></param>
         /// <returns></returns>
-        [Route(nameof(SubmitCaptcha))]
-        [HttpPost, HttpGet]
-        public async Task<BaseResponseModel> SubmitCaptcha([FromQuery] string captcha)
+        [HttpPost]
+        public async Task<BaseResponseModel> SubmitCaptcha([FromBody] SubmitCaptchaRequestModel requestModel)
         {
             BaseResponseModel responseModel = new BaseResponseModel();
+            string captcha = requestModel.Captcha;
             if (string.IsNullOrEmpty(captcha))
             {
                 responseModel.Code = -1;
@@ -86,15 +151,16 @@ namespace QQBotHub.Web.Controllers
 
                 return responseModel;
             }
+            bool isSuccessCaptcha = false;
             try
             {
-                switch (CaptchaType)
+                switch (CaptchaStore.CaptchaType)
                 {
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
-                        QQBotStore.Bot.SubmitSmsCode(captcha);
+                        isSuccessCaptcha = QQBotStore.Bot.SubmitSmsCode(captcha);
                         break;
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
-                        QQBotStore.Bot.SubmitSliderTicket(captcha);
+                        isSuccessCaptcha = QQBotStore.Bot.SubmitSliderTicket(captcha);
                         break;
                     case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
                         break;
@@ -103,7 +169,7 @@ namespace QQBotHub.Web.Controllers
                 }
 
                 responseModel.Code = 1;
-                responseModel.Message = "提交验证成功";
+                responseModel.Message = $"{(isSuccessCaptcha ? "验证通过" : "验证失败, 请重新验证")}";
             }
             catch (System.Exception ex)
             {
@@ -117,39 +183,73 @@ namespace QQBotHub.Web.Controllers
             return await Task.FromResult(responseModel);
         }
 
-        [Route(nameof(IsOnline))]
-        [HttpGet]
-        public async Task<BaseResponseModel> IsOnline()
+        [HttpPost]
+        public async Task<BaseResponseModel> Login(LoginRequestModel requestModel)
         {
             BaseResponseModel responseModel = new BaseResponseModel();
-            bool isOnline = QQBotStore.Bot.IsOnline();
-            responseModel.Data = isOnline;
+            try
+            {
+                var oldSettings = Utils.SettingsUtil.Get();
+                var newSettings = new SettingsModel
+                {
+                    Uin = requestModel.Uin,
+                    Password = requestModel.Password
+                };
+                if (string.IsNullOrEmpty(requestModel.Password?.Trim()))
+                {
+                    newSettings.Password = oldSettings.Password;
+                }
+                Utils.SettingsUtil.Set(newSettings);
+
+                InitQQBot(qq: newSettings.Uin, password: newSettings.Password);
+
+                Task<bool> taskLogin = QQBotStore.Bot.Login();
+
+                responseModel.Code = 1;
+                responseModel.Message = "提交登录成功";
+            }
+            catch (Exception ex)
+            {
+                responseModel.Code = -1;
+                responseModel.Message = "提交登录失败";
+                responseModel.Data = ex.ToString();
+            }
 
             return await Task.FromResult(responseModel);
         }
 
-
-        [Route("/Login")]
-        [HttpGet]
-        public async Task<ActionResult> Get()
+        [HttpPost]
+        public async Task<BaseResponseModel> Logout()
         {
-            if (!QQBotStore.Bot.IsOnline())
+            BaseResponseModel responseModel = new BaseResponseModel();
+            try
             {
-                Task<bool> taskLogin = QQBotStore.Bot.Login();
+                Task<bool> taskLogout = QQBotStore.Bot.Logout();
+
+                responseModel.Code = 1;
+                responseModel.Message = "提交退出成功";
+            }
+            catch (Exception ex)
+            {
+                responseModel.Code = -1;
+                responseModel.Message = "提交退出失败";
+                responseModel.Data = ex.ToString();
             }
 
-            string indexFilePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "login.html");
-
-            return PhysicalFile(indexFilePath, "text/html");
+            return await Task.FromResult(responseModel);
         }
 
+        #endregion
 
-        public void InitQQBot()
+        #region Helpers
+
+        [NonAction]
+        public void InitQQBot(string qq, string password)
         {
             #region Bot
 
             // Create a bot instance
-            var bot = BotFather.Create(QQBotStore.BotConfig, QQBotStore.BotDevice, QQBotStore.BotKeyStore);
+            var bot = BotFather.Create(BotConfig.Default(), BotDevice.Default(), new BotKeyStore(uin: qq, password: password));
             {
                 // Print the log
                 bot.OnLog += (s, e) =>
@@ -166,16 +266,18 @@ namespace QQBotHub.Web.Controllers
                         Utils.LogUtil.Info(e.SliderUrl);
                         //((Bot)s).SubmitSliderTicket(Console.ReadLine());
 
-                        Controllers.LoginController.CaptchaType = CaptchaType.Slider;
-                        Controllers.LoginController.CaptchaMessage = $"{e.SliderUrl}";
+                        CaptchaStore.CaptchaType = CaptchaType.Slider;
+                        CaptchaStore.CaptchaTip = $"{e.SliderUrl}";
+                        CaptchaStore.UpdateTime = DateTime.Now;
                     }
                     else if (e.Type == CaptchaType.Sms)
                     {
                         Utils.LogUtil.Info(e.Phone);
                         //((Bot)s).SubmitSmsCode(Console.ReadLine());
 
-                        Controllers.LoginController.CaptchaType = CaptchaType.Sms;
-                        Controllers.LoginController.CaptchaMessage = $"{e.Phone}";
+                        CaptchaStore.CaptchaType = CaptchaType.Sms;
+                        CaptchaStore.CaptchaTip = $"{e.Phone}";
+                        CaptchaStore.UpdateTime = DateTime.Now;
                     }
                 };
 
@@ -247,5 +349,21 @@ namespace QQBotHub.Web.Controllers
             QQBotStore.Bot = bot;
         }
 
+        #endregion
+
     }
+
+    #region More
+
+    public static class CaptchaStore
+    {
+        public static Konata.Core.Events.Model.CaptchaEvent.CaptchaType CaptchaType { get; set; }
+
+        public static string CaptchaTip { get; set; }
+
+        public static DateTime UpdateTime { get; set; }
+    }
+
+    #endregion
+
 }
