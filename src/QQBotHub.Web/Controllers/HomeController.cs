@@ -103,7 +103,8 @@ namespace QQBotHub.Web.Controllers
                 return responseModel;
             }
 
-            if (QQBotStore.Bot.IsOnline())
+            //if (QQBotStore.Bot.IsOnline())
+            if (CaptchaStore.IsOnline)
             {
                 responseModel.Code = 2;
                 responseModel.Message = "已处于登录状态, 无需验证";
@@ -322,6 +323,8 @@ namespace QQBotHub.Web.Controllers
                 {
                     Utils.LogUtil.Info($"{s.Name} 上线");
 
+                    CaptchaStore.IsOnline = true;
+
                     var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
                     foreach (var plugin in plugins)
                     {
@@ -332,6 +335,8 @@ namespace QQBotHub.Web.Controllers
                 bot.OnBotOffline += (s, e) =>
                 {
                     Utils.LogUtil.Info($"{s.Name} 离线");
+
+                    CaptchaStore.IsOnline = false;
 
                     var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
                     foreach (var plugin in plugins)
@@ -375,6 +380,8 @@ namespace QQBotHub.Web.Controllers
         public static string CaptchaTip { get; set; }
 
         public static DateTime UpdateTime { get; set; }
+
+        public static bool IsOnline { get; set; }
     }
 
     #endregion
