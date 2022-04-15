@@ -1,6 +1,6 @@
 # Heroku Dockerfile
 
-FROM yiyungent/qqbothub:v0.2.0
+FROM yiyungent/qqbothub:v0.2.1
 
 # 处于 /app 目录下
 ADD heroku-entrypoint.sh ./heroku-entrypoint.sh
