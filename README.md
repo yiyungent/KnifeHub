@@ -100,6 +100,14 @@ docker exec -it qqbothub bash
 > 注意验证不要等待太久, 否则尝试刷新登录页面 以重新登录及获取新验证
 
 
+> **注意**    
+> 当 无法登录 时
+> - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`       
+> - 可 下载 [Releases - ConsoleApp - Assets](https://github.com/yiyungent/QQBotHub/releases?q=ConsoleApp&expanded=true) 在本地登录成功后, 获取 `BotKeyStore.json` 后, 在登录页面使用 `配置` 方式登录
+>   - 运行 `ConsoleApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
+
+
+
 
 ### 插件管理
 
