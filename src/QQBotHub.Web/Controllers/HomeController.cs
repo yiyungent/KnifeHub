@@ -331,9 +331,9 @@ namespace QQBotHub.Web.Controllers
                 // Print the log
                 bot.OnLog += (s, e) =>
                 {
-#if DEBUG
-                    Utils.LogUtil.Info(e.EventMessage);
-#endif
+                    //#if DEBUG
+                    //                    Utils.LogUtil.Info(e.EventMessage);
+                    //#endif
                     if (_debug)
                     {
                         Utils.LogUtil.Info(e.EventMessage);
@@ -363,24 +363,38 @@ namespace QQBotHub.Web.Controllers
                 // Handle messages from group
                 bot.OnGroupMessage += (s, e) =>
                 {
-                    Utils.LogUtil.Info($"群消息: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
+                    Utils.LogUtil.Info($"群消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
 
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
+                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
                     foreach (var plugin in plugins)
                     {
-                        plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
+                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                        if (e.Message.Sender.Uin != s.Uin)
+                        {
+                            // 排除机器人自己
+                            plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
+                        }
                     }
                 };
 
                 // Handle messages from friend
                 bot.OnFriendMessage += (s, e) =>
                 {
-                    Utils.LogUtil.Info($"好友消息: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
+                    Utils.LogUtil.Info($"好友消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
 
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    // 在获取插件这步正常, 没有触发 bot.OnFriendMessage 
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
+                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                    //Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
                     foreach (var plugin in plugins)
                     {
-                        plugin.OnFriendMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.FriendUin);
+                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                        if (e.Message.Sender.Uin != s.Uin)
+                        {
+                            // 排除机器人自己
+                            plugin.OnFriendMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.FriendUin);
+                        }
                     }
                 };
 

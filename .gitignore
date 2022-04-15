@@ -368,7 +368,9 @@ FodyWeavers.xsd
 src/QQBotHub.Web/settings.json
 src/QQBotHub.Web/App_Data/
 src/QQBotPlugin/settings.json
-
+src/QQBotHub.Web/Plugins/
+src/QQBotHub.Web/Plugins_wwwroot/
+src/QQBotHub.Web/App_Data/
 
 
 
