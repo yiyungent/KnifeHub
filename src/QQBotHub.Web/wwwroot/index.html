@@ -22,10 +22,22 @@
                 <img class="mdui-img-circle mdui-center" src="https://q1.qlogo.cn/g?b=qq&nk=10000&s=100" />
                 <div id="qq-online" class="mdui-text-center">加载中...</div>
             </div>
-            <label class="mdui-textfield-label">QQ</label>
-            <input id="login-input-uin" class="mdui-textfield-input" type="text" />
-            <label class="mdui-textfield-label">密码 (不修改密码留空)</label>
-            <input id="login-input-password" class="mdui-textfield-input" type="password" />
+            <div id="login-tab" class="mdui-tab mdui-tab-full-width" mdui-tab>
+                <a href="#tab-account" class="mdui-ripple" data-type="password">账号密码</a>
+                <a href="#tab-config" class="mdui-ripple" data-type="config">配置</a>
+            </div>
+            <div>
+                <div id="tab-account">
+                    <label class="mdui-textfield-label">QQ</label>
+                    <input id="login-input-uin" class="mdui-textfield-input" type="text" />
+                    <label class="mdui-textfield-label">密码 (不修改留空)</label>
+                    <input id="login-input-password" class="mdui-textfield-input" type="password" />
+                </div>
+                <div id="tab-config">
+                    <label class="mdui-textfield-label">BotKeyStore.json (不修改留空)</label>
+                    <input id="login-input-botKeyStore" class="mdui-textfield-input" type="text" />
+                </div>
+            </div>
             <button id="btn-login" onclick="login()" class="mdui-btn mdui-btn-block mdui-color-green mdui-ripple">登录</button>
             <button id="btn-logout" onclick="logout()" class="mdui-btn mdui-btn-block mdui-color-red mdui-ripple" disabled>退出</button>
         </div>
@@ -148,7 +160,9 @@
                 url: '/api/Login',
                 data: {
                     uin: document.querySelector("#login-input-uin").value,
-                    password: document.querySelector("#login-input-password").value
+                    password: document.querySelector("#login-input-password").value,
+                    botKeyStore: document.querySelector("#login-input-botKeyStore").value,
+                    loginType: document.querySelector("#login-tab .mdui-tab-active").getAttribute("data-type")
                 },
                 responseType: 'json'
             }).then(function (res) {

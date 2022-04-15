@@ -61,7 +61,12 @@ namespace QQBotHub.Web.Controllers
             BaseResponseModel responseModel = new BaseResponseModel();
             try
             {
-                string uin = Utils.SettingsUtil.Get()?.Uin ?? "";
+                var settings = Utils.SettingsUtil.Get();
+                string uin = settings?.Uin ?? "";
+                if (!string.IsNullOrEmpty(QQBotStore.Bot?.Uin.ToString()))
+                {
+                    uin = QQBotStore.Bot?.Uin.ToString() ?? uin;
+                }
 
                 responseModel.Code = 1;
                 responseModel.Message = "获取成功";
@@ -202,18 +207,55 @@ namespace QQBotHub.Web.Controllers
             try
             {
                 var oldSettings = Utils.SettingsUtil.Get();
-                var newSettings = new SettingsModel
+                SettingsModel newSettings = new SettingsModel();
+                if (requestModel.LoginType == "password")
                 {
-                    Uin = requestModel.Uin,
-                    Password = requestModel.Password
-                };
-                if (string.IsNullOrEmpty(requestModel.Password?.Trim()))
-                {
-                    newSettings.Password = oldSettings.Password;
-                }
-                Utils.SettingsUtil.Set(newSettings);
+                    newSettings = new SettingsModel
+                    {
+                        Uin = requestModel.Uin,
+                        Password = requestModel.Password,
+                    };
+                    if (string.IsNullOrEmpty(requestModel.Password?.Trim()))
+                    {
+                        newSettings.Password = oldSettings.Password;
+                    }
 
-                InitQQBot(qq: newSettings.Uin, password: newSettings.Password);
+                    InitQQBot(botKeyStore: new BotKeyStore(uin: newSettings.Uin, password: newSettings.Password));
+
+                    Utils.SettingsUtil.Set(newSettings);
+                }
+                else if (requestModel.LoginType == "config")
+                {
+                    newSettings = new SettingsModel();
+                    if (!string.IsNullOrEmpty(requestModel.BotKeyStore?.Trim()))
+                    {
+                        try
+                        {
+                            newSettings.BotKeyStore = Utils.JsonUtil.JsonStr2Obj<BotKeyStore>(requestModel.BotKeyStore.Trim());
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("requestModel.BotKeyStore 转换失败:");
+                            Console.WriteLine(ex.ToString());
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(requestModel.BotKeyStore?.Trim()))
+                    {
+                        newSettings.BotKeyStore = oldSettings.BotKeyStore;
+                    }
+
+                    InitQQBot(botKeyStore: newSettings.BotKeyStore);
+
+                    Utils.SettingsUtil.Set(newSettings);
+                }
+                else
+                {
+                    responseModel.Code = -2;
+                    responseModel.Message = "未知登录方式";
+
+                    return await Task.FromResult(responseModel);
+                }
 
                 Task<bool> taskLogin = QQBotStore.Bot.Login();
 
@@ -256,12 +298,13 @@ namespace QQBotHub.Web.Controllers
         #region Helpers
 
         [NonAction]
-        public void InitQQBot(string qq, string password)
+        public void InitQQBot(BotKeyStore botKeyStore)
         {
             #region Bot
 
             // Create a bot instance
             #region 准备数据
+            // 优先从 环境变量 中获取
             BotConfig botConfig = BotConfig.Default();
             string botConfigJsonStr = Utils.EnvUtil.GetEnv("BOT_CONFIG");
             if (!string.IsNullOrEmpty(botConfigJsonStr))
@@ -276,7 +319,6 @@ namespace QQBotHub.Web.Controllers
                 botDevice = Utils.JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
             }
 
-            BotKeyStore botKeyStore = new BotKeyStore(uin: qq, password: password);
             string botKeyStoreJsonStr = Utils.EnvUtil.GetEnv("BOT_KEYSTORE");
             if (!string.IsNullOrEmpty(botKeyStoreJsonStr))
             {
