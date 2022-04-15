@@ -68,7 +68,7 @@ if (!await bot.Login())
 
 Console.WriteLine("We got online!");
 
-Console.WriteLine("下方是你的 BotKeyStore.json, 请将它复制作为 环境变量 BOT_KEYSTORE 的值");
+Console.WriteLine("下方是你的 BotKeyStore.json, 请将它复制好, 用于登录使用");
 Console.WriteLine("-------------------------------start-------------------------------------");
 string jsonStr = JsonSerializer.Serialize(bot.KeyStore,
                new JsonSerializerOptions { WriteIndented = true });
