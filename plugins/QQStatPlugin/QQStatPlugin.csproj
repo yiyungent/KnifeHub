@@ -9,10 +9,10 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
+		<PackageReference Include="SqlSugarCore" Version="5.0.7.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-
 		<ProjectReference Include="..\..\src\QQBotHub.Web\QQBotHub.Web.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>
