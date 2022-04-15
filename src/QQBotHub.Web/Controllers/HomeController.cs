@@ -261,7 +261,30 @@ namespace QQBotHub.Web.Controllers
             #region Bot
 
             // Create a bot instance
-            var bot = BotFather.Create(BotConfig.Default(), BotDevice.Default(), new BotKeyStore(uin: qq, password: password));
+            #region 准备数据
+            BotConfig botConfig = BotConfig.Default();
+            string botConfigJsonStr = Utils.EnvUtil.GetEnv("BOT_CONFIG");
+            if (!string.IsNullOrEmpty(botConfigJsonStr))
+            {
+                botConfig = Utils.JsonUtil.JsonStr2Obj<BotConfig>(botConfigJsonStr);
+            }
+
+            BotDevice botDevice = BotDevice.Default();
+            string botDeviceJsonStr = Utils.EnvUtil.GetEnv("BOT_DEVICE");
+            if (!string.IsNullOrEmpty(botDeviceJsonStr))
+            {
+                botDevice = Utils.JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
+            }
+
+            BotKeyStore botKeyStore = new BotKeyStore(uin: qq, password: password);
+            string botKeyStoreJsonStr = Utils.EnvUtil.GetEnv("BOT_KEYSTORE");
+            if (!string.IsNullOrEmpty(botKeyStoreJsonStr))
+            {
+                botKeyStore = Utils.JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
+            }
+            #endregion
+
+            var bot = BotFather.Create(botConfig, botDevice, botKeyStore);
             {
                 // Print the log
                 bot.OnLog += (s, e) =>
