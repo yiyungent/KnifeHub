@@ -1,0 +1,6 @@
+{
+  "ApiKey": "",
+  "ApiSecret": "",
+  "AllowGroup": [ "QQ群号1", "QQ群号2" ],
+  "AllowFriends": [ "QQ号1", "QQ号2" ]
+}
