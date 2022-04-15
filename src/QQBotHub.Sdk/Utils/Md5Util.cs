@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace QQBotHub.Web.Utils
+namespace QQBotHub.Sdk.Utils
 {
     public class Md5Util
     {

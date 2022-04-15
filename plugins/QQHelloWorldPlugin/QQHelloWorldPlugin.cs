@@ -4,10 +4,10 @@ using QQHelloWorldPlugin.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PluginCore.IPlugins;
-using QQBotHub.Web;
 using Konata.Core;
 using Konata.Core.Events.Model;
 using Konata.Core.Interfaces.Api;
+using QQBotHub.Sdk.IPlugins;
 
 namespace QQHelloWorldPlugin
 {

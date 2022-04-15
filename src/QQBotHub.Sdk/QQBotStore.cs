@@ -1,7 +1,7 @@
 ﻿using Konata.Core;
 using Konata.Core.Common;
 
-namespace QQBotHub.Web
+namespace QQBotHub.Sdk
 {
     public class QQBotStore
     {

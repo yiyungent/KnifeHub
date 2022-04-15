@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/QQBotHub.Web/QQBotHub.Web.csproj", "src/QQBotHub.Web/"]
+COPY ["src/QQBotHub.Sdk/QQBotHub.Sdk.csproj", "src/QQBotHub.Sdk/"]
 RUN dotnet restore "src/QQBotHub.Web/QQBotHub.Web.csproj"
 COPY . .
 WORKDIR "/src/src/QQBotHub.Web"

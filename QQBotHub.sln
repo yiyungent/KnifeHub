@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "test\ConsoleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQStatPlugin", "plugins\QQStatPlugin\QQStatPlugin.csproj", "{D4A8C051-C14E-4123-AF20-794A98FD3662}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQBotHub.Sdk", "src\QQBotHub.Sdk\QQBotHub.Sdk.csproj", "{56C78578-C690-4013-8AB6-1ED28770C2B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D4A8C051-C14E-4123-AF20-794A98FD3662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A8C051-C14E-4123-AF20-794A98FD3662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A8C051-C14E-4123-AF20-794A98FD3662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C78578-C690-4013-8AB6-1ED28770C2B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C78578-C690-4013-8AB6-1ED28770C2B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C78578-C690-4013-8AB6-1ED28770C2B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C78578-C690-4013-8AB6-1ED28770C2B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{6243DEEC-C677-412E-955D-BD18E02EB6E3} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{DD974327-3D52-447A-9652-62811800140D} = {F5C1CDD2-053C-4C8E-8192-7A97477CFC44}
 		{D4A8C051-C14E-4123-AF20-794A98FD3662} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{56C78578-C690-4013-8AB6-1ED28770C2B1} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}

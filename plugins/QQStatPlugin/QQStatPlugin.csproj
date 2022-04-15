@@ -12,8 +12,14 @@
 		<PackageReference Include="SqlSugarCore" Version="5.0.7.3" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\src\QQBotHub.Web\QQBotHub.Web.csproj">
+	<!-- 方便开发debug,与发布到nuget -->
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="QQBotHub.Sdk" Version="0.0.1">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\..\src\QQBotHub.Sdk\QQBotHub.Sdk.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</ProjectReference>
@@ -34,10 +40,7 @@
 
 	<!-- 发布 wwwroot -->
 	<ItemGroup>
-		<Content Include="wwwroot\*">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="wwwroot\*\*">
+		<Content Include="wwwroot\**\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

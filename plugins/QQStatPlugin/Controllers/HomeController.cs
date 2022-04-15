@@ -26,13 +26,13 @@ namespace QQStatPlugin.Controllers
         }
 
 
-        public async Task<ActionResult> Get()
-        {
-            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(QQStatPlugin)), "index.html");
+        //public async Task<ActionResult> Get()
+        //{
+        //    string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(QQStatPlugin)), "index.html");
 
 
 
-            return File(fileStream: null, contentType: "file", fileDownloadName: "", enableRangeProcessing: true);
-        }
+        //    return File(fileStream: null, contentType: "file", fileDownloadName: "", enableRangeProcessing: true);
+        //}
     }
 }

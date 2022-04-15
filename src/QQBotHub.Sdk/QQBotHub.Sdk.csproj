@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>QQBotHub.Sdk</PackageId>
+		<Version>0.0.1</Version>
+		<Company>yiyun</Company>
+		<Authors>yiyun</Authors>
+		<Description>QQBotHub 插件开发包</Description>
+		<Copyright>Copyright (c) 2022-present yiyun</Copyright>
+		<RepositoryUrl>https://github.com/yiyungent/QQBotHub</RepositoryUrl>
+		<PackageLicenseUrl>https://github.com/yiyungent/QQBotHub/blob/main/LICENSE</PackageLicenseUrl>
+		<PackageTags>QQBotHub QQBotHub.Sdk</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PluginCore.IPlugins" Version="0.7.0" />
+		<PackageReference Include="Konata.Core" Version="1.3.1" />
+	</ItemGroup>
+
+</Project>

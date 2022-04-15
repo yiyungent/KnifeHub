@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQBotHub.Web.Utils
+namespace QQBotHub.Sdk.Utils
 {
     public class EnvUtil
     {

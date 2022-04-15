@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore.Interfaces;
 using PluginCore.IPlugins;
+using QQBotHub.Sdk;
+using QQBotHub.Sdk.IPlugins;
+using QQBotHub.Sdk.Utils;
 using QQBotHub.Web.RequestModels;
 using QQBotHub.Web.ResponseModels;
 using System.Threading.Tasks;
@@ -30,7 +33,7 @@ namespace QQBotHub.Web.Controllers
         public HomeController(IPluginFinder pluginFinder)
         {
             _pluginFinder = pluginFinder;
-            string debugStr = Utils.EnvUtil.GetEnv("DEBUG");
+            string debugStr = EnvUtil.GetEnv("DEBUG");
             if (!string.IsNullOrEmpty(debugStr) && bool.TryParse(debugStr, out bool debug))
             {
                 _debug = debug;
@@ -231,7 +234,7 @@ namespace QQBotHub.Web.Controllers
                     {
                         try
                         {
-                            newSettings.BotKeyStore = Utils.JsonUtil.JsonStr2Obj<BotKeyStore>(requestModel.BotKeyStore.Trim());
+                            newSettings.BotKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(requestModel.BotKeyStore.Trim());
                         }
                         catch (Exception ex)
                         {
@@ -306,23 +309,23 @@ namespace QQBotHub.Web.Controllers
             #region 准备数据
             // 优先从 环境变量 中获取
             BotConfig botConfig = BotConfig.Default();
-            string botConfigJsonStr = Utils.EnvUtil.GetEnv("BOT_CONFIG");
+            string botConfigJsonStr = EnvUtil.GetEnv("BOT_CONFIG");
             if (!string.IsNullOrEmpty(botConfigJsonStr))
             {
-                botConfig = Utils.JsonUtil.JsonStr2Obj<BotConfig>(botConfigJsonStr);
+                botConfig = JsonUtil.JsonStr2Obj<BotConfig>(botConfigJsonStr);
             }
 
             BotDevice botDevice = BotDevice.Default();
-            string botDeviceJsonStr = Utils.EnvUtil.GetEnv("BOT_DEVICE");
+            string botDeviceJsonStr = EnvUtil.GetEnv("BOT_DEVICE");
             if (!string.IsNullOrEmpty(botDeviceJsonStr))
             {
-                botDevice = Utils.JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
+                botDevice = JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
             }
 
-            string botKeyStoreJsonStr = Utils.EnvUtil.GetEnv("BOT_KEYSTORE");
+            string botKeyStoreJsonStr = EnvUtil.GetEnv("BOT_KEYSTORE");
             if (!string.IsNullOrEmpty(botKeyStoreJsonStr))
             {
-                botKeyStore = Utils.JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
+                botKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
             }
             #endregion
 
