@@ -121,8 +121,30 @@ docker exec -it qqbothub bash
 > 然后直接 `上传 -> 安装 -> 文档 -> 设置 -> 启用 -> 文档` 即可
 
 
+## 插件开发
+
+> 注意:  
+> 所有纯基于 `PluginCore.IPlugins` 开发的插件都通用,   
+> 下载插件包, 然后 `上传 -> 安装 -> 设置 -> 启用` 即可
 
 
+> 插件开发 可参考:   
+> - [插件开发 | PluginCore](https://moeci.com/PluginCore/zh/PluginDev/Guide/)      
+> - **建议** 参考: [./plugins/QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQHelloWorldPlugin)
+
+> QQBotHub 插件开发包  
+> 插件开发包中已包含:   
+> - `Konata.Core`
+> - `PluginCore.IPlugins`
+
+```powershell
+dotnet add package QQBotHub.Sdk
+```
+
+> **注意**:   
+> - 本项目目前直接使用的 `PluginCore` 插件框架, 插件采用激活方式, 插件工作完成后, 实例会立即销毁, 无法常驻后台
+> - 若需要定时任务, 可以使用 `ITimePlugin`, 可见 `PluginCore` 的文档    
+> - 由于 QQBot 本身为常驻, 因此需额外注意 `IPluginFinder` 的服务的生命周期/范围, 这点和在 `ASP.NET Core` 的 `Controller` 中 直接使用不同
 
 ## 相关项目
 
