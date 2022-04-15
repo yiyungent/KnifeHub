@@ -1,0 +1,58 @@
+name: QQStatPlugin Release
+
+on: 
+  push:
+    tags:
+      - 'QQStatPlugin-v*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.100
+        
+    - name: Build
+      run: |
+        cd ./plugins/QQStatPlugin
+        dotnet build --configuration Release
+        ls
+        ls ./bin/Release/
+      
+    - name: Zip the Build
+      run: |
+        cd ./plugins/QQStatPlugin/bin/Release/net6.0
+        # 移除不需要的 dll
+        rm Microsoft.IdentityModel.*.dll
+        rm K4os*.dll
+        rm System.*.dll
+        rm MySql.Data.dll
+        rm Newtonsoft.Json.dll
+        rm Oracle.ManagedDataAccess.dll
+        rm Google.Protobuf.dll
+        rm -rf runtimes
+        zip -r QQStatPlugin-net6.0.zip *
+        cd ../../../../../
+        mv ./plugins/QQStatPlugin/bin/Release/net6.0/*.zip ./
+      
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        #tag_name: ${{ github.ref }}
+        #name: ${{ github.ref }}
+        body: TODO New Release.
+        #body_path: CHANGELOG.txt
+        draft: false
+        prerelease: false
+        files: |
+          QQStatPlugin-net6.0.zip
+          LICENSE 
+          README.md

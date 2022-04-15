@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 
@@ -25,14 +26,15 @@ namespace QQStatPlugin.Controllers
             return PhysicalFile(indexFilePath, "text/html");
         }
 
+        [Route(nameof(Download))]
+        [Authorize("PluginCoreAdmin")]
+        public async Task<ActionResult> Download()
+        {
+            string dbFilePath = DbContext.DbFilePath;
+            var fileStream = System.IO.File.OpenRead(dbFilePath);
+            //System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
 
-        //public async Task<ActionResult> Get()
-        //{
-        //    string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(QQStatPlugin)), "index.html");
-
-
-
-        //    return File(fileStream: null, contentType: "file", fileDownloadName: "", enableRangeProcessing: true);
-        //}
+            return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(QQStatPlugin)}.sqlite", enableRangeProcessing: true);
+        }
     }
 }
