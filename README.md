@@ -21,6 +21,12 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 - [x] 在线 QQ 登录
 - [x] 其它大部分功能由 插件提供
+- [x] 本仓库 维护的 官方插件
+  - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
+    - [x] 复读好友私聊
+    - [x] 上下线通知 设置 里的 AdminQQ
+   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+     - QQ 数据统计分析
 
 ## Screenshots
 
