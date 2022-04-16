@@ -16,7 +16,7 @@ using static Konata.Core.Events.Model.CaptchaEvent;
 namespace QQBotHub.Web.Controllers
 {
     [Route("api/[action]")]
-    [Authorize("PluginCoreAdmin")]
+    [Authorize("PluginCore.Admin")]
     [ApiController]
     public class HomeController : ControllerBase
     {

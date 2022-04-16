@@ -11,17 +11,17 @@ using QQBotHub.Sdk.IPlugins;
 
 namespace QQHelloWorldPlugin
 {
-    public class HelloWorldPlugin : BasePlugin, IStartupXPlugin, IWidgetPlugin, IQQBotPlugin
+    public class QQHelloWorldPlugin : BasePlugin, IStartupXPlugin, IWidgetPlugin, IQQBotPlugin
     {
         public override (bool IsSuccess, string Message) AfterEnable()
         {
-            Console.WriteLine($"{nameof(HelloWorldPlugin)}: {nameof(AfterEnable)}");
+            Console.WriteLine($"{nameof(QQHelloWorldPlugin)}: {nameof(AfterEnable)}");
             return base.AfterEnable();
         }
 
         public override (bool IsSuccess, string Message) BeforeDisable()
         {
-            Console.WriteLine($"{nameof(HelloWorldPlugin)}: {nameof(BeforeDisable)}");
+            Console.WriteLine($"{nameof(QQHelloWorldPlugin)}: {nameof(BeforeDisable)}");
             return base.BeforeDisable();
         }
 

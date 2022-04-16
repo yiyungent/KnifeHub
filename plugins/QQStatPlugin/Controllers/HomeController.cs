@@ -27,7 +27,7 @@ namespace QQStatPlugin.Controllers
         }
 
         [Route(nameof(Download))]
-        [Authorize("PluginCoreAdmin")]
+        [Authorize("PluginCore.Admin")]
         public async Task<ActionResult> Download()
         {
             string dbFilePath = DbContext.DbFilePath;

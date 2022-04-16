@@ -1,4 +1,4 @@
-using PluginCore.Extensions;
+using PluginCore.AspNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

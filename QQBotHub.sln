@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginCore", "src\PluginCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginCore.IPlugins", "src\PluginCore\src\PluginCore.IPlugins\PluginCore.IPlugins.csproj", "{3F1C9ACE-0EC3-45FE-B382-97216429086E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginCore.AspNetCore", "src\PluginCore\src\PluginCore.AspNetCore\PluginCore.AspNetCore.csproj", "{F0B0E0DF-4490-478A-9C60-C80F0E290FC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginCore.IPlugins.AspNetCore", "src\PluginCore\src\PluginCore.IPlugins.AspNetCore\PluginCore.IPlugins.AspNetCore.csproj", "{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{3F1C9ACE-0EC3-45FE-B382-97216429086E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F1C9ACE-0EC3-45FE-B382-97216429086E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F1C9ACE-0EC3-45FE-B382-97216429086E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +94,8 @@ Global
 		{F6087CC7-5239-42E3-92D6-51F25F6E3EE8} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{AE51E530-8545-40F5-9070-8314E722FEF9} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 		{3F1C9ACE-0EC3-45FE-B382-97216429086E} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
+		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
+		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
