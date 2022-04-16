@@ -1,7 +1,10 @@
-﻿using PluginCore;
-using SqlSugar;
+﻿using Dapper;
+using PluginCore;
+using QQStatPlugin.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,23 +24,38 @@ namespace QQStatPlugin
             }
         }
 
-
-        public static SqlSugarScope Instance = new SqlSugarScope(new ConnectionConfig()
+        public static string ConnStr
         {
-            ConnectionString = $"Server={DbFilePath}",//连接符字串
-            DbType = DbType.Sqlite,//数据库类型
-            IsAutoCloseConnection = true //不设成true要手动close
-        },
-          db =>
-          {
-              //(A)全局生效配置点
-              //调试SQL事件，可以删掉
-              db.Aop.OnLogExecuting = (sql, pars) =>
-              {
-                  Console.WriteLine(sql);//输出sql,查看执行sql
-              };
-          });
+            get
+            {
+                return $"Data Source={DbFilePath};Cache Size=0"; // 连接符字串
+            }
+        }
 
+
+        public static int InsertIntoMessage(Message model)
+        {
+            using (IDbConnection con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+
+                string sql = "INSERT INTO Message (QQName,QQUin,Content,GroupName,GroupUin,CreateTime) Values (@QQName,@QQUin,@Content,@GroupName,@GroupUin,@CreateTime);";
+
+                return con.Execute(sql, model);
+            }
+        }
+
+        public static List<Message> QueryAllMessage()
+        {
+            using (IDbConnection con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+
+                string sql = "SELECT * FROM Message;";
+
+                return con.Query<Message>(sql).ToList();
+            }
+        }
 
     }
 }
