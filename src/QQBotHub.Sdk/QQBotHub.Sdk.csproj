@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>QQBotHub.Sdk</PackageId>
-		<Version>0.0.1</Version>
+		<Version>0.1.0</Version>
 		<Company>yiyun</Company>
 		<Authors>yiyun</Authors>
 		<Description>QQBotHub 插件开发包</Description>
