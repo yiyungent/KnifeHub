@@ -1,4 +1,7 @@
 using PluginCore.AspNetCore.Extensions;
+using PluginCore.AspNetCore.lmplements;
+using PluginCore.Interfaces;
+using PluginCore.lmplements;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,12 @@ builder.Services.AddSwaggerGen(options =>
     // https://stackoverflow.com/questions/61881770/invalidoperationexception-cant-use-schemaid-the-same-schemaid-is-already-us
     options.CustomSchemaIds(type => type.ToString());
 });
+
+builder.Services.AddTransient<AspNetCorePluginManagerBeta>();
+// สนำร AspNetCorePluginManager
+builder.Services.AddTransient<IPluginManager, AspNetCorePluginManagerBeta>();
+builder.Services.AddTransient<PluginFinder<PluginLoadContext>>();
+builder.Services.AddTransient<IPluginFinder, PluginFinder<PluginLoadContext>>();
 
 builder.Services.AddPluginCore();
 
