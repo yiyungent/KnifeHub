@@ -1,0 +1,3 @@
+[submodule "src/PluginCore"]
+	path = src/PluginCore
+	url = git@github.com:yiyungent/PluginCore.git
