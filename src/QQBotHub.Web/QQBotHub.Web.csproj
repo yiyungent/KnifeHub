@@ -25,7 +25,7 @@
 
 	<!-- 方便开发debug,与发布到nuget -->
 	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="QQBotHub.Sdk" Version="0.0.1" />
+		<PackageReference Include="QQBotHub.Sdk" Version="0.1.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
 		<ProjectReference Include="..\..\src\QQBotHub.Sdk\QQBotHub.Sdk.csproj" />
