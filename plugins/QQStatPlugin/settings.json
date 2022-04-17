@@ -1,4 +1,7 @@
 {
   "AdminQQ": "",
-  "Groups": [ "收集数据群号1", "收集数据群号2" ]
+  "Groups": [ "鏀堕泦鏁版嵁缇ゅ彿1", "鏀堕泦鏁版嵁缇ゅ彿2" ],
+  "AdminGroups": [ "", "" ],
+  "BaseUrl": "",
+  "ScreenshotUrl": "https://webscreenshot-yiyun.herokuapp.com/?url="
 }

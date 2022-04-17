@@ -8,6 +8,8 @@ using Konata.Core.Events.Model;
 using Konata.Core.Interfaces.Api;
 using QQBotHub.Sdk.IPlugins;
 using QQStatPlugin.Utils;
+using Konata.Core.Message.Model;
+using Konata.Core.Common;
 
 namespace QQStatPlugin
 {
@@ -29,6 +31,62 @@ namespace QQStatPlugin
         public void OnGroupMessage((Bot s, GroupMessageEvent e) obj, string message, string groupName, uint groupUin, uint memberUin)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
+
+            #region 管理员控制
+            Console.WriteLine(groupUin);
+            if (settingsModel.AdminGroups != null && settingsModel.AdminGroups.Count >= 1 && settingsModel.AdminGroups.Contains(groupUin.ToString()))
+            {
+                Console.WriteLine("进入 AdminGroups");
+                BotMember member = null;
+                try
+                {
+                    member = obj.s.GetGroupMemberInfo(groupUin: groupUin, memberUin: memberUin, forceUpdate: true).Result;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("获取群成员信息失败");
+                }
+                if (member != null)
+                {
+                    if (member.Role == Konata.Core.Common.RoleType.Admin || member.Role == Konata.Core.Common.RoleType.Owner)
+                    {
+                        // 群管理员
+                        if (message.Contains("#日历"))
+                        {
+                            string token = Guid.NewGuid().ToString();
+                            Controllers.CalendarController.CreateTime = DateTime.Now;
+
+                            // 下方获取当前群聊
+                            string imageUrl = $"{settingsModel.ScreenshotUrl}{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar?groupUin={groupUin.ToString()}";
+                            Console.WriteLine(imageUrl);
+                            try
+                            {
+                                var image = ImageChain.CreateFromUrl(imageUrl);
+                                obj.s.SendGroupMessage(groupUin, image);
+                            }
+                            catch (Exception ex)
+                            {
+                                obj.s.SendGroupMessage(groupUin, "发送 日历 图片失败");
+                                obj.s.SendGroupMessage(groupUin, imageUrl);
+
+                                Console.WriteLine("发送 日历 图片失败");
+                                Console.WriteLine(ex.ToString());
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("未包含命令");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("非管理员/群主");
+                    }
+                }
+            }
+            #endregion
+
+            #region 收集群消息
             if (settingsModel.Groups != null && settingsModel.Groups.Count >= 1 && settingsModel.Groups.Contains(groupUin.ToString()))
             {
                 #region 收集群消息
@@ -53,6 +111,8 @@ namespace QQStatPlugin
                 }
                 #endregion
             }
+            #endregion
+            
         }
 
         public void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)

@@ -5,7 +5,11 @@
 
 ## 前端视图
 
-- [/Plugins/QQStatPlugin](/Plugins/QQStatPlugin)
+- [/Plugins/QQStatPlugin](/Plugins/QQStatPlugin) - 未做
+
+> QQ群消息 日历
+
+- [/Plugins/QQStatPlugin/Calendar](/Plugins/QQStatPlugin/Calendar)
 
 
 ## 其它

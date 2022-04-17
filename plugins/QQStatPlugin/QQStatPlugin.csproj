@@ -51,5 +51,8 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="wwwroot\calendar.html" />
+	</ItemGroup>
 
 </Project>
