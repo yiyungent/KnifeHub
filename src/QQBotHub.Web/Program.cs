@@ -18,12 +18,6 @@ builder.Services.AddSwaggerGen(options =>
     options.CustomSchemaIds(type => type.ToString());
 });
 
-builder.Services.AddTransient<AspNetCorePluginManagerBeta>();
-// สนำร AspNetCorePluginManager
-builder.Services.AddTransient<IPluginManager, AspNetCorePluginManagerBeta>();
-builder.Services.AddTransient<PluginFinder<PluginLoadContext>>();
-builder.Services.AddTransient<IPluginFinder, PluginFinder<PluginLoadContext>>();
-
 builder.Services.AddPluginCore();
 
 var app = builder.Build();
