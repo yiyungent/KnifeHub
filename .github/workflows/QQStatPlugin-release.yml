@@ -25,19 +25,11 @@ jobs:
         dotnet build --configuration Release
         ls
         ls ./bin/Release/
+        ls ./bin/Release/net6.0/
       
     - name: Zip the Build
       run: |
         cd ./plugins/QQStatPlugin/bin/Release/net6.0
-        # 移除不需要的 dll
-        rm Microsoft.IdentityModel.*.dll
-        rm K4os*.dll
-        rm System.*.dll
-        rm MySql.Data.dll
-        rm Newtonsoft.Json.dll
-        rm Oracle.ManagedDataAccess.dll
-        rm Google.Protobuf.dll
-        rm -rf runtimes
         zip -r QQStatPlugin-net6.0.zip *
         cd ../../../../../
         mv ./plugins/QQStatPlugin/bin/Release/net6.0/*.zip ./

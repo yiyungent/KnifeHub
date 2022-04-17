@@ -25,6 +25,7 @@ jobs:
         dotnet build --configuration Release
         ls
         ls ./bin/Release/
+        ls ./bin/Release/net6.0/
       
     - name: Zip the Build
       run: |
