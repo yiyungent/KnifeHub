@@ -75,7 +75,7 @@ namespace QQStatPlugin
                 }
                 if (member != null)
                 {
-                    if (member.Role == Konata.Core.Common.RoleType.Admin || member.Role == Konata.Core.Common.RoleType.Owner)
+                    if (member.Uin.ToString() == settingsModel.AdminQQ || member.Role == Konata.Core.Common.RoleType.Owner || member.Role == Konata.Core.Common.RoleType.Admin)
                     {
                         // 群管理员
                         if (message.Contains("#日历"))

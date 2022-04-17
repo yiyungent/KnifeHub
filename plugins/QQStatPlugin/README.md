@@ -14,7 +14,7 @@
 
 > 需要设置 `BaseUrl`, `ScreenshotUrl`, `ScreenshotUrl` 保持默认即可
 
-> `AdminGroups` 群范围内, 群管理员/群主 发送 `#日历` , 获取本群 日历图
+> `AdminGroups` 群范围内, AdminQQ/群主/群管理员 发送 `#日历` , 获取本群 日历图
 
 或者发送 `#日历 目标个人QQ号`, 获取此人 在机器人收集的 **所有群聊** 数据形成的日历, 不限本群
 
