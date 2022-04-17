@@ -32,11 +32,38 @@ namespace QQStatPlugin
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
 
+            #region 收集群消息
+            if (settingsModel.Groups != null && settingsModel.Groups.Count >= 1 && settingsModel.Groups.Contains(groupUin.ToString()))
+            {
+                #region 收集群消息
+                try
+                {
+                    // 保存数据库
+                    int successRow = DbContext.InsertIntoMessage(new Models.Message()
+                    {
+                        Content = message,
+                        CreateTime = DateTime.Now.ToTimeStamp13(),
+                        GroupName = groupName,
+                        GroupUin = groupUin.ToString(),
+                        QQName = obj.e.Message.Sender.Name,
+                        QQUin = memberUin.ToString()
+                    });
+                    Console.WriteLine($"成功插入 {successRow} 行");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("插入表 Message 出错:");
+                    Console.WriteLine(ex.ToString());
+                }
+                #endregion
+            }
+            #endregion
+
             #region 管理员控制
             Console.WriteLine(groupUin);
             if (settingsModel.AdminGroups != null && settingsModel.AdminGroups.Count >= 1 && settingsModel.AdminGroups.Contains(groupUin.ToString()))
             {
-                Console.WriteLine("进入 AdminGroups");
+                Console.WriteLine($"进入 AdminGroups {DateTime.Now.ToString()}");
                 BotMember member = null;
                 try
                 {
@@ -86,33 +113,6 @@ namespace QQStatPlugin
             }
             #endregion
 
-            #region 收集群消息
-            if (settingsModel.Groups != null && settingsModel.Groups.Count >= 1 && settingsModel.Groups.Contains(groupUin.ToString()))
-            {
-                #region 收集群消息
-                try
-                {
-                    // 保存数据库
-                    int successRow = DbContext.InsertIntoMessage(new Models.Message()
-                    {
-                        Content = message,
-                        CreateTime = DateTime.Now.ToTimeStamp13(),
-                        GroupName = groupName,
-                        GroupUin = groupUin.ToString(),
-                        QQName = obj.e.Message.Sender.Name,
-                        QQUin = memberUin.ToString()
-                    });
-                    Console.WriteLine($"成功插入 {successRow} 行");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("插入表 Message 出错:");
-                    Console.WriteLine(ex.ToString());
-                }
-                #endregion
-            }
-            #endregion
-            
         }
 
         public void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)
