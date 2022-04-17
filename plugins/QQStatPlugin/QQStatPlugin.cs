@@ -84,7 +84,19 @@ namespace QQStatPlugin
                             Controllers.CalendarController.CreateTime = DateTime.Now;
 
                             // 下方获取当前群聊
-                            string imageUrl = $"{settingsModel.ScreenshotUrl}{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar?groupUin={groupUin.ToString()}";
+                            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar?groupUin={groupUin.ToString()}";
+                            string targetMemberUinStr = message.Replace("#日历", "")?.Trim();
+                            if (uint.TryParse(targetMemberUinStr, out uint targetMemberUin))
+                            {
+                                // 仅此人 日历
+                                urlParam += $"&memeberUin={targetMemberUin}";
+                            }
+                            // 注意: url 编码, 这样才能正确传参
+                            urlParam = System.Web.HttpUtility.UrlEncode(urlParam, System.Text.Encoding.UTF8);
+                            // 加个time 防止缓存
+                            // ScreenshotUrl: xxx.com?url=
+                            string imageUrl = $"{settingsModel.ScreenshotUrl}{urlParam}&time={DateTime.Now.ToTimeStamp13()}";
+
                             Console.WriteLine(imageUrl);
                             try
                             {
@@ -94,7 +106,7 @@ namespace QQStatPlugin
                             catch (Exception ex)
                             {
                                 obj.s.SendGroupMessage(groupUin, "发送 日历 图片失败");
-                                obj.s.SendGroupMessage(groupUin, imageUrl);
+                                //obj.s.SendGroupMessage(groupUin, imageUrl);
 
                                 Console.WriteLine("发送 日历 图片失败");
                                 Console.WriteLine(ex.ToString());

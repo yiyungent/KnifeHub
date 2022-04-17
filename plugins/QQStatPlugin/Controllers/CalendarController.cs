@@ -41,8 +41,10 @@ namespace QQStatPlugin.Controllers
         }
 
         [HttpGet]
-        public async Task<BaseResponseModel> EChartsOption(string memeberUin = "", string groupUin = "")
+        public async Task<BaseResponseModel> EChartsOption([FromQuery] string memeberUin = "", [FromQuery] string groupUin = "")
         {
+            Console.WriteLine($"{nameof(CalendarController)}.{nameof(EChartsOption)} {nameof(memeberUin)}:{memeberUin} {nameof(groupUin)}:{groupUin}");
+
             BaseResponseModel responseModel = new BaseResponseModel();
 
             // 1:00 + 1 = 2:00
@@ -84,35 +86,49 @@ namespace QQStatPlugin.Controllers
                 var messageList = DbContext.QueryAllMessage();
 
                 Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
-                foreach (var item in messageList)
+                if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
                 {
-                    if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
+                    // 个人
+                    foreach (var item in messageList)
                     {
                         // 某人
-                        if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
+                        if (item.QQUin == memeberUin)
                         {
-                            keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
-                        }
-                        else
-                        {
-                            keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
+                            if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
+                            {
+                                keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
+                            }
+                            else
+                            {
+                                keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
+                            }
                         }
                     }
-                    else if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
+                }
+                else if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
+                {
+                    // 群
+                    foreach (var item in messageList)
                     {
                         // 某群
-                        if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
+                        if (item.GroupUin == groupUin)
                         {
-                            keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
-                        }
-                        else
-                        {
-                            keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
+                            if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
+                            {
+                                keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
+                            }
+                            else
+                            {
+                                keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
+                            }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    // 全部
+                    foreach (var item in messageList)
                     {
-                        // 全部
                         if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
                         {
                             keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
