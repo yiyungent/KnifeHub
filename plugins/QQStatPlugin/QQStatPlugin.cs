@@ -85,6 +85,9 @@ namespace QQStatPlugin
                             stringBuilder.AppendLine("#日历 指定某人QQ");
                             stringBuilder.AppendLine("#折线");
                             stringBuilder.AppendLine("#折线 指定某人QQ");
+                            stringBuilder.AppendLine("补充:");
+                            stringBuilder.AppendLine("日历为 计算消息字数");
+                            stringBuilder.AppendLine("折线为 计算消息字数");
                             obj.s.SendGroupMessage(groupUin, stringBuilder.ToString());
                         }
                         else if (message.Contains("#日历"))

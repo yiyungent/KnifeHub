@@ -95,7 +95,7 @@ namespace QQStatPlugin.Controllers
                         // 某人
                         messageList = messageList.Where(m => m.QQUin == memeberUin).ToList();
                     }
-                } 
+                }
                 #endregion
 
                 Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
@@ -104,11 +104,11 @@ namespace QQStatPlugin.Controllers
                 {
                     if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
                     {
-                        keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
+                        keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += item.Content?.Length ?? 0;
                     }
                     else
                     {
-                        keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
+                        keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), item.Content?.Length ?? 0);
                     }
                 }
 
