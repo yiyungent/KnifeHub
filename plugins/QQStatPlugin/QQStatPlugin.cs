@@ -60,11 +60,13 @@ namespace QQStatPlugin
             }
             #endregion
 
-            #region 管理员控制
+            #region 图表
             Console.WriteLine(groupUin);
-            if (settingsModel.AdminGroups != null && settingsModel.AdminGroups.Count >= 1 && settingsModel.AdminGroups.Contains(groupUin.ToString()))
+            bool isAdminGroup = settingsModel.ChartGroups != null && settingsModel.ChartGroups.Count >= 1 && settingsModel.ChartGroups.Contains(groupUin.ToString());
+            bool isChartGroup = settingsModel.AdminGroups != null && settingsModel.AdminGroups.Count >= 1 && settingsModel.AdminGroups.Contains(groupUin.ToString());
+            if (isAdminGroup || isChartGroup)
             {
-                Console.WriteLine($"进入 AdminGroups {DateTime.Now.ToString()}");
+                Console.WriteLine($"进入 {DateTime.Now.ToString()}");
                 BotMember member = null;
                 try
                 {
