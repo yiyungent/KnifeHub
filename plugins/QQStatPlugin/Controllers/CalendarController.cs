@@ -56,14 +56,14 @@ namespace QQStatPlugin.Controllers
                 return responseModel;
             }
 
-            CalendarEChartsOptionResponseModel dataModel = new CalendarEChartsOptionResponseModel();
+            CalendarEChartsOptionResponseDataModel dataModel = new CalendarEChartsOptionResponseDataModel();
 
             #region CalendarEChartsOption 初始化
-            dataModel.tooltip = new CalendarEChartsOptionResponseModel.TooltipModel()
+            dataModel.tooltip = new CalendarEChartsOptionResponseDataModel.TooltipModel()
             {
                 position = "top"
             };
-            dataModel.visualMap = new CalendarEChartsOptionResponseModel.VisualmapModel()
+            dataModel.visualMap = new CalendarEChartsOptionResponseDataModel.VisualmapModel()
             {
                 min = 0,
                 max = 1000,
@@ -71,13 +71,13 @@ namespace QQStatPlugin.Controllers
                 orient = "horizontal",
                 left = "center",
                 top = "top",
-                inRange = new CalendarEChartsOptionResponseModel.VisualmapModel.inRangeModel()
+                inRange = new CalendarEChartsOptionResponseDataModel.VisualmapModel.inRangeModel()
                 {
                     color = new List<string>() { "#f0f0f0", "#dcf064", "#d2e650", "#bed228", "#5ab40a" }, // 格子的颜色
                     colorAlpha = 0.9
                 }
             };
-            dataModel.calendar = new List<CalendarEChartsOptionResponseModel.CalendarModel>();
+            dataModel.calendar = new List<CalendarEChartsOptionResponseDataModel.CalendarModel>();
 
             #endregion
 
@@ -152,7 +152,7 @@ namespace QQStatPlugin.Controllers
                 List<List<List<string>>> list = new List<List<List<string>>>();
                 int calendarIndex = -1; // 注意: 从 -1 开始
                 List<int> yearList = new List<int>();
-                dataModel.series = new List<CalendarEChartsOptionResponseModel.SeriesModel>();
+                dataModel.series = new List<CalendarEChartsOptionResponseDataModel.SeriesModel>();
                 foreach (var item in calendarList)
                 {
                     //int currentYear = DateTime.Parse(item[0]).Year;
@@ -160,7 +160,7 @@ namespace QQStatPlugin.Controllers
                     if (!yearList.Contains(currentYear))
                     {
                         calendarIndex++;
-                        var serie = new CalendarEChartsOptionResponseModel.SeriesModel();
+                        var serie = new CalendarEChartsOptionResponseDataModel.SeriesModel();
                         serie.type = "heatmap";
                         serie.coordinateSystem = "calendar";
                         serie.calendarIndex = calendarIndex;
@@ -181,7 +181,7 @@ namespace QQStatPlugin.Controllers
                 int index = 0;
                 foreach (var year in yearList)
                 {
-                    dataModel.calendar.Add(new CalendarEChartsOptionResponseModel.CalendarModel
+                    dataModel.calendar.Add(new CalendarEChartsOptionResponseDataModel.CalendarModel
                     {
                         range = year.ToString(),
                         cellSize = new List<string> { "auto", "20" },

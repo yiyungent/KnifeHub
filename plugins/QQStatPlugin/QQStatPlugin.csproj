@@ -53,6 +53,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="wwwroot\calendar.html" />
+	  <None Remove="wwwroot\stacked-area.html" />
 	</ItemGroup>
 
 </Project>

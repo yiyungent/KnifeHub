@@ -10,6 +10,7 @@ using QQBotHub.Sdk.IPlugins;
 using QQStatPlugin.Utils;
 using Konata.Core.Message.Model;
 using Konata.Core.Common;
+using System.Text;
 
 namespace QQStatPlugin
 {
@@ -80,6 +81,7 @@ namespace QQStatPlugin
                         // 群管理员
                         if (message.Contains("#日历"))
                         {
+                            #region 日历
                             string token = Guid.NewGuid().ToString();
                             Controllers.CalendarController.CreateTime = DateTime.Now;
 
@@ -111,6 +113,52 @@ namespace QQStatPlugin
                                 Console.WriteLine("发送 日历 图片失败");
                                 Console.WriteLine(ex.ToString());
                             }
+                            #endregion
+                        }
+                        else if (message.Contains("#折线"))
+                        {
+                            #region 折线
+                            string token = Guid.NewGuid().ToString();
+                            Controllers.StackedAreaController.CreateTime = DateTime.Now;
+
+                            // 下方获取当前群聊
+                            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/StackedArea?groupUin={groupUin.ToString()}";
+                            string targetMemberUinStr = message.Replace("#折线", "")?.Trim();
+                            if (uint.TryParse(targetMemberUinStr, out uint targetMemberUin))
+                            {
+                                // 仅此人 日历
+                                urlParam += $"&memeberUin={targetMemberUin}";
+                            }
+                            // 注意: url 编码, 这样才能正确传参
+                            urlParam = System.Web.HttpUtility.UrlEncode(urlParam, System.Text.Encoding.UTF8);
+                            // 加个time 防止缓存
+                            // ScreenshotUrl: xxx.com?url=
+                            string imageUrl = $"{settingsModel.ScreenshotUrl}{urlParam}&time={DateTime.Now.ToTimeStamp13()}";
+
+                            Console.WriteLine(imageUrl);
+                            try
+                            {
+                                var image = ImageChain.CreateFromUrl(imageUrl);
+                                obj.s.SendGroupMessage(groupUin, image);
+                            }
+                            catch (Exception ex)
+                            {
+                                obj.s.SendGroupMessage(groupUin, "发送 折线 图片失败");
+                                //obj.s.SendGroupMessage(groupUin, imageUrl);
+
+                                Console.WriteLine("发送 折线 图片失败");
+                                Console.WriteLine(ex.ToString());
+                            }
+                            #endregion
+                        }
+                        else if (message.Contains("#帮助"))
+                        {
+                            StringBuilder stringBuilder = new StringBuilder();
+                            stringBuilder.AppendLine("#日历");
+                            stringBuilder.AppendLine("#日历 指定某人QQ");
+                            stringBuilder.AppendLine("#折线");
+                            stringBuilder.AppendLine("#折线 指定某人QQ");
+                            obj.s.SendGroupMessage(groupUin, stringBuilder.ToString());
                         }
                         else
                         {

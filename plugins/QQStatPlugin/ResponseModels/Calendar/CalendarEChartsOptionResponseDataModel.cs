@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QQStatPlugin.ResponseModels.Calendar
 {
-    public class CalendarEChartsOptionResponseModel
+    public class CalendarEChartsOptionResponseDataModel
     {
         public TooltipModel tooltip { get; set; }
         public VisualmapModel visualMap { get; set; }

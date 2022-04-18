@@ -3,5 +3,5 @@
   "Groups": [ "收集数据群号1", "收集数据群号2" ],
   "AdminGroups": [ "", "" ],
   "BaseUrl": "",
-  "ScreenshotUrl": "https://webscreenshot-yiyun.herokuapp.com/?url="
+  "ScreenshotUrl": "https://webscreenshot-yiyun.herokuapp.com/?windowWidth=1080&forceWait=5&url="
 }
