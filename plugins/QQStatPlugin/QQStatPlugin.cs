@@ -11,11 +11,19 @@ using QQStatPlugin.Utils;
 using Konata.Core.Message.Model;
 using Konata.Core.Common;
 using System.Text;
+using QQBotHub.Sdk;
+using Konata.Core.Message;
+using System.Collections.Generic;
 
 namespace QQStatPlugin
 {
-    public class QQStatPlugin : BasePlugin, IQQBotPlugin
+    public class QQStatPlugin : BasePlugin, IQQBotPlugin, ITimeJobPlugin
     {
+        /// <summary>
+        /// 43200 = 12 小时
+        /// </summary>
+        public long SecondsPeriod => 43200;
+
         public override (bool IsSuccess, string Message) AfterEnable()
         {
             Console.WriteLine($"{nameof(QQStatPlugin)}: {nameof(AfterEnable)}");
@@ -99,7 +107,7 @@ namespace QQStatPlugin
                         else if (message.Contains("#折线"))
                         {
                             #region 折线
-                            SendStackedArea(obj, message, groupUin, memberUin, settingsModel);
+                            SendStackedArea(obj: obj, message: message, groupUin: groupUin, settingsModel: settingsModel, memberUin: memberUin);
                             #endregion
                         }
                     }
@@ -179,6 +187,42 @@ namespace QQStatPlugin
         #endregion
 
 
+        #region 定时任务
+        public async Task ExecuteAsync()
+        {
+            try
+            {
+                SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
+                if (QQBotStore.Bot != null && QQBotStore.Bot.IsOnline())
+                {
+                    var groupList = await QQBotStore.Bot.GetGroupList(forceUpdate: true);
+                    foreach (var group in groupList)
+                    {
+                        if (settingsModel.ChartGroups.Contains(group.Uin.ToString()))
+                        {
+                            SendStackedArea((QQBotStore.Bot, null), message: "#折线", groupUin: group.Uin, settingsModel: settingsModel);
+
+                            List<BaseChain> baseChains = new List<BaseChain>()
+                            {
+                                TextChain.Create("发送 #帮助 获取更多信息")
+                            };
+
+                            await QQBotStore.Bot.SendGroupMessage(groupUin: group.Uin, baseChains.ToArray());
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"执行定时任务失败: {ex.ToString()}");
+            }
+
+            await Task.CompletedTask;
+        }
+        #endregion
+
+
         public void SendCalendar((Bot s, GroupMessageEvent e) obj, string message, uint groupUin, uint memberUin, SettingsModel settingsModel)
         {
             string token = Guid.NewGuid().ToString();
@@ -216,7 +260,7 @@ namespace QQStatPlugin
             }
         }
 
-        public void SendStackedArea((Bot s, GroupMessageEvent e) obj, string message, uint groupUin, uint memberUin, SettingsModel settingsModel)
+        public void SendStackedArea((Bot s, GroupMessageEvent e) obj, string message, uint groupUin, SettingsModel settingsModel, uint memberUin = 0)
         {
             string token = Guid.NewGuid().ToString();
             Controllers.StackedAreaController.CreateTime = DateTime.Now;
@@ -240,8 +284,11 @@ namespace QQStatPlugin
             {
                 var image = ImageChain.CreateFromUrl(imageUrl);
                 obj.s.SendGroupMessage(groupUin, image);
-                obj.s.SendGroupPoke(groupUin: groupUin, memberUin: memberUin);
-                obj.s.SendGroupMessage(groupUin, AtChain.Create(memberUin));
+                if (memberUin > 0)
+                {
+                    obj.s.SendGroupPoke(groupUin: groupUin, memberUin: memberUin);
+                    obj.s.SendGroupMessage(groupUin, AtChain.Create(memberUin));
+                }
             }
             catch (Exception ex)
             {
@@ -252,6 +299,7 @@ namespace QQStatPlugin
                 Console.WriteLine(ex.ToString());
             }
         }
+
 
     }
 }
