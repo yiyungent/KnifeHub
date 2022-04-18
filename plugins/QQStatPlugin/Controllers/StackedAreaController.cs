@@ -26,7 +26,7 @@ namespace QQStatPlugin.Controllers
 
         [Route("/Plugins/QQStatPlugin/StackedArea")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] string memeberUin = "", [FromQuery] string groupUin = "")
+        public async Task<ActionResult> Get([FromQuery] string groupUin = "", [FromQuery] string memeberUin = "")
         {
             if (CreateTime.AddHours(1) < DateTime.Now)
             {
@@ -64,22 +64,23 @@ namespace QQStatPlugin.Controllers
             {
                 var messageList = DbContext.QueryAllMessage();
 
-                Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
-                if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
-                {
-                    // 个人
-                    messageList = messageList.Where(m => m.QQUin == memeberUin).ToList();
-                }
-                else if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
+                #region 过滤
+                if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
                 {
                     // 某群
                     messageList = messageList.Where(m => m.GroupUin == groupUin).ToList();
+                    if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
+                    {
+                        // 某人
+                        messageList = messageList.Where(m => m.QQUin == memeberUin).ToList();
+                    }
                 }
-                else
-                {
-                    // 全部
+                #endregion
 
-                }
+
+                Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
+
+
                 // 只要前10 发言最多的人
                 #region 只要 top10
                 //Dictionary<string, int> tempDic = new Dictionary<string, int>();

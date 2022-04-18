@@ -25,7 +25,7 @@ namespace QQStatPlugin.Controllers
 
         [Route("/Plugins/QQStatPlugin/Calendar")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] string memeberUin = "", [FromQuery] string groupUin = "")
+        public async Task<ActionResult> Get([FromQuery] string groupUin = "", [FromQuery] string memeberUin = "")
         {
             if (CreateTime.AddHours(1) < DateTime.Now)
             {
@@ -85,60 +85,33 @@ namespace QQStatPlugin.Controllers
             {
                 var messageList = DbContext.QueryAllMessage();
 
-                Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
-                if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
+                #region 过滤
+                if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
                 {
-                    // 个人
-                    foreach (var item in messageList)
+                    // 某群
+                    messageList = messageList.Where(m => m.GroupUin == groupUin).ToList();
+                    if (!string.IsNullOrEmpty(memeberUin) && uint.TryParse(memeberUin, out uint mUin))
                     {
                         // 某人
-                        if (item.QQUin == memeberUin)
-                        {
-                            if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
-                            {
-                                keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
-                            }
-                            else
-                            {
-                                keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
-                            }
-                        }
+                        messageList = messageList.Where(m => m.QQUin == memeberUin).ToList();
                     }
-                }
-                else if (!string.IsNullOrEmpty(groupUin) && uint.TryParse(groupUin, out uint gUin))
+                } 
+                #endregion
+
+                Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
+
+                foreach (var item in messageList)
                 {
-                    // 群
-                    foreach (var item in messageList)
+                    if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
                     {
-                        // 某群
-                        if (item.GroupUin == groupUin)
-                        {
-                            if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
-                            {
-                                keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
-                            }
-                            else
-                            {
-                                keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
-                            }
-                        }
+                        keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
+                    }
+                    else
+                    {
+                        keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
                     }
                 }
-                else
-                {
-                    // 全部
-                    foreach (var item in messageList)
-                    {
-                        if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
-                        {
-                            keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += 1;
-                        }
-                        else
-                        {
-                            keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), 1);
-                        }
-                    }
-                }
+
 
                 // 排序 转换
                 List<List<string>> calendarList = keyValuePairs

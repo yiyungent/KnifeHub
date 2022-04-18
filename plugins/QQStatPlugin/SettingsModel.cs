@@ -8,9 +8,10 @@ namespace QQStatPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
+        /// <summary>
+        /// AdminQQ 在任何情况都拥有权限
+        /// </summary>
         public string AdminQQ { get; set; }
-
-        public List<string> Groups { get; set; }
 
         /// <summary>
         /// 这些群 必须是 管理员/群主 才可以 使用 图表
@@ -19,9 +20,10 @@ namespace QQStatPlugin
 
 
         /// <summary>
-        /// 这些群 群普通成员也可以使用 图表
+        /// 这些群 普通成员 也可以使用 图表
         /// </summary>
         public List<string> ChartGroups { get; set; }
+
 
         public string BaseUrl { get; set; }
 
