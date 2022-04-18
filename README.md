@@ -29,10 +29,19 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
      - [x] 对接 [茉莉机器人 API](https://mly.app)
        - 自定义知识库, 各种功能
      - [x] 设置 机器人聊天群, 好友
+   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+     - [x] 收集群聊消息 
+     - [x] `#日历`
+     - [x] `#折线`
 
 ## Screenshots
 
 ![qq_online.png](./screenshots/qq_online.png)
+
+### [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+
+![](./screenshots/2022-04-18-15-46-04.png)
+![](./screenshots/2022-04-18-15-47-02.png)
 
 ## Quick Start
 
