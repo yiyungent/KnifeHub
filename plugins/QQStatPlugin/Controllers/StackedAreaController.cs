@@ -184,5 +184,16 @@ namespace QQStatPlugin.Controllers
         }
 
         #endregion
+
+
+        private static string ConvertTime(this long time)
+        {
+            string rtnStr = "";
+            DateTime dateTime = time.ToDateTime13();
+            rtnStr = dateTime.ToString("yyyy-MM-dd HH");
+
+            return rtnStr;
+        }
+
     }
 }
