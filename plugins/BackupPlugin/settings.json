@@ -1,0 +1,8 @@
+{
+  "SecondsPeriod": 180,
+  "Telegram": {
+    "Enable": false,
+    "Token": "",
+    "ChatId": ""
+  }
+}

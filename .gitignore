@@ -365,12 +365,16 @@ FodyWeavers.xsd
 
 
 # Others
+src/QQBotPlugin/settings.json
 src/QQBotHub.Web/settings.json
 src/QQBotHub.Web/App_Data/
-src/QQBotPlugin/settings.json
 src/QQBotHub.Web/Plugins/
 src/QQBotHub.Web/Plugins_wwwroot/
-src/QQBotHub.Web/App_Data/
+# 注意: 由于前面排除了 Backup*/ , 这里需要包括
+!plugins/BackupPlugin/
+
+
+
 
 
 
