@@ -30,14 +30,18 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
   - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
     - [x] 复读好友私聊
     - [x] 上下线通知 设置 里的 AdminQQ
-   - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
-     - [x] 对接 [茉莉机器人 API](https://mly.app)
-       - 自定义知识库, 各种功能
-     - [x] 设置 机器人聊天群, 好友
-   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
-     - [x] 收集群聊消息 
-     - [x] `#日历`
-     - [x] `#折线`
+  - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
+    - [x] 对接 [茉莉机器人 API](https://mly.app)
+      - 自定义知识库, 各种功能
+    - [x] 设置 机器人聊天群, 好友
+  - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+    - [x] 收集群聊消息 
+    - [x] 下载 群聊 数据库
+    - [x] `#日历`
+    - [x] `#折线`
+  - [BackupPlugin](https://github.com/yiyungent/QQBotHub/releases?q=BackupPlugin&expanded=true) 
+    - [x] 定时 自动 备份 插件数据
+    - [x] 将 备份文件 发送到 Telegram 
 
 ## Screenshots
 
