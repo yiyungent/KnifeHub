@@ -18,13 +18,9 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
 > **通知:**
-> 请尽快 更新到 **QQBotHub-v0.5.2** 版本, 旧版本不再做支持   
+> 请尽快 更新到 **QQBotHub-v0.5.2** 或 更高版本, 旧版本不再做支持   
 
-> 查看最新版 [Releases - QQBotHub](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
 
-> 若你使用 `Railway` 一键部署, 只需要修改 `Railway` 创建的仓库 (例如: `QQBotHub`) 里的 `Dockerfile` 文件里的 `yiyungent/qqbothub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
-> 注意: 请更新前导出插件数据, `QQStatPlugin` 支持下载数据库到本地, 然后下载最新插件包, 解压, 将数据库文件替换为你导出的数据库文件, 然后在有 `QQStatPlugin.sqlite` 的路径下打包所有文件 为 zip, 上传插件即可
-> `插件设置` 可以通过保持打开插件设置页面的方式, 重新安装插件后, 再在此页面点击保存
 
 ## 功能
 
@@ -145,6 +141,20 @@ docker exec -it qqbothub bash
 > > 直接插件上传 下载的 `QQHelloWorldPlugin-net6.0.zip` 即可    
 > 
 > 然后直接 `上传 -> 安装 -> 文档 -> 设置 -> 启用 -> 文档` 即可
+
+
+## 更新 QQBotHub
+
+> 查看最新版 [Releases - QQBotHub](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
+
+
+> 若你使用 `Railway` 一键部署,         
+> 只需要修改 `Railway` 创建的仓库 (例如: `QQBotHub`) 里的 `Dockerfile` 文件里的 `yiyungent/qqbothub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
+
+
+> **注意:**    
+> 请更新前导出插件数据, `QQStatPlugin` 支持下载数据库到本地, 然后下载最新插件包, 解压, 将数据库文件替换为你导出的数据库文件, 然后在有 `QQStatPlugin.sqlite` 的路径下打包所有文件 为 zip, 上传插件即可           
+> `插件设置` 可以通过保持打开插件设置页面的方式, 重新安装插件后, 再在此页面点击保存
 
 
 ## 插件开发
