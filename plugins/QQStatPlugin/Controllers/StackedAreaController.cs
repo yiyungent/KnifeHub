@@ -10,6 +10,9 @@ using QQStatPlugin;
 using QQStatPlugin.Utils;
 using PluginCore;
 using ResponseModels.StackedArea;
+using Konata.Core.Message.Model;
+using System.Text.RegularExpressions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace QQStatPlugin.Controllers
 {
@@ -99,7 +102,7 @@ namespace QQStatPlugin.Controllers
                 //top10QQUinList = tempDic.OrderByDescending(m => m.Value).Take(10).Select(m => m.Key).ToList();
                 //messageList = messageList.Where(m => top10QQUinList.Contains(m.QQUin)).ToList();
                 // top10 发言字数最多
-                var tempMesageList = messageList.GroupBy(m => m.QQUin).OrderByDescending(m => m.Sum(a => a.Content.Length)).Take(5).ToList();
+                var tempMesageList = messageList.GroupBy(m => m.QQUin).OrderByDescending(m => m.Sum(a => ExtractHanzi2(a.Content).Length)).Take(5).ToList();
                 Console.WriteLine("tempMesageList.Count: " + tempMesageList.Count.ToString());
                 List<string> top5QQUinList = tempMesageList.Select(m => m.Key).ToList();
                 Console.WriteLine($"top5QQUinList: {string.Join(",", top5QQUinList)}");
@@ -129,7 +132,8 @@ namespace QQStatPlugin.Controllers
                 #endregion
 
                 // 应该说这里最多10个
-                chartOption.legend.data = messageList.Select(m => m.QQName).Distinct().ToList();
+                var tempQQNameAndUin = messageList.Select(m => (uin: m.QQUin, name: m.QQName)).Distinct(new QQCompare()).ToList();
+                chartOption.legend.data = tempQQNameAndUin.Select(m => $"{m.name}").ToList();
 
                 IList<string> recordDays = messageList.OrderBy(m => m.Id).Select(m => m.CreateTime.ToDateTime13().ToString("yyyy-MM-dd HH"))
                     .Distinct().ToList();
@@ -145,8 +149,9 @@ namespace QQStatPlugin.Controllers
                     type = "value"
                 });
                 chartOption.series = new List<StackedAreaEChartsOptionResponseDataModel.Series>();
-                // types: 时间
+                // types: 昵称
                 IList<string> types = chartOption.legend.data;
+                int i = 0;
                 foreach (var type in types)
                 {
                     var item = new StackedAreaEChartsOptionResponseDataModel.Series();
@@ -161,14 +166,14 @@ namespace QQStatPlugin.Controllers
                     {
                         // TODO: 注意: 这里用 QQName 区分
                         long symbolCount = messageList
-                            .Where(m => m.QQName == type && m.CreateTime.ToDateTime13().ToString("yyyy-MM-dd HH") == day)
-                            ?.Select(m => m.Content.Length)?.Sum() ?? 0;
+                            .Where(m => m.QQUin == tempQQNameAndUin[i].uin && m.CreateTime.ToDateTime13().ToString("yyyy-MM-dd HH") == day)
+                            ?.Select(m => ExtractHanzi2(m.Content).Length)?.Sum() ?? 0;
                         item.data.Add(symbolCount);
                     }
+                    i++;
 
                     chartOption.series.Add(item);
                 }
-
 
                 responseModel.Code = 1;
                 responseModel.Message = "成功";
@@ -178,6 +183,8 @@ namespace QQStatPlugin.Controllers
             {
                 responseModel.Code = -1;
                 responseModel.Message = "失败";
+                Console.WriteLine("堆叠图失败: ");
+                Console.WriteLine(ex.ToString());
                 responseModel.Data = chartOption;
             }
 
@@ -195,6 +202,38 @@ namespace QQStatPlugin.Controllers
 
         //    return rtnStr;
         //}
+
+
+        public class QQCompare : IEqualityComparer<(string uin, string name)>
+        {
+            public bool Equals((string uin, string name) x, (string uin, string name) y)
+            {
+                return x.uin == y.uin;
+            }
+
+            public int GetHashCode([DisallowNull] (string uin, string name) obj)
+            {
+                return obj.GetHashCode();
+            }
+        }
+
+        /// <summary>
+        /// 提取字符串中的汉字
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns></returns>
+        public static string ExtractHanzi2(string st)
+        {
+            string hanziString = "";
+            foreach (var ch in st)
+            {
+                if (Regex.IsMatch(ch.ToString(), @"[\u4e00-\u9fbb]+"))
+                {
+                    hanziString += ch.ToString();
+                }
+            }
+            return hanziString;
+        }
 
     }
 }
