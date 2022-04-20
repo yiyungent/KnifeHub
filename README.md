@@ -50,6 +50,8 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 ## Screenshots
 
+![PluginCore Admin](./screenshots/PluginCore-Admin.png)
+
 ![qq_online.png](./screenshots/qq_online.png)
 
 ### [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
