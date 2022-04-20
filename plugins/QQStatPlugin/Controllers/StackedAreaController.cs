@@ -150,12 +150,12 @@ namespace QQStatPlugin.Controllers
                 });
                 chartOption.series = new List<StackedAreaEChartsOptionResponseDataModel.Series>();
                 // types: 昵称
-                IList<string> types = chartOption.legend.data;
+                IList<string> names = chartOption.legend.data;
                 int i = 0;
-                foreach (var type in types)
+                foreach (var name in names)
                 {
                     var item = new StackedAreaEChartsOptionResponseDataModel.Series();
-                    item.name = type;
+                    item.name = name;
                     item.type = "line";
                     item.stack = "字数";
                     item.areaStyle = new StackedAreaEChartsOptionResponseDataModel.Areastyle();
@@ -166,7 +166,11 @@ namespace QQStatPlugin.Controllers
                     {
                         // TODO: 注意: 这里用 QQName 区分
                         long symbolCount = messageList
-                            .Where(m => m.QQUin == tempQQNameAndUin[i].uin && m.CreateTime.ToDateTime13().ToString("yyyy-MM-dd HH") == day)
+                            .Where(m =>
+                                m.QQUin == tempQQNameAndUin[i].uin
+                                && m.QQName == name
+                                && m.CreateTime.ToDateTime13().ToString("yyyy-MM-dd HH") == day
+                            )
                             ?.Select(m => ExtractHanzi2(m.Content).Length)?.Sum() ?? 0;
                         item.data.Add(symbolCount);
                     }
