@@ -51,12 +51,13 @@ namespace AutoLoginPlugin
                     string jsonStr = QQBotHub.Sdk.Utils.JsonUtil.Obj2JsonStr(QQBotStore.Bot.KeyStore);
                     File.WriteAllText(filePath, contents: jsonStr, Encoding.UTF8);
                 }
-                else if (QQBotStore.Bot != null && !QQBotStore.Bot.IsOnline())
-                {
-                    #region 重新登录
-                    await Login(settingsModel);
-                    #endregion
-                }
+                // 取消: 发现这么调用, 会触发验证, 而直接 用 BotKeyStore new 一个, 就不会(好多次这样都没有验证)
+                //else if (QQBotStore.Bot != null && !QQBotStore.Bot.IsOnline())
+                //{
+                //    #region 重新登录
+                //    await Login(settingsModel);
+                //    #endregion
+                //}
                 else
                 {
                     if (File.Exists(filePath))
