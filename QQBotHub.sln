@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginCore.IPlugins.AspNetC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackupPlugin", "plugins\BackupPlugin\BackupPlugin.csproj", "{B5F526F5-49A7-41C7-A291-FFFF9A2BA05B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLoginPlugin", "plugins\AutoLoginPlugin\AutoLoginPlugin.csproj", "{4A137527-1CB2-48DF-8BF5-CB9532592D14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{B5F526F5-49A7-41C7-A291-FFFF9A2BA05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5F526F5-49A7-41C7-A291-FFFF9A2BA05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5F526F5-49A7-41C7-A291-FFFF9A2BA05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A137527-1CB2-48DF-8BF5-CB9532592D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A137527-1CB2-48DF-8BF5-CB9532592D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A137527-1CB2-48DF-8BF5-CB9532592D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A137527-1CB2-48DF-8BF5-CB9532592D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{F0B0E0DF-4490-478A-9C60-C80F0E290FC2} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 		{61F02E99-EB5C-4E9E-95D7-A2F7CEAFE077} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 		{B5F526F5-49A7-41C7-A291-FFFF9A2BA05B} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{4A137527-1CB2-48DF-8BF5-CB9532592D14} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
