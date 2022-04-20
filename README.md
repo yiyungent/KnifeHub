@@ -42,6 +42,11 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
   - [BackupPlugin](https://github.com/yiyungent/QQBotHub/releases?q=BackupPlugin&expanded=true) 
     - [x] 定时 自动 备份 插件数据
     - [x] 将 备份文件 发送到 Telegram 
+    - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
+  - [AutoLoginPlugin](https://github.com/yiyungent/QQBotHub/releases?q=AutoLoginPlugin&expanded=true) 
+    - [x] 定时 检测在线状态 (频率:1分钟)
+    - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
+    - [x] 重新登录成功后, 通知 `AdminQQ`
 
 ## Screenshots
 
