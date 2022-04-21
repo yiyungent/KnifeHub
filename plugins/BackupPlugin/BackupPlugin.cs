@@ -10,6 +10,7 @@ using PluginCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using System.IO;
+using System.Linq;
 
 namespace BackupPlugin
 {
@@ -53,9 +54,9 @@ namespace BackupPlugin
         #region 定时任务
         public async Task ExecuteAsync()
         {
+            SettingsModel settings = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(BackupPlugin));
             try
             {
-                SettingsModel settings = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(BackupPlugin));
 
                 #region Telegram
                 if (settings.Telegram != null && settings.Telegram.Enable)
@@ -107,6 +108,40 @@ namespace BackupPlugin
             {
                 Console.WriteLine($"执行定时 备份 任务失败: \r\n {ex.ToString()}");
             }
+
+            #region 清理本地备份文件
+            try
+            {
+                string backupsDirPath = Path.Combine(Directory.GetCurrentDirectory(), "Backups");
+                var backupFileList = Directory.GetFiles(path: backupsDirPath, $"{nameof(BackupPlugin)}-*.zip").ToList();
+
+                // backupFileList.OrderBy(x => DateTime.ParseExact(x, "yyyy-MM-dd HH", System.Globalization.CultureInfo.CurrentCulture));
+
+                // item: (path, "2022-04-20 02-06-30")
+                var tempBackupFiles = backupFileList
+                    .Select(m => (path: m, time: m.Replace($"{nameof(BackupPlugin)}-", "").Replace(".zip", "")))
+                    .OrderBy(m => m.time).ToList();
+                // 删除最早的
+                for (int i = 0; i < tempBackupFiles.Count - settings.LocalBackupsMaxNum; i++)
+                {
+                    var item = tempBackupFiles[i];
+                    Console.WriteLine($"删除: {item.path}");
+                    try
+                    {
+                        System.IO.File.Delete(item.path);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("删除失败:");
+                        Console.WriteLine(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"执行 清理本地备份文件 失败: \r\n {ex.ToString()}");
+            }
+            #endregion
 
             await Task.CompletedTask;
         }

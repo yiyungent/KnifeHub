@@ -10,6 +10,8 @@ namespace BackupPlugin
     {
         public long SecondsPeriod { get; set; }
 
+        public int LocalBackupsMaxNum { get; set; }
+
         public TelegramModel Telegram { get; set; }
 
         public class TelegramModel
