@@ -15,16 +15,6 @@
       "description": "PluginCore Admin 密码",
       "value": "ABC12345",
       "required": true
-    },
-    "BOT_QQ": {
-      "description": "机器人 QQ",
-      "value": "",
-      "required": true
-    },
-    "BOT_PASSWORD": {
-      "description": "机器人 QQ 密码",
-      "value": "",
-      "required": true
     }
   },
 
