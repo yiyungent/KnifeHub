@@ -12,8 +12,8 @@
 
 QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 一键免费部署
 
-- **Web 可视化** 无需再在 Console 上操作
-- **插件化架构** 轻松使用插件扩展
+- **Web 可视化** - 无需再在 Console 上操作, 轻松上手
+- **插件化架构** - 轻松使用插件扩展
 
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
@@ -32,7 +32,7 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
     - [x] 上下线通知 设置 里的 AdminQQ
   - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
     - [x] 对接 [茉莉机器人 API](https://mly.app)
-      - 自定义知识库, 各种功能
+      - 自定义知识库, 各种娱乐功能
     - [x] 设置 机器人聊天群, 好友
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
@@ -67,8 +67,9 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 #### 方式1: 使用 Railway 免费 一键部署 
 
-> - 点击下方按钮 一键部署      
-> - Railway 每月有 `$5` 免费额度, 若只跑本项目完全够用
+> - 点击下方按钮 一键部署        
+> - 免费注册, 无需信用卡验证      
+> - Railway 每月有 `$5.00` 免费额度, 若只跑本项目完全够用 (应该说绰绰有余)
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/A3JY-J?referralCode=8eKBDA)
 
@@ -87,9 +88,10 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 #### 方式2: 使用 Heroku 免费 一键部署 
 
-> - 点击下方按钮 一键部署    
-> - Heroku 每月有免费时长   
-> - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: Free Website Monitoring Service](https://uptimerobot.com/)   
+> - 点击下方按钮 一键部署       
+> - 免费注册, 无需信用卡验证
+> - Heroku 每月有免费时长 500小时, 若使用信用卡验证, 可提升到 免费 1000小时      
+> - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/QQBotHub)
 
@@ -112,6 +114,7 @@ docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" --name qqbothub yiyung
 ```
 
 ```bash
+# 可选, 进入容器 管理, 例如修改 /app/App_Data/PluginCore.Config.json 中的 PluginCore Admin 用户名与密码
 docker exec -it qqbothub bash
 ```
 
@@ -190,22 +193,22 @@ docker exec -it qqbothub bash
 > QQBotHub 插件开发包  
 > 插件开发包中已包含:   
 > - `Konata.Core`
-> - `PluginCore.IPlugins`
+> - `PluginCore.IPlugins.AspNetCore`
 
 ```powershell
 dotnet add package QQBotHub.Sdk
 ```
 
 > **注意**:   
-> - 本项目目前直接使用的 `PluginCore` 插件框架, 插件采用激活方式, 插件工作完成后, 实例会立即销毁, 无法常驻后台
-> - 若需要定时任务, 可以使用 `ITimePlugin`, 可见 `PluginCore` 的文档    
+> - 本项目目前直接使用的 `PluginCore` 插件框架, 插件采用激发式, 插件工作完成后, 实例会立即销毁, 无法常驻后台
+> - 若需要定时任务, 可以使用 `ITimeJobPlugin`, 可见 `PluginCore` 的文档    
 > - 由于 QQBot 本身为常驻, 因此需额外注意 `IPluginFinder` 的服务的生命周期/范围, 这点和在 `ASP.NET Core` 的 `Controller` 中 直接使用不同
 
 ## 相关项目
 
 
-- [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core)
-- [yiyungent/PluginCore](https://github.com/yiyungent/PluginCore)
+- [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core) - QQ Android 协议核心库
+- [yiyungent/PluginCore](https://github.com/yiyungent/PluginCore) - 插件系统
 
 
 ## Donate
