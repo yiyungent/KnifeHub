@@ -141,9 +141,9 @@ docker exec -it qqbothub bash
 > - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
 >   
 > 可 下载 [Releases - ConsoleApp - Assets](https://github.com/yiyungent/QQBotHub/releases?q=ConsoleApp&expanded=true) 在本地登录成功后,    
-> 获取 `BotKeyStore.json` 后, 在登录页面使用 `配置` 方式登录
+> 获取 **BotKeyStore.json** 后, 在登录页面使用 **配置** 方式登录
 > 
-> > - 大部分人电脑为 `Windows 64 位`, 点击 `ConsoleApp-win-x64.zip` 下载即可, 下载到本地解压, 双击 `ConsoleApp.exe`
+> > - 大部分人电脑为 `Windows 64 位`, 点击 **ConsoleApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **ConsoleApp.exe**
 > > - 运行 `ConsoleApp.exe` 会自动给出输入提示, 按提示操作即可       
 > > - 运行 `ConsoleApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
 
