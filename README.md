@@ -63,6 +63,8 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 ### 部署
 
+> `PluginCore Admin 用户名` 与 `PluginCore Admin 密码` 为你自己设置的后台登录用户名与密码, 随意设置即可, 自己记住就行
+
 #### 方式1: 使用 Railway 免费 一键部署 
 
 > - 点击下方按钮 一键部署      
