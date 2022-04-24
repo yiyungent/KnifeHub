@@ -38,6 +38,7 @@ jobs:
           --output "type=image,push=true" \
           --file src/QQBotHub.Web/Dockerfile \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.last_release.outputs.tag_name }}-beta \
+          .
 
       - name: Login to Registry - ghcr.io
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
