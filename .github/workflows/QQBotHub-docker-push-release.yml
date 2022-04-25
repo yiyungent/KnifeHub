@@ -22,31 +22,57 @@ jobs:
           echo ::set-output name=RELEASE_VERSION::$(echo ${GITHUB_REF:19})
           echo ::set-output name=IMAGE_NAME::qqbothub
 
-      - name: Build Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }} -f src/QQBotHub.Web/Dockerfile .
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
       - name: Login to Registry - Docker Hub
         run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Image - Docker Hub
-        # push: RELEASE_VERSION, latest
+      - name: Build Image and Push - Docker Hub
+        # push: RELEASE_VERSION
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }}
-          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }} ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest
+          docker buildx build \
+          --platform=linux/amd64,linux/arm64 \
+          --output "type=image,push=true" \
+          --file src/QQBotHub.Web/Dockerfile \
+          --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }} \
+          .
+
+      - name: Build Image and Push - latest - Docker Hub
+        # push: latest
+        run: |
+          docker buildx build \
+          --platform=linux/amd64,linux/arm64 \
+          --output "type=image,push=true" \
+          --file src/QQBotHub.Web/Dockerfile \
+          --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest \
+          .
       
       - name: Login to Registry - ghcr.io
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       
-      - name: Push Image - ghcr.io
-        # push: RELEASE_VERSION, latest
+      - name: Build Image and Push - ghcr.io
+        # push: RELEASE_VERSION
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ steps.vars.outputs.IMAGE_NAME }}
           VERSION=${{ steps.vars.outputs.RELEASE_VERSION }}
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
-          docker tag $IMAGE_ID:$VERSION $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+          docker buildx build \
+          --platform=linux/amd64,linux/arm64 \
+          --output "type=image,push=true" \
+          --file src/QQBotHub.Web/Dockerfile \
+          --tag $IMAGE_ID:$VERSION \
+          .
+
+      - name: Build Image and Push - latest - ghcr.io
+        # push: latest
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ steps.vars.outputs.IMAGE_NAME }}
+          echo IMAGE_ID=$IMAGE_ID
+          docker buildx build \
+          --platform=linux/amd64,linux/arm64 \
+          --output "type=image,push=true" \
+          --file src/QQBotHub.Web/Dockerfile \
+          --tag $IMAGE_ID:latest \
+          .
