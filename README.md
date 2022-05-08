@@ -48,6 +48,9 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
     - [x] 定时 检测在线状态 (频率:1分钟)
     - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
     - [x] 重新登录成功后, 通知 `AdminQQ`
+  - [QQNotePlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQNotePlugin&expanded=true) 
+    - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
+      - 笔记写入 GitHub 指定仓库的指定文件中
 
 ## Screenshots
 
