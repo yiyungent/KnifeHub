@@ -93,7 +93,7 @@ namespace QQNotePlugin
                                     {
                                         continue;
                                     }
-                                    string imageBase64 = Convert.ToBase64String(imageBytes);
+                                    //  jpeg和jpg没什么区别，二者是一样的，jpg是jpeg的简称
                                     string imageType = "jpeg";
                                     switch (imageChain.ImageType)
                                     {
@@ -131,6 +131,7 @@ namespace QQNotePlugin
 
                                     #region 图片 base64 形式
                                     // 由于 GitHub 不支持直接显示 base64 图片, 因此改为上传图片文件
+                                    //string imageBase64 = Convert.ToBase64String(imageBytes);
                                     //string imgBase64Html = $"<img src=\"data:image/{imageType};base64,{imageBase64}\" />";
                                     //fullMessageSb.AppendLine(imgBase64Html); 
                                     #endregion
@@ -139,6 +140,8 @@ namespace QQNotePlugin
                                     string dirName = Path.GetFileNameWithoutExtension(settingsModel.GitHub.RepoTargetFilePath);
                                     string imageFileName = $"image-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")} {imageBytes.GetHashCode()}.{imageType}";
                                     string imageHtml = $"<img src=\"{dirName}/{imageFileName}\" />";
+                                    // Markdown 图片标记 容易不显示
+                                    //string imageMd = $"![{Path.GetFileNameWithoutExtension(imageFileName)}]({dirName}/{imageFileName})";
                                     imageDic.Add($"{dirName}/{imageFileName}", imageBytes);
                                     fullMessageSb.AppendLine(imageHtml);
                                     #endregion
@@ -212,7 +215,7 @@ namespace QQNotePlugin
                         {
                             string imageFilePath = Path.Combine(Path.GetDirectoryName(targetFilePath), item.Key);
                             var createImageSet = gitHubClient.Repository.Content.CreateFile(owner, repo, imageFilePath,
-                               new CreateFileRequest(message: $"{nameof(QQNotePlugin)}-{DateTime.Now.ToString("yyyy-MM-dd HH-mm:ss")}",
+                               new CreateFileRequest(message: $"{nameof(QQNotePlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                                content: Convert.ToBase64String(item.Value), branch: branch, convertContentToBase64: false))
                                 .Result;
                         }
@@ -235,7 +238,7 @@ namespace QQNotePlugin
 
                     // update the file
                     var updateChangeSet = gitHubClient.Repository.Content.UpdateFile(owner, repo, targetFilePath,
-                       new UpdateFileRequest(message: $"{nameof(QQNotePlugin)}-{DateTime.Now.ToString("yyyy-MM-dd HH-mm:ss")}",
+                       new UpdateFileRequest(message: $"{nameof(QQNotePlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                        content: newFileContent, sha: existingFile.First().Sha, branch: branch))
                         .Result;
                     #endregion
@@ -259,22 +262,12 @@ namespace QQNotePlugin
 
         public void OnBotOnline((Bot s, BotOnlineEvent e) obj, string botName, uint botUin)
         {
-            //SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
 
-            //if (settingsModel != null && !string.IsNullOrEmpty(settingsModel.AdminQQ))
-            //{
-            //    obj.s.SendFriendMessage(Convert.ToUInt32(settingsModel.AdminQQ), $"{obj.s.Name}({obj.s.Uin}) 上线啦");
-            //}
         }
 
         public void OnBotOffline((Bot s, BotOfflineEvent e) obj, string botName, uint botUin)
         {
-            //SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
 
-            //if (settingsModel != null && !string.IsNullOrEmpty(settingsModel.AdminQQ))
-            //{
-            //    obj.s.SendFriendMessage(Convert.ToUInt32(settingsModel.AdminQQ), $"{obj.s.Name}({obj.s.Uin}) 离线啦");
-            //}
         }
         #endregion
 
