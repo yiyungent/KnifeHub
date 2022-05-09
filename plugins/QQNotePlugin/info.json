@@ -1,7 +1,7 @@
 {
 	"PluginId": "QQNotePlugin",
-	"DisplayName": "QQNotePlugin",
-	"Description": "QQNotePlugin",
+	"DisplayName": "QQ写笔记",
+	"Description": "利用 QQ 写笔记 (随笔/零碎知识点)",
 	"Author": "yiyun",
 	"Version": "0.1.0",
 	"SupportedVersions": [ "0.0.1" ]
