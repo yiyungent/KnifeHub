@@ -138,12 +138,14 @@ namespace QQNotePlugin
 
                                     #region 图片文件形式
                                     string dirName = Path.GetFileNameWithoutExtension(settingsModel.GitHub.RepoTargetFilePath);
-                                    string imageFileName = $"image-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")} {imageBytes.GetHashCode()}.{imageType}";
-                                    string imageHtml = $"<img src=\"{dirName}/{imageFileName}\" />";
+                                    // 注意: 图片文件名不能有空格, 否则会导致在 GitHub 无法预览
+                                    string imageFileName = $"image-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}-{imageBytes.GetHashCode()}.{imageType}";
+                                    //string imageHtml = $"<img src=\"{dirName}/{imageFileName}\" />";
                                     // Markdown 图片标记 容易不显示
-                                    //string imageMd = $"![{Path.GetFileNameWithoutExtension(imageFileName)}]({dirName}/{imageFileName})";
+                                    string imageMd = $"![{Path.GetFileNameWithoutExtension(imageFileName)}]({dirName}/{imageFileName})";
                                     imageDic.Add($"{dirName}/{imageFileName}", imageBytes);
-                                    fullMessageSb.AppendLine(imageHtml);
+                                    //fullMessageSb.AppendLine(imageHtml);
+                                    fullMessageSb.AppendLine(imageMd);
                                     #endregion
                                 }
                                 catch (Exception ex)
@@ -221,7 +223,7 @@ namespace QQNotePlugin
                         }
                         catch (Exception ex)
                         {
-                            obj.s.SendFriendMessage(friendUin, "笔记中的图片写入失败:");
+                            obj.s.SendFriendMessage(friendUin, $"{item.Key} 笔记中的图片写入失败:");
                             obj.s.SendFriendMessage(friendUin, ex.ToString());
                         }
                     }
