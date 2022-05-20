@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: qqbothub
+    env: docker
+    repo: https://github.com/yiyungent/QQBotHub.git
+    dockerfilePath: ./deploy/render/Dockerfile
+    dockerContext: ./deploy/render/
+    healthCheckPath: /healthz # hanging
+    envVars:
+      - key: PLUGINCORE_ADMIN_USERNAME
+        value: admin
+      - key: PLUGINCORE_ADMIN_PASSWORD
+        value: ABC12345
+    autoDeploy: true
