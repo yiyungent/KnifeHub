@@ -2,6 +2,7 @@ services:
   - type: web
     name: qqbothub
     env: docker
+    plan: free
     repo: https://github.com/yiyungent/QQBotHub.git
     dockerfilePath: ./deploy/render/Dockerfile
     dockerContext: ./deploy/render/
