@@ -51,6 +51,10 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
   - [QQNotePlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQNotePlugin&expanded=true) 
     - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
       - 笔记写入 GitHub 指定仓库的指定文件中
+  - [ZhiDaoPlugin](https://github.com/yiyungent/QQBotHub/releases?q=ZhiDaoPlugin&expanded=true) 
+    - [x] 自定义问答
+      - [x] 私聊学习问答
+      - [x] 群聊自动回复问答    
 
 ## Screenshots
 
