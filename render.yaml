@@ -6,7 +6,7 @@ services:
     repo: https://github.com/yiyungent/QQBotHub.git
     dockerfilePath: ./deploy/render/Dockerfile
     dockerContext: ./deploy/render/
-    #healthCheckPath: /PluginCore/Admin # hanging
+    healthCheckPath: /PluginCore/Admin # hanging
     envVars:
       - key: PLUGINCORE_ADMIN_USERNAME
         value: admin
