@@ -1,0 +1,8 @@
+{
+	"PluginId": "ZhiDaoPlugin",
+	"DisplayName": "QQ知道插件",
+	"Description": "自定义问答",
+	"Author": "yiyun",
+	"Version": "0.0.1",
+	"SupportedVersions": [ "0.0.1" ]
+}
