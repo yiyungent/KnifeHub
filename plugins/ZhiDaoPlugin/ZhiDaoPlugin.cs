@@ -39,13 +39,14 @@ namespace ZhiDaoPlugin
 
             if (settingsModel.Groups != null && settingsModel.Groups.Length > 0 && settingsModel.Groups.Contains(groupUin.ToString()))
             {
-                string text = ConvertToString(obj.e.Message.Chain);
+                string text = ConvertToString(obj.e.Message.Chain).ToLower();
+                #region 关键词
                 try
                 {
                     var boxList = DbContext.QueryAllQABox();
                     foreach (var item in boxList)
                     {
-                        if (text.Contains(item.Question.Trim()))
+                        if (text.Contains(item.Question.ToLower().Trim()))
                         {
                             obj.s.SendGroupMessage(groupUin: groupUin, AtChain.Create(obj.e.MemberUin), TextChain.Create(item.Answer));
                         }
@@ -55,6 +56,7 @@ namespace ZhiDaoPlugin
                 {
                     obj.s.SendGroupMessage(groupUin: groupUin, ex.ToString());
                 }
+                #endregion
             }
 
 
@@ -75,7 +77,7 @@ namespace ZhiDaoPlugin
 
                     try
                     {
-                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Question == questionStr);
+                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Question.Trim().ToLower() == questionStr.ToLower());
                         if (dbModel != null)
                         {
                             dbModel.Answer = answerStr;
@@ -103,7 +105,26 @@ namespace ZhiDaoPlugin
                 }
                 #endregion
 
-                #region 查询
+
+                #region 删除问答
+                if (message.StartsWith("#删除问答"))
+                {
+                    string text = ConvertToString(obj.e.Message.Chain).Replace("#删除问答", "").Trim().ToLower();
+                    var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Question.Trim().ToLower() == text);
+                    if (dbModel != null)
+                    {
+                        DbContext.DeleteQABox(dbModel);
+                        obj.s.SendFriendMessage(friendUin: friendUin, "删除问答成功");
+                    }
+                    else
+                    {
+                        obj.s.SendFriendMessage(friendUin: friendUin, "不存在此问答");
+                    }
+
+                }
+                #endregion
+
+                #region 已学习
                 if (message.StartsWith("#已学习"))
                 {
                     var dbModelList = DbContext.QueryAllQABox();

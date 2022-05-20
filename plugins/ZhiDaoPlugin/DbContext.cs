@@ -57,6 +57,18 @@ namespace ZhiDaoPlugin
             }
         }
 
+        public static int DeleteQABox(QABox model)
+        {
+            using (IDbConnection con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+
+                string sql = "DELETE FROM QABox WHERE Id=@Id;";
+
+                return con.Execute(sql, model);
+            }
+        }
+
         public static List<QABox> QueryAllQABox()
         {
             using (IDbConnection con = new SQLiteConnection(ConnStr))
