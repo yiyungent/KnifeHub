@@ -1,6 +1,6 @@
 # render Dockerfile
 
-FROM yiyungent/qqbothub:v0.5.2
+FROM yiyungent/qqbothub:v0.5.3
 
 # 处于 /app 目录下
 ADD render-entrypoint.sh ./render-entrypoint.sh
