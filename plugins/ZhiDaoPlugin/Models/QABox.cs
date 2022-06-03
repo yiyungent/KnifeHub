@@ -13,6 +13,11 @@ namespace ZhiDaoPlugin.Models
     {
         public int Id { get; set; }
 
+        /// <summary>
+        /// 对应QQ群 群号
+        /// </summary>
+        public string Group { get; set; }
+
         public string Question { get; set; }
 
         public string Answer { get; set; }

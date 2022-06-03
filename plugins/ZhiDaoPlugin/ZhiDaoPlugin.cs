@@ -40,44 +40,23 @@ namespace ZhiDaoPlugin
             if (settingsModel.Groups != null && settingsModel.Groups.Length > 0 && settingsModel.Groups.Contains(groupUin.ToString()))
             {
                 string text = ConvertToString(obj.e.Message.Chain).ToLower();
-                #region 关键词
-                try
-                {
-                    var boxList = DbContext.QueryAllQABox();
-                    foreach (var item in boxList)
-                    {
-                        if (text.Contains(item.Question.ToLower().Trim()))
-                        {
-                            obj.s.SendGroupMessage(groupUin: groupUin, AtChain.Create(obj.e.MemberUin), TextChain.Create(item.Answer));
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    obj.s.SendGroupMessage(groupUin: groupUin, ex.ToString());
-                }
-                #endregion
-            }
 
-
-        }
-
-        public void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)
-        {
-            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(ZhiDaoPlugin));
-            if (settingsModel.AdminQQ != null && settingsModel.AdminQQ == friendUin.ToString())
-            {
-                #region 学习
                 if (message.StartsWith("#问"))
                 {
-                    string text = ConvertToString(obj.e.Message.Chain);
+                    if (!IsAdmin(obj.s, adminQQ: settingsModel.AdminQQ, groupUin: groupUin, memberUin: memberUin))
+                    {
+                        return;
+                    }
+
+                    #region 自定义问答
                     int answerIndex = text.IndexOf("#答");
                     string questionStr = text.Substring(0, answerIndex).Trim().Replace("#问", "").Trim();
                     string answerStr = text.Substring(answerIndex + 1 + 1).Trim();
 
                     try
                     {
-                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Question.Trim().ToLower() == questionStr.ToLower());
+                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Group == groupUin.ToString()
+                                                                                    && m.Question.Trim().ToLower() == questionStr.ToLower());
                         if (dbModel != null)
                         {
                             dbModel.Answer = answerStr;
@@ -91,53 +70,91 @@ namespace ZhiDaoPlugin
                                 CreateTime = DateTime.Now.ToTimeStamp13(),
                                 UpdateTime = DateTime.Now.ToTimeStamp13(),
                                 Question = questionStr,
-                                Answer = answerStr
+                                Answer = answerStr,
+                                Group = groupUin.ToString()
                             };
                             DbContext.InsertIntoQABox(dbModel);
                         }
 
-                        obj.s.SendFriendMessage(friendUin: friendUin, "学习成功");
+                        obj.s.SendGroupMessage(groupUin: groupUin, "学习成功");
                     }
                     catch (Exception ex)
                     {
-                        obj.s.SendFriendMessage(friendUin: friendUin, ex.ToString());
+                        obj.s.SendGroupMessage(groupUin: groupUin, ex.ToString());
                     }
+                    #endregion
                 }
-                #endregion
-
-
-                #region 删除问答
-                if (message.StartsWith("#删除问答"))
+                else if (message.StartsWith("#删除问答"))
                 {
-                    string text = ConvertToString(obj.e.Message.Chain).Replace("#删除问答", "").Trim().ToLower();
-                    var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Question.Trim().ToLower() == text);
+                    if (!IsAdmin(obj.s, adminQQ: settingsModel.AdminQQ, groupUin: groupUin, memberUin: memberUin))
+                    {
+                        return;
+                    }
+
+                    #region 删除问答
+                    text = text.Replace("#删除问答", "").Trim().ToLower();
+                    var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Group == groupUin.ToString()
+                                                                                && m.Question.Trim().ToLower() == text);
                     if (dbModel != null)
                     {
                         DbContext.DeleteQABox(dbModel);
-                        obj.s.SendFriendMessage(friendUin: friendUin, "删除问答成功");
+                        obj.s.SendGroupMessage(groupUin: groupUin, "删除问答成功");
                     }
                     else
                     {
-                        obj.s.SendFriendMessage(friendUin: friendUin, "不存在此问答");
+                        obj.s.SendGroupMessage(groupUin: groupUin, "不存在此问答");
+                    }
+                    #endregion
+                }
+                else if (message.StartsWith("#已学习"))
+                {
+                    if (!IsAdmin(obj.s, adminQQ: settingsModel.AdminQQ, groupUin: groupUin, memberUin: memberUin))
+                    {
+                        return;
                     }
 
-                }
-                #endregion
-
-                #region 已学习
-                if (message.StartsWith("#已学习"))
-                {
-                    var dbModelList = DbContext.QueryAllQABox();
+                    #region 已学习
+                    var dbModelList = DbContext.QueryAllQABox().Where(m => m.Group == groupUin.ToString()).ToList();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("已学习:");
                     foreach (var dbModel in dbModelList)
                     {
                         sb.AppendLine(dbModel.Question);
                     }
-                    obj.s.SendFriendMessage(friendUin: friendUin, sb.ToString());
+                    obj.s.SendGroupMessage(groupUin: groupUin, sb.ToString());
+                    #endregion
                 }
-                #endregion
+                else
+                {
+                    #region 关键词回复
+                    try
+                    {
+                        var boxList = DbContext.QueryAllQABox().Where(m => m.Group == groupUin.ToString()).ToList();
+                        foreach (var item in boxList)
+                        {
+                            if (text.Contains(item.Question.ToLower().Trim()))
+                            {
+                                obj.s.SendGroupMessage(groupUin: groupUin,
+                                    ReplyChain.Create(obj.e.Message),
+                                    AtChain.Create(obj.e.MemberUin),
+                                    TextChain.Create(item.Answer));
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        obj.s.SendGroupMessage(groupUin: groupUin, ex.ToString());
+                    }
+                    #endregion
+                }
+
             }
+
+        }
+
+        public void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)
+        {
+
         }
 
         public void OnBotOnline((Bot s, BotOnlineEvent e) obj, string botName, uint botUin)
@@ -189,6 +206,15 @@ namespace ZhiDaoPlugin
             }
 
             return sb.ToString();
+        }
+
+
+        private bool IsAdmin(Bot bot, string adminQQ, uint groupUin, uint memberUin)
+        {
+            var memeberInfo = bot.GetGroupMemberInfo(groupUin: groupUin, memberUin: memberUin, forceUpdate: true).Result;
+            bool isAdmin = adminQQ == memberUin.ToString() || memeberInfo.Role == RoleType.Owner || memeberInfo.Role == RoleType.Admin;
+
+            return isAdmin;
         }
 
     }
