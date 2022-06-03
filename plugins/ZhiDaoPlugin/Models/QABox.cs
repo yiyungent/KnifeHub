@@ -16,7 +16,7 @@ namespace ZhiDaoPlugin.Models
         /// <summary>
         /// 对应QQ群 群号
         /// </summary>
-        public string Group { get; set; }
+        public string QQGroup { get; set; }
 
         public string Question { get; set; }
 

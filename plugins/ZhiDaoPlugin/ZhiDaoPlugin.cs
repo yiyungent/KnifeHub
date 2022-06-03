@@ -55,7 +55,7 @@ namespace ZhiDaoPlugin
 
                     try
                     {
-                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Group == groupUin.ToString()
+                        var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.QQGroup == groupUin.ToString()
                                                                                     && m.Question.Trim().ToLower() == questionStr.ToLower());
                         if (dbModel != null)
                         {
@@ -71,7 +71,7 @@ namespace ZhiDaoPlugin
                                 UpdateTime = DateTime.Now.ToTimeStamp13(),
                                 Question = questionStr,
                                 Answer = answerStr,
-                                Group = groupUin.ToString()
+                                QQGroup = groupUin.ToString()
                             };
                             DbContext.InsertIntoQABox(dbModel);
                         }
@@ -93,7 +93,7 @@ namespace ZhiDaoPlugin
 
                     #region 删除问答
                     text = text.Replace("#删除问答", "").Trim().ToLower();
-                    var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.Group == groupUin.ToString()
+                    var dbModel = DbContext.QueryAllQABox().FirstOrDefault(m => m.QQGroup == groupUin.ToString()
                                                                                 && m.Question.Trim().ToLower() == text);
                     if (dbModel != null)
                     {
@@ -114,7 +114,7 @@ namespace ZhiDaoPlugin
                     }
 
                     #region 已学习
-                    var dbModelList = DbContext.QueryAllQABox().Where(m => m.Group == groupUin.ToString()).ToList();
+                    var dbModelList = DbContext.QueryAllQABox().Where(m => m.QQGroup == groupUin.ToString()).ToList();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("已学习:");
                     foreach (var dbModel in dbModelList)
@@ -129,7 +129,7 @@ namespace ZhiDaoPlugin
                     #region 关键词回复
                     try
                     {
-                        var boxList = DbContext.QueryAllQABox().Where(m => m.Group == groupUin.ToString()).ToList();
+                        var boxList = DbContext.QueryAllQABox().Where(m => m.QQGroup == groupUin.ToString()).ToList();
                         foreach (var item in boxList)
                         {
                             if (text.Contains(item.Question.ToLower().Trim()))
