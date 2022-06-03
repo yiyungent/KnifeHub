@@ -39,7 +39,7 @@ namespace ZhiDaoPlugin
             {
                 con.Open();
 
-                string sql = "INSERT INTO QABox (Question,Answer,CreateTime,UpdateTime) Values (@Question,@Answer,@CreateTime,@UpdateTime);";
+                string sql = "INSERT INTO QABox (Question,Answer,CreateTime,UpdateTime,Group) Values (@Question,@Answer,@CreateTime,@UpdateTime,@Group);";
 
                 return con.Execute(sql, model);
             }
@@ -51,7 +51,7 @@ namespace ZhiDaoPlugin
             {
                 con.Open();
 
-                string sql = "UPDATE QABox SET Question=@Question, Answer=@Answer, CreateTime=@CreateTime, UpdateTime=@UpdateTime WHERE Id=@Id;";
+                string sql = "UPDATE QABox SET Question=@Question, Answer=@Answer, CreateTime=@CreateTime, UpdateTime=@UpdateTime, Group=@Group WHERE Id=@Id;";
 
                 return con.Execute(sql, model);
             }
