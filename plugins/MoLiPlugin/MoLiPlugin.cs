@@ -8,6 +8,8 @@ using Konata.Core.Events.Model;
 using Konata.Core.Interfaces.Api;
 using QQBotHub.Sdk.IPlugins;
 using MoLiPlugin.Utils;
+using Konata.Core.Message;
+using Konata.Core.Message.Model;
 
 namespace MoLiPlugin
 {
@@ -31,6 +33,17 @@ namespace MoLiPlugin
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLiPlugin));
 
             Console.WriteLine($"茉莉: 来自: {groupUin}-{memberUin}");
+
+            if (settingsModel.AtEnable && !IsAtBot(obj.e.Chain, obj.s.Uin))
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+            {
+                return;
+            }
+
+
             if (settingsModel.AllowGroup != null && settingsModel.AllowGroup.Count >= 1 && settingsModel.AllowGroup.Contains(groupUin.ToString()))
             {
                 Console.WriteLine("茉莉准备回复: ");
@@ -71,6 +84,16 @@ namespace MoLiPlugin
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLiPlugin));
 
             Console.WriteLine($"茉莉: 来自: {friendUin}");
+
+            if (settingsModel.AtEnable && !IsAtBot(obj.e.Chain, obj.s.Uin))
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+            {
+                return;
+            }
+
             if (settingsModel.AllowFriends != null && settingsModel.AllowFriends.Count >= 1 && settingsModel.AllowFriends.Contains(friendUin.ToString()))
             {
                 Console.WriteLine("茉莉准备回复: ");
@@ -106,24 +129,61 @@ namespace MoLiPlugin
             }
         }
 
+        private bool IsAtBot(MessageChain baseChains, uint botUin)
+        {
+            bool isAtBot = false;
+            foreach (var item in baseChains)
+            {
+                switch (item.Type)
+                {
+                    case BaseChain.ChainType.At:
+                        AtChain atChain = (AtChain)item;
+                        isAtBot = atChain.AtUin == botUin;
+                        //if (isAtBot = atChain.AtUin == botUin)
+                        //{
+                        //    break;
+                        //}
+                        break;
+                    case BaseChain.ChainType.Reply:
+                        //ReplyChain replyChain = (ReplyChain)item;
+                        //isAtBot = atChain.AtUin == botUin;
+                        break;
+                    case BaseChain.ChainType.Text:
+                        break;
+                    case BaseChain.ChainType.Image:
+                        break;
+                    case BaseChain.ChainType.Flash:
+                        break;
+                    case BaseChain.ChainType.Record:
+                        break;
+                    case BaseChain.ChainType.Video:
+                        break;
+                    case BaseChain.ChainType.QFace:
+                        break;
+                    case BaseChain.ChainType.BFace:
+                        break;
+                    case BaseChain.ChainType.Xml:
+                        break;
+                    case BaseChain.ChainType.MultiMsg:
+                        break;
+                    case BaseChain.ChainType.Json:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return isAtBot;
+        }
+
         public void OnBotOnline((Bot s, BotOnlineEvent e) obj, string botName, uint botUin)
         {
-            //SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
 
-            //if (settingsModel != null && !string.IsNullOrEmpty(settingsModel.AdminQQ))
-            //{
-            //    obj.s.SendFriendMessage(Convert.ToUInt32(settingsModel.AdminQQ), $"{obj.s.Name}({obj.s.Uin}) 上线啦");
-            //}
         }
 
         public void OnBotOffline((Bot s, BotOfflineEvent e) obj, string botName, uint botUin)
         {
-            //SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
 
-            //if (settingsModel != null && !string.IsNullOrEmpty(settingsModel.AdminQQ))
-            //{
-            //    obj.s.SendFriendMessage(Convert.ToUInt32(settingsModel.AdminQQ), $"{obj.s.Name}({obj.s.Uin}) 离线啦");
-            //}
         }
         #endregion
 

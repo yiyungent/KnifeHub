@@ -1,8 +1,8 @@
 {
 	"PluginId": "MoLiPlugin",
 	"DisplayName": "茉莉机器人",
-	"Description": "对接 茉莉机器 API",
+	"Description": "对接 茉莉 API",
 	"Author": "yiyun",
-	"Version": "0.1.0",
+	"Version": "0.2.0",
 	"SupportedVersions": [ "0.0.1" ]
 }
