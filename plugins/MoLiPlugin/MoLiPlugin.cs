@@ -10,6 +10,7 @@ using QQBotHub.Sdk.IPlugins;
 using MoLiPlugin.Utils;
 using Konata.Core.Message;
 using Konata.Core.Message.Model;
+using System.Text;
 
 namespace MoLiPlugin
 {
@@ -50,9 +51,10 @@ namespace MoLiPlugin
                 MoLiApiResponseModel resModel = new MoLiApiResponseModel();
                 try
                 {
+                    string text = ConvertToString(obj.e.Chain);
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
-                        content = message,
+                        content = text,
                         type = "2",
                         from = memberUin.ToString(),
                         fromName = obj.e.Message.Sender.Name,
@@ -100,9 +102,10 @@ namespace MoLiPlugin
                 MoLiApiResponseModel resModel = new MoLiApiResponseModel();
                 try
                 {
+                    string text = ConvertToString(obj.e.Chain);
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
-                        content = message,
+                        content = text,
                         type = "1",
                         from = friendUin.ToString(),
                         fromName = obj.e.Message.Sender.Name,
@@ -127,6 +130,46 @@ namespace MoLiPlugin
                     }
                 }
             }
+        }
+
+        private string ConvertToString(MessageChain chains)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in chains)
+            {
+                switch (item.Type)
+                {
+                    case BaseChain.ChainType.At:
+                        break;
+                    case BaseChain.ChainType.Reply:
+                        break;
+                    case BaseChain.ChainType.Text:
+                        sb.AppendLine(item.ToString());
+                        break;
+                    case BaseChain.ChainType.Image:
+                        break;
+                    case BaseChain.ChainType.Flash:
+                        break;
+                    case BaseChain.ChainType.Record:
+                        break;
+                    case BaseChain.ChainType.Video:
+                        break;
+                    case BaseChain.ChainType.QFace:
+                        break;
+                    case BaseChain.ChainType.BFace:
+                        break;
+                    case BaseChain.ChainType.Xml:
+                        break;
+                    case BaseChain.ChainType.MultiMsg:
+                        break;
+                    case BaseChain.ChainType.Json:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return sb.ToString();
         }
 
         private bool IsAtBot(MessageChain baseChains, uint botUin)
