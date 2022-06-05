@@ -8,6 +8,10 @@
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue)](https://t.me/xx_dev_group)
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-894031109-deepgreen)](https://jq.qq.com/?_wv=1027&k=q5R82fYN)
 ![hits](https://api-onetree.moeci.com/hits.svg?id=QQBotHub)
+[![docker pulls](https://img.shields.io/docker/pulls/yiyungent/qqbothub)](https://hub.docker.com/r/yiyungent/qqbothub)
+[![docker version](https://img.shields.io/docker/v/yiyungent/qqbothub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/qqbothub)
+[![Docker Image CI/CD - Release - QQBotHub](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml)
+
 
 ## Introduce
 
