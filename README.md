@@ -39,6 +39,7 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
     - [x] 对接 [茉莉机器人 API](https://mly.app)
       - 自定义知识库, 各种娱乐功能
     - [x] 设置 机器人聊天群, 好友
+    - [x] `@机器人` / `聊天前缀`
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
