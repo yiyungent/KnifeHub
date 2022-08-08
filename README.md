@@ -79,7 +79,16 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 > `PluginCore Admin 用户名` 与 `PluginCore Admin 密码` 为你自己设置的后台登录用户名与密码, 随意设置即可, 自己记住就行
 
-#### 方式1: 使用 Railway 免费 一键部署 
+#### 方式1：原生部署（适合小白）
+
+选择  [Releases - QQBotHub, 点我下载](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
+找到并下载 QQBotHub 相应平台压缩包，
+windows系统 的 vps，下载 windows-64版本 的即可，
+解压里面有exe，运行它即可（无需再安装其它任何运行库），
+黑窗口中会显示一个url地址，复制到浏览器中打开即可，
+保持此黑窗口在后台运行，机器人就不会掉线
+
+#### 方式2: 使用 Railway 免费 一键部署 
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
@@ -100,7 +109,9 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 > - Railway 修改环境变量 会 触发 重新 Deploy   
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
-#### 方式2: 使用 Heroku 免费 一键部署 
+#### 方式3: 使用 Heroku 免费 一键部署 
+
+注意：此种方式可能无法QQ登录
 
 > - 点击下方按钮 一键部署       
 > - 免费注册, 无需信用卡验证
@@ -121,7 +132,7 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 
 
-#### 方式3: 使用 Docker
+#### 方式4: 使用 Docker
 
 ```bash
 docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
@@ -153,7 +164,7 @@ docker exec -it qqbothub bash
 
 
 > **注意**    
-> 当 **无法登录** 时
+> ⭐⭐⭐⭐当 **无法登录** 时⭐⭐⭐⭐
 > 
 > - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
 >   
