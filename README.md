@@ -1,7 +1,7 @@
 
 <h1 align="center">QQBotHub</h1>
 
-> 琪琪 机器人 平台 | 日常生活工作加速 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
+> 琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotHub.svg?style=flat)](https://github.com/yiyungent/QQBotHub/blob/master/LICENSE)
@@ -15,7 +15,7 @@
 
 ## Introduce
 
-琪琪 机器人 平台 | 日常生活工作加速 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
+琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
