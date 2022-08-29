@@ -1,7 +1,7 @@
 
 <h1 align="center">QQBotHub</h1>
 
-> QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 一键免费部署
+> 琪琪 机器人 平台 | 日常生活工作加速 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotHub.svg?style=flat)](https://github.com/yiyungent/QQBotHub/blob/master/LICENSE)
@@ -15,10 +15,11 @@
 
 ## Introduce
 
-QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 一键免费部署
+琪琪 机器人 平台 | 日常生活工作加速 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
+- **多平台多架构** - win,linux,osx,amd,arm 均可
 
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
@@ -30,7 +31,7 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 ## 功能
 
 - [x] 在线 QQ 登录
-- [x] 其它大部分功能由 插件提供
+- [x] **其它大部分功能由 插件提供**
 - [x] 本仓库 维护的 官方插件
   - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
     - [x] 复读好友私聊
