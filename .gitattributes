@@ -61,3 +61,7 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# 使 GitHub 正确识别 项目 编程语言
+*.css linguist-language=csharp
+*.js linguist-language=csharp
