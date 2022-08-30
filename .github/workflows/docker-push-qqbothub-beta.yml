@@ -1,4 +1,4 @@
-name: Docker Image CI/CD - Beta - qqbothub
+name: Docker Image CI/CD - Beta - qqbothub-beta
 
 on:
   push:
