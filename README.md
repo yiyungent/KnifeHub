@@ -41,7 +41,7 @@
       - 自定义知识库, 各种娱乐功能
     - [x] 设置 机器人聊天群, 好友
     - [x] `@机器人` / `聊天前缀`
-    - 免费API调用次数：500次/天
+    - [x] 免费API调用次数：500次/天
       - 专属8折优惠码：`qqbothub`
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
