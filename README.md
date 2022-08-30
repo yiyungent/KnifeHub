@@ -10,7 +10,7 @@
 ![hits](https://api-onetree.moeci.com/hits.svg?id=QQBotHub)
 [![docker pulls](https://img.shields.io/docker/pulls/yiyungent/qqbothub)](https://hub.docker.com/r/yiyungent/qqbothub)
 [![docker version](https://img.shields.io/docker/v/yiyungent/qqbothub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/qqbothub)
-[![Docker Image CI/CD - Release - QQBotHub](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml)
+[![Docker Image CI/CD - Release - qqbothub](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml)
 
 
 ## Introduce
