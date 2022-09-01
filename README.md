@@ -153,7 +153,8 @@ docker exec -it qqbothub bash
 ### QQ 登录
 
 > 部署完成后
-> > 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限      
+> > ⭐⭐⭐⭐ 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限⭐⭐⭐⭐      
+> > 访问 **401** 说明你没有登录 <https://your-domain/PluginCore/Admin>      
 > 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
 > 2. 访问: <https://your-domain> 进行 QQ机器人 登录
 
@@ -249,6 +250,17 @@ We accept donations through these channels:
 - <a href="https://dun.mianbaoduo.com/@yiyun" target="_blank">面包多</a> (￥1.00 起)
 
 ## Author
+
+- QQBotHub 主程序 `GPL-3.0`
+- QQBotHub.Sdk `GPL-3.0`
+- QQHelloWorldPlugin `GPL-3.0`
+- MoLiPlugin `GPL-3.0`
+- QQStatPlugin `GPL-3.0`
+- BackupPlugin `MIT`
+- AutoLoginPlugin `GPL-3.0`
+- QQNotePlugin `GPL-3.0`
+- ZhiDaoPlugin `GPL-3.0`
+- WebMonitor `Apache-2.0`
 
 **QQBotHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
 Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/QQBotHub/contributors)).
