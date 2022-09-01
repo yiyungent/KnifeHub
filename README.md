@@ -260,7 +260,7 @@ We accept donations through these channels:
 - AutoLoginPlugin `GPL-3.0`
 - QQNotePlugin `GPL-3.0`
 - ZhiDaoPlugin `GPL-3.0`
-- WebMonitor `Apache-2.0`
+- WebMonitorPlugin `Apache-2.0`
 
 **QQBotHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
 Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/QQBotHub/contributors)).
