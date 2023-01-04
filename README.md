@@ -1,7 +1,7 @@
 
 <h1 align="center">QQBotHub</h1>
 
-> QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 一键免费部署
+> 琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotHub.svg?style=flat)](https://github.com/yiyungent/QQBotHub/blob/master/LICENSE)
@@ -10,15 +10,18 @@
 ![hits](https://api-onetree.moeci.com/hits.svg?id=QQBotHub)
 [![docker pulls](https://img.shields.io/docker/pulls/yiyungent/qqbothub)](https://hub.docker.com/r/yiyungent/qqbothub)
 [![docker version](https://img.shields.io/docker/v/yiyungent/qqbothub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/qqbothub)
-[![Docker Image CI/CD - Release - QQBotHub](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/QQBotHub-docker-push-release.yml)
+[![Docker Image CI/CD - Release - qqbothub](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml)
+[![Github All Releases](https://img.shields.io/github/downloads/yiyungent/QQBotHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=QQBotHub)
+
 
 
 ## Introduce
 
-QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 一键免费部署
+琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
+- **多平台多架构** - win,linux,osx,amd,arm 均可
 
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
@@ -30,16 +33,18 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 ## 功能
 
 - [x] 在线 QQ 登录
-- [x] 其它大部分功能由 插件提供
+- [x] **其它大部分功能由 插件提供**
 - [x] 本仓库 维护的 官方插件
   - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
     - [x] 复读好友私聊
     - [x] 上下线通知 设置 里的 AdminQQ
   - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
-    - [x] 对接 [茉莉机器人 API](https://mly.app)
+    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
       - 自定义知识库, 各种娱乐功能
     - [x] 设置 机器人聊天群, 好友
     - [x] `@机器人` / `聊天前缀`
+    - [x] 免费API调用次数：500次/天
+      - 专属8折优惠码：`qqbothub`
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
@@ -79,7 +84,16 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 > `PluginCore Admin 用户名` 与 `PluginCore Admin 密码` 为你自己设置的后台登录用户名与密码, 随意设置即可, 自己记住就行
 
-#### 方式1: 使用 Railway 免费 一键部署 
+#### 方式1：原生部署（适合小白）
+
+选择  [Releases - QQBotHub, 点我下载](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
+找到并下载 QQBotHub 相应平台压缩包，
+windows系统 的 vps，下载 windows-64版本 的即可，
+解压里面有exe，运行它即可（无需再安装其它任何运行库），
+黑窗口中会显示一个url地址，复制到浏览器中打开即可，
+保持此黑窗口在后台运行，机器人就不会掉线
+
+#### 方式2: 使用 Railway 免费 一键部署 
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
@@ -100,7 +114,9 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 > - Railway 修改环境变量 会 触发 重新 Deploy   
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
-#### 方式2: 使用 Heroku 免费 一键部署 
+#### 方式3: 使用 Heroku 免费 一键部署 
+
+注意：此种方式可能无法QQ登录
 
 > - 点击下方按钮 一键部署       
 > - 免费注册, 无需信用卡验证
@@ -121,7 +137,7 @@ QQ 机器人 | 基于 [Konata.Core](https://github.com/KonataDev/Konata.Core) | 
 
 
 
-#### 方式3: 使用 Docker
+#### 方式4: 使用 Docker
 
 ```bash
 docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
@@ -139,7 +155,8 @@ docker exec -it qqbothub bash
 ### QQ 登录
 
 > 部署完成后
-> > 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限      
+> > ⭐⭐⭐⭐ 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限⭐⭐⭐⭐      
+> > 访问 **401** 说明你没有登录 <https://your-domain/PluginCore/Admin>      
 > 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
 > 2. 访问: <https://your-domain> 进行 QQ机器人 登录
 
@@ -153,7 +170,7 @@ docker exec -it qqbothub bash
 
 
 > **注意**    
-> 当 **无法登录** 时
+> ⭐⭐⭐⭐当 **无法登录** 时⭐⭐⭐⭐
 > 
 > - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
 >   
@@ -235,6 +252,17 @@ We accept donations through these channels:
 - <a href="https://dun.mianbaoduo.com/@yiyun" target="_blank">面包多</a> (￥1.00 起)
 
 ## Author
+
+- QQBotHub 主程序 `GPL-3.0`
+- QQBotHub.Sdk `GPL-3.0`
+- QQHelloWorldPlugin `GPL-3.0`
+- MoLiPlugin `GPL-3.0`
+- QQStatPlugin `GPL-3.0`
+- BackupPlugin `MIT`
+- AutoLoginPlugin `GPL-3.0`
+- QQNotePlugin `GPL-3.0`
+- ZhiDaoPlugin `GPL-3.0`
+- WebMonitorPlugin `Apache-2.0`
 
 **QQBotHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
 Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/QQBotHub/contributors)).
