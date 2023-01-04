@@ -9,25 +9,37 @@ using System.Linq;
 using QQStatPlugin;
 using QQStatPlugin.Utils;
 using PluginCore;
+using System.Text.RegularExpressions;
 
 namespace QQStatPlugin.Controllers
 {
     [Route("api/Plugins/QQStatPlugin/{controller}/{action}")]
     public class CalendarController : ControllerBase
     {
-        /// <summary>
-        /// 效验权限
-        /// </summary>
-        public static DateTime CreateTime { get; set; }
+        public static TempDataModel TempData { get; set; } = new TempDataModel();
+
+        public class TempDataModel
+        {
+            /// <summary>
+            /// 效验权限
+            /// </summary>
+            public DateTime CreateTime { get; set; }
+
+            public string GroupUin { get; set; }
+
+            public string MemeberUin { get; set; }
+        }
 
 
         #region Actions
 
         [Route("/Plugins/QQStatPlugin/Calendar")]
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] string groupUin = "", [FromQuery] string memeberUin = "")
+        public async Task<ActionResult> Get(/*[FromQuery] string groupUin = "", [FromQuery] string memeberUin = ""*/)
         {
-            if (CreateTime.AddHours(1) < DateTime.Now)
+            string memeberUin = TempData.MemeberUin;
+            string groupUin = TempData.GroupUin;
+            if (TempData.CreateTime.AddHours(1) < DateTime.Now)
             {
                 // 1小时后过期
                 return NotFound();
@@ -41,8 +53,10 @@ namespace QQStatPlugin.Controllers
         }
 
         [HttpGet]
-        public async Task<BaseResponseModel> EChartsOption([FromQuery] string memeberUin = "", [FromQuery] string groupUin = "")
+        public async Task<BaseResponseModel> EChartsOption(/*[FromQuery] string memeberUin = "", [FromQuery] string groupUin = ""*/)
         {
+            string memeberUin = TempData.MemeberUin;
+            string groupUin = TempData.GroupUin;
             Console.WriteLine($"{nameof(CalendarController)}.{nameof(EChartsOption)} {nameof(memeberUin)}:{memeberUin} {nameof(groupUin)}:{groupUin}");
 
             BaseResponseModel responseModel = new BaseResponseModel();
@@ -50,7 +64,7 @@ namespace QQStatPlugin.Controllers
             // 1:00 + 1 = 2:00
             // 1:30 false
             // 2:00 < 1:30 false
-            if (CreateTime.AddHours(1) < DateTime.Now)
+            if (TempData.CreateTime.AddHours(1) < DateTime.Now)
             {
                 // 1小时后过期
                 return responseModel;
@@ -104,11 +118,14 @@ namespace QQStatPlugin.Controllers
                 {
                     if (keyValuePairs.ContainsKey(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")))
                     {
-                        keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += item.Content?.Length ?? 0;
+                        //keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += item.Content?.Length ?? 0;
+                        keyValuePairs[item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd")] += ExtractHanzi2(item.Content).Length;
+
                     }
                     else
                     {
-                        keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), item.Content?.Length ?? 0);
+                        //keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), item.Content?.Length ?? 0);
+                        keyValuePairs.Add(item.CreateTime.ToDateTime13().ToString("yyyy-MM-dd"), ExtractHanzi2(item.Content).Length);
                     }
                 }
 
@@ -178,5 +195,27 @@ namespace QQStatPlugin.Controllers
         }
 
         #endregion
+
+        /// <summary>
+        /// 提取字符串中的汉字
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns></returns>
+        public static string ExtractHanzi2(string st)
+        {
+            if (string.IsNullOrEmpty(st))
+            {
+                return "";
+            }
+            string hanziString = "";
+            foreach (var ch in st)
+            {
+                if (Regex.IsMatch(ch.ToString(), @"[\u4e00-\u9fbb]+"))
+                {
+                    hanziString += ch.ToString();
+                }
+            }
+            return hanziString;
+        }
     }
 }

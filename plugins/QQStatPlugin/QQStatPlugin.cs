@@ -47,7 +47,7 @@ namespace QQStatPlugin
                 // 保存数据库
                 int successRow = DbContext.InsertIntoMessage(new Models.Message()
                 {
-                    Content = message,
+                    Content = ConvertToString(obj.e.Chain),
                     CreateTime = DateTime.Now.ToTimeStamp13(),
                     GroupName = groupName,
                     GroupUin = groupUin.ToString(),
@@ -107,7 +107,15 @@ namespace QQStatPlugin
                         else if (message.Contains("#折线"))
                         {
                             #region 折线
-                            SendStackedArea(obj: obj, message: message, groupUin: groupUin, settingsModel: settingsModel, memberUin: memberUin);
+                            try
+                            {
+                                SendStackedArea(obj: obj, message: message, groupUin: groupUin, settingsModel: settingsModel, memberUin: memberUin);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("SendStackedArea() 失败:");
+                                Console.WriteLine(ex.ToString());
+                            }
                             #endregion
                         }
                     }
@@ -226,18 +234,35 @@ namespace QQStatPlugin
         public void SendCalendar((Bot s, GroupMessageEvent e) obj, string message, uint groupUin, uint memberUin, SettingsModel settingsModel)
         {
             string token = Guid.NewGuid().ToString();
-            Controllers.CalendarController.CreateTime = DateTime.Now;
+            Controllers.CalendarController.TempData.CreateTime = DateTime.Now;
+            Controllers.CalendarController.TempData.GroupUin = groupUin.ToString();
+            Controllers.CalendarController.TempData.MemeberUin = null;
 
             // 下方获取当前群聊
-            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar?groupUin={groupUin.ToString()}";
+            //string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar?groupUin={groupUin.ToString()}";
+            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/Calendar";
             string targetMemberUinStr = message.Replace("#日历", "")?.Trim();
             if (uint.TryParse(targetMemberUinStr, out uint targetMemberUin))
             {
                 // 仅此人 日历
-                urlParam += $"&memeberUin={targetMemberUin}";
+                //urlParam += $"&memeberUin={targetMemberUin}";
+                Controllers.StackedAreaController.TempData.MemeberUin = targetMemberUin.ToString();
             }
+
+            Console.WriteLine($"准备发送统计: {urlParam}");
+            try
+            {
+                obj.s.SendGroupMessage(groupUin, $"{urlParam} \r\n 1小时后/下次失效,需重新获取,数据较多,请耐心等待");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("发送统计失败:");
+                Console.WriteLine(ex.ToString());
+            }
+
             // 注意: url 编码, 这样才能正确传参
             urlParam = System.Web.HttpUtility.UrlEncode(urlParam, System.Text.Encoding.UTF8);
+
             // 加个time 防止缓存
             // ScreenshotUrl: xxx.com?url=
             string imageUrl = $"{settingsModel.ScreenshotUrl}{urlParam}&time={DateTime.Now.ToTimeStamp13()}";
@@ -262,19 +287,37 @@ namespace QQStatPlugin
 
         public void SendStackedArea((Bot s, GroupMessageEvent e) obj, string message, uint groupUin, SettingsModel settingsModel, uint memberUin = 0)
         {
+            Console.WriteLine("进入 SendStackedArea");
             string token = Guid.NewGuid().ToString();
-            Controllers.StackedAreaController.CreateTime = DateTime.Now;
+            Controllers.StackedAreaController.TempData.CreateTime = DateTime.Now;
+            Controllers.StackedAreaController.TempData.GroupUin = groupUin.ToString();
+            Controllers.StackedAreaController.TempData.MemeberUin = null;
 
             // 下方获取当前群聊
-            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/StackedArea?groupUin={groupUin.ToString()}";
+            //string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/StackedArea?groupUin={groupUin.ToString()}";
+            string urlParam = $"{settingsModel.BaseUrl}/Plugins/QQStatPlugin/StackedArea";
             string targetMemberUinStr = message.Replace("#折线", "")?.Trim();
             if (uint.TryParse(targetMemberUinStr, out uint targetMemberUin))
             {
                 // 仅此人 日历
-                urlParam += $"&memeberUin={targetMemberUin}";
+                //urlParam += $"&memeberUin={targetMemberUin}";
+                Controllers.StackedAreaController.TempData.MemeberUin = targetMemberUin.ToString();
             }
+
+            Console.WriteLine($"准备发送统计: {urlParam}");
+            try
+            {
+                obj.s.SendGroupMessage(groupUin, $"{urlParam} \r\n 1小时后/下次失效,需重新获取,数据较多,请耐心等待");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("发送统计失败:");
+                Console.WriteLine(ex.ToString());
+            }
+
             // 注意: url 编码, 这样才能正确传参
             urlParam = System.Web.HttpUtility.UrlEncode(urlParam, System.Text.Encoding.UTF8);
+
             // 加个time 防止缓存
             // ScreenshotUrl: xxx.com?url=
             string imageUrl = $"{settingsModel.ScreenshotUrl}{urlParam}&time={DateTime.Now.ToTimeStamp13()}";
@@ -298,6 +341,47 @@ namespace QQStatPlugin
                 Console.WriteLine("发送 折线 图片失败");
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        private string ConvertToString(MessageChain chains)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in chains)
+            {
+                switch (item.Type)
+                {
+                    case BaseChain.ChainType.At:
+                        sb.AppendLine(item.ToString());
+                        break;
+                    case BaseChain.ChainType.Reply:
+                        break;
+                    case BaseChain.ChainType.Text:
+                        sb.AppendLine(item.ToString());
+                        break;
+                    case BaseChain.ChainType.Image:
+                        break;
+                    case BaseChain.ChainType.Flash:
+                        break;
+                    case BaseChain.ChainType.Record:
+                        break;
+                    case BaseChain.ChainType.Video:
+                        break;
+                    case BaseChain.ChainType.QFace:
+                        break;
+                    case BaseChain.ChainType.BFace:
+                        break;
+                    case BaseChain.ChainType.Xml:
+                        break;
+                    case BaseChain.ChainType.MultiMsg:
+                        break;
+                    case BaseChain.ChainType.Json:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return sb.ToString();
         }
 
 

@@ -20,10 +20,10 @@
             axios({
                 method: "get",
                 url: "/api/Plugins/QQStatPlugin/Calendar/EChartsOption",
-                params: {
-                    memeberUin: "{{memeberUin}}",
-                    groupUin: "{{groupUin}}"
-                },
+                //params: {
+                //    memeberUin: "{{memeberUin}}",
+                //    groupUin: "{{groupUin}}"
+                //},
             }).then(res => {
                 calendarECharts.hideLoading();
                 if (res.status == 200) {
