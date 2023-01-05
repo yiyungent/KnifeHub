@@ -249,6 +249,7 @@ namespace QQStatPlugin.Controllers
             string hanziString = "";
             foreach (var ch in st)
             {
+                // if ((uint)ch - 0x4e00) <= 0x9fbb - 0x4e00)
                 if (Regex.IsMatch(ch.ToString(), @"[\u4e00-\u9fbb]+"))
                 {
                     hanziString += ch.ToString();
