@@ -26,7 +26,7 @@
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
 > **通知:**
-> 请尽快 更新到 **QQBotHub-v0.5.2** 或 更高版本, 旧版本不再做支持   
+> 最新版 (QQBotHub-**v0.5.4** +)  已修复 由 [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core) 导致 **QQ无法登录的问题**, 你需要更新 `QQBotHub` 与 `ConsoleApp`  
 
 
 
@@ -237,9 +237,16 @@ dotnet add package QQBotHub.Sdk
 
 ## 相关项目
 
-
 - [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core) - QQ Android 协议核心库
 - [yiyungent/PluginCore](https://github.com/yiyungent/PluginCore) - 插件系统
+
+### 社区插件
+
+> 欢迎 Pull Request !
+
+- [SweelLong/AntiRecall: 这是基于QQBotHub的开源插件，主要功能是防止消息撤回。](https://github.com/SweelLong/AntiRecall)       
+- [SweelLong/RandomImage: 这是基于QQBotHub的开源插件，主要功能是发送随机图片。](https://github.com/SweelLong/RandomImage)       
+
 
 
 ## Donate
