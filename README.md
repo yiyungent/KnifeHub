@@ -45,6 +45,12 @@
     - [x] `@机器人` / `聊天前缀`
     - [x] 免费API调用次数：500次/天
       - 专属8折优惠码：`qqbothub`
+  - [QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQChannelPlugin&expanded=true)
+    - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 订阅频道消息/私信 
+    - [x] 多频道机器人管理
+    - [x] 沙盒模式
+    - [x] 演示模式
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
