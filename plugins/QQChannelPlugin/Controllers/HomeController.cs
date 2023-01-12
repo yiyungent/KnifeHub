@@ -183,6 +183,35 @@ namespace QQChannelPlugin.Controllers
                 }
             };
 
+            channelBot.ReceivedDirectMessage += async (message) =>
+            {
+                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人收到消息 -> {message.Content}");
+
+                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
+                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                foreach (var plugin in plugins)
+                {
+                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+
+                    plugin.ReceivedDirectMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
+                }
+            };
+
+            // 仅私域机器人可用, 在频道内无需 at
+            channelBot.ReceivedUserMessage += async (message) =>
+            {
+                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人收到消息 -> {message.Content}");
+
+                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
+                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                foreach (var plugin in plugins)
+                {
+                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+
+                    plugin.ReceivedUserMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
+                }
+            };
+
             #endregion
 
             // 保存起来

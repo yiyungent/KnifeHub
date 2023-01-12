@@ -18,5 +18,9 @@ namespace QQChannelPlugin.IPlugins
         void OnError(string botAppId, Exception ex);
 
         void ReceivedAtMessage(string botAppId, Message message, QQChannelApi qChannelApi);
+
+        void ReceivedDirectMessage(string botAppId, Message message, QQChannelApi qChannelApi);
+
+        void ReceivedUserMessage(string botAppId, Message message, QQChannelApi qChannelApi);
     }
 }
