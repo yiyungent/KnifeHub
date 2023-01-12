@@ -285,6 +285,7 @@ dotnet add package QQBotHub.Sdk
 ## 相关项目
 
 - [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core) - QQ Android 协议核心库
+- [Chianne1025/QQChannelFramework](https://github.com/Chianne1025/QQChannelFramework) - QQ 频道 核心库
 - [yiyungent/PluginCore](https://github.com/yiyungent/PluginCore) - 插件系统
 
 ### 社区插件
@@ -307,7 +308,7 @@ We accept donations through these channels:
 
 ## Author
 
-- QQBotHub 主程序 `GPL-3.0`
+- QQBotHub.Web `GPL-3.0`
 - QQBotHub.Sdk `GPL-3.0`
 - QQHelloWorldPlugin `GPL-3.0`
 - MoLiPlugin `GPL-3.0`
@@ -317,6 +318,8 @@ We accept donations through these channels:
 - QQNotePlugin `GPL-3.0`
 - ZhiDaoPlugin `GPL-3.0`
 - WebMonitorPlugin `Apache-2.0`
+- QQChannelPlugin `MIT`
+- MoLi4QQChannelPlugin `MIT`
 
 **QQBotHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
 Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/QQBotHub/contributors)).
