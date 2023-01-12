@@ -51,7 +51,8 @@ namespace MoLi4QQChannelPlugin
             MoLiApiResponseModel resModel = new MoLiApiResponseModel();
             try
             {
-                string text = message.Content;
+                // 去除 @机器人 字符
+                string text = message.Content.Replace($"<@!{qChannelApi.GetUserApi().GetCurrentUserAsync().Result.Id}>", "");
                 resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                 {
                     content = text,
