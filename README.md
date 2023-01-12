@@ -216,6 +216,42 @@ docker exec -it qqbothub bash
 > `插件设置` 可以通过保持打开插件设置页面的方式, 重新安装插件后, 再在此页面点击保存
 
 
+> 一些更新 docker qqbothub 可能需要用到的命令
+
+```bash
+# docker-data 位置用于保存当前容器数据
+mkdir -r docker-data/App_Data/
+mkdir -r docker-data/Plugins/
+mkdir -r docker-data/Plugins_wwwroot/
+# 保存当前数据
+docker cp qqbothub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
+docker cp qqbothub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
+docker cp qqbothub:/app/Plugins/ docker-data/
+docker cp qqbothub:/app/Plugins_wwwroot/ docker-data/
+
+# 移除当前
+docker stop qqbothub
+docker rm qqbothub
+docker rmi yiyungent/qqbothub
+
+# 获取最新
+docker pull yiyungent/qqbothub:latest
+docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
+
+# 这里我将原本备份的数据保存到了这个路径, 进入这个路径, 将备份数据覆盖到 docker 容器中
+cd docker-data
+
+docker cp App_Data/PluginCore.Config.json qqbothub:/app/App_Data/PluginCore.Config.json
+docker cp App_Data/plugin.config.json qqbothub:/app/App_Data/plugin.config.json
+docker cp Plugins/ qqbothub:/app/
+docker cp Plugins_wwwroot/ qqbothub:/app/
+
+# 重启容器
+docker restart qqbothub
+```
+
+
+
 ## 插件开发
 
 > 注意:  
