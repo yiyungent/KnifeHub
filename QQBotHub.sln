@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQNotePlugin", "plugins\QQN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZhiDaoPlugin", "plugins\ZhiDaoPlugin\ZhiDaoPlugin.csproj", "{19926B94-9C88-42C5-B80F-A76B1134E9CC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQChannelPlugin", "plugins\QQChannelPlugin\QQChannelPlugin.csproj", "{8BEB0C54-7117-4025-8042-4D947E6E45F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{19926B94-9C88-42C5-B80F-A76B1134E9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19926B94-9C88-42C5-B80F-A76B1134E9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19926B94-9C88-42C5-B80F-A76B1134E9CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BEB0C54-7117-4025-8042-4D947E6E45F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BEB0C54-7117-4025-8042-4D947E6E45F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BEB0C54-7117-4025-8042-4D947E6E45F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BEB0C54-7117-4025-8042-4D947E6E45F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{4A137527-1CB2-48DF-8BF5-CB9532592D14} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{AA865F02-FB95-4624-94B6-DE51FB34015A} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{19926B94-9C88-42C5-B80F-A76B1134E9CC} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{8BEB0C54-7117-4025-8042-4D947E6E45F2} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
