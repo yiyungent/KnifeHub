@@ -51,6 +51,11 @@
     - [x] 多频道机器人管理
     - [x] 沙盒模式
     - [x] 演示模式
+  - [MoLi4QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLi4QQChannelPlugin&expanded=true)
+    - [x] 专为 QQ 频道, 支持多个机器人, **启用前需保证 QQChannelPlugin 处于已启用状态** 
+    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
+      - 自定义知识库, 各种娱乐功能
+    - [x] `@机器人` / `聊天前缀`
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
