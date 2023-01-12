@@ -17,6 +17,12 @@ namespace QQChannelPlugin.IPlugins
 
         void OnError(string botAppId, Exception ex);
 
+        /// <summary>
+        /// 注意: message.Content 中包含 <@!1094789961239705377> 其中 1094789961239705377 为@的人
+        /// </summary>
+        /// <param name="botAppId"></param>
+        /// <param name="message"></param>
+        /// <param name="qChannelApi"></param>
         void ReceivedAtMessage(string botAppId, Message message, QQChannelApi qChannelApi);
 
         void ReceivedDirectMessage(string botAppId, Message message, QQChannelApi qChannelApi);

@@ -65,7 +65,26 @@ namespace QQChannelPlugin.Controllers
         public async Task<ActionResult> Login()
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQChannelPlugin));
+            // 确保以前的都取消
+            #region 确保以前的都取消
+            foreach (var item in QQChannelBotStore.Bots)
+            {
+                try
+                {
+                    await item.ChannelBot.OfflineAsync();
+                    await item.ChannelBot.CloseAsync();
+                    item.ChannelBot = null;
+                    item.OpenApiAccessInfo = new OpenApiAccessInfo();
+                    item.QQChannelApi = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
             QQChannelBotStore.Bots.Clear();
+
+            #endregion
             foreach (var botConfig in settingsModel.Bots)
             {
                 ChannelBotItem(botConfig, settingsModel);
