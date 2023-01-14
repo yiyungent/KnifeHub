@@ -235,10 +235,11 @@ docker exec -it qqbothub bash
 > 一些更新 docker qqbothub 可能需要用到的命令
 
 ```bash
+cd /www/wwwroot/qqbothub*
 # docker-data 位置用于保存当前容器数据
-mkdir -r docker-data/App_Data/
-mkdir -r docker-data/Plugins/
-mkdir -r docker-data/Plugins_wwwroot/
+mkdir -p docker-data/App_Data/
+mkdir -p docker-data/Plugins/
+mkdir -p docker-data/Plugins_wwwroot/
 # 保存当前数据
 docker cp qqbothub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
 docker cp qqbothub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
@@ -251,6 +252,8 @@ docker rm qqbothub
 docker rmi yiyungent/qqbothub
 
 # 获取最新
+# 建议不要使用 latest , 而是指定最新的版本号, 有可能你使用的 docker 仓储源还未同步, 而导致 latest 仍为旧版
+#docker pull yiyungent/qqbothub:v1.0.0
 docker pull yiyungent/qqbothub:latest
 docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
 
