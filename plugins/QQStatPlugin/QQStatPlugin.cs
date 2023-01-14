@@ -6,14 +6,13 @@ using PluginCore.IPlugins;
 using Konata.Core;
 using Konata.Core.Events.Model;
 using Konata.Core.Interfaces.Api;
-using QQBotHub.Sdk.IPlugins;
 using QQStatPlugin.Utils;
 using Konata.Core.Message.Model;
 using Konata.Core.Common;
 using System.Text;
-using QQBotHub.Sdk;
 using Konata.Core.Message;
 using System.Collections.Generic;
+using KonataPlugin;
 
 namespace QQStatPlugin
 {
@@ -201,21 +200,21 @@ namespace QQStatPlugin
             try
             {
                 SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
-                if (QQBotStore.Bot != null && QQBotStore.Bot.IsOnline())
+                if (KonataBotStore.Bot != null && KonataBotStore.Bot.IsOnline())
                 {
-                    var groupList = await QQBotStore.Bot.GetGroupList(forceUpdate: true);
+                    var groupList = await KonataBotStore.Bot.GetGroupList(forceUpdate: true);
                     foreach (var group in groupList)
                     {
                         if (settingsModel.ChartGroups.Contains(group.Uin.ToString()))
                         {
-                            SendStackedArea((QQBotStore.Bot, null), message: "#折线", groupUin: group.Uin, settingsModel: settingsModel);
+                            SendStackedArea((KonataBotStore.Bot, null), message: "#折线", groupUin: group.Uin, settingsModel: settingsModel);
 
                             List<BaseChain> baseChains = new List<BaseChain>()
                             {
                                 TextChain.Create("发送 #帮助 获取更多信息")
                             };
 
-                            await QQBotStore.Bot.SendGroupMessage(groupUin: group.Uin, baseChains.ToArray());
+                            await KonataBotStore.Bot.SendGroupMessage(groupUin: group.Uin, baseChains.ToArray());
                         }
                     }
 
