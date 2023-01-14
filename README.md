@@ -1,7 +1,7 @@
 
 <h1 align="center">QQBotHub</h1>
 
-> 琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
+> 琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotHub.svg?style=flat)](https://github.com/yiyungent/QQBotHub/blob/master/LICENSE)
@@ -17,7 +17,7 @@
 
 ## Introduce
 
-琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡
+琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
@@ -26,7 +26,7 @@
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
 > **通知:**
-> 最新版 (QQBotHub-**v0.5.4** +)  已修复 由 [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core) 导致 **QQ无法登录的问题**, 你需要更新 `QQBotHub` 与 `ConsoleApp`  
+> 请尽快更新到 最新版 (QQBotHub-**v1.0.0** +)
 
 
 
@@ -35,28 +35,33 @@
 - [x] 在线 QQ 登录
 - [x] **其它大部分功能由 插件提供**
 - [x] 本仓库 维护的 官方插件
-  - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
-    - [x] 复读好友私聊
-    - [x] 上下线通知 设置 里的 AdminQQ
-  - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
-    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
-      - 自定义知识库, 各种娱乐功能
-    - [x] 设置 机器人聊天群, 好友
-    - [x] `@机器人` / `聊天前缀`
-    - [x] 免费API调用次数：500次/天
-      - 专属8折优惠码：`qqbothub`
   - [QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQChannelPlugin&expanded=true)
     - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 订阅频道消息/私信 
     - [x] 多频道机器人管理
     - [x] 沙盒模式
     - [x] 演示模式
+  - [KonataPlugin](https://github.com/yiyungent/QQBotHub/releases?q=KonataPlugin&expanded=true)
+    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 账号密码/配置 登录 
+    - [x] 订阅私聊/群聊
+    - [x] 演示模式
   - [MoLi4QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLi4QQChannelPlugin&expanded=true)
-    - [x] 专为 QQ 频道, 支持多个机器人, **启用前需保证 QQChannelPlugin 处于已启用状态** 
+    - [x] **启用前需保证 QQChannelPlugin 处于已启用状态**
+    - [x] 专为 QQ 频道, 支持多个机器人 
     - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
       - 自定义知识库, 各种娱乐功能
     - [x] `@机器人` / `聊天前缀`
+  - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
+    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
+      - 自定义知识库, 各种娱乐功能
+    - [x] 设置 机器人聊天群, 好友
+    - [x] `@机器人` / `聊天前缀`
+    - [x] 免费API调用次数：500次/天
+      - 专属8折优惠码：`qqbothub`
   - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
     - [x] `#日历`
@@ -66,17 +71,24 @@
     - [x] 将 备份文件 发送到 Telegram 
     - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
   - [AutoLoginPlugin](https://github.com/yiyungent/QQBotHub/releases?q=AutoLoginPlugin&expanded=true) 
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 定时 检测在线状态 (频率:1分钟)
     - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
     - [x] 重新登录成功后, 通知 `AdminQQ`
   - [QQNotePlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQNotePlugin&expanded=true) 
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
       - 笔记写入 GitHub 指定仓库的指定文件中
   - [ZhiDaoPlugin](https://github.com/yiyungent/QQBotHub/releases?q=ZhiDaoPlugin&expanded=true) 
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
     - [x] 自定义问答
       - [x] 群主/管理员/AdminQQ 自定义问答
       - [x] 分群自定义问答    
       - [x] 关键词自动回复 
+  - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
+    - [x] 复读好友私聊
+    - [x] 上下线通知 设置 里的 AdminQQ
 
 ## Screenshots
 
@@ -185,12 +197,12 @@ docker exec -it qqbothub bash
 > 
 > - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
 >   
-> 可 下载 [Releases - ConsoleApp - Assets](https://github.com/yiyungent/QQBotHub/releases?q=ConsoleApp&expanded=true) 在本地登录成功后,    
+> 可 下载 [Releases - KonataApp - Assets](https://github.com/yiyungent/QQBotHub/releases?q=KonataApp&expanded=true) 在本地登录成功后,    
 > 获取 **BotKeyStore.json** 后, 在登录页面使用 **配置** 方式登录
 > 
-> > - 大部分人电脑为 `Windows 64 位`, 点击 **ConsoleApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **ConsoleApp.exe**
-> > - 运行 `ConsoleApp.exe` 会自动给出输入提示, 按提示操作即可       
-> > - 运行 `ConsoleApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
+> > - 大部分人电脑为 `Windows 64 位`, 点击 **KonataApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **KonataApp.exe**
+> > - 运行 `KonataApp.exe` 会自动给出输入提示, 按提示操作即可       
+> > - 运行 `KonataApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
 
 
 
@@ -270,8 +282,9 @@ docker restart qqbothub
 
 > QQBotHub 插件开发包  
 > 插件开发包中已包含:   
-> - `Konata.Core`
 > - `PluginCore.IPlugins.AspNetCore`
+
+> 注意: 如果你不需要 `QQBotHub.Sdk` 中的一些 `Utils` , 那么建议直接依赖 `PluginCore.IPlugins.AspNetCore` , 减少依赖项, 使之称为通用插件
 
 ```powershell
 dotnet add package QQBotHub.Sdk
