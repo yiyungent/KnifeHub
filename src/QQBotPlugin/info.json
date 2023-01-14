@@ -1,8 +1,0 @@
-{
-	"PluginId": "QQBotPlugin",
-	"DisplayName": "QQ机器人",
-	"Description": "QQ机器人插件",
-	"Author": "yiyun",
-	"Version": "0.1.0",
-	"SupportedVersions": [ "0.0.1" ]
-}
