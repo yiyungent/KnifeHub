@@ -36,13 +36,21 @@
 - [x] 本仓库 维护的 官方插件
   - [QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQChannelPlugin&expanded=true)
     - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 依赖 [Chianne1025/QQChannelFramework](https://github.com/Chianne1025/QQChannelFramework)
     - [x] 订阅频道消息/私信 
     - [x] 多频道机器人管理
     - [x] 沙盒模式
     - [x] 演示模式
   - [KonataPlugin](https://github.com/yiyungent/QQBotHub/releases?q=KonataPlugin&expanded=true)
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 依赖 [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core)
     - [x] 账号密码/配置 登录 
+    - [x] 订阅私聊/群聊
+    - [x] 演示模式
+  - [CocoaPlugin](https://github.com/yiyungent/QQBotHub/releases?q=CocoaPlugin&expanded=true)
+    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供模块化事件派发, 机器人管理
+    - [x] 依赖 [Miyakowww/CocoaFramework2](https://github.com/Miyakowww/CocoaFramework2)
+    - [x] 对接 `mirai-api-http`
     - [x] 订阅私聊/群聊
     - [x] 演示模式
   - [MoLi4QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLi4QQChannelPlugin&expanded=true)
