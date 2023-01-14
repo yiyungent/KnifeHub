@@ -28,9 +28,9 @@
 
 ## 下载数据库
 
-> 所有数据保存到数据库 **CocoaPlugin.sqlite** 中
+> 所有数据保存到数据库 **SoraPlugin.sqlite** 中
 
-- [下载数据库 (CocoaPlugin.sqlite)](/Plugins/SoraPlugin/Download)
+- [下载数据库 (SoraPlugin.sqlite)](/Plugins/SoraPlugin/Download)
 
 
 
