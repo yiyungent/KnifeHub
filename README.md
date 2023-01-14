@@ -47,6 +47,12 @@
     - [x] 账号密码/配置 登录 
     - [x] 订阅私聊/群聊
     - [x] 演示模式
+  - [SoraPlugin](https://github.com/yiyungent/QQBotHub/releases?q=SoraPlugin&expanded=true)
+    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 依赖 [Hoshikawa-Kaguya/Sora](https://github.com/Hoshikawa-Kaguya/Sora)
+    - [x] 对接 `go-cqhttp`
+    - [x] 订阅私聊/群聊等
+    - [x] 演示模式
   - [CocoaPlugin](https://github.com/yiyungent/QQBotHub/releases?q=CocoaPlugin&expanded=true)
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供模块化事件派发, 机器人管理
     - [x] 依赖 [Miyakowww/CocoaFramework2](https://github.com/Miyakowww/CocoaFramework2)
