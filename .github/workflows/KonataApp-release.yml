@@ -1,9 +1,9 @@
-name: ConsoleApp Release
+name: KonataApp Release
 
 on: 
   push:
     tags:
-      - 'ConsoleApp-v*'
+      - 'KonataApp-v*'
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
         
     - name: Build
       run: |
-        cd ./test/ConsoleApp
+        cd ./test/KonataApp
         # win-x64
         dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --output ../../win-x64 --self-contained true
         # win-x86
@@ -39,13 +39,13 @@ jobs:
       
     - name: Zip the Build
       run: |
-        zip -r ConsoleApp-win-x64.zip ./win-x64/
-        zip -r ConsoleApp-win-x86.zip ./win-x86/
-        zip -r ConsoleApp-linux-x64.zip ./linux-x64/
-        zip -r ConsoleApp-linux-arm.zip ./linux-arm/
-        zip -r ConsoleApp-linux-arm64.zip ./linux-arm64/
-        zip -r ConsoleApp-osx-x64.zip ./osx-x64/
-        zip -r ConsoleApp-osx.10.10-x64.zip ./osx.10.10-x64/
+        zip -r KonataApp-win-x64.zip ./win-x64/
+        zip -r KonataApp-win-x86.zip ./win-x86/
+        zip -r KonataApp-linux-x64.zip ./linux-x64/
+        zip -r KonataApp-linux-arm.zip ./linux-arm/
+        zip -r KonataApp-linux-arm64.zip ./linux-arm64/
+        zip -r KonataApp-osx-x64.zip ./osx-x64/
+        zip -r KonataApp-osx.10.10-x64.zip ./osx.10.10-x64/
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -58,10 +58,10 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          ConsoleApp-win-x64.zip
-          ConsoleApp-win-x86.zip
-          ConsoleApp-linux-x64.zip
-          ConsoleApp-linux-arm.zip
-          ConsoleApp-linux-arm64.zip
-          ConsoleApp-osx-x64.zip
-          ConsoleApp-osx.10.10-x64.zip
+          KonataApp-win-x64.zip
+          KonataApp-win-x86.zip
+          KonataApp-linux-x64.zip
+          KonataApp-linux-arm.zip
+          KonataApp-linux-arm64.zip
+          KonataApp-osx-x64.zip
+          KonataApp-osx.10.10-x64.zip
