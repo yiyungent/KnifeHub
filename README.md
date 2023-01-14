@@ -32,8 +32,7 @@
 
 ## 功能
 
-- [x] 在线 QQ 登录
-- [x] **其它大部分功能由 插件提供**
+- [x] **大部分功能由插件提供**
 - [x] 本仓库 维护的 官方插件
   - [QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQChannelPlugin&expanded=true)
     - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
@@ -66,10 +65,6 @@
     - [x] 下载 群聊 数据库
     - [x] `#日历`
     - [x] `#折线`
-  - [BackupPlugin](https://github.com/yiyungent/QQBotHub/releases?q=BackupPlugin&expanded=true) 
-    - [x] 定时 自动 备份 插件数据
-    - [x] 将 备份文件 发送到 Telegram 
-    - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
   - [AutoLoginPlugin](https://github.com/yiyungent/QQBotHub/releases?q=AutoLoginPlugin&expanded=true) 
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 定时 检测在线状态 (频率:1分钟)
@@ -89,6 +84,10 @@
     - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
     - [x] 复读好友私聊
     - [x] 上下线通知 设置 里的 AdminQQ
+  - [BackupPlugin](https://github.com/yiyungent/QQBotHub/releases?q=BackupPlugin&expanded=true) 
+    - [x] 定时 自动 备份 插件数据
+    - [x] 将 备份文件 发送到 Telegram 
+    - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
 
 ## Screenshots
 
