@@ -7,12 +7,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 using PluginCore.Interfaces;
-using QQChannelFramework.Api;
-using QQChannelFramework.Expansions.Bot;
-using QQChannelPlugin.IPlugins;
-using QQChannelPlugin.Utils;
+using KonataPlugin.Utils;
+using KonataPlugin.ResponseModels;
+using KonataPlugin.RequestModels;
+using Konata.Core.Common;
+using Konata.Core.Interfaces;
+using static Konata.Core.Events.Model.CaptchaEvent;
+using PluginCore.IPlugins;
+using Konata.Core.Interfaces.Api;
 
-namespace QQChannelPlugin.Controllers
+namespace KonataPlugin.Controllers
 {
     /// <summary>
     /// 其实也可以不写这个, 直接访问 Plugins/ZhiDaoPlugin/index.html
@@ -22,7 +26,8 @@ namespace QQChannelPlugin.Controllers
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
     /// 这样访问 Plugins/HelloWorldPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{nameof(QQChannelPlugin)}")]
+    [Route($"Plugins/{nameof(KonataPlugin)}")]
+    [Authorize("PluginCore.Admin")]
     public class HomeController : Controller
     {
         #region Fields
@@ -49,212 +54,443 @@ namespace QQChannelPlugin.Controllers
         }
         #endregion
 
-        public async Task<ActionResult> Get()
+
+        #region Actions
+
+        [Route("")]
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(QQChannelPlugin)), "index.html");
+            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(KonataPlugin)), "index.html");
 
             return PhysicalFile(indexFilePath, "text/html");
         }
 
+
+        [HttpGet]
+        [Route(nameof(Uin))]
+        public async Task<BaseResponseModel> Uin()
+        {
+            BaseResponseModel responseModel = new BaseResponseModel();
+            try
+            {
+                var settings = Utils.SettingsUtil.Get(nameof(KonataPlugin));
+                string uin = settings?.Uin ?? "";
+                if (!string.IsNullOrEmpty(KonataBotStore.Bot?.Uin.ToString()))
+                {
+                    uin = KonataBotStore.Bot?.Uin.ToString() ?? uin;
+                }
+
+                responseModel.Code = 1;
+                responseModel.Message = "获取成功";
+                responseModel.Data = uin;
+            }
+            catch (Exception ex)
+            {
+                responseModel.Code = -1;
+                responseModel.Message = "获取失败";
+                responseModel.Data = ex.ToString();
+            }
+
+            return await Task.FromResult(responseModel);
+        }
+
         /// <summary>
-        /// 将所有 settings.json 中的 bot 尝试登录
+        /// 登录后，定时访问此api, 获取验证等信息
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
+        [Route(nameof(Info))]
+        public async Task<BaseResponseModel> Info()
+        {
+            BaseResponseModel responseModel = new BaseResponseModel();
+            InfoResponseDataModel dataModel = new InfoResponseDataModel();
+
+            if (KonataBotStore.Bot == null)
+            {
+                // 未点击登录过
+                responseModel.Code = 1;
+                responseModel.Message = "未登录";
+
+                dataModel.CaptchaTip = "";
+                dataModel.IsOnline = false;
+                dataModel.CaptchaType = "";
+                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                responseModel.Data = dataModel;
+
+                return responseModel;
+            }
+
+            //if (QQBotStore.Bot.IsOnline())
+            if (CaptchaStore.IsOnline)
+            {
+                responseModel.Code = 2;
+                responseModel.Message = "已处于登录状态, 无需验证";
+
+                dataModel.CaptchaTip = "";
+                dataModel.IsOnline = true;
+                dataModel.CaptchaType = "";
+                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                responseModel.Data = dataModel;
+
+                return responseModel;
+            }
+
+            // 已经点击登录过一次
+            responseModel.Code = 3;
+            responseModel.Message = "需要验证";
+            switch (CaptchaStore.CaptchaType)
+            {
+                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
+                    dataModel.CaptchaType = "短信验证";
+                    break;
+                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
+                    dataModel.CaptchaType = "滑块验证";
+                    break;
+                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
+                    dataModel.CaptchaType = "未知验证";
+                    break;
+                default:
+                    dataModel.CaptchaType = "未知验证-不匹配的验证类型";
+                    break;
+            }
+            dataModel.IsOnline = false;
+            dataModel.CaptchaTip = CaptchaStore.CaptchaTip;
+            dataModel.CaptchaUpdateTime = CaptchaStore.UpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+            responseModel.Data = dataModel;
+
+            return await Task.FromResult(responseModel);
+        }
+
+        /// <summary>
+        /// 提交验证信息
+        /// </summary>
+        /// <param name="captcha"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(nameof(SubmitCaptcha))]
+        public async Task<BaseResponseModel> SubmitCaptcha([FromBody] SubmitCaptchaRequestModel requestModel)
+        {
+            BaseResponseModel responseModel = new BaseResponseModel();
+            string captcha = requestModel.Captcha;
+            if (string.IsNullOrEmpty(captcha))
+            {
+                responseModel.Code = -1;
+                responseModel.Message = "captcha 不能为空";
+
+                return responseModel;
+            }
+            bool isSuccessCaptcha = false;
+            try
+            {
+                switch (CaptchaStore.CaptchaType)
+                {
+                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
+                        isSuccessCaptcha = KonataBotStore.Bot.SubmitSmsCode(captcha);
+                        break;
+                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
+                        isSuccessCaptcha = KonataBotStore.Bot.SubmitSliderTicket(captcha);
+                        break;
+                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
+                        break;
+                    default:
+                        break;
+                }
+
+                responseModel.Code = 1;
+                responseModel.Message = $"{(isSuccessCaptcha ? "验证通过" : "验证失败, 请重新验证")}";
+            }
+            catch (System.Exception ex)
+            {
+                responseModel.Code = -3;
+                responseModel.Message = "提交验证失败";
+                responseModel.Data = ex.ToString();
+
+                Utils.LogUtil.Exception(ex);
+            }
+
+            return await Task.FromResult(responseModel);
+        }
+
+        [HttpPost]
         [Route(nameof(Login))]
-        [Authorize("PluginCore.Admin")]
-        public async Task<ActionResult> Login()
+        public async Task<BaseResponseModel> Login(LoginRequestModel requestModel)
         {
-            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQChannelPlugin));
-            // 确保以前的都取消
-            #region 确保以前的都取消
-            foreach (var item in QQChannelBotStore.Bots)
+            BaseResponseModel responseModel = new BaseResponseModel();
+            try
             {
-                try
+                var oldSettings = Utils.SettingsUtil.Get(nameof(KonataPlugin));
+                SettingsModel newSettings = new SettingsModel();
+                newSettings.UseDemoModel = oldSettings.UseDemoModel;
+                newSettings.AdminQQ = oldSettings.AdminQQ;
+                if (requestModel.LoginType == "password")
                 {
-                    await item.ChannelBot.OfflineAsync();
-                    await item.ChannelBot.CloseAsync();
-                    item.ChannelBot = null;
-                    item.OpenApiAccessInfo = new OpenApiAccessInfo();
-                    item.QQChannelApi = null;
-                }
-                catch (Exception ex)
-                {
+                    newSettings = new SettingsModel
+                    {
+                        Uin = requestModel.Uin,
+                        Password = requestModel.Password,
+                    };
+                    if (string.IsNullOrEmpty(requestModel.Password?.Trim()))
+                    {
+                        newSettings.Password = oldSettings.Password;
+                    }
 
+                    InitQQBot(botKeyStore: new BotKeyStore(uin: newSettings.Uin, password: newSettings.Password));
+
+                    Utils.SettingsUtil.Set(nameof(KonataPlugin), newSettings);
                 }
+                else if (requestModel.LoginType == "config")
+                {
+                    newSettings = new SettingsModel();
+                    if (!string.IsNullOrEmpty(requestModel.BotKeyStore?.Trim()))
+                    {
+                        try
+                        {
+                            newSettings.BotKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(requestModel.BotKeyStore.Trim());
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("requestModel.BotKeyStore 转换失败:");
+                            Console.WriteLine(ex.ToString());
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(requestModel.BotKeyStore?.Trim()))
+                    {
+                        newSettings.BotKeyStore = oldSettings.BotKeyStore;
+                    }
+
+                    InitQQBot(botKeyStore: newSettings.BotKeyStore);
+
+                    Utils.SettingsUtil.Set(nameof(KonataPlugin), newSettings);
+                }
+                else
+                {
+                    responseModel.Code = -2;
+                    responseModel.Message = "未知登录方式";
+
+                    return await Task.FromResult(responseModel);
+                }
+
+                Task<bool> taskLogin = KonataBotStore.Bot.Login();
+
+                responseModel.Code = 1;
+                responseModel.Message = "提交登录成功";
             }
-            QQChannelBotStore.Bots.Clear();
-
-            #endregion
-            foreach (var botConfig in settingsModel.Bots)
+            catch (Exception ex)
             {
-                ChannelBotItem(botConfig, settingsModel);
+                responseModel.Code = -1;
+                responseModel.Message = "提交登录失败";
+                responseModel.Data = ex.ToString();
             }
 
-            // TODO: 暂时这么做, 以后优化界面
-            return Content("尝试登录 设置 里的 QQ频道机器人中, 请耐性等待! 注意查看控制台!");
+            return await Task.FromResult(responseModel);
         }
 
-        private async void ChannelBotItem(SettingsModel.BotDevItemModel botConfig, SettingsModel settings)
+        [HttpPost]
+        [Route(nameof(Logout))]
+        public async Task<BaseResponseModel> Logout()
         {
-            // https://www.yuque.com/chianne1025/mybot/otkzzg
-
-            // 声明鉴权信息
-            OpenApiAccessInfo openApiAccessInfo = new OpenApiAccessInfo();
-            openApiAccessInfo.BotAppId = botConfig.BotAppId;
-            openApiAccessInfo.BotToken = botConfig.BotToken;
-            openApiAccessInfo.BotSecret = botConfig.BotSecret;
-
-            // 使用QQChannelApi获取相应的Api接口
-            // 鉴权信息在实例化时传入
-            QQChannelApi qChannelApi = new(openApiAccessInfo);
-
-            // 指定Api请求使用Bot身份
-            qChannelApi.UseBotIdentity();
-
-            if (botConfig.UseSandBoxMode)
+            BaseResponseModel responseModel = new BaseResponseModel();
+            try
             {
-                // 指定Api通道模式为沙盒模式 (测试时使用)
-                qChannelApi.UseSandBoxMode();
+                Task<bool> taskLogout = KonataBotStore.Bot.Logout();
+
+                responseModel.Code = 1;
+                responseModel.Message = "提交退出成功";
             }
-            else
+            catch (Exception ex)
             {
-                // 不指定的情况下默认是正式模式
-                //qChannelApi.UseReleaseMode();
+                responseModel.Code = -1;
+                responseModel.Message = "提交退出失败";
+                responseModel.Data = ex.ToString();
             }
 
-            // 实例化一个 ChannelBot,该类是一个容易理解且简单的类
-            // 帮助你快速实现一个利于理解学习与开发的机器人原型
-            // 将鉴权信息 (openApiAccessInfo) 传入构造函数
-            ChannelBot channelBot = new(qChannelApi);
-            // 注册接受@机器人消息时间，否则无法收到消息
-            channelBot.RegisterAtMessageEvent();
+            return await Task.FromResult(responseModel);
+        }
 
-            #region 事件
+        #endregion
 
-            // 为链接官方平台成功事件绑定一个回调函数
-            channelBot.OnConnected += () =>
+        #region Helpers
+
+        [NonAction]
+        public void InitQQBot(BotKeyStore botKeyStore)
+        {
+            #region Bot
+
+            // Create a bot instance
+            #region 准备数据
+            // 优先从 环境变量 中获取
+            BotConfig botConfig = BotConfig.Default();
+            string botConfigJsonStr = EnvUtil.GetEnv("BOT_CONFIG");
+            if (!string.IsNullOrEmpty(botConfigJsonStr))
             {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 连接成功");
+                botConfig = JsonUtil.JsonStr2Obj<BotConfig>(botConfigJsonStr);
+            }
 
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
-                {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-
-                    plugin.OnConnected(openApiAccessInfo.BotAppId);
-                }
-            };
-
-            // 为鉴权成功事件绑定一个回调函数
-            channelBot.AuthenticationSuccess += () =>
+            BotDevice botDevice = BotDevice.Default();
+            string botDeviceJsonStr = EnvUtil.GetEnv("BOT_DEVICE");
+            if (!string.IsNullOrEmpty(botDeviceJsonStr))
             {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人已上线");
+                botDevice = JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
+            }
 
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
-                {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-
-                    plugin.AuthenticationSuccess(openApiAccessInfo.BotAppId);
-                }
-            };
-
-            // 为机器人出现异常事件绑定一个回调函数
-            channelBot.OnError += (ex) =>
+            string botKeyStoreJsonStr = EnvUtil.GetEnv("BOT_KEYSTORE");
+            if (!string.IsNullOrEmpty(botKeyStoreJsonStr))
             {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人出现错误 -> {ex.Message}");
+                botKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
+            }
+            #endregion
 
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
-                {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-
-                    plugin.OnError(openApiAccessInfo.BotAppId, ex);
-                }
-            };
-
-            // 为接收到@机器人事件绑定一个回调函数
-            // message 为收到的消息内容
-            channelBot.ReceivedAtMessage += async (message) =>
+            var bot = BotFather.Create(botConfig, botDevice, botKeyStore);
             {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人收到消息 -> {message.Content}");
-
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
+                // Print the log
+                bot.OnLog += (s, e) =>
                 {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                    //#if DEBUG
+                    //                    Utils.LogUtil.Info(e.EventMessage);
+                    //#endif
+                    if (_debug)
+                    {
+                        Utils.LogUtil.Info(e.EventMessage);
+                    }
+                };
 
-                    plugin.ReceivedAtMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
-                }
-
-                if (botConfig.UseDemoModel)
+                // Handle the captcha
+                bot.OnCaptcha += (s, e) =>
                 {
-                    // 使用QQChannelApi异步回复一个与用户发送一样的消息内容
-                    // 发送消息时，如果机器人中的一些能力未联系官方开通，会导致发送失败，或者发送成功但需要等待官方人工审核
-                    // 发送失败或需要等待官方审核时会抛出异常，请注意捕获
-                    await qChannelApi
-                        .GetMessageApi()
-                        .SendTextMessageAsync(message.ChannelId, $"收到消息啦！您发送的消息为 -> {message.Content}", message.Id);
-                }
-            };
+                    Utils.LogUtil.Info("QQ 登录验证:");
+                    CaptchaStore.UpdateTime = DateTime.Now;
+                    CaptchaStore.CaptchaType = e.Type;
+                    if (e.Type == CaptchaType.Slider)
+                    {
+                        Utils.LogUtil.Info(e.SliderUrl);
+                        //((Bot)s).SubmitSliderTicket(Console.ReadLine());
+                        CaptchaStore.CaptchaTip = $"{e.SliderUrl}";
+                    }
+                    else if (e.Type == CaptchaType.Sms)
+                    {
+                        Utils.LogUtil.Info(e.Phone);
+                        //((Bot)s).SubmitSmsCode(Console.ReadLine());
+                        CaptchaStore.CaptchaTip = $"{e.Phone}";
+                    }
+                };
 
-            channelBot.ReceivedDirectMessage += async (message) =>
-            {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人收到消息 -> {message.Content}");
-
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
+                // Handle messages from group
+                bot.OnGroupMessage += (s, e) =>
                 {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                    Utils.LogUtil.Info($"群消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
 
-                    plugin.ReceivedDirectMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
-                }
-            };
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
+                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                    foreach (var plugin in plugins)
+                    {
+                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                        if (e.Message.Sender.Uin != s.Uin)
+                        {
+                            // 排除机器人自己
+                            plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
+                        }
+                    }
+                };
 
-            // 仅私域机器人可用, 在频道内无需 at
-            channelBot.ReceivedUserMessage += async (message) =>
-            {
-                Utils.LogUtil.Info($"{openApiAccessInfo.BotAppId} 机器人收到消息 -> {message.Content}");
-
-                var plugins = _pluginFinder.EnablePlugins<IQQChannelPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
+                // Handle messages from friend
+                bot.OnFriendMessage += (s, e) =>
                 {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                    Utils.LogUtil.Info($"好友消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
 
-                    plugin.ReceivedUserMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
-                }
-            };
+                    // 在获取插件这步正常, 没有触发 bot.OnFriendMessage 
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
+                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                    //Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
+                    foreach (var plugin in plugins)
+                    {
+                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                        if (e.Message.Sender.Uin != s.Uin)
+                        {
+                            // 排除机器人自己
+                            plugin.OnFriendMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.FriendUin);
+                        }
+                    }
+                };
+
+                bot.OnBotOnline += (s, e) =>
+                {
+                    Utils.LogUtil.Info($"{s.Name} 上线");
+
+                    CaptchaStore.IsOnline = true;
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnBotOnline((s, e), s.Name, s.Uin);
+                    }
+                };
+
+                bot.OnBotOffline += (s, e) =>
+                {
+                    Utils.LogUtil.Info($"{s.Name} 离线");
+
+                    CaptchaStore.IsOnline = false;
+
+                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnBotOffline((s, e), s.Name, s.Uin);
+                    }
+                };
+                // ... More handlers
+            }
+
+            // Do login
+            //Task<bool> loginTask = bot.Login();
+
+            // 下方操作会阻塞, 并且是阻塞到过登录验证
+            //if (!bot.Login().Result)
+            //{
+            //    Utils.LogUtil.Info($"{nameof(QQBotPlugin)} 启用后 QQ 自动登录失败");
+            //    return base.AfterEnable();
+            //}
+            //else
+            //{
+            //    Utils.LogUtil.Info($"{nameof(QQBotPlugin)} 启用后 QQ 自动登录成功");
+            //}
 
             #endregion
 
-            // 保存起来
-            QQChannelBotStore.Bots.Add(new QQChannelBotStore.BotItemModel()
-            {
-                OpenApiAccessInfo = openApiAccessInfo,
-                QQChannelApi = qChannelApi,
-                ChannelBot = channelBot,
-            });
-
-            // TODO: 可能放在这里上线不合适
-            // 完成以上配置后将机器人上线
-            await channelBot.OnlineAsync();
+            // 登录成功, 保存起来
+            KonataBotStore.Bot = bot;
         }
+
+        #endregion
 
         [Route(nameof(Download))]
-        [Authorize("PluginCore.Admin")]
         public async Task<ActionResult> Download()
         {
             string dbFilePath = DbContext.DbFilePath;
             var fileStream = System.IO.File.OpenRead(dbFilePath);
             //System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
 
-            return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(QQChannelPlugin)}.sqlite", enableRangeProcessing: true);
+            return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(KonataPlugin)}.sqlite", enableRangeProcessing: true);
         }
     }
+
+    #region More
+
+    public static class CaptchaStore
+    {
+        public static Konata.Core.Events.Model.CaptchaEvent.CaptchaType CaptchaType { get; set; }
+
+        public static string CaptchaTip { get; set; }
+
+        public static DateTime UpdateTime { get; set; }
+
+        public static bool IsOnline { get; set; }
+    }
+
+    #endregion
+
 }

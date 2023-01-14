@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQChannelPlugin.Utils
+namespace KonataPlugin.Utils
 {
     public class EnvUtil
     {

@@ -1,22 +1,25 @@
-﻿using QQBotHub.Sdk.Utils;
+﻿
 
-namespace QQBotHub.Web.Utils
+using System.IO;
+
+namespace KonataPlugin.Utils
 {
     public class SettingsUtil
     {
-
-        public static void EnsureExist()
+        public static void EnsureExist(string pluginId)
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "settings.json");
+            string pluginDir = Path.Combine(PluginCore.PluginPathProvider.PluginsRootPath(), pluginId);
+            string filePath = Path.Combine(pluginDir, "settings.json");
             if (!File.Exists(filePath))
             {
-                Set(new SettingsModel());
+                Set(pluginId, new SettingsModel());
             }
         }
 
-        public static SettingsModel Get()
+        public static SettingsModel Get(string pluginId)
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "settings.json");
+            string pluginDir = Path.Combine(PluginCore.PluginPathProvider.PluginsRootPath(), pluginId);
+            string filePath = Path.Combine(pluginDir, "settings.json");
             if (!File.Exists(filePath))
             {
                 SettingsModel jsonModel = new SettingsModel();
@@ -34,9 +37,10 @@ namespace QQBotHub.Web.Utils
             }
         }
 
-        public static void Set(SettingsModel settingsModel)
+        public static void Set(string pluginId, SettingsModel settingsModel)
         {
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "settings.json");
+            string pluginDir = Path.Combine(PluginCore.PluginPathProvider.PluginsRootPath(), pluginId);
+            string filePath = Path.Combine(pluginDir, "settings.json");
             string jsonStr = JsonUtil.Obj2JsonStr(settingsModel);
             File.WriteAllText(path: filePath, contents: jsonStr, encoding: System.Text.Encoding.UTF8);
         }

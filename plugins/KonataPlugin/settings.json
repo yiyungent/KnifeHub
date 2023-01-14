@@ -1,18 +1,7 @@
-{
-  "Bots": [
-    {
-      "BotAppId": "",
-      "BotToken": "",
-      "BotSecret": "",
-      "UseSandBoxMode": true,
-      "UseDemoModel": true
-    },
-    {
-      "BotAppId": "",
-      "BotToken": "",
-      "BotSecret": "",
-      "UseSandBoxMode": true,
-      "UseDemoModel": true
-    }
-  ]
+﻿{
+  "Uin": "",
+  "Password": "",
+  "UseDemoModel": false,
+  "AdminQQ": "",
+  "BotKeyStore": null
 }

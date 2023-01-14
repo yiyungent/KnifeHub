@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQChannelPlugin.Models
+namespace KonataPlugin.Models
 {
     /// <summary>
     /// 某人发消息

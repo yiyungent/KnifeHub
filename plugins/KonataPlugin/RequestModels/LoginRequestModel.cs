@@ -1,4 +1,4 @@
-﻿namespace QQBotHub.Web.RequestModels
+﻿namespace KonataPlugin.RequestModels
 {
     public class LoginRequestModel
     {

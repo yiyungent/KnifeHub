@@ -1,4 +1,4 @@
-﻿namespace QQBotHub.Web.ResponseModels
+﻿namespace KonataPlugin.ResponseModels
 {
     public class InfoResponseDataModel
     {

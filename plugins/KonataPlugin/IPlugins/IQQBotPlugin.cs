@@ -1,7 +1,7 @@
 ﻿using Konata.Core;
 using PluginCore.IPlugins;
 
-namespace QQBotHub.Sdk.IPlugins
+namespace PluginCore.IPlugins
 {
     public interface IQQBotPlugin : IPlugin
     {

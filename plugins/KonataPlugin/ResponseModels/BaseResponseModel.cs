@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQChannelPlugin.ResponseModels
+namespace KonataPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

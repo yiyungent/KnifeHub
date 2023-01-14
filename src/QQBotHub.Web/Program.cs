@@ -36,10 +36,6 @@ app.UseAuthorization();
 // wwwroot
 app.UseStaticFiles();
 
-#region 确保有 settings.json 文件
-QQBotHub.Web.Utils.SettingsUtil.EnsureExist();
-#endregion
-
 app.MapControllers();
 
 app.Run();

@@ -32,12 +32,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Update="settings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 		<Content Update="wwwroot\**\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 
 	<!-- 生成注释xml -->

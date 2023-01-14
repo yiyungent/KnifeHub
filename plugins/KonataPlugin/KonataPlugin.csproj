@@ -13,7 +13,7 @@
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>-->
 		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="MyBot" Version="1.1.8" />
+		<PackageReference Include="Konata.Core" Version="1.3.2" />
 		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
@@ -38,6 +38,8 @@
 		</Content>
 		<Content Include="settings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Include="KonataPlugin.sqlite">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
