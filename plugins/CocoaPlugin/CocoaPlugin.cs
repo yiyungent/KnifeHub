@@ -3,24 +3,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PluginCore.IPlugins;
-using QQChannelPlugin.Utils;
+using CocoaPlugin.Utils;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QQChannelPlugin
+namespace CocoaPlugin
 {
-    public class QQChannelPlugin : BasePlugin
+    public class CocoaPlugin : BasePlugin
     {
         public override (bool IsSuccess, string Message) AfterEnable()
         {
-            Console.WriteLine($"{nameof(QQChannelPlugin)}: {nameof(AfterEnable)}");
+            Console.WriteLine($"{nameof(CocoaPlugin)}: {nameof(AfterEnable)}");
             return base.AfterEnable();
         }
 
         public override (bool IsSuccess, string Message) BeforeDisable()
         {
-            Console.WriteLine($"{nameof(QQChannelPlugin)}: {nameof(BeforeDisable)}");
+            Console.WriteLine($"{nameof(CocoaPlugin)}: {nameof(BeforeDisable)}");
             return base.BeforeDisable();
         }
 

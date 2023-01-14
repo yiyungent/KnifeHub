@@ -13,11 +13,11 @@
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>-->
 		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="MyBot" Version="1.1.8" />
 		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+		<PackageReference Include="Maila.Cocoa.Framework" Version="2.1.8" />
 	</ItemGroup>
 
 	<!-- 方便开发debug,与发布到nuget -->
@@ -39,7 +39,7 @@
 		<Content Include="settings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="QQChannelPlugin.sqlite">
+		<Content Include="CocoaPlugin.sqlite">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

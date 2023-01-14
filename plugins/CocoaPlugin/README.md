@@ -3,33 +3,34 @@
 
 ## 介绍
 
-> 本项目为 QQ频道 基础插件, 可通过依赖本插件开发相关插件
+> 本项目为 QQ 基础插件, 可通过依赖本插件开发相关插件
 
 ```json
-"UseSandBoxMode": true,
 "UseDemoModel": true
 ```
 
-> 当开启 `UseDemoModel` 时, 可在机器人加入的频道内 `@机器人` , 它会自动回复, 此项功能用于测试
+> 当开启 `UseDemoModel` 时, 可在机器人加入的群内/私聊 发送 `hello cocoa` , 它会自动回复, 此项功能用于测试
 
 
-## 登录
+## 启动
 
-- [点击访问即可尝试登录, 注意查看控制台信息](/Plugins/QQChannelPlugin/Login)
+> 请耐心等待启动
+
+- [点击访问即可尝试启动, 注意查看控制台信息](/Plugins/CocoaPlugin/Start)
 
 
 
 ## 下载数据库
 
-> 所有数据保存到数据库 **QQChannelPlugin.sqlite** 中
+> 所有数据保存到数据库 **CocoaPlugin.sqlite** 中
 
-- [下载数据库 (QQChannelPlugin.sqlite)](/Plugins/QQChannelPlugin/Download)
+- [下载数据库 (CocoaPlugin.sqlite)](/Plugins/CocoaPlugin/Download)
 
 
 
 
 ## 相关
 
-> 项目地址: [https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQChannelPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQChannelPlugin)             
-> 本项目基于 [Chianne1025/QQChannelFramework: MyBot - QQ频道机器人开发框架(C#)](https://github.com/Chianne1025/QQChannelFramework)
+> 项目地址: [https://github.com/yiyungent/QQBotHub/tree/main/plugins/CocoaPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/CocoaPlugin)             
+> 本项目基于 [Miyakowww/CocoaFramework2: 基于 mirai 的 QQ 机器人开发框架](https://github.com/Miyakowww/CocoaFramework2)
 

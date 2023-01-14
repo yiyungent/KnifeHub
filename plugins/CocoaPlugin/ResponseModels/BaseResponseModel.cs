@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQChannelPlugin.ResponseModels
+namespace CocoaPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

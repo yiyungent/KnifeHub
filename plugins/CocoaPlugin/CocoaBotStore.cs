@@ -1,29 +1,27 @@
-﻿using System;
+﻿using Maila.Cocoa.Beans.Models.Messages;
+using Maila.Cocoa.Framework;
+using Maila.Cocoa.Framework.Support;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QQChannelFramework.Api;
-using QQChannelFramework.Expansions.Bot;
 
-namespace QQChannelPlugin
+namespace CocoaPlugin
 {
-    public static class QQChannelBotStore
+    public static class CocoaBotStore
     {
-        public static List<BotItemModel> Bots { get; set; }
+        public static BotItemModel Bot { get; set; }
 
-        static QQChannelBotStore()
+        static CocoaBotStore()
         {
-            Bots = new List<BotItemModel>();
+            Bot = new BotItemModel();
+            //BotAPI.SendFriendMessage(13232, new PlainMessage("message"));
         }
 
         public sealed class BotItemModel
         {
-            public OpenApiAccessInfo OpenApiAccessInfo { get; set; }
-
-            public QQChannelApi QQChannelApi { get; set; }
-
-            public ChannelBot ChannelBot { get; set; }
+            public BotStartupConfig BotStartupConfig { get; set; }
         }
     }
 }
