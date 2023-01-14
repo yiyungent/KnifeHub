@@ -14,16 +14,7 @@
 		</PackageReference>-->
 		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
-	</ItemGroup>
-
-	<!-- 方便开发debug,与发布到nuget -->
-	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="QQBotHub.Sdk" Version="0.1.0">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<ProjectReference Include="..\..\src\QQBotHub.Sdk\QQBotHub.Sdk.csproj">
+		<ProjectReference Include="..\KonataPlugin\KonataPlugin.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</ProjectReference>
