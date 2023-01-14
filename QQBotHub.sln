@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KonataApp", "test\KonataApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CocoaPlugin", "plugins\CocoaPlugin\CocoaPlugin.csproj", "{D96EE98D-2F5C-4A4A-ABED-37556A8707C1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoraPlugin", "plugins\SoraPlugin\SoraPlugin.csproj", "{4E0411C6-09A1-491C-A11A-DDAA7083BFE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{D96EE98D-2F5C-4A4A-ABED-37556A8707C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96EE98D-2F5C-4A4A-ABED-37556A8707C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96EE98D-2F5C-4A4A-ABED-37556A8707C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{841E5EB5-D8A6-48A7-93E4-55938139B574} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{31D39F7C-C5E1-4349-9DA1-95E984AC6372} = {F5C1CDD2-053C-4C8E-8192-7A97477CFC44}
 		{D96EE98D-2F5C-4A4A-ABED-37556A8707C1} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
