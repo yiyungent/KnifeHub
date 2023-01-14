@@ -328,7 +328,7 @@ dotnet add package QQBotHub.Sdk
 
 ## Donate
 
-QQBotHub is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
+QQBotHub is an Apache-2.0 licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
 We accept donations through these channels:
 
@@ -337,8 +337,8 @@ We accept donations through these channels:
 
 ## Author
 
-- QQBotHub.Web `MIT`
-- QQBotHub.Sdk `MIT`
+- QQBotHub.Web `Apache-2.0`
+- QQBotHub.Sdk `Apache-2.0`
 - QQHelloWorldPlugin `GPL-3.0`
 - MoLiPlugin `GPL-3.0`
 - QQStatPlugin `GPL-3.0`
