@@ -15,6 +15,8 @@ using Konata.Core.Interfaces;
 using static Konata.Core.Events.Model.CaptchaEvent;
 using PluginCore.IPlugins;
 using Konata.Core.Interfaces.Api;
+using Konata.Core.Message;
+using Konata.Core.Message.Model;
 
 namespace KonataPlugin.Controllers
 {
@@ -26,7 +28,7 @@ namespace KonataPlugin.Controllers
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
     /// 这样访问 Plugins/HelloWorldPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{nameof(KonataPlugin)}")]
+    [Route($"api/Plugins/{nameof(KonataPlugin)}")]
     [Authorize("PluginCore.Admin")]
     public class HomeController : Controller
     {
@@ -57,7 +59,7 @@ namespace KonataPlugin.Controllers
 
         #region Actions
 
-        [Route("")]
+        [Route($"/Plugins/{nameof(KonataPlugin)}")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -217,7 +219,7 @@ namespace KonataPlugin.Controllers
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<BaseResponseModel> Login(LoginRequestModel requestModel)
+        public async Task<BaseResponseModel> Login([FromBody] LoginRequestModel requestModel)
         {
             BaseResponseModel responseModel = new BaseResponseModel();
             try
@@ -343,6 +345,7 @@ namespace KonataPlugin.Controllers
             {
                 botKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
             }
+            var settings = Utils.SettingsUtil.Get(nameof(KonataPlugin));
             #endregion
 
             var bot = BotFather.Create(botConfig, botDevice, botKeyStore);
@@ -393,6 +396,20 @@ namespace KonataPlugin.Controllers
                         {
                             // 排除机器人自己
                             plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
+                        }
+                    }
+
+                    // 演示模式
+                    if (settings.UseDemoModel)
+                    {
+                        if (e.Message.Sender.Uin != s.Uin)
+                        {
+                            // 排除机器人自己
+                            // 只回应 @机器人
+                            if (IsAtBot(e.Message.Chain, s.Uin))
+                            {
+                                bot.SendGroupMessage(e.GroupUin, $"收到消息啦！您发送的消息为 -> {ConvertToString(e.Message.Chain)}");
+                            }
                         }
                     }
                 };
@@ -475,6 +492,95 @@ namespace KonataPlugin.Controllers
             //System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
 
             return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(KonataPlugin)}.sqlite", enableRangeProcessing: true);
+        }
+
+        [NonAction]
+        private string ConvertToString(MessageChain chains)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in chains)
+            {
+                switch (item.Type)
+                {
+                    case BaseChain.ChainType.At:
+                        break;
+                    case BaseChain.ChainType.Reply:
+                        break;
+                    case BaseChain.ChainType.Text:
+                        sb.AppendLine(item.ToString());
+                        break;
+                    case BaseChain.ChainType.Image:
+                        break;
+                    case BaseChain.ChainType.Flash:
+                        break;
+                    case BaseChain.ChainType.Record:
+                        break;
+                    case BaseChain.ChainType.Video:
+                        break;
+                    case BaseChain.ChainType.QFace:
+                        break;
+                    case BaseChain.ChainType.BFace:
+                        break;
+                    case BaseChain.ChainType.Xml:
+                        break;
+                    case BaseChain.ChainType.MultiMsg:
+                        break;
+                    case BaseChain.ChainType.Json:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        [NonAction]
+        private bool IsAtBot(MessageChain baseChains, uint botUin)
+        {
+            bool isAtBot = false;
+            foreach (var item in baseChains)
+            {
+                switch (item.Type)
+                {
+                    case BaseChain.ChainType.At:
+                        AtChain atChain = (AtChain)item;
+                        isAtBot = atChain.AtUin == botUin;
+                        //if (isAtBot = atChain.AtUin == botUin)
+                        //{
+                        //    break;
+                        //}
+                        break;
+                    case BaseChain.ChainType.Reply:
+                        //ReplyChain replyChain = (ReplyChain)item;
+                        //isAtBot = atChain.AtUin == botUin;
+                        break;
+                    case BaseChain.ChainType.Text:
+                        break;
+                    case BaseChain.ChainType.Image:
+                        break;
+                    case BaseChain.ChainType.Flash:
+                        break;
+                    case BaseChain.ChainType.Record:
+                        break;
+                    case BaseChain.ChainType.Video:
+                        break;
+                    case BaseChain.ChainType.QFace:
+                        break;
+                    case BaseChain.ChainType.BFace:
+                        break;
+                    case BaseChain.ChainType.Xml:
+                        break;
+                    case BaseChain.ChainType.MultiMsg:
+                        break;
+                    case BaseChain.ChainType.Json:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return isAtBot;
         }
     }
 

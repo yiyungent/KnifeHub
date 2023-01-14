@@ -48,7 +48,7 @@
                 <div>许可</div>
                 <div class="mdui-text-color-black-text">GPL-3.0 License</div>
                 <div>
-                    <a href="https://github.com/yiyungent/QQBotHub">KonataPlugin/</a>
+                    <a href="https://github.com/yiyungent/QQBotHub">KonataPlugin</a>
                 </div>
                 <div>
                     基于 <a href="https://github.com/KonataDev/Konata.Core">Konata.Core</a>
@@ -61,7 +61,7 @@
             function getUin() {
                 axios({
                     method: 'get',
-                    url: '/api/KonataPlugin/Uin',
+                    url: '/api/Plugins/KonataPlugin/Uin',
                     responseType: 'json'
                 }).then(function (res) {
                     res = res.data;
@@ -79,7 +79,7 @@
                 var captcha = document.querySelector("#captcha-box input").value;
                 axios({
                     method: 'post',
-                    url: '/api/KonataPlugin/SubmitCaptcha',
+                    url: '/api/Plugins/KonataPlugin/SubmitCaptcha',
                     data: {
                         captcha: captcha
                     },
@@ -99,7 +99,7 @@
             function getInfo() {
                 axios({
                     method: 'get',
-                    url: '/api/KonataPlugin/Info',
+                    url: '/api/Plugins/KonataPlugin/Info',
                     responseType: 'json'
                 }).then(function (res) {
                     res = res.data;
@@ -160,7 +160,7 @@
                 document.querySelector("#btn-login").innerHTML = "登录中...";
                 axios({
                     method: 'post',
-                    url: '/api/KonataPlugin/Login',
+                    url: '/api/Plugins/KonataPlugin/Login',
                     data: {
                         uin: document.querySelector("#login-input-uin").value,
                         password: document.querySelector("#login-input-password").value,
@@ -183,7 +183,7 @@
                 document.querySelector("#btn-logout").innerHTML = "退出中...";
                 axios({
                     method: 'post',
-                    url: '/api/KonataPlugin/Logout',
+                    url: '/api/Plugins/KonataPlugin/Logout',
                     responseType: 'json'
                 }).then(function (res) {
                     res = res.data;

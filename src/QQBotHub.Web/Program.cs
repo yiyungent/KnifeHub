@@ -34,7 +34,15 @@ app.UsePluginCore();
 app.UseAuthorization();
 
 // wwwroot
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+
+});
+
+app.UseDefaultFiles(new DefaultFilesOptions()
+{
+    DefaultFileNames = new[] { "index.html" }
+});
 
 app.MapControllers();
 

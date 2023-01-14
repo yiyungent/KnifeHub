@@ -14,7 +14,7 @@ namespace KonataPlugin
 
         public string Password { get; set; } = "";
 
-        public bool UseDemoModel { get; set; } = false;
+        public bool UseDemoModel { get; set; } = true;
 
         public string AdminQQ { get; set; } = "";
 

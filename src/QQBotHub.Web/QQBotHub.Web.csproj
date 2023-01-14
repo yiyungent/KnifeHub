@@ -37,10 +37,6 @@
 		</Content>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="wwwroot\" />
-	</ItemGroup>
-
 	<!-- 生成注释xml -->
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
 		<DocumentationFile>bin\Release\net6.0\QQBot.Web.xml</DocumentationFile>

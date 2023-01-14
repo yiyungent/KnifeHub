@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>QQBotHub</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Header,before) -->
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Header,after) -->
+        </header>
+        <content>
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Content,before) -->
+            <h2 style="text-align: center">正常运行中, 请前往 <a href='/PluginCore/Admin'>插件管理</a></h2>
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Content,after) -->
+        </content>
+        <footer>
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Footer,before) -->
+            <div style="text-align: center;">
+                <a href="https://github.com/yiyungent/QQBotHub" target="_blank">GitHub</a>
+            </div>
+            <!-- PluginCore.IPlugins.IWidgetPlugin.Widget(QQBotHub.Home.Index.Footer,after) -->
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@yiyungent/plugincore/dist/PluginCore.min.js"></script>
+    <script>
+        var p = new PluginCore({
+            baseUrl: ""
+        });
+
+        p.start();
+    </script>
+</body>
+</html>
