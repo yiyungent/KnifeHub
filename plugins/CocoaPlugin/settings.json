@@ -1,0 +1,18 @@
+{
+  "Bots": [
+    {
+      "BotAppId": "",
+      "BotToken": "",
+      "BotSecret": "",
+      "UseSandBoxMode": true,
+      "UseDemoModel": true
+    },
+    {
+      "BotAppId": "",
+      "BotToken": "",
+      "BotSecret": "",
+      "UseSandBoxMode": true,
+      "UseDemoModel": true
+    }
+  ]
+}
