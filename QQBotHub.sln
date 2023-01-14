@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQChannelPlugin", "plugins\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoLi4QQChannelPlugin", "plugins\MoLi4QQChannelPlugin\MoLi4QQChannelPlugin.csproj", "{0DCFB20E-CFE2-4927-BC71-47FC2C2371A8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KonataPlugin", "plugins\KonataPlugin\KonataPlugin.csproj", "{841E5EB5-D8A6-48A7-93E4-55938139B574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{0DCFB20E-CFE2-4927-BC71-47FC2C2371A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DCFB20E-CFE2-4927-BC71-47FC2C2371A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DCFB20E-CFE2-4927-BC71-47FC2C2371A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841E5EB5-D8A6-48A7-93E4-55938139B574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841E5EB5-D8A6-48A7-93E4-55938139B574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841E5EB5-D8A6-48A7-93E4-55938139B574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841E5EB5-D8A6-48A7-93E4-55938139B574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{19926B94-9C88-42C5-B80F-A76B1134E9CC} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{8BEB0C54-7117-4025-8042-4D947E6E45F2} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{0DCFB20E-CFE2-4927-BC71-47FC2C2371A8} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{841E5EB5-D8A6-48A7-93E4-55938139B574} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
