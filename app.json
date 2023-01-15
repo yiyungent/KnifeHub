@@ -1,9 +1,9 @@
 {
-  "name": "QQBotHub",
-  "description": "QQ 机器人 | 基于 Konata.Core - Heroku Deploy",
-  "keywords": ["yiyungent", "QQBotHub"],
-  "website": "https://github.com/yiyungent/QQBotHub",
-  "repository": "https://github.com/yiyungent/QQBotHub",
+  "name": "KnifeHub",
+  "description": "工具平台 | 日常生活/学习/工作/开发 工具集 - Heroku Deploy",
+  "keywords": ["yiyungent", "KnifeHub"],
+  "website": "https://github.com/yiyungent/KnifeHub",
+  "repository": "https://github.com/yiyungent/KnifeHub",
   "success_url": "/",
   "env": {
     "PLUGINCORE_ADMIN_USERNAME": {
