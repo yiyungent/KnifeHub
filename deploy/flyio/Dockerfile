@@ -1,6 +1,6 @@
 # fly.io Dockerfile
 
-FROM yiyungent/knifehub:v1.0.2
+FROM yiyungent/knifehub:v1.0.3
 
 ADD flyio-entrypoint.sh ./flyio-entrypoint.sh
 RUN chmod +x ./flyio-entrypoint.sh
