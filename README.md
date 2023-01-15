@@ -123,9 +123,8 @@
 
 #### 方式1：原生部署 (适合小白)
 
-> 选择     
-> - [Releases - KnifeHub, 点我下载](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)      
-> 找到并下载 KnifeHub 相应平台压缩包,       
+> [Releases - KnifeHub, 点我下载](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)         
+> 找到并下载 **KnifeHub** 相应平台压缩包,       
 > (Windows 系统 一般下载 Windows-64 版本即可, 即 **KnifeHub-win-x64.zip**)   
 > 解压里面有 **KnifeHub.Web.exe** , 运行它即可 (无需再安装其它任何运行库)    
 > 黑窗口中会显示一个 url 地址, 复制到浏览器中打开即可,     
