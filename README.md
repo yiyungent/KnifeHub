@@ -1,23 +1,23 @@
 
-<h1 align="center">QQBotHub</h1>
+<h1 align="center">KnifeHub</h1>
 
-> 琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
+> 工具平台 | 日常生活/学习/工作/开发 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
 
-[![repo size](https://img.shields.io/github/repo-size/yiyungent/QQBotHub.svg?style=flat)]()
-[![LICENSE](https://img.shields.io/github/license/yiyungent/QQBotHub.svg?style=flat)](https://github.com/yiyungent/QQBotHub/blob/master/LICENSE)
+[![repo size](https://img.shields.io/github/repo-size/yiyungent/KnifeHub.svg?style=flat)]()
+[![LICENSE](https://img.shields.io/github/license/yiyungent/KnifeHub.svg?style=flat)](https://github.com/yiyungent/KnifeHub/blob/master/LICENSE)
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue)](https://t.me/xx_dev_group)
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-894031109-deepgreen)](https://jq.qq.com/?_wv=1027&k=q5R82fYN)
-<!-- ![hits](https://api-onetree.moeci.com/hits.svg?id=QQBotHub) -->
-[![docker pulls](https://img.shields.io/docker/pulls/yiyungent/qqbothub)](https://hub.docker.com/r/yiyungent/qqbothub)
-[![docker version](https://img.shields.io/docker/v/yiyungent/qqbothub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/qqbothub)
-[![Docker Image CI/CD - Release - qqbothub](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml/badge.svg)](https://github.com/yiyungent/QQBotHub/actions/workflows/docker-push-qqbothub-release.yml)
-[![Github All Releases](https://img.shields.io/github/downloads/yiyungent/QQBotHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=QQBotHub)
+<!-- ![hits](https://api-onetree.moeci.com/hits.svg?id=KnifeHub) -->
+[![docker pulls](https://img.shields.io/docker/pulls/yiyungent/KnifeHub)](https://hub.docker.com/r/yiyungent/KnifeHub)
+[![docker version](https://img.shields.io/docker/v/yiyungent/KnifeHub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/KnifeHub)
+[![Docker Image CI/CD - Release - KnifeHub](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-KnifeHub-release.yml/badge.svg)](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-KnifeHub-release.yml)
+[![Github All Releases](https://img.shields.io/github/downloads/yiyungent/KnifeHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=KnifeHub)
 
 
 
 ## Introduce
 
-琪琪 机器人 平台 | 日常生活学习工作 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
+工具平台 | 日常生活/学习/工作/开发 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
@@ -26,7 +26,7 @@
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
 > **通知:**
-> 请尽快更新到 最新版 (QQBotHub-**v1.0.0** +)
+> 请尽快更新到 最新版 (KnifeHub-**v1.0.0** +)
 
 
 
@@ -34,71 +34,71 @@
 
 - [x] **大部分功能由插件提供**
 - [x] 本仓库 维护的 官方插件
-  - [QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQChannelPlugin&expanded=true)
+  - [QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQChannelPlugin&expanded=true)
     - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [Chianne1025/QQChannelFramework](https://github.com/Chianne1025/QQChannelFramework)
     - [x] 订阅频道消息/私信 
     - [x] 多频道机器人管理
     - [x] 沙盒模式
     - [x] 演示模式
-  - [KonataPlugin](https://github.com/yiyungent/QQBotHub/releases?q=KonataPlugin&expanded=true)
+  - [KonataPlugin](https://github.com/yiyungent/KnifeHub/releases?q=KonataPlugin&expanded=true)
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core)
     - [x] 账号密码/配置 登录 
     - [x] 订阅私聊/群聊
     - [x] 演示模式
-  - [SoraPlugin](https://github.com/yiyungent/QQBotHub/releases?q=SoraPlugin&expanded=true)
+  - [SoraPlugin](https://github.com/yiyungent/KnifeHub/releases?q=SoraPlugin&expanded=true)
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [Hoshikawa-Kaguya/Sora](https://github.com/Hoshikawa-Kaguya/Sora)
     - [x] 对接 `go-cqhttp`
     - [x] 订阅私聊/群聊等
     - [x] 演示模式
-  - [CocoaPlugin](https://github.com/yiyungent/QQBotHub/releases?q=CocoaPlugin&expanded=true)
+  - [CocoaPlugin](https://github.com/yiyungent/KnifeHub/releases?q=CocoaPlugin&expanded=true)
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供模块化事件派发, 机器人管理
     - [x] 依赖 [Miyakowww/CocoaFramework2](https://github.com/Miyakowww/CocoaFramework2)
     - [x] 对接 `mirai-api-http`
     - [x] 订阅私聊/群聊
     - [x] 演示模式
-  - [MoLi4QQChannelPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLi4QQChannelPlugin&expanded=true)
+  - [MoLi4QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=MoLi4QQChannelPlugin&expanded=true)
     - [x] **启用前需保证 QQChannelPlugin 处于已启用状态**
     - [x] 专为 QQ 频道, 支持多个机器人 
-    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
+    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-KnifeHub)
       - 自定义知识库, 各种娱乐功能
     - [x] `@机器人` / `聊天前缀`
-  - [MoLiPlugin](https://github.com/yiyungent/QQBotHub/releases?q=MoLiPlugin&expanded=true)
+  - [MoLiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=MoLiPlugin&expanded=true)
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-QQBotHub)
+    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-KnifeHub)
       - 自定义知识库, 各种娱乐功能
     - [x] 设置 机器人聊天群, 好友
     - [x] `@机器人` / `聊天前缀`
     - [x] 免费API调用次数：500次/天
-      - 专属8折优惠码：`qqbothub`
-  - [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+      - 专属8折优惠码：`KnifeHub`
+  - [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true)
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 收集群聊消息 
     - [x] 下载 群聊 数据库
     - [x] `#日历`
     - [x] `#折线`
-  - [AutoLoginPlugin](https://github.com/yiyungent/QQBotHub/releases?q=AutoLoginPlugin&expanded=true) 
+  - [AutoLoginPlugin](https://github.com/yiyungent/KnifeHub/releases?q=AutoLoginPlugin&expanded=true) 
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 定时 检测在线状态 (频率:1分钟)
     - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
     - [x] 重新登录成功后, 通知 `AdminQQ`
-  - [QQNotePlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQNotePlugin&expanded=true) 
+  - [QQNotePlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQNotePlugin&expanded=true) 
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
       - 笔记写入 GitHub 指定仓库的指定文件中
-  - [ZhiDaoPlugin](https://github.com/yiyungent/QQBotHub/releases?q=ZhiDaoPlugin&expanded=true) 
+  - [ZhiDaoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=ZhiDaoPlugin&expanded=true) 
     - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
     - [x] 自定义问答
       - [x] 群主/管理员/AdminQQ 自定义问答
       - [x] 分群自定义问答    
       - [x] 关键词自动回复 
-  - [QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQHelloWorldPlugin&expanded=true)
+  - [QQHelloWorldPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQHelloWorldPlugin&expanded=true)
     - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
     - [x] 复读好友私聊
     - [x] 上下线通知 设置 里的 AdminQQ
-  - [BackupPlugin](https://github.com/yiyungent/QQBotHub/releases?q=BackupPlugin&expanded=true) 
+  - [BackupPlugin](https://github.com/yiyungent/KnifeHub/releases?q=BackupPlugin&expanded=true) 
     - [x] 定时 自动 备份 插件数据
     - [x] 将 备份文件 发送到 Telegram 
     - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
@@ -109,7 +109,7 @@
 
 ![qq_online.png](./screenshots/qq_online.png)
 
-### [QQStatPlugin](https://github.com/yiyungent/QQBotHub/releases?q=QQStatPlugin&expanded=true)
+### [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true)
 
 ![](./screenshots/2022-04-18-15-46-04.png)
 ![](./screenshots/2022-04-18-15-47-02.png)
@@ -122,8 +122,8 @@
 
 #### 方式1：原生部署（适合小白）
 
-选择  [Releases - QQBotHub, 点我下载](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
-找到并下载 QQBotHub 相应平台压缩包，
+选择  [Releases - KnifeHub, 点我下载](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)
+找到并下载 KnifeHub 相应平台压缩包，
 windows系统 的 vps，下载 windows-64版本 的即可，
 解压里面有exe，运行它即可（无需再安装其它任何运行库），
 黑窗口中会显示一个url地址，复制到浏览器中打开即可，
@@ -138,7 +138,7 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 > - Free Bandwidth: 100 GB/month
 > - Free Build Minutes: 500 min/month
 
-[![Deploy on Render](https://img.shields.io/badge/Render-Deploy%20on%20Render-brightgreen.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/QQBotHub)
+[![Deploy on Render](https://img.shields.io/badge/Render-Deploy%20on%20Render-brightgreen.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/KnifeHub)
 
 ##### Render 环境变量
 
@@ -177,7 +177,7 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 > - Heroku 每月有免费时长 500小时, 若使用信用卡验证, 可提升到 免费 1000小时      
 > - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/QQBotHub)
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub)
 
 
 
@@ -194,12 +194,12 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 #### 方式4: 使用 Docker
 
 ```bash
-docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
+docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name KnifeHub yiyungent/KnifeHub
 ```
 
 ```bash
 # 可选, 进入容器 管理, 例如修改 /app/App_Data/PluginCore.Config.json 中的 PluginCore Admin 用户名与密码
-docker exec -it qqbothub bash
+docker exec -it KnifeHub bash
 ```
 
 > 现在访问: <http://localhost:5004/PluginCore/Admin>
@@ -228,7 +228,7 @@ docker exec -it qqbothub bash
 > 
 > - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
 >   
-> 可 下载 [Releases - KonataApp - Assets](https://github.com/yiyungent/QQBotHub/releases?q=KonataApp&expanded=true) 在本地登录成功后,    
+> 可 下载 [Releases - KonataApp - Assets](https://github.com/yiyungent/KnifeHub/releases?q=KonataApp&expanded=true) 在本地登录成功后,    
 > 获取 **BotKeyStore.json** 后, 在登录页面使用 **配置** 方式登录
 > 
 > > - 大部分人电脑为 `Windows 64 位`, 点击 **KonataApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **KonataApp.exe**
@@ -244,19 +244,19 @@ docker exec -it qqbothub bash
 
 > 插件:   
 > 下载插件包, 
-> > 插件包下载见 [Release](https://github.com/yiyungent/QQBotHub/releases) , 
+> > 插件包下载见 [Release](https://github.com/yiyungent/KnifeHub/releases) , 
 > > 直接插件上传 下载的 `QQHelloWorldPlugin-net6.0.zip` 即可    
 > 
 > 然后直接 `上传 -> 安装 -> 文档 -> 设置 -> 启用 -> 文档` 即可
 
 
-## 更新 QQBotHub
+## 更新 KnifeHub
 
-> 查看最新版 [Releases - QQBotHub](https://github.com/yiyungent/QQBotHub/releases?q=QQBotHub&expanded=true)
+> 查看最新版 [Releases - KnifeHub](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)
 
 
 > 若你使用 `Railway` 一键部署,         
-> 只需要修改 `Railway` 创建的仓库 (例如: `QQBotHub`) 里的 `Dockerfile` 文件里的 `yiyungent/qqbothub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
+> 只需要修改 `Railway` 创建的仓库 (例如: `KnifeHub`) 里的 `Dockerfile` 文件里的 `yiyungent/KnifeHub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
 
 
 > **注意:**    
@@ -264,41 +264,41 @@ docker exec -it qqbothub bash
 > `插件设置` 可以通过保持打开插件设置页面的方式, 重新安装插件后, 再在此页面点击保存
 
 
-> 一些更新 docker qqbothub 可能需要用到的命令
+> 一些更新 docker KnifeHub 可能需要用到的命令
 
 ```bash
-cd /www/wwwroot/qqbothub*
+cd /www/wwwroot/KnifeHub*
 # docker-data 位置用于保存当前容器数据
 mkdir -p docker-data/App_Data/
 mkdir -p docker-data/Plugins/
 mkdir -p docker-data/Plugins_wwwroot/
 # 保存当前数据
-docker cp qqbothub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
-docker cp qqbothub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
-docker cp qqbothub:/app/Plugins/ docker-data/
-docker cp qqbothub:/app/Plugins_wwwroot/ docker-data/
+docker cp KnifeHub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
+docker cp KnifeHub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
+docker cp KnifeHub:/app/Plugins/ docker-data/
+docker cp KnifeHub:/app/Plugins_wwwroot/ docker-data/
 
 # 移除当前
-docker stop qqbothub
-docker rm qqbothub
-docker rmi yiyungent/qqbothub
+docker stop KnifeHub
+docker rm KnifeHub
+docker rmi yiyungent/KnifeHub
 
 # 获取最新
 # 建议不要使用 latest , 而是指定最新的版本号, 有可能你使用的 docker 仓储源还未同步, 而导致 latest 仍为旧版
-#docker pull yiyungent/qqbothub:v1.0.0
-docker pull yiyungent/qqbothub:latest
-docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name qqbothub yiyungent/qqbothub
+#docker pull yiyungent/KnifeHub:v1.0.0
+docker pull yiyungent/KnifeHub:latest
+docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name KnifeHub yiyungent/KnifeHub
 
 # 这里我将原本备份的数据保存到了这个路径, 进入这个路径, 将备份数据覆盖到 docker 容器中
 cd docker-data
 
-docker cp App_Data/PluginCore.Config.json qqbothub:/app/App_Data/PluginCore.Config.json
-docker cp App_Data/plugin.config.json qqbothub:/app/App_Data/plugin.config.json
-docker cp Plugins/ qqbothub:/app/
-docker cp Plugins_wwwroot/ qqbothub:/app/
+docker cp App_Data/PluginCore.Config.json KnifeHub:/app/App_Data/PluginCore.Config.json
+docker cp App_Data/plugin.config.json KnifeHub:/app/App_Data/plugin.config.json
+docker cp Plugins/ KnifeHub:/app/
+docker cp Plugins_wwwroot/ KnifeHub:/app/
 
 # 重启容器
-docker restart qqbothub
+docker restart KnifeHub
 ```
 
 
@@ -312,16 +312,16 @@ docker restart qqbothub
 
 > 插件开发 可参考:   
 > - [插件开发 | PluginCore](https://moeci.com/PluginCore/zh/PluginDev/Guide/)      
-> - **建议** 参考: [./plugins/QQHelloWorldPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQHelloWorldPlugin)
+> - **建议** 参考: [./plugins/QQHelloWorldPlugin](https://github.com/yiyungent/KnifeHub/tree/main/plugins/QQHelloWorldPlugin)
 
-> QQBotHub 插件开发包  
+> KnifeHub 插件开发包  
 > 插件开发包中已包含:   
 > - `PluginCore.IPlugins.AspNetCore`
 
-> 注意: 如果你不需要 `QQBotHub.Sdk` 中的一些 `Utils` , 那么建议直接依赖 `PluginCore.IPlugins.AspNetCore` , 减少依赖项, 使之称为通用插件
+> 注意: 如果你不需要 `KnifeHub.Sdk` 中的一些 `Utils` , 那么建议直接依赖 `PluginCore.IPlugins.AspNetCore` , 减少依赖项, 使之称为通用插件
 
 ```powershell
-dotnet add package QQBotHub.Sdk
+dotnet add package KnifeHub.Sdk
 ```
 
 > **注意**:   
@@ -346,7 +346,7 @@ dotnet add package QQBotHub.Sdk
 
 ## Donate
 
-QQBotHub is an Apache-2.0 licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
+KnifeHub is an Apache-2.0 licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
 We accept donations through these channels:
 
@@ -355,8 +355,8 @@ We accept donations through these channels:
 
 ## Author
 
-- QQBotHub.Web `Apache-2.0`
-- QQBotHub.Sdk `Apache-2.0`
+- KnifeHub.Web `Apache-2.0`
+- KnifeHub.Sdk `Apache-2.0`
 - QQHelloWorldPlugin `GPL-3.0`
 - MoLiPlugin `GPL-3.0`
 - QQStatPlugin `GPL-3.0`
@@ -368,11 +368,11 @@ We accept donations through these channels:
 - QQChannelPlugin `MIT`
 - MoLi4QQChannelPlugin `MIT`
 
-**QQBotHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
-Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/QQBotHub/contributors)).
+**KnifeHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
+Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/KnifeHub/contributors)).
 
 > GitHub [@yiyungent](https://github.com/yiyungent) Gitee [@yiyungent](https://gitee.com/yiyungent)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=GitHub.QQBotHub.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=GitHub.KnifeHub.README" style="border:0" alt="" />
 <!-- End Matomo -->
