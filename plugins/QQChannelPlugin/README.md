@@ -33,3 +33,6 @@
 > 项目地址: [https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQChannelPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/QQChannelPlugin)             
 > 本项目基于 [Chianne1025/QQChannelFramework: MyBot - QQ频道机器人开发框架(C#)](https://github.com/Chianne1025/QQChannelFramework)
 
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.QQChannelPlugin.README" style="border:0" alt="" />
+<!-- End Matomo -->
