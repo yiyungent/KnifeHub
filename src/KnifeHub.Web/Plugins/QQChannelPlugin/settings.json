@@ -1,0 +1,11 @@
+﻿{
+  "Bots": [
+    {
+      "BotAppId": "102034445",
+      "BotToken": "Iol3I86fWlWKBvIabNkHhCV7KJhwFDh1",
+      "BotSecret": "8nGWccR2PHxQmvtd",
+      "UseSandBoxMode": true,
+      "UseDemoModel": true
+    }
+  ]
+}

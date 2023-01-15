@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>KnifeHub.Sdk</PackageId>
+		<Version>1.0.1</Version>
+		<Company>yiyun</Company>
+		<Authors>yiyun</Authors>
+		<Description>KnifeHub 插件开发包</Description>
+		<Copyright>Copyright (c) 2022-present yiyun</Copyright>
+		<RepositoryUrl>https://github.com/yiyungent/KnifeHub</RepositoryUrl>
+		<PackageLicenseUrl>https://github.com/yiyungent/KnifeHub/blob/main/LICENSE</PackageLicenseUrl>
+		<PackageTags>KnifeHub KnifeHub.Sdk</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<!-- 方便开发debug,与发布到nuget -->
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\PluginCore\src\PluginCore.IPlugins.AspNetCore\PluginCore.IPlugins.AspNetCore.csproj" />
+	</ItemGroup>
+
+</Project>

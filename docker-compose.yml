@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  qqbothub.web:
-    image: ${DOCKER_REGISTRY-}qqbothubweb
+  knifehub.web:
+    image: ${DOCKER_REGISTRY-}knifehubweb
     build:
       context: .
-      dockerfile: src/QQBotHub.Web/Dockerfile
+      dockerfile: src/KnifeHub.Web/Dockerfile

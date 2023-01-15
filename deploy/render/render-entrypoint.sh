@@ -18,4 +18,4 @@ cat '/app/render-PluginCore.Config.json' | sed "s/PLUGINCORE_ADMIN_USERNAME/${PL
 cat '/app/App_Data/PluginCore.Config.json' | sed "s/PLUGINCORE_ADMIN_PASSWORD/${PLUGINCORE_ADMIN_PASSWORD}/g" | tee '/app/App_Data/PluginCore.Config.json'
 # endregion PluginCore
 
-dotnet QQBotHub.Web.dll
+dotnet KnifeHub.Web.dll

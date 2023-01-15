@@ -1,0 +1,25 @@
+﻿{
+  "Uin": "",
+  "Password": "",
+  "UseDemoModel": true,
+  "AdminQQ": "",
+  "BotKeyStore": {
+    "Account": {
+      "Uin": 1498133043,
+      "Name": "\u4F9D\u65E7\u90A3\u4E48\u751C",
+      "Face": 594,
+      "PasswordMd5": "+iwQMGKgRfg7zO/IuMIQHg=="
+    },
+    "Session": {
+      "GSecret": "",
+      "DSecret": "LRCFKXZHVUKTKDFJ",
+      "TgtKey": "KHo8XkF+d3lpXWJnLUdFcA==",
+      "TgtToken": "I/glazaFfcwxKABEzAlolwWk9FijgnV9CNaPB9WlGfMqunLtPZq7JvN1bXtAMutmQAWCv9+IivctKgXBBJfcnfDLXNHhWn/w",
+      "D2Key": "P0RiNTJYW2IhWnRoZV5ATQ==",
+      "D2Token": "Caip6mVDxYXgfIGy/XA9gYF/bCvCkcPsXnDmlBDsi41Q4V+LwF8wQ6DAqRAxNTQdJbEs+gLZfySA3Oe+KNgKng==",
+      "GtKey": "cmZUSnppWWVpSWJGK2IkZg==",
+      "StKey": "dTcsK1h6WnteZX02UiM6LQ==",
+      "Tlv106Key": "4VEb6bVQJkedxgW9fRFZPw=="
+    }
+  }
+}

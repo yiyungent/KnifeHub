@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: qqbothub
+    name: knifehub
     env: docker
     plan: free
-    repo: https://github.com/yiyungent/QQBotHub.git
+    repo: https://github.com/yiyungent/KnifeHub.git
     dockerfilePath: ./deploy/render/Dockerfile
     dockerContext: ./deploy/render/
     healthCheckPath: /PluginCore/Admin # hanging

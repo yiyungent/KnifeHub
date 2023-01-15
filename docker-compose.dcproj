@@ -6,7 +6,7 @@
     <ProjectGuid>e4815dec-037c-4781-900a-6d8005a2f33b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>qqbothub.web</DockerServiceName>
+    <DockerServiceName>knifehub.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
