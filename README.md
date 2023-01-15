@@ -129,7 +129,25 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 黑窗口中会显示一个url地址，复制到浏览器中打开即可，
 保持此黑窗口在后台运行，机器人就不会掉线
 
-#### 方式2: 使用 Railway 免费 一键部署 
+
+#### 方式2: 使用 Render 免费 一键部署 
+
+> - 点击下方按钮 一键部署        
+> - 免费注册, 无需信用卡验证      
+> - Free Instance Hours: 750 hours/month
+> - Free Bandwidth: 100 GB/month
+> - Free Build Minutes: 500 min/month
+
+[![Deploy on Render](https://img.shields.io/badge/Render-Deploy%20on%20Render-brightgreen.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/QQBotHub)
+
+##### Render 环境变量
+
+| 环境变量名称                | 必填 | 备注                    |
+| --------------------------- | ---- | ----------------------- |
+| `PLUGINCORE_ADMIN_USERNAME` | √    | PluginCore Admin 用户名 |
+| `PLUGINCORE_ADMIN_PASSWORD` | √    | PluginCore Admin 密码   |
+
+#### 方式3: 使用 Railway 免费 一键部署 
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
@@ -150,7 +168,7 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 > - Railway 修改环境变量 会 触发 重新 Deploy   
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
-#### 方式3: 使用 Heroku 免费 一键部署 
+#### 方式4: 使用 Heroku 免费 一键部署 
 
 注意：此种方式可能无法QQ登录
 
