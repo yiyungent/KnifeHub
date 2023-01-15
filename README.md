@@ -8,9 +8,9 @@
 [![Telegram Group](https://img.shields.io/badge/Telegram-Group-blue)](https://t.me/xx_dev_group)
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-894031109-deepgreen)](https://jq.qq.com/?_wv=1027&k=q5R82fYN)
 <!-- ![hits](https://api-onetree.moeci.com/hits.svg?id=KnifeHub) -->
-[![docker pulls](https://img.shields.io/docker/pulls/yiyungent/KnifeHub)](https://hub.docker.com/r/yiyungent/KnifeHub)
-[![docker version](https://img.shields.io/docker/v/yiyungent/KnifeHub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/KnifeHub)
-[![Docker Image CI/CD - Release - KnifeHub](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-KnifeHub-release.yml/badge.svg)](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-KnifeHub-release.yml)
+[![docker pulls](https://img.shields.io/docker/pulls/yiyungent/knifehub)](https://hub.docker.com/r/yiyungent/knifehub)
+[![docker version](https://img.shields.io/docker/v/yiyungent/knifehub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/knifehub)
+[![Docker Image CI/CD - Release - knifehub](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml/badge.svg)](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml)
 [![Github All Releases](https://img.shields.io/github/downloads/yiyungent/KnifeHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=KnifeHub)
 
 
