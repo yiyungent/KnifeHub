@@ -171,7 +171,7 @@
 
 #### 方式4: 使用 Heroku 一键部署 
 
-注意：此种方式可能无法 KonataPlugin: QQ登录
+> 注意：此种方式可能无法 KonataPlugin: QQ登录
 
 > - 点击下方按钮 一键部署       
 > - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
@@ -193,12 +193,12 @@
 #### 方式5: 使用 Docker
 
 ```bash
-docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name KnifeHub yiyungent/KnifeHub
+docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 ```
 
 ```bash
 # 可选, 进入容器 管理, 例如修改 /app/App_Data/PluginCore.Config.json 中的 PluginCore Admin 用户名与密码
-docker exec -it KnifeHub bash
+docker exec -it knifehub bash
 ```
 
 > 现在访问: <http://localhost:5004/PluginCore/Admin>
@@ -255,7 +255,7 @@ docker exec -it KnifeHub bash
 
 
 > 若你使用 `Railway` 一键部署,         
-> 只需要修改 `Railway` 创建的仓库 (例如: `KnifeHub`) 里的 `Dockerfile` 文件里的 `yiyungent/KnifeHub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
+> 只需要修改 `Railway` 创建的仓库 (例如: `KnifeHub`) 里的 `Dockerfile` 文件里的 `yiyungent/knifehub:v0.5.2` , 更新最后的版本号 `v0.5.2` 到最新版即可
 
 
 > **注意:**    
@@ -263,41 +263,41 @@ docker exec -it KnifeHub bash
 > `插件设置` 可以通过保持打开插件设置页面的方式, 重新安装插件后, 再在此页面点击保存
 
 
-> 一些更新 docker KnifeHub 可能需要用到的命令
+> 一些更新 docker knifehub 可能需要用到的命令
 
 ```bash
-cd /www/wwwroot/KnifeHub*
+cd /www/wwwroot/knifehub*
 # docker-data 位置用于保存当前容器数据
 mkdir -p docker-data/App_Data/
 mkdir -p docker-data/Plugins/
 mkdir -p docker-data/Plugins_wwwroot/
 # 保存当前数据
-docker cp KnifeHub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
-docker cp KnifeHub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
-docker cp KnifeHub:/app/Plugins/ docker-data/
-docker cp KnifeHub:/app/Plugins_wwwroot/ docker-data/
+docker cp knifehub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
+docker cp knifehub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
+docker cp knifehub:/app/Plugins/ docker-data/
+docker cp knifehub:/app/Plugins_wwwroot/ docker-data/
 
 # 移除当前
-docker stop KnifeHub
-docker rm KnifeHub
-docker rmi yiyungent/KnifeHub
+docker stop knifehub
+docker rm knifehub
+docker rmi yiyungent/knifehub
 
 # 获取最新
 # 建议不要使用 latest , 而是指定最新的版本号, 有可能你使用的 docker 仓储源还未同步, 而导致 latest 仍为旧版
-#docker pull yiyungent/KnifeHub:v1.0.0
-docker pull yiyungent/KnifeHub:latest
-docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name KnifeHub yiyungent/KnifeHub
+#docker pull yiyungent/knifehub:v1.0.0
+docker pull yiyungent/knifehub:latest
+docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 
 # 这里我将原本备份的数据保存到了这个路径, 进入这个路径, 将备份数据覆盖到 docker 容器中
 cd docker-data
 
-docker cp App_Data/PluginCore.Config.json KnifeHub:/app/App_Data/PluginCore.Config.json
-docker cp App_Data/plugin.config.json KnifeHub:/app/App_Data/plugin.config.json
-docker cp Plugins/ KnifeHub:/app/
-docker cp Plugins_wwwroot/ KnifeHub:/app/
+docker cp App_Data/PluginCore.Config.json knifehub:/app/App_Data/PluginCore.Config.json
+docker cp App_Data/plugin.config.json knifehub:/app/App_Data/plugin.config.json
+docker cp Plugins/ knifehub:/app/
+docker cp Plugins_wwwroot/ knifehub:/app/
 
 # 重启容器
-docker restart KnifeHub
+docker restart knifehub
 ```
 
 
