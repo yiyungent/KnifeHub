@@ -1,9 +1,9 @@
-name: QQBotHub Release
+name: KnifeHub Release
 
 on: 
   push:
     tags:
-      - 'QQBotHub-v*'
+      - 'KnifeHub-v*'
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
         
     - name: Build
       run: |
-        cd ./src/QQBotHub.Web
+        cd ./src/KnifeHub.Web
         # win-x64
         dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --output ../../win-x64 --self-contained true
         # win-x86
@@ -39,13 +39,13 @@ jobs:
       
     - name: Zip the Build
       run: |
-        zip -r QQBotHub-win-x64.zip ./win-x64/
-        zip -r QQBotHub-win-x86.zip ./win-x86/
-        zip -r QQBotHub-linux-x64.zip ./linux-x64/
-        zip -r QQBotHub-linux-arm.zip ./linux-arm/
-        zip -r QQBotHub-linux-arm64.zip ./linux-arm64/
-        zip -r QQBotHub-osx-x64.zip ./osx-x64/
-        zip -r QQBotHub-osx.10.10-x64.zip ./osx.10.10-x64/
+        zip -r KnifeHub-win-x64.zip ./win-x64/
+        zip -r KnifeHub-win-x86.zip ./win-x86/
+        zip -r KnifeHub-linux-x64.zip ./linux-x64/
+        zip -r KnifeHub-linux-arm.zip ./linux-arm/
+        zip -r KnifeHub-linux-arm64.zip ./linux-arm64/
+        zip -r KnifeHub-osx-x64.zip ./osx-x64/
+        zip -r KnifeHub-osx.10.10-x64.zip ./osx.10.10-x64/
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -58,10 +58,10 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          QQBotHub-win-x64.zip
-          QQBotHub-win-x86.zip
-          QQBotHub-linux-x64.zip
-          QQBotHub-linux-arm.zip
-          QQBotHub-linux-arm64.zip
-          QQBotHub-osx-x64.zip
-          QQBotHub-osx.10.10-x64.zip
+          KnifeHub-win-x64.zip
+          KnifeHub-win-x86.zip
+          KnifeHub-linux-x64.zip
+          KnifeHub-linux-arm.zip
+          KnifeHub-linux-arm64.zip
+          KnifeHub-osx-x64.zip
+          KnifeHub-osx.10.10-x64.zip

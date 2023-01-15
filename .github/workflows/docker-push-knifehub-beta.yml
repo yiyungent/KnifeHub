@@ -1,4 +1,4 @@
-name: Docker Image CI/CD - Beta - qqbothub-beta
+name: Docker Image CI/CD - Beta - knifehub-beta
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          echo ::set-output name=IMAGE_NAME::qqbothub
+          echo ::set-output name=IMAGE_NAME::knifehub
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -36,7 +36,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/QQBotHub.Web/Dockerfile \
+          --file src/knifehub.Web/Dockerfile \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.last_release.outputs.tag_name }}-beta \
           .
 
@@ -53,6 +53,6 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/QQBotHub.Web/Dockerfile \
+          --file src/knifehub.Web/Dockerfile \
           --tag $IMAGE_ID:$VERSION \
           .

@@ -15,6 +15,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_SSH_PRIVATE_KEY }}
         with:
           # GitHub 源仓库地址
-          source-repo: git@github.com:yiyungent/QQBotHub.git
+          source-repo: git@github.com:yiyungent/KnifeHub.git
           # Gitee 目标仓库地址
-          destination-repo: git@gitee.com:yiyungent/QQBotHub.git
+          destination-repo: git@gitee.com:yiyungent/KnifeHub.git

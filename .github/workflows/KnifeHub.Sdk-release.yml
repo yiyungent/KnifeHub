@@ -1,9 +1,9 @@
-name: QQBotHub.Sdk Release
+name: KnifeHub.Sdk Release
 
 on: 
   push:
     tags:
-      - 'QQBotHub.Sdk-v*'
+      - 'KnifeHub.Sdk-v*'
 
 jobs:
   build:
@@ -21,17 +21,17 @@ jobs:
         
     - name: Build
       run: |
-        cd ./src/QQBotHub.Sdk
+        cd ./src/KnifeHub.Sdk
         dotnet build --configuration Release
         ls
         ls ./bin/Release/
       
     - name: Zip the Build
       run: |
-        cd ./src/QQBotHub.Sdk/bin/Release
-        zip -r QQBotHub.Sdk-net6.0.zip ./net6.0/ 
+        cd ./src/KnifeHub.Sdk/bin/Release
+        zip -r KnifeHub.Sdk-net6.0.zip ./net6.0/ 
         cd ../../../../
-        mv ./src/QQBotHub.Sdk/bin/Release/*.zip ./
+        mv ./src/KnifeHub.Sdk/bin/Release/*.zip ./
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -44,6 +44,6 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          QQBotHub.Sdk-net6.0.zip
+          KnifeHub.Sdk-net6.0.zip
           LICENSE 
           README.md

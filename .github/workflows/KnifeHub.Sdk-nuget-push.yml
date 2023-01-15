@@ -1,9 +1,9 @@
-name: QQBotHub.Sdk NuGet Push
+name: KnifeHub.Sdk NuGet Push
 
 on: 
   push:
     tags:
-      - 'QQBotHub.Sdk-v*'
+      - 'KnifeHub.Sdk-v*'
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
 
     - name: Build and Pack
       run: |
-        cd ./src/QQBotHub.Sdk
+        cd ./src/KnifeHub.Sdk
         dotnet build --configuration Release
         dotnet pack --configuration Release
         dotnet pack --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
@@ -38,5 +38,5 @@ jobs:
         
     - name: Push generated package to GitHub registry and NuGet
       run: |
-        nuget push .\src\QQBotHub.Sdk\bin\Release\*.nupkg -Source github -SkipDuplicate
-        nuget push .\src\QQBotHub.Sdk\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NUGET_KEY }}
+        nuget push .\src\KnifeHub.Sdk\bin\Release\*.nupkg -Source github -SkipDuplicate
+        nuget push .\src\KnifeHub.Sdk\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NUGET_KEY }}
