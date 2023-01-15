@@ -5,7 +5,7 @@ on:
 #    types: [published]
   push:
     tags:
-      - 'knifehub-v*'
+      - 'KnifeHub-v*'
 
 jobs:
   # build and push
@@ -34,7 +34,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }}-amd-chrome \
           .
       - name: Build Image and Push - latest - Docker Hub
@@ -43,7 +43,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest-amd-chrome \
           .
       
@@ -60,7 +60,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag $IMAGE_ID:$VERSION-amd-chrome \
           .
       - name: Build Image and Push - latest - ghcr.io
@@ -71,6 +71,6 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag $IMAGE_ID:latest-amd-chrome \
           .

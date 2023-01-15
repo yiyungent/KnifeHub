@@ -35,7 +35,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.last_release.outputs.tag_name }}-amd-chrome-beta \
           .
       - name: Login to Registry - ghcr.io
@@ -51,6 +51,6 @@ jobs:
           docker buildx build \
           --platform=linux/amd64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile.amd-chrome \
+          --file src/KnifeHub.Web/Dockerfile.amd-chrome \
           --tag $IMAGE_ID:$VERSION \
           .

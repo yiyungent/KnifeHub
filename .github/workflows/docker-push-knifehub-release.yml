@@ -5,7 +5,7 @@ on:
 #    types: [published]
   push:
     tags:
-      - 'knifehub-v*'
+      - 'KnifeHub-v*'
 
 jobs:
   # build and push
@@ -34,7 +34,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile \
+          --file src/KnifeHub.Web/Dockerfile \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:${{ steps.vars.outputs.RELEASE_VERSION }} \
           .
 
@@ -44,7 +44,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile \
+          --file src/KnifeHub.Web/Dockerfile \
           --tag ${{ secrets.DOCKER_USERNAME }}/${{ steps.vars.outputs.IMAGE_NAME }}:latest \
           .
       
@@ -61,7 +61,7 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile \
+          --file src/KnifeHub.Web/Dockerfile \
           --tag $IMAGE_ID:$VERSION \
           .
 
@@ -73,6 +73,6 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file src/knifehub.Web/Dockerfile \
+          --file src/KnifeHub.Web/Dockerfile \
           --tag $IMAGE_ID:latest \
           .
