@@ -121,14 +121,15 @@
 
 > `PluginCore Admin 用户名` 与 `PluginCore Admin 密码` 为你自己设置的后台登录用户名与密码, 随意设置即可, 自己记住就行
 
-#### 方式1：原生部署（适合小白）
+#### 方式1：原生部署 (适合小白)
 
-选择  [Releases - KnifeHub, 点我下载](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)
-找到并下载 KnifeHub 相应平台压缩包，
-windows系统 的 vps，下载 windows-64版本 的即可，
-解压里面有exe，运行它即可（无需再安装其它任何运行库），
-黑窗口中会显示一个url地址，复制到浏览器中打开即可，
-保持此黑窗口在后台运行，机器人就不会掉线
+> 选择     
+> - [Releases - KnifeHub, 点我下载](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)      
+> 找到并下载 KnifeHub 相应平台压缩包,       
+> (Windows 系统 一般下载 Windows-64 版本即可, 即 **KnifeHub-win-x64.zip**)   
+> 解压里面有 **KnifeHub.Web.exe** , 运行它即可 (无需再安装其它任何运行库)    
+> 黑窗口中会显示一个 url 地址, 复制到浏览器中打开即可,     
+> 保持此黑窗口在后台运行即可
 
 
 #### 方式2: 使用 Render 免费 一键部署 
@@ -152,7 +153,7 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
-> - Railway 每月有 `$5.00` 免费额度, 若只跑本项目完全够用 (应该说绰绰有余)
+> - 每月 `$5.00` 免费额度 / 每月 500 小时免费执行时间
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/A3JY-J?referralCode=8eKBDA)
 
@@ -169,13 +170,11 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 > - Railway 修改环境变量 会 触发 重新 Deploy   
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
-#### 方式4: 使用 Heroku 免费 一键部署 
+#### 方式4: 使用 Heroku 一键部署 
 
-注意：此种方式可能无法QQ登录
+注意：此种方式可能无法 KonataPlugin: QQ登录
 
 > - 点击下方按钮 一键部署       
-> - 免费注册, 无需信用卡验证
-> - Heroku 每月有免费时长 500小时, 若使用信用卡验证, 可提升到 免费 1000小时      
 > - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub)
@@ -192,7 +191,7 @@ windows系统 的 vps，下载 windows-64版本 的即可，
 
 
 
-#### 方式4: 使用 Docker
+#### 方式5: 使用 Docker
 
 ```bash
 docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name KnifeHub yiyungent/KnifeHub
@@ -207,7 +206,7 @@ docker exec -it KnifeHub bash
 
 
 
-### QQ 登录
+### KonataPlugin: QQ 登录
 
 > 部署完成后
 > > ⭐⭐⭐⭐ 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限⭐⭐⭐⭐      
