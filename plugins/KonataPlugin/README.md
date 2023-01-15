@@ -33,3 +33,7 @@
 > 项目地址: [https://github.com/yiyungent/QQBotHub/tree/main/plugins/KonataPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/KonataPlugin)             
 > 本项目基于 [KonataDev/Konata.Core: QQ(Android) protocol core implemented with pure C#.](https://github.com/KonataDev/Konata.Core)
 
+
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.KonataPlugin.README" style="border:0" alt="" />
+<!-- End Matomo -->
