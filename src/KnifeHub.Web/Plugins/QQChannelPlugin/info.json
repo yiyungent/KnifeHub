@@ -1,8 +1,0 @@
-{
-	"PluginId": "QQChannelPlugin",
-	"DisplayName": "QQ频道插件",
-	"Description": "QQ频道基础插件",
-	"Author": "yiyun",
-	"Version": "0.1.0",
-	"SupportedVersions": [ "0.0.1" ]
-}
