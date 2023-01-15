@@ -3,7 +3,7 @@
 
 # $pluginId = "QQHelloWorldPlugin"
 
-# dotnet build QQHelloWorldPlugin 并 将 相关文件移动到 ./src/QQBotHub.Web/Plugins/QQHelloWorldPlugin 文件夹中
+# dotnet build QQHelloWorldPlugin 并 将 相关文件移动到 ./src/KnifeHub.Web/Plugins/QQHelloWorldPlugin 文件夹中
 
 cd ..
 
@@ -22,12 +22,12 @@ rm PluginCore.IPlugins*
 cd ../../../../../
 
 # 移除原处 所有文件
-rm -r "./src/QQBotHub.Web/Plugins/${pluginId}/*"
+rm -r "./src/KnifeHub.Web/Plugins/${pluginId}/*"
 
 # 移动
-mv "./plugins/${pluginId}/bin/Debug/net6.0/*" "./src/QQBotHub.Web/Plugins/${pluginId}/"
+mv "./plugins/${pluginId}/bin/Debug/net6.0/*" "./src/KnifeHub.Web/Plugins/${pluginId}/"
 
-ls "./src/QQBotHub.Web/Plugins/${pluginId}/"
+ls "./src/KnifeHub.Web/Plugins/${pluginId}/"
 
 echo "${pluginId} build and move success !"
 
