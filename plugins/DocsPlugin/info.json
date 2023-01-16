@@ -1,8 +1,8 @@
 {
-	"PluginId": "QQChannelPlugin",
-	"DisplayName": "QQ频道插件",
-	"Description": "QQ频道基础插件",
+	"PluginId": "DocsPlugin",
+	"DisplayName": "文档插件",
+	"Description": "提供文档检索",
 	"Author": "yiyun",
-	"Version": "0.1.1",
+	"Version": "0.0.1",
 	"SupportedVersions": [ "0.0.1" ]
 }

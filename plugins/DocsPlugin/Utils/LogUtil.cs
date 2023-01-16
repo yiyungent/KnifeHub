@@ -4,11 +4,11 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace QQChannelPlugin.Utils
+namespace DocsPlugin.Utils
 {
     public class LogUtil
     {
-        public const string Sign = nameof(QQChannelPlugin);
+        public const string Sign = nameof(DocsPlugin);
 
         public static void Info(string message)
         {

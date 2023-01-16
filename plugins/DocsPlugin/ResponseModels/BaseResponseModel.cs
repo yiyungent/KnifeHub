@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQChannelPlugin.ResponseModels
+namespace DocsPlugin.ResponseModels
 {
-    public class BaseResponseModel
+    public class BaseResponseModel<T>
     {
         public int Code { get; set; }
 
         public string Message { get; set; }
 
-        public object Data { get; set; }
+        public T Data { get; set; }
     }
 }

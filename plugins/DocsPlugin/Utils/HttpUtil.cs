@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KonataPlugin.Utils
+namespace DocsPlugin.Utils
 {
     public class HttpUtil
     {

@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using PluginCore;
-using QQChannelPlugin.Models;
+using DocsPlugin.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQChannelPlugin
+namespace DocsPlugin
 {
     public class DbContext
     {
@@ -18,7 +18,7 @@ namespace QQChannelPlugin
         {
             get
             {
-                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(QQChannelPlugin), $"{nameof(QQChannelPlugin)}.sqlite");
+                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(DocsPlugin), $"{nameof(DocsPlugin)}.sqlite");
 
                 return dbFilePath;
             }

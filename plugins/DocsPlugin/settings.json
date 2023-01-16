@@ -1,18 +1,21 @@
 {
-  "Bots": [
+  "DocsGitHubSources": [
     {
-      "BotAppId": "",
-      "BotToken": "",
-      "BotSecret": "",
-      "UseSandBoxMode": true,
-      "UseDemoModel": true
-    },
-    {
-      "BotAppId": "",
-      "BotToken": "",
-      "BotSecret": "",
-      "UseSandBoxMode": true,
-      "UseDemoModel": true
+      "SourceKey": "",
+      "Url": ""
     }
-  ]
+  ],
+  "DocsWebSources": [
+    {
+      "SourceKey": "",
+      "RepoOwner": "",
+      "RepoName": "",
+      "RepoBranch": "",
+      "RepoTargetDirPath": "",
+      "GitHub": {
+        "AccessToken": ""
+      }
+    }
+  ],
+  "Secret": ""
 }
