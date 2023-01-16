@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 using PluginCore.Interfaces;
-using DocsPlugin.IPlugins;
 using DocsPlugin.Utils;
 using DocsPlugin.ResponseModels;
 using Octokit;
