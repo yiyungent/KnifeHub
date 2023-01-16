@@ -73,7 +73,7 @@
     - [x] 设置 机器人聊天群, 好友
     - [x] `@机器人` / `聊天前缀`
     - [x] 免费API调用次数：500次/天
-      - 专属8折优惠码：`KnifeHub`
+      - 专属8折优惠码：`QQBotHub`
   - [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true)
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 收集群聊消息 
