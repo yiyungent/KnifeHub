@@ -52,6 +52,7 @@ namespace DocsPlugin.Controllers
 
         [Route($"/Plugins/{nameof(DocsPlugin)}")]
         [HttpGet]
+        [Authorize("PluginCore.Admin")]
         public async Task<ActionResult> Get()
         {
             string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(DocsPlugin)), "index.html");
