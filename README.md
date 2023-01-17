@@ -142,7 +142,7 @@
 > - Free Build Minutes: 500 min/month
 
 <!-- [![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/KnifeHub) -->
-[![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://yourls.moeci.com/knifehubdeployrender)
+[![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://yourls.yiyungent.eu.org/knifehubdeployrender)
 
 ##### Render 环境变量
 
@@ -180,7 +180,7 @@
 > - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
 <!-- [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub) -->
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://yourls.moeci.com/knifehubdeployheroku)
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://yourls.yiyungent.eu.org/knifehubdeployheroku)
 
 
 
