@@ -346,6 +346,13 @@ dotnet add package KnifeHub.Sdk
 - [SweelLong/RandomImage: 这是基于QQBotHub的开源插件，主要功能是发送随机图片。](https://github.com/SweelLong/RandomImage)       
 
 
+## 赞助者
+
+感谢这些来自爱发电的赞助者：
+
+<!-- AFDIAN-ACTION:START -->
+<!-- AFDIAN-ACTION:END -->
+
 
 ## Donate
 
