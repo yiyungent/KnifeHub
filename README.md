@@ -141,7 +141,8 @@
 > - Free Bandwidth: 100 GB/month
 > - Free Build Minutes: 500 min/month
 
-[![Deploy on Render](https://img.shields.io/badge/Render-Deploy%20on%20Render-brightgreen.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/KnifeHub)
+<!-- [![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/KnifeHub) -->
+[![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://yourls.moeci.com/knifehubdeployrender)
 
 ##### Render 环境变量
 
@@ -178,7 +179,8 @@
 > - 点击下方按钮 一键部署       
 > - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub)
+<!-- [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub) -->
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://yourls.moeci.com/knifehubdeployheroku)
 
 
 
