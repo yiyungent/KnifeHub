@@ -129,7 +129,7 @@
 > 找到并下载 **KnifeHub** 相应平台压缩包,       
 > (Windows 系统 一般下载 Windows-64 版本即可, 即 **KnifeHub-win-x64.zip**)   
 > 解压里面有 **KnifeHub.Web.exe** , 运行它即可 (无需再安装其它任何运行库)    
-> 黑窗口中会显示一个 url 地址, 复制到浏览器中打开即可,     
+> 黑窗口中会显示一个 url 地址（Now listening on:后跟随的地址）, 复制到浏览器中打开即可 
 > 保持此黑窗口在后台运行即可
 
 
@@ -205,7 +205,7 @@ docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONM
 docker exec -it knifehub bash
 ```
 
-> 现在访问: <http://localhost:5004/PluginCore/Admin>
+> 现在访问: <http://your-domain/PluginCore/Admin>  your-domain 为黑窗口中显示的 url 地址
 
 
 
@@ -214,8 +214,8 @@ docker exec -it knifehub bash
 > 部署完成后
 > > ⭐⭐⭐⭐ 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限⭐⭐⭐⭐      
 > > 访问 **401** 说明你没有登录 <https://your-domain/PluginCore/Admin>      
-> 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin`
-> 2. 访问: <https://your-domain> 进行 QQ机器人 登录
+> 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin` 在插件列表中添加[KonataPlugin插件](https://github.com/yiyungent/KnifeHub/releases?q=KonataPlugin&expanded=true)
+> 2. 访问: <https://your-domain/Plugins/KonataPlugin> 进行 QQ机器人 登录
 
 > 若为 `短信验证` , 则直接输入收到的验证码, 点击 `提交验证` 即可
 
@@ -237,6 +237,7 @@ docker exec -it knifehub bash
 > > - 大部分人电脑为 `Windows 64 位`, 点击 **KonataApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **KonataApp.exe**
 > > - 运行 `KonataApp.exe` 会自动给出输入提示, 按提示操作即可       
 > > - 运行 `KonataApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
+
 
 
 
@@ -342,8 +343,8 @@ dotnet add package KnifeHub.Sdk
 
 > 欢迎 Pull Request !
 
-- [SweelLong/AntiRecall: 这是基于QQBotHub的开源插件，主要功能是防止消息撤回。](https://github.com/SweelLong/AntiRecall)       
-- [SweelLong/RandomImage: 这是基于QQBotHub的开源插件，主要功能是发送随机图片。](https://github.com/SweelLong/RandomImage)       
+- [SweelLong/AntiRecall: 这是基于KnifeHub - KonataPlugin的开源插件，功能是防止消息撤回。](https://github.com/SweelLong/AntiRecall)       
+- [SweelLong/RandomImage: 这是基于QQBotHub的开源插件，主要功能是发送随机图片。（短期内不会更新）](https://github.com/SweelLong/RandomImage)       
 
 
 ## 赞助者
