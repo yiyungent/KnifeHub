@@ -173,7 +173,7 @@ namespace TelegramPlugin.Controllers
             }
 
             #region 插件事件派发
-            Utils.LogUtil.Info($"{botToken} 机器人收到消息 -> {messageText}");
+            Utils.LogUtil.Info($"{botToken} 机器人收到消息");
 
             var plugins = _pluginFinder.EnablePlugins<ITelegramBotPlugin>().ToList();
             Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
