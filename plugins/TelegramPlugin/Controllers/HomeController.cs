@@ -210,6 +210,14 @@ namespace TelegramPlugin.Controllers
                     chatId: chatId,
                     text: "You said:\n" + messageText,
                     cancellationToken: cancellationToken);
+
+                //await botClient.SetMyCommandsAsync(commands: new BotCommand[] {
+                //    new BotCommand(){
+                //        Command = "help",
+                //        Description = ""
+                //    }
+                //});
+                //await botClient.SetChatMenuButtonAsync(menuButton: new MenuButtonDefault());
             }
         }
 
