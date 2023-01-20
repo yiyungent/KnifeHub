@@ -21,6 +21,9 @@
 
 > 3. `@userinfobot` 通过此机器人获取你的 `Id` , 填入设置 `AdminChatId`
 
+> 4. 注意: `Telegram Bot` 若需要接收来自 Group 的消息, 需要禁用机器人的 `Group Privacy`    
+> 前往 `@BotFather`, 发送 `/setprivacy` , 选择你的机器人,  点击 `Disable`
+
 
 ### 2. 启动
 
