@@ -111,6 +111,9 @@
     - [x] 定时 自动 备份 插件数据
     - [x] 将 备份文件 发送到 Telegram 
     - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
+  - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true)
+    - [x] Duplicati 辅助插件
+    - [x] Duplicati 备份通知 Telegram
 
 ## Screenshots
 
