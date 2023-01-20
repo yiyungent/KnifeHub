@@ -30,7 +30,6 @@
 
 ```
 --send-http-url=替换为你的链接
---send-http-result-output-format=Json
 ```
 
 

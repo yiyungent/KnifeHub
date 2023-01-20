@@ -26,9 +26,15 @@ namespace DuplicatiPlugin.Controllers
 
         [HttpGet, HttpPost]
         [Route("TgBotToken/{botToken}/to/TgChatId/{chatId}/apply")]
-        public async Task<ActionResult> TelegramBot([FromRoute] string botToken, [FromRoute] long chatId, [FromBody] DuplicatiRequestModel duplicatiRequestModel)
+        public async Task<ActionResult> TelegramBot([FromRoute] string botToken, [FromRoute] long chatId, [FromForm] string message)
         {
             SettingsModel settings = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(DuplicatiPlugin));
+
+            #region TODO: 解析数据: Duplicati
+            // 目前 --send-http-result-output-format=Json 有问题, 收不到, 于是采用默认格式, 手动获取
+            //DuplicatiRequestModel duplicatiRequestModel = new DuplicatiRequestModel();
+            //message.Split()
+            #endregion
 
             try
             {
@@ -37,24 +43,31 @@ namespace DuplicatiPlugin.Controllers
                 {
                     var botClient = new TelegramBotClient(botToken);
 
-                    string text = $"[{duplicatiRequestModel.BackupName}] {duplicatiRequestModel.MainOperation}";
-                    string badge = "🔴";
-                    switch (duplicatiRequestModel.ParsedResult)
-                    {
-                        case "Success":
-                            badge = "✅";
-                            break;
-                        default:
-                            badge = "🔴";
-                            break;
-                    }
-                    text += "\n" + badge;
-                    text += $"\n WarningsActualLength: {duplicatiRequestModel.WarningsActualLength}";
-                    text += $"\n ErrorsActualLength: {duplicatiRequestModel.ErrorsActualLength}";
+                    #region TODO: 解析后发送
+                    //string text = $"[{duplicatiRequestModel.BackupName}] {duplicatiRequestModel.MainOperation}";
+                    //string badge = "🔴";
+                    //switch (duplicatiRequestModel.ParsedResult)
+                    //{
+                    //    case "Success":
+                    //        badge = "✅";
+                    //        break;
+                    //    default:
+                    //        badge = "🔴";
+                    //        break;
+                    //}
+                    //text += "\n" + badge;
+                    //text += $"\n WarningsActualLength: {duplicatiRequestModel.WarningsActualLength}";
+                    //text += $"\n ErrorsActualLength: {duplicatiRequestModel.ErrorsActualLength}";
 
+                    //await botClient.SendTextMessageAsync(
+                    //    chatId: chatId,
+                    //    text: text); 
+                    #endregion
+
+                    // 发送原生格式
                     await botClient.SendTextMessageAsync(
                         chatId: chatId,
-                        text: text);
+                        text: message);
                 }
                 #endregion
             }
