@@ -35,6 +35,12 @@
 
 - [x] **大部分功能由插件提供**
 - [x] 本仓库 维护的 官方插件
+  - [TelegramPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TelegramPlugin&expanded=true)
+    - [x] Telegram 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 依赖 [TelegramBots/Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
+    - [x] 订阅所有类型消息
+    - [x] 多机器人管理
+    - [x] 演示模式
   - [QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQChannelPlugin&expanded=true)
     - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [Chianne1025/QQChannelFramework](https://github.com/Chianne1025/QQChannelFramework)
