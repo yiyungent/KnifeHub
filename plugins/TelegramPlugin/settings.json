@@ -1,0 +1,10 @@
+{
+  "Bots": [
+    {
+      "BotToken": "",
+      "AdminChatId": "",
+      "UseDemoModel": true,
+      "Enable": true
+    }
+  ]
+}

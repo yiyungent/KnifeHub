@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoraPlugin", "plugins\SoraP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocsPlugin", "plugins\DocsPlugin\DocsPlugin.csproj", "{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramPlugin", "plugins\TelegramPlugin\TelegramPlugin.csproj", "{8185E32D-32D9-462D-995F-C4522E636B86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8185E32D-32D9-462D-995F-C4522E636B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8185E32D-32D9-462D-995F-C4522E636B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8185E32D-32D9-462D-995F-C4522E636B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8185E32D-32D9-462D-995F-C4522E636B86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +172,7 @@ Global
 		{D96EE98D-2F5C-4A4A-ABED-37556A8707C1} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{4E0411C6-09A1-491C-A11A-DDAA7083BFE3} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{8185E32D-32D9-462D-995F-C4522E636B86} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
