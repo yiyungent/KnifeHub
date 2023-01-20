@@ -172,17 +172,6 @@ namespace TelegramPlugin.Controllers
                 return;
             }
 
-            // Only process Message updates: https://core.telegram.org/bots/api#message
-            if (update.Message is not { } message)
-                return;
-            // Only process text messages
-            if (message.Text is not { } messageText)
-                return;
-
-            var chatId = message.Chat.Id;
-
-            Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
-
             #region 插件事件派发
             Utils.LogUtil.Info($"{botToken} 机器人收到消息 -> {messageText}");
 
@@ -205,6 +194,17 @@ namespace TelegramPlugin.Controllers
 
             if (botConfig.UseDemoModel)
             {
+                // Only process Message updates: https://core.telegram.org/bots/api#message
+                if (update.Message is not { } message)
+                    return;
+                // Only process text messages
+                if (message.Text is not { } messageText)
+                    return;
+
+                var chatId = message.Chat.Id;
+
+                Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
+
                 // Echo received message text
                 Message sentMessage = await botClient.SendTextMessageAsync(
                     chatId: chatId,
