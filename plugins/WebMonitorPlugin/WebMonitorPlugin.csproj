@@ -1,17 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Dragonfly.Sdk" Version="0.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</PackageReference>
+		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</PackageReference>
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="Telegram.Bot" Version="17.0.0" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
 	</ItemGroup>
 
 	<!-- 发布插件相关文件 -->
@@ -24,6 +29,9 @@
 		</Content>
 		<Content Include="settings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="WebMonitorPlugin.sqlite">
+				<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 

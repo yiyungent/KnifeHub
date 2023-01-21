@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelegramPlugin", "plugins\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuplicatiPlugin", "plugins\DuplicatiPlugin\DuplicatiPlugin.csproj", "{81F72AD3-CE49-4886-B18F-443D491A6DB0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMonitorPlugin", "plugins\WebMonitorPlugin\WebMonitorPlugin.csproj", "{F10458CE-D27C-41D7-A400-A81007347A93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{81F72AD3-CE49-4886-B18F-443D491A6DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81F72AD3-CE49-4886-B18F-443D491A6DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81F72AD3-CE49-4886-B18F-443D491A6DB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F10458CE-D27C-41D7-A400-A81007347A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10458CE-D27C-41D7-A400-A81007347A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10458CE-D27C-41D7-A400-A81007347A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10458CE-D27C-41D7-A400-A81007347A93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +186,7 @@ Global
 		{7CDB5D18-8946-4DF5-9ACB-24AC5F9A5906} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{8185E32D-32D9-462D-995F-C4522E636B86} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{81F72AD3-CE49-4886-B18F-443D491A6DB0} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{F10458CE-D27C-41D7-A400-A81007347A93} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}

@@ -1,8 +1,12 @@
 {
-	"SecondsPeriod": 60,
-	"Telegram": {
-		"Token": "",
-		"ChatId": "",
-		"Enable": false
-	}
+  "SecondsPeriod": 60,
+  "Telegram": {
+    "Token": "",
+    "ChatId": "",
+    "Enable": false
+  },
+  "Selenium": {
+    "ChromeDriverDirectory": "",
+    "CommandTimeoutMinute": 5
+  }
 }

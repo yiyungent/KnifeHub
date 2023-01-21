@@ -11,12 +11,14 @@ namespace WebMonitorPlugin
 
         public TelegramModel Telegram { get; set; }
 
+        public SeleniumModel Selenium { get; set; }
+
         public class TelegramModel
         {
             public string Token { get; set; }
             public string ChatId { get; set; }
 
-            public bool Enable  { get; set; }
+            public bool Enable { get; set; }
 
         }
 
@@ -36,6 +38,11 @@ namespace WebMonitorPlugin
 
         }
 
+        public class SeleniumModel
+        {
+            public string ChromeDriverDirectory { get; set; }
 
+            public long CommandTimeoutMinute { get; set; }
+        }
     }
 }

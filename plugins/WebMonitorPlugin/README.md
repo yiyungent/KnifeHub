@@ -1,4 +1,9 @@
 
+# 介绍
+
+> **注意**: **启用本插件较慢** , 请耐心等待提示 `启用成功` , 若出错, 禁用再启用即可
+
+> **注意** : 本插件需要浏览器环境, 如: 此 Docker 镜像 `yiyungent/knifehub:latest-amd-chrome` 中就打包好了浏览器环境
 
 # 基础
 
@@ -7,6 +12,14 @@
 
 - [设置](/plugincore/admin/index.html#/plugins/settings/WebMonitorPlugin) 里配置提醒通知
 
+
+# 插件设置
+
+`SecondsPeriod` : 一般保持默认 60 秒的监控频率, 当然若服务器压力大, 可以调高
+
+`Selenium.ChromeDriverDirectory` : "" 一般保持为默认空字符串即可, 即使用 当前主程序所在目录 (/app/), 即使用 `yiyungent/knifehub:v1.0.5-amd-chrome` 等镜像 保持默认空字符串即可
+
+`CommandTimeoutMinute.CommandTimeoutMinute` : 一般保持默认 5 分钟即可
 
 
 # 通知

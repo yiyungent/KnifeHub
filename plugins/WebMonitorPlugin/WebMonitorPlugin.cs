@@ -111,7 +111,17 @@ namespace WebMonitorPlugin
                 options.AddArgument("--ignore-certificate-errors");
                 options.AddArgument("--disable-gpu");
 
-                var driver = new ChromeDriver(chromeDriverDirectory: Environment.CurrentDirectory, options, commandTimeout: TimeSpan.FromMinutes(5));
+                string chromeDriverDirectory = Environment.CurrentDirectory;
+                long commandTimeoutMinute = 5;
+                if (settings.Selenium != null && settings.Selenium.CommandTimeoutMinute > 0)
+                {
+                    commandTimeoutMinute = settings.Selenium.CommandTimeoutMinute;
+                }
+                if (!string.IsNullOrEmpty(settings.Selenium?.ChromeDriverDirectory))
+                {
+                    chromeDriverDirectory = settings.Selenium.ChromeDriverDirectory;
+                }
+                var driver = new ChromeDriver(chromeDriverDirectory: chromeDriverDirectory, options, commandTimeout: TimeSpan.FromMinutes(commandTimeoutMinute));
                 #endregion
 
                 try

@@ -13,7 +13,7 @@ using WebMonitorPlugin.ResponseModels;
 namespace WebMonitorPlugin.Controllers
 {
     [ApiController]
-    [Authorize("PluginCoreAdmin")]
+    [Authorize("PluginCore.Admin")]
     [Route($"plugins/{nameof(WebMonitorPlugin)}")]
     public class HomeController : ControllerBase
     {
