@@ -226,6 +226,8 @@
 
 #### 方式5: 使用 Docker
 
+> **注意** : 请不要映射/挂载 容器内 **/app/Plugins/** 目录, 否则可能导致 **插件无法正常上传** , 此问题解决中
+
 ```bash
 docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 ```
