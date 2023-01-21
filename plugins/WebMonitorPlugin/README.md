@@ -185,3 +185,12 @@ if (oldFirstDynamicText != newFirstDynamicText) {
 // 保存最新的动态数据
 localStorage.setItem("WebMonitorPlugin.Storage.FirstDynamicText", newFirstDynamicText);
 ```
+
+
+## 相关
+
+> 项目地址: [https://github.com/yiyungent/KnifeHub/tree/main/plugins/WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/tree/main/plugins/WebMonitorPlugin)             
+
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.WebMonitorPlugin.README" style="border:0" alt="" />
+<!-- End Matomo -->
