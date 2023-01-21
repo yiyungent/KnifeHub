@@ -1,0 +1,124 @@
+﻿
+<style>
+    #editor {
+        width: 100%;
+        height: 500px;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<!-- general form elements -->
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">添加</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form id="js-form">
+        <div class="box-body">
+            <div class="form-group">
+                <label>任务名</label>
+                <input class="form-control" placeholder="全英文字母, 区分大小写" type="text" name="name" value="" />
+            </div>
+            <div class="form-group">
+                <label>目标 Url</label>
+                <input class="form-control" placeholder="https://www.baidu.com" type="text" name="url" value="" />
+            </div>
+            <div class="form-group">
+                <label>提醒消息</label>
+                <input class="form-control" placeholder="收到 xxx 提醒!" type="text" name="message" value="" />
+            </div>
+            <div class="form-group">
+                <label>浏览器打开 Url 后, 强制等待 (秒) (0 代表默认 等待 DOMContentLoaded)</label>
+                <input class="form-control" type="text" name="forceWait:number" value="0" />
+            </div>
+            <div class="form-group">
+                <label>浏览器窗口 - 宽 (默认 0, 代表自动延展)</label>
+                <input class="form-control" placeholder="0" type="text" name="windowWidth:number" value="0" />
+            </div>
+            <div class="form-group">
+                <label>浏览器窗口 - 高 (默认 0, 代表自动延展)</label>
+                <input class="form-control" placeholder="0" type="text" name="windowHeight:number" value="0" />
+            </div>
+            <div class="form-group">
+                <label>Cookies (如需多个, 一行一个)</label>
+                <label>注意: Cookie 设置在 访问 Url 后, 因此你可能需要在 JavaScript 条件 内 document.location.reload();</label>
+                <textarea name="cookies" class="form-control" rows="3" placeholder="name=xxx;value=xxx;domain=.baidu.com;path=/"></textarea>
+            </div>
+            <div class="form-group">
+                <label>JavaScript 条件</label>
+                <div id="editor"></div>
+            </div>
+            <div class="form-group">
+                <label>浏览器执行 JavaScript 条件  后, 强制等待 (秒) (默认 0, 代表立即, 不等待</label>
+                <input class="form-control" type="text" name="forceWaitAfterJsConditionExecute:number" value="0" />
+            </div>
+            <div class="form-group">
+                <label>启用 (true/false)</label>
+                <input class="form-control" type="text" name="enable:boolean" value="true" />
+            </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+            <div class="btn-group">
+                <a class="btn btn-default" href="/plugins/WebMonitorPlugin/">返回</a>
+                <button id="js-btn-save" class="btn btn-primary" onclick="saveData()">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.box -->
+<!-- start: editor -->
+<script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
+<!-- end: editor -->
+<!--<script src="/plugins/WebMonitorPlugin/libs/jquery.serializeJSON/jquery.serializejson.js"></script>-->
+<script>
+
+    function saveDataSuccess(data) {
+        if (data.code <= 0) {
+            showMessage(data.message, -1);
+        } else {
+            showMessage(data.message, 1);
+        }
+        $("#js-btn-save").html("保存").removeAttr("disabled");
+    }
+    function saveData() {
+        $("#js-btn-save").html("保存中").attr("disabled", "disabled");
+        var dataObj = $("#js-form").serializeJSON();
+        dataObj.jsCondition = window.editor.getValue();
+        $.ajax({
+            url: "/plugins/WebMonitorPlugin/Create",
+            type: "post",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(dataObj),
+            success: saveDataSuccess
+        });
+    }
+
+    require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' } });
+    window.MonacoEnvironment = { getWorkerUrl: () => proxy };
+    let proxy = URL.createObjectURL(new Blob([`
+            self.MonacoEnvironment = {
+                baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
+            };
+            importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
+            `], { type: 'text/javascript' }));
+    function initEditor() {
+        require(["vs/editor/editor.main"], function () {
+            window.editor = monaco.editor.create(document.getElementById('editor'), {
+                value: '',
+                language: 'javascript',
+                theme: 'vs-dark'
+            });
+            window.editor.setValue(`// localStorage.setItem("WebMonitorPlugin.JavaScriptConditionResult", false); \n`
+                + `// 通过此方法来确定本次任务 是否达成条件, 默认 false \n`
+                + `// 下面写你的业务逻辑`);
+        });
+    }
+
+    $(function () {
+        initEditor();
+    });
+</script>

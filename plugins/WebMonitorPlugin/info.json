@@ -1,0 +1,8 @@
+{
+	"PluginId": "WebMonitorPlugin",
+	"DisplayName": "网页监控",
+	"Description": "网页监控,看文档",
+	"Author": "yiyun",
+	"Version": "0.3.1",
+	"SupportedVersions": [ "0.1.2" ]
+}

@@ -1,0 +1,73 @@
+﻿/**
+ * ==============================================================
+ * ======================================================= 常用样式
+ */
+/* 常用样式 */
+.hidden {
+	display: none;
+}
+
+
+/**
+ * ==============================================================
+ * ======================================================= 底部翻页
+ */
+/* 底部翻页 */
+.app-footer-nav {
+  height: 96px;
+}
+.app-footer-nav-left,
+.app-footer-nav-right {
+  height: 96px;
+}
+.app-footer-nav-left {
+  text-align: left;
+}
+.app-footer-nav-right {
+  text-align: right;
+}
+.app-footer-nav-text {
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  line-height: 24px;
+  padding-top: 24px;
+  width: 100%;
+}
+.app-footer-nav-text .mdui-icon {
+  padding-top: 23px;
+  width: 24px;
+}
+.app-footer-nav-text .app-footer-nav-direction {
+  font-size: 15px;
+  line-height: 18px;
+  margin-bottom: 1px;
+  opacity: 0.55;
+}
+.app-footer-nav-left .mdui-icon {
+  float: left;
+  margin-right: 10px;
+}
+.app-footer-nav-right .mdui-icon {
+  float: right;
+  margin-left: 10px;
+}
+.app-footer-nav-left .app-footer-nav-chapter {
+  margin-left: 34px;
+}
+.app-footer-nav-right .app-footer-nav-chapter {
+  margin-right: 34px;
+}
+.mdui-theme-layout-dark .app-footer-nav {
+  background-color: #212121 !important;
+}
+.mdui-theme-layout-dark .app-footer-nav-left,
+.mdui-theme-layout-dark .app-footer-nav-right {
+  background-color: #212121 !important;
+}
+.mdui-theme-layout-dark .app-footer-nav-text {
+  color: #fff;
+}

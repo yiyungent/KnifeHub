@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebMonitorPlugin - Powered by WebMonitorPlugin</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/plugins/WebMonitorPlugin/libs/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/WebMonitorPlugin/libs/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/plugins/WebMonitorPlugin/libs/AdminLTE/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/plugins/WebMonitorPlugin/libs/AdminLTE/dist/css/skins/skin-blue.min.css">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/plugins/WebMonitorPlugin/libs/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- 注意: 不知道为什么一定要写在这里才能成功, 明明在子页面也是在后面的 -->
+    <script src="/plugins/WebMonitorPlugin/libs/jquery.serializeJSON/jquery.serializejson.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="/plugins/WebMonitorPlugin/libs/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/plugins/WebMonitorPlugin/libs/AdminLTE/dist/js/adminlte.min.js"></script>
+    <!-- tools.js -->
+    <script src="/plugins/WebMonitorPlugin/js/tools.js"></script>
+    <!-- start 提示框 -->
+    <link href="/plugins/WebMonitorPlugin/libs/toastr/build/toastr.min.css" rel="stylesheet" />
+    <script src="/plugins/WebMonitorPlugin/libs/toastr/build/toastr.min.js"></script>
+    <script>
+        toastr.options.closeButton = true;
+    </script>
+    <!-- end 提示框 -->
+    <script>
+        $(function () {
+
+            /**
+            * Get access to plugins
+             */
+            $('[data-toggle="control-sidebar"]').controlSidebar()
+            $('[data-toggle="push-menu"]').pushMenu()
+            var $pushMenu = $('[data-toggle="push-menu"]').data('lte.pushmenu')
+            var $controlSidebar = $('[data-toggle="control-sidebar"]').data('lte.controlsidebar')
+            var $layout = $('body').data('lte.layout')
+            $(window).on('load', function () {
+                // Reinitialize variables on load
+                $pushMenu = $('[data-toggle="push-menu"]').data('lte.pushmenu')
+                $controlSidebar = $('[data-toggle="control-sidebar"]').data('lte.controlsidebar')
+                $layout = $('body').data('lte.layout')
+            })
+
+
+        });
+
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">Monitor</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">WebMonitorPlugin</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+            <!-- Sidebar Menu -->
+            <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+            </section>
+            <!-- Main content -->
+            <section class="content container-fluid">
+                {{Content}}
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                WebMonitorPlugin
+            </div>
+            <!-- Default to the left -->
+            <div class="pull-left hidden-xs">
+                <p>Powered by <strong><a href="https://github.com/yiyungent/Dragonfly" target="_blank">WebMonitorPlugin</a></strong> <em></em></p>
+            </div>
+        </footer>
+        <!-- Control Sidebar -->
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+</body>
+</html>

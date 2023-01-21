@@ -1,0 +1,105 @@
+﻿<style>
+	table tr td {
+		vertical-align: middle !important;
+	}
+</style>
+<!-- start 删除确认框 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">确认框</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="message-text" class="control-label">确定要删除 ?</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button onclick="deleteSubmit()" type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end 删除确认框 -->
+<input id="js-id" type="hidden" />
+
+<!-- start .box -->
+<div class="box">
+	<!-- start .box-header -->
+	<div class="box-header">
+		<h3 class="box-title">列表</h3>
+
+		<div class="box-tools">
+			<div class="input-group input-group-sm" style="width: 250px;">
+			</div>
+		</div>
+	</div>
+	<!-- end .box-header -->
+	<!-- start .box-body -->
+	<!-- start 简单表格 -->
+	<div class="box-body table-responsive no-padding">
+		<table id="js-table" class="table table-hover" pview="table">
+			<tr>
+				<th>任务名</th>
+				<th>浏览器窗口 - 宽</th>
+				<th>浏览器窗口 - 高</th>
+				<th>强制等待</th>
+				<th>启用</th>
+				<th>操作</th>
+			</tr>
+			{{Table.Trs}}
+		</table>
+	</div>
+	<!-- end 简单表格 -->
+	<!-- end .box-body -->
+	<!-- start .box-footer -->
+	<div class="box-footer clearfix">
+		<div class="btn-group pull-left">
+			<a class="btn btn-primary" href="/plugins/WebMonitorPlugin/Create">添加</a>
+		</div>
+		<!-- start 分页 -->
+		<!--<div id="js-page" pview="pages">
+			<ul class="pagination pull-right" pview-btn-group pview-targets="table,pages">
+				@Html.PageLinks(Model.PageInfo, i => Url.Action("Index", new { pageIndex = i, q = Request["q"], type = Request["type"] }))
+			</ul>
+		</div>-->
+		<!-- end 分页 -->
+	</div>
+	<!-- end .box-footer -->
+</div>
+<!-- end .box -->
+<!--<script src="/assets/libs/pview/pview.js"></script>-->
+<script>
+	// start 删除
+	function deleteSuccess(data) {
+		if (data.code <= 0) {
+			showMessage(data.message, -1);
+		} else {
+			showMessage(data.message, 1);
+			window.location.href = window.location.href;
+		}
+	}
+	function deleteOp(id) {
+		$("#js-id").val(id);
+		$('#deleteModal').modal();
+	}
+	function deleteSubmit() {
+		var id = $("#js-id").val();
+		$.ajax({
+			type: 'POST',
+            url: '/plugins/WebMonitorPlugin/Delete',
+			data: { id: id },
+			dataType: 'json',
+			success: deleteSuccess
+		});
+	}
+	// end 删除
+	$(function () {
+		
+	});
+</script>
