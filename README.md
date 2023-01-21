@@ -34,7 +34,16 @@
 ## 功能
 
 - [x] **大部分功能由插件提供**
-- [x] 本仓库 维护的 官方插件
+
+<details>
+  <summary>点我 打开/关闭 本仓库 维护的 官方插件</summary>
+
+  - [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
+    - [x] 自动签到等
+    - [x] 监控网页变化, 及时提醒
+    - [x] 运行 WebUI 自动化测试
+    - [x] 爬虫, 数据采集
+    - [x] 一切可用浏览器完成的操作，都可自动化运行
   - [TelegramPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TelegramPlugin&expanded=true)
     - [x] Telegram 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [TelegramBots/Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
@@ -115,11 +124,23 @@
     - [x] Duplicati 辅助插件
     - [x] Duplicati 备份通知 Telegram
 
+</details>
+
 ## Screenshots
 
 ![PluginCore Admin](./screenshots/PluginCore-Admin.png)
 
 ![qq_online.png](./screenshots/qq_online.png)
+
+### [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
+
+![](./screenshots/2022-03-09-20-46-26.png)
+![](./screenshots/2022-03-09-20-47-33.png)
+
+> Telegram 通知, 还会附加一张网页截图
+
+![](./screenshots/2022-03-09-20-48-16.png)
+
 
 ### [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true)
 
