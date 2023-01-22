@@ -171,6 +171,7 @@
 > - Free Instance Hours: 750 hours/month
 > - Free Bandwidth: 100 GB/month
 > - Free Build Minutes: 500 min/month
+> - **注意** : 免费实例类型上的 Web 服务在闲置 15 分钟后会自动停止运行, 当一个新的免费服务请求进来时, Render 会再次启动它, 以便它可以处理该请求, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
 <!-- [![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yiyungent/KnifeHub) -->
 [![Deploy to Render](http://render.com/images/deploy-to-render-button.svg)](https://yourls.yiyungent.eu.org/knifehubdeployrender)
@@ -187,6 +188,7 @@
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
 > - 每月 `$5.00` 免费额度 / 每月 500 小时免费执行时间
+> - 无需保活, 在免费额度用完之前永不停止运行
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/A3JY-J?referralCode=8eKBDA)
 
@@ -205,10 +207,10 @@
 
 #### 方式4: 使用 Heroku 一键部署 
 
-> 注意：此种方式可能无法 KonataPlugin: QQ登录
+> 注意：此种方式 `KonataPlugin` 可能 无法正常登录上线
 
 > - 点击下方按钮 一键部署       
-> - Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
+> - **注意** : Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
 
 <!-- [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub) -->
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://yourls.yiyungent.eu.org/knifehubdeployheroku)
