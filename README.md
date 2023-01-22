@@ -1,7 +1,7 @@
 ﻿
 <h1 align="center">KnifeHub</h1>
 
-> 工具平台 | 日常生活/学习/工作/开发 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
+> 工具平台 | 日常生活/学习/工作/开发 工具集
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/KnifeHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/KnifeHub.svg?style=flat)](https://github.com/yiyungent/KnifeHub/blob/master/LICENSE)
@@ -17,7 +17,7 @@
 
 ## Introduce
 
-工具平台 | 日常生活/学习/工作/开发 工具集 | QQ、Telegram、微信、钉钉、浏览器自动化、打卡、QQ频道
+工具平台 | 日常生活/学习/工作/开发 工具集
 
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
@@ -36,7 +36,7 @@
 - [x] **大部分功能由插件提供**
 
 <details>
-  <summary>点我 打开/关闭 本仓库 维护的 官方插件</summary>
+  <summary><strong>点我 打开/关闭 本仓库 维护的 官方插件</strong></summary>
 
   - [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
     - [x] 自动签到等
@@ -44,6 +44,23 @@
     - [x] 运行 WebUI 自动化测试
     - [x] 爬虫, 数据采集
     - [x] 一切可用浏览器完成的操作，都可自动化运行
+  - [BackupPlugin](https://github.com/yiyungent/KnifeHub/releases?q=BackupPlugin&expanded=true) 
+    - [x] 定时 自动 备份 插件数据
+    - [x] 将 备份文件 发送到 Telegram 
+    - 备份时资源占用较大
+  - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true)
+    - [x] Duplicati 辅助插件
+    - [x] Duplicati 备份通知 Telegram
+  - [QQNotePlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQNotePlugin&expanded=true) 
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
+    - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
+      - 笔记写入 GitHub 指定仓库的指定文件中
+  - [ZhiDaoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=ZhiDaoPlugin&expanded=true) 
+    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
+    - [x] 自定义问答
+      - [x] 群主/管理员/AdminQQ 自定义问答
+      - [x] 分群自定义问答    
+      - [x] 关键词自动回复 
   - [TelegramPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TelegramPlugin&expanded=true)
     - [x] Telegram 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [TelegramBots/Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
@@ -102,35 +119,19 @@
     - [x] 定时 检测在线状态 (频率:1分钟)
     - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
     - [x] 重新登录成功后, 通知 `AdminQQ`
-  - [QQNotePlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQNotePlugin&expanded=true) 
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
-      - 笔记写入 GitHub 指定仓库的指定文件中
-  - [ZhiDaoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=ZhiDaoPlugin&expanded=true) 
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
-    - [x] 自定义问答
-      - [x] 群主/管理员/AdminQQ 自定义问答
-      - [x] 分群自定义问答    
-      - [x] 关键词自动回复 
   - [QQHelloWorldPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQHelloWorldPlugin&expanded=true)
     - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
     - [x] 复读好友私聊
     - [x] 上下线通知 设置 里的 AdminQQ
-  - [BackupPlugin](https://github.com/yiyungent/KnifeHub/releases?q=BackupPlugin&expanded=true) 
-    - [x] 定时 自动 备份 插件数据
-    - [x] 将 备份文件 发送到 Telegram 
-    - 备份时消耗较大, 建议 搭配 `AutoLoginPlugin` 使用, 防止备份途中 意外掉线
-  - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true)
-    - [x] Duplicati 辅助插件
-    - [x] Duplicati 备份通知 Telegram
+
 
 </details>
 
 ## Screenshots
 
-![PluginCore Admin](./screenshots/PluginCore-Admin.png)
+### PluginCore Admin
 
-![qq_online.png](./screenshots/qq_online.png)
+![PluginCore Admin](./screenshots/PluginCore-Admin.png)
 
 ### [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
 
@@ -229,7 +230,7 @@
 > **注意** : 请不要映射/挂载 容器内 **/app/Plugins/** 目录, 否则可能导致 **插件无法正常上传** , 此问题解决中
 
 ```bash
-docker run -d -p 5004:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
+docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 ```
 
 ```bash
@@ -238,40 +239,6 @@ docker exec -it knifehub bash
 ```
 
 > 现在访问: <http://your-domain/PluginCore/Admin>  your-domain 为黑窗口中显示的 url 地址
-
-
-
-### KonataPlugin: QQ 登录
-
-> 部署完成后
-> > ⭐⭐⭐⭐ 一定要先登录 `PluginCore Admin`, 因为 `QQ登录页面` 与 `PluginCore Admin` 使用相同权限⭐⭐⭐⭐      
-> > 访问 **401** 说明你没有登录 <https://your-domain/PluginCore/Admin>      
-> 1. 访问: <https://your-domain/PluginCore/Admin>  进入 `PluginCore Admin` 在插件列表中添加[KonataPlugin插件](https://github.com/yiyungent/KnifeHub/releases?q=KonataPlugin&expanded=true)
-> 2. 访问: <https://your-domain/Plugins/KonataPlugin> 进行 QQ机器人 登录
-
-> 若为 `短信验证` , 则直接输入收到的验证码, 点击 `提交验证` 即可
-
-> 若为 `滑动验证` , 则 `点击前往验证`, 浏览器在 `滑动验证` 页面 按 `F12`, 再选择 `Network`, 通过滑动验证后, 复制 `ticket` 如下 (不要包括双引号), 将 `ticket` 粘贴到输入框, 点击 `提交验证` 即可
-
-![login_slide.png](./screenshots/login_slide.png)
-
-> 注意验证不要等待太久, 否则尝试刷新登录页面 以重新登录及获取新验证
-
-
-> **注意**    
-> ⭐⭐⭐⭐当 **无法登录** 时⭐⭐⭐⭐
-> 
-> - 当 `滑动验证` `验证通过` 后, 等待一会 , 还是 `无法进入已登录状态`     
->   
-> 可 下载 [Releases - KonataApp - Assets](https://github.com/yiyungent/KnifeHub/releases?q=KonataApp&expanded=true) 在本地登录成功后,    
-> 获取 **BotKeyStore.json** 后, 在登录页面使用 **配置** 方式登录
-> 
-> > - 大部分人电脑为 `Windows 64 位`, 点击 **KonataApp-win-x64.zip** 下载即可, 下载到本地解压, 双击 **KonataApp.exe**
-> > - 运行 `KonataApp.exe` 会自动给出输入提示, 按提示操作即可       
-> > - 运行 `KonataApp.exe` 无需额外安装 `.NET SDK 或 Runtime`, 程序已打包
-
-
-
 
 
 ### 插件管理
