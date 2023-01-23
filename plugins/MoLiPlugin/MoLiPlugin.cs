@@ -52,6 +52,11 @@ namespace MoLiPlugin
                 try
                 {
                     string text = ConvertToString(obj.e.Chain);
+                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+                    {
+                        // 移除前缀
+                        text = text.Substring(settingsModel.Prefix.Length);
+                    }
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
                         content = text,
@@ -103,6 +108,11 @@ namespace MoLiPlugin
                 try
                 {
                     string text = ConvertToString(obj.e.Chain);
+                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+                    {
+                        // 移除前缀
+                        text = text.Substring(settingsModel.Prefix.Length);
+                    }
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
                         content = text,
@@ -140,6 +150,7 @@ namespace MoLiPlugin
                 switch (item.Type)
                 {
                     case BaseChain.ChainType.At:
+                        // 注意: 这里不要 at, 否则发送给茉莉时还需要去除
                         break;
                     case BaseChain.ChainType.Reply:
                         break;
