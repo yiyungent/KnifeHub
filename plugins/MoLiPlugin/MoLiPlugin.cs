@@ -52,10 +52,10 @@ namespace MoLiPlugin
                 try
                 {
                     string text = ConvertToString(obj.e.Chain);
-                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && message.Trim().StartsWith(settingsModel.Prefix))
                     {
-                        // 移除前缀
-                        text = text.Substring(settingsModel.Prefix.Length);
+                        // 移除前缀, 不考虑空格前缀
+                        text = text.Trim().Substring(settingsModel.Prefix.Length);
                     }
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
@@ -108,10 +108,10 @@ namespace MoLiPlugin
                 try
                 {
                     string text = ConvertToString(obj.e.Chain);
-                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Trim().StartsWith(settingsModel.Prefix))
+                    if (!string.IsNullOrEmpty(settingsModel.Prefix) && message.Trim().StartsWith(settingsModel.Prefix))
                     {
-                        // 移除前缀
-                        text = text.Substring(settingsModel.Prefix.Length);
+                        // 移除前缀, 不考虑空格前缀
+                        text = text.Trim().Substring(settingsModel.Prefix.Length);
                     }
                     resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                     {
