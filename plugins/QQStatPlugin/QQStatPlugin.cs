@@ -243,29 +243,28 @@ namespace QQStatPlugin
         {
             try
             {
-                // TODO:
-                await Task.CompletedTask;
+                #region TODO
+                //SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
+                //if (KonataBotStore.Bot != null && KonataBotStore.Bot.IsOnline())
+                //{
+                //    var groupList = await KonataBotStore.Bot.GetGroupList(forceUpdate: true);
+                //    foreach (var group in groupList)
+                //    {
+                //        if (settingsModel.ChartGroups.Contains(group.Uin.ToString()))
+                //        {
+                //            SendStackedArea((KonataBotStore.Bot, null), message: "#折线", groupUin: group.Uin, settingsModel: settingsModel);
 
-                SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
-                if (KonataBotStore.Bot != null && KonataBotStore.Bot.IsOnline())
-                {
-                    var groupList = await KonataBotStore.Bot.GetGroupList(forceUpdate: true);
-                    foreach (var group in groupList)
-                    {
-                        if (settingsModel.ChartGroups.Contains(group.Uin.ToString()))
-                        {
-                            SendStackedArea((KonataBotStore.Bot, null), message: "#折线", groupUin: group.Uin, settingsModel: settingsModel);
+                //            List<BaseChain> baseChains = new List<BaseChain>()
+                //            {
+                //                TextChain.Create("发送 #帮助 获取更多信息")
+                //            };
 
-                            List<BaseChain> baseChains = new List<BaseChain>()
-                            {
-                                TextChain.Create("发送 #帮助 获取更多信息")
-                            };
+                //            await KonataBotStore.Bot.SendGroupMessage(groupUin: group.Uin, baseChains.ToArray());
+                //        }
+                //    }
 
-                            await KonataBotStore.Bot.SendGroupMessage(groupUin: group.Uin, baseChains.ToArray());
-                        }
-                    }
-
-                }
+                //} 
+                #endregion
             }
             catch (Exception ex)
             {
