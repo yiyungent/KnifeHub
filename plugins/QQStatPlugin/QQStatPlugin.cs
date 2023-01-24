@@ -125,7 +125,7 @@ namespace QQStatPlugin
                             try
                             {
                                 var memeberList = obj.s.GetGroupMemberList(groupUin: groupUin, forceUpdate: true).Result.ToList()
-                                    .Select(m => (m.Name, m.Uin)).ToList();
+                                    .Select(m => (m.NickName, m.Uin)).ToList();
                                 var memeberUinList = memeberList.Select(m => m.Uin).ToList();
 
                                 var topByGroupList = DbContext.TopByGroup(groupUin: groupUin.ToString()).Result.ToList();
@@ -138,13 +138,17 @@ namespace QQStatPlugin
                                     baseChains.Add(TextChain.Create($"总字数: {topByGroupList[i].TotalContentLen}  "));
                                     if (memeberUinList.Contains(uint.Parse(topByGroupList[i].QQUin)))
                                     {
-                                        var memeber = memeberList.FirstOrDefault(m => m.Uin.ToString() == topByGroupList[i].QQUin);
+                                        //var memberTemp = memeberList.FirstOrDefault(m => m.Uin.ToString() == topByGroupList[i].QQUin);
+                                        // 没有 memberTemp.Name
+
+                                        var memberTemp = obj.s.GetGroupMemberInfo(groupUin: groupUin, memberUin: uint.Parse(topByGroupList[i].QQUin), forceUpdate: true).Result;
+
                                         //baseChains.Add(AtChain.Create(uint.Parse(topByGroupList[i].QQUin)));
-                                        baseChains.Add(TextChain.Create($"{member.Name}"));
+                                        baseChains.Add(TextChain.Create($"{memberTemp.NickName}({topByGroupList[i].QQUin})"));
                                     }
                                     else
                                     {
-                                        baseChains.Add(TextChain.Create($"{topByGroupList[i].QQUin}"));
+                                        baseChains.Add(TextChain.Create($"已退群({topByGroupList[i].QQUin})"));
                                     }
                                     baseChains.Add(TextChain.Create("\r\n"));
                                 }
