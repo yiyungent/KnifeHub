@@ -131,6 +131,7 @@ namespace QQStatPlugin
                                 var topByGroupList = DbContext.TopByGroup(groupUin: groupUin.ToString()).Result.ToList();
                                 List<BaseChain> baseChains = new List<BaseChain>();
                                 baseChains.Add(TextChain.Create("本群发言排行榜 (总字数)"));
+                                baseChains.Add(TextChain.Create("\r\n"));
                                 for (int i = 0; i < topByGroupList.Count; i++)
                                 {
                                     baseChains.Add(TextChain.Create($"{(i + 1)}: "));
