@@ -1,29 +1,29 @@
 
 
-
-
-
 ## 前端视图
 
 - [/Plugins/QQStatPlugin](/Plugins/QQStatPlugin) - 未做
 
 
-## 聊天功能
+## 聊天命令
+
+> `ChartGroups` 群范围内 任何人都可发送命令
+
+> `AdminGroups` 群范围内 仅 AdminQQ/群主/群管理员 可发送命令
 
 ### `#帮助`
 
 ### `#日历`
 
+> 本群日历图 
+
 > 需要设置 `BaseUrl`, `ScreenshotUrl`, `ScreenshotUrl` 保持默认即可
-
-> `AdminGroups` 群范围内, AdminQQ/群主/群管理员 发送 `#日历` , 获取本群 日历图
-
-或者发送 `#日历 目标个人QQ号`, 获取此人 在 **此群** 数据形成的日历
-
 
 ### `#折线`
 
 > 本群折线图 
+
+> 需要设置 `BaseUrl`, `ScreenshotUrl`, `ScreenshotUrl` 保持默认即可
 
 ### `#排行榜`
 

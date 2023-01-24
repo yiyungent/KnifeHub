@@ -243,6 +243,9 @@ namespace QQStatPlugin
         {
             try
             {
+                // TODO:
+                await Task.CompletedTask;
+
                 SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQStatPlugin));
                 if (KonataBotStore.Bot != null && KonataBotStore.Bot.IsOnline())
                 {
