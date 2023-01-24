@@ -13,6 +13,7 @@ using System.Text;
 using Konata.Core.Message;
 using System.Collections.Generic;
 using KonataPlugin;
+using System.Linq;
 
 namespace QQStatPlugin
 {
@@ -92,6 +93,7 @@ namespace QQStatPlugin
                             stringBuilder.AppendLine("#日历 指定某人QQ");
                             stringBuilder.AppendLine("#折线");
                             stringBuilder.AppendLine("#折线 指定某人QQ");
+                            stringBuilder.AppendLine("#排行榜");
                             stringBuilder.AppendLine("补充:");
                             stringBuilder.AppendLine("日历为 计算消息字数");
                             stringBuilder.AppendLine("折线为 计算消息字数");
@@ -113,6 +115,41 @@ namespace QQStatPlugin
                             catch (Exception ex)
                             {
                                 Console.WriteLine("SendStackedArea() 失败:");
+                                Console.WriteLine(ex.ToString());
+                            }
+                            #endregion
+                        }
+                        else if (message.Contains("#排行榜"))
+                        {
+                            #region 排行榜
+                            try
+                            {
+                                var memeberList = obj.s.GetGroupMemberList(groupUin: groupUin, forceUpdate: true).Result.ToList()
+                                    .Select(m => (m.Name, m.Uin)).ToList();
+                                var memeberUinList = memeberList.Select(m => m.Uin).ToList();
+
+                                var topByGroupList = DbContext.TopByGroup(groupUin: groupUin.ToString()).Result.ToList();
+                                List<BaseChain> baseChains = new List<BaseChain>();
+                                baseChains.Add(TextChain.Create("本群发言排行榜 (总字数)"));
+                                for (int i = 0; i < topByGroupList.Count; i++)
+                                {
+                                    baseChains.Add(TextChain.Create($"{(i + 1)}: "));
+                                    baseChains.Add(TextChain.Create($"总字数: {topByGroupList[i].TotalContentLen}  "));
+                                    if (memeberUinList.Contains(uint.Parse(topByGroupList[i].QQUin)))
+                                    {
+                                        baseChains.Add(AtChain.Create(uint.Parse(topByGroupList[i].QQUin)));
+                                    }
+                                    else
+                                    {
+                                        baseChains.Add(TextChain.Create($"@{topByGroupList[i].QQUin}"));
+                                    }
+                                    baseChains.Add(TextChain.Create("\r\n"));
+                                }
+                                obj.s.SendGroupMessage(groupUin, baseChains.ToArray());
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("发送 排行榜 失败:");
                                 Console.WriteLine(ex.ToString());
                             }
                             #endregion

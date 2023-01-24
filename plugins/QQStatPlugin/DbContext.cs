@@ -69,5 +69,24 @@ namespace QQStatPlugin
             }
         }
 
+        public async static Task<IEnumerable<(string QQUin, long TotalContentLen)>> TopByGroup(string groupUin)
+        {
+            using (IDbConnection con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+
+                string sql = @"SELECT QQUin, SUM(ContentLen) AS TotalContentLen
+                                FROM(SELECT Id, QQUin, LENGTH(Content) AS ContentLen FROM Message WHERE GroupUin = @GroupUin)
+                                GROUP BY QQUin
+                                ORDER BY TotalContentLen DESC
+                                LIMIT 10;";
+
+                return await con.QueryAsync<(string QQUin, long TotalContentLen)>(sql, new
+                {
+                    GroupUin = groupUin
+                });
+            }
+        }
+
     }
 }

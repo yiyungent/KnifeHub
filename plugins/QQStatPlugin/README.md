@@ -10,6 +10,8 @@
 
 ## 聊天功能
 
+### `#帮助`
+
 ### `#日历`
 
 > 需要设置 `BaseUrl`, `ScreenshotUrl`, `ScreenshotUrl` 保持默认即可
@@ -21,7 +23,11 @@
 
 ### `#折线`
 
+> 本群折线图 
 
+### `#排行榜`
+
+> 查询在本群的发言字数排行榜
 
 
 ## 其它
@@ -30,3 +36,6 @@
 
 - [下载数据库 (QQStatPlugin.sqlite)](/Plugins/QQStatPlugin/Download)
 
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.QQStatPlugin.README" style="border:0" alt="" />
+<!-- End Matomo -->
