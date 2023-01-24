@@ -138,11 +138,13 @@ namespace QQStatPlugin
                                     baseChains.Add(TextChain.Create($"总字数: {topByGroupList[i].TotalContentLen}  "));
                                     if (memeberUinList.Contains(uint.Parse(topByGroupList[i].QQUin)))
                                     {
-                                        baseChains.Add(AtChain.Create(uint.Parse(topByGroupList[i].QQUin)));
+                                        var memeber = memeberList.FirstOrDefault(m => m.Uin.ToString() == topByGroupList[i].QQUin);
+                                        //baseChains.Add(AtChain.Create(uint.Parse(topByGroupList[i].QQUin)));
+                                        baseChains.Add(TextChain.Create($"{member.Name}"));
                                     }
                                     else
                                     {
-                                        baseChains.Add(TextChain.Create($"@{topByGroupList[i].QQUin}"));
+                                        baseChains.Add(TextChain.Create($"{topByGroupList[i].QQUin}"));
                                     }
                                     baseChains.Add(TextChain.Create("\r\n"));
                                 }
