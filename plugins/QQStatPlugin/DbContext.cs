@@ -57,5 +57,17 @@ namespace QQStatPlugin
             }
         }
 
+        public async static Task<long> Count()
+        {
+            using (IDbConnection con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+
+                string sql = "SELECT COUNT(*) FROM Message;";
+
+                return await con.QueryFirstAsync<long>(sql);
+            }
+        }
+
     }
 }

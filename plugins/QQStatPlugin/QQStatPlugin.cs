@@ -159,12 +159,12 @@ namespace QQStatPlugin
                 {
                     try
                     {
-                        var messages = DbContext.QueryAllMessage();
-                        obj.s.SendFriendMessage(friendUin, $"共收集 Message {(messages?.Count.ToString() ?? "0")} 条");
+                        long count = DbContext.Count().Result;
+                        obj.s.SendFriendMessage(friendUin, $"共收集 Message {count} 条");
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("查询 Message 出错");
+                        Console.WriteLine("查询 Message 条数 出错");
                     }
                 }
             }

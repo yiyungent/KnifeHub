@@ -2,6 +2,6 @@
   "AdminQQ": "",
   "AdminGroups": [ "", "" ],
   "ChartGroups": [ "", "" ],
-  "BaseUrl": "",
-  "ScreenshotUrl": "https://webscreenshot-yiyun.herokuapp.com/?windowWidth=1080&forceWait=5&url="
+  "BaseUrl": "https://qqbothub.moeci.com",
+  "ScreenshotUrl": "https://webstack-screenshot.vercel.app/?viewport=1920x1080&fullPage=true&url="
 }
