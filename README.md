@@ -310,6 +310,8 @@ docker restart knifehub
 
 ## 插件开发
 
+### 开发必读
+
 > 注意:  
 > 所有纯基于 `PluginCore.IPlugins` 开发的插件都通用,   
 > 下载插件包, 然后 `上传 -> 安装 -> 设置 -> 启用` 即可
@@ -333,6 +335,20 @@ dotnet add package KnifeHub.Sdk
 > - 本项目目前直接使用的 `PluginCore` 插件框架, 插件采用激发式, 插件工作完成后, 实例会立即销毁, 无法常驻后台
 > - 若需要定时任务, 可以使用 `ITimeJobPlugin`, 可见 `PluginCore` 的文档    
 > - 由于 QQBot 本身为常驻, 因此需额外注意 `IPluginFinder` 的服务的生命周期/范围, 这点和在 `ASP.NET Core` 的 `Controller` 中 直接使用不同
+
+### 在线开发
+
+<!-- https://yourls.yiyungent.eu.org/replit0knifehub0v1 -->
+
+> > #### [使用 Replit 在线开发 | 点我前往](https://replit.com/@yiyungent/KnifeHub?v=1)
+> - 预设 Replit 开发模板
+> - 免费注册, 无需信用卡验证
+> - 免费在线实验环境, 可启动项目
+> - `Console/Shell` 支持
+> - 未注册用户注册登录后, 再回到此处点击上方链接, `fork` 此 Replit 模板项目, 基于此开发更方便, 但此模板可能不是最新版, 建议在实验环境中 `git pull`
+> - 注意: 此实验环境 `KonataPlugin` 无法登录上线, 你依然需要做本地测试
+
+
 
 ## 相关项目
 
