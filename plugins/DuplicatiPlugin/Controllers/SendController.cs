@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DuplicatiPlugin.RequestModel;
 using Telegram.Bot;
+using DuplicatiPlugin.Models;
+using System.Text.Json;
 
 namespace DuplicatiPlugin.Controllers
 {
@@ -14,6 +16,81 @@ namespace DuplicatiPlugin.Controllers
     public class SendController : ControllerBase
     {
         #region Actions
+
+        [HttpGet, HttpPost]
+        [Route("{key}/apply")]
+        public async Task<ActionResult> Apply([FromRoute] string key, [FromForm] string message)
+        {
+            SettingsModel settings = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(DuplicatiPlugin));
+            // 切割 message
+            string splitLineStr = "<--DuplicatiPlugin-->";
+            int splitLineFirstIndex = message.IndexOf(splitLineStr);
+            string jsonStr = message.Substring(startIndex: 0, length: splitLineFirstIndex).Trim();
+            string duplicatiStr = message.Substring(startIndex: splitLineFirstIndex + splitLineStr.Length).Trim();
+            if (settings.UseDebugModel && settings.Telegram != null && settings.Telegram.Enable)
+            {
+                try
+                {
+                    var botClient = new TelegramBotClient(settings.Telegram.BotToken);
+                    await botClient.SendTextMessageAsync(
+                           chatId: settings.Telegram.ChatId,
+                           text: $"message:\r\n" + message);
+                    await botClient.SendTextMessageAsync(
+                            chatId: settings.Telegram.ChatId,
+                            text: $"jsonStr:\r\n" + jsonStr);
+                    await botClient.SendTextMessageAsync(
+                           chatId: settings.Telegram.ChatId,
+                           text: $"duplicatiStr:\r\n" + duplicatiStr);
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogUtil.Exception(ex);
+                }
+
+            }
+
+            // 解析 message
+            DuplicatiMessageModel jsonModel = JsonSerializer.Deserialize<DuplicatiMessageModel>(jsonStr);
+            // TODO: 解析 duplicatiStr
+
+
+            // 使用设置里的 Telegram
+            try
+            {
+                #region Telegram
+                if (settings.Telegram != null && settings.Telegram.Enable)
+                {
+                    var botClient = new TelegramBotClient(settings.Telegram.BotToken);
+                    string badge = "🔴";
+                    switch (jsonModel.ParsedResult)
+                    {
+                        case "Success":
+                            badge = "✅";
+                            break;
+                        default:
+                            badge = "🔴";
+                            break;
+                    }
+                    string temp = $"Duplicati: {jsonModel.OperationName} \r\n"
+                                  + $"{jsonModel.BackupName} \r\n"
+                                  + $"{badge}";
+                    // 发送
+                    await botClient.SendTextMessageAsync(
+                        chatId: settings.Telegram.ChatId,
+                        text: temp);
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Utils.LogUtil.Exception(ex);
+
+                return Ok("fail");
+            }
+
+
+            return Ok("Ok");
+        }
 
         [HttpGet, HttpPost]
         [Route("to/TgChatId/{chatId}/apply")]
