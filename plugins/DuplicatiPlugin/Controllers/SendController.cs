@@ -22,6 +22,8 @@ namespace DuplicatiPlugin.Controllers
         public async Task<ActionResult> Apply([FromRoute] string key, [FromForm] string message)
         {
             SettingsModel settings = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(DuplicatiPlugin));
+
+            #region 数据预处理
             // 切割 message
             string splitLineStr = "<--DuplicatiPlugin-->";
             int splitLineFirstIndex = message.IndexOf(splitLineStr);
@@ -51,10 +53,11 @@ namespace DuplicatiPlugin.Controllers
 
             // 解析 message
             DuplicatiMessageModel jsonModel = JsonSerializer.Deserialize<DuplicatiMessageModel>(jsonStr);
-            // TODO: 解析 duplicatiStr
-
+            // TODO: 解析 duplicatiStr 
+            #endregion
 
             // 使用设置里的 Telegram
+            #region Telegram 通知
             try
             {
                 #region Telegram
@@ -86,8 +89,12 @@ namespace DuplicatiPlugin.Controllers
                 Utils.LogUtil.Exception(ex);
 
                 return Ok("fail");
-            }
+            } 
+            #endregion
 
+            #region 保存数据库, key 做来源区分
+
+            #endregion
 
             return Ok("Ok");
         }

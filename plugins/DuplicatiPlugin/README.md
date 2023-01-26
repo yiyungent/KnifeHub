@@ -18,7 +18,7 @@
 > 3. `@userinfobot` 通过此机器人获取你的 `Id` , 即为 `ChatId`
 
 
-### 2. 全局设置 Duplicati
+### 2. 方式1: 全局设置 Duplicati
 
 - [右键复制本链接, 然后再替换其中内容](/api/Duplicati/TgBotToken/replace-your-botToken/to/TgChatId/replace-your-chatId/apply)
 
@@ -29,9 +29,25 @@
 > Duplicati - 设置 - 默认选项 - 以文本形式编辑
 
 ```
+--send-http-result-output-format=Duplicati
 --send-http-url=替换为你的链接
 ```
 
+### 2. 方式2: 全局设置 Duplicati
+
+- [右键复制本链接, 然后再替换其中内容](/api/Duplicati/replace-your-key/apply)
+
+```
+/api/Duplicati/替换为你的来源key,用作区分/apply
+```
+
+> Duplicati - 设置 - 默认选项 - 以文本形式编辑
+
+```
+--send-http-result-output-format=Duplicati
+--send-http-message={"Name":"Duplicati","OperationName":"%OPERATIONNAME%","BackupName":"%backup-name%","ParsedResult":"%PARSEDRESULT%","LocalPath":"%LOCALPATH%","RemoteUrl":"%REMOTEURL%"}<--DuplicatiPlugin-->%RESULT%
+--send-http-url=替换为你的链接
+```
 
 
 
