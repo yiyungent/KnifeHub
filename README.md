@@ -166,6 +166,8 @@
 
 #### 方式2: 使用 Render 免费 一键部署 
 
+> 注意: 此种方式 'KonataPlugin' 可能无法登录上线
+
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
 > - Free Instance Hours: 750 hours/month
@@ -207,7 +209,7 @@
 
 #### 方式4: 使用 Heroku 一键部署 
 
-> 注意：此种方式 `KonataPlugin` 可能 无法正常登录上线
+> 注意：此种方式 `KonataPlugin` 可能无法登录上线
 
 > - 点击下方按钮 一键部署       
 > - **注意** : Heroku 应用一段时间不访问会自动休眠, 因此为了保证存活, 请使用第三方监控保活, 例如: [UptimeRobot: 免费网站监控服务](https://uptimerobot.com/)   
