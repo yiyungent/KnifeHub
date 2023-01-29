@@ -11,6 +11,7 @@ using KonataPlugin;
 using Konata.Core.Message;
 using Konata.Core.Message.Model;
 using System.Text;
+using System.Collections.Generic;
 
 namespace MoLiPlugin
 {
@@ -29,7 +30,7 @@ namespace MoLiPlugin
         }
 
         #region QQBot
-        public void OnGroupMessage((Bot s, GroupMessageEvent e) obj, string message, string groupName, uint groupUin, uint memberUin)
+        public async void OnGroupMessage((Bot s, GroupMessageEvent e) obj, string message, string groupName, uint groupUin, uint memberUin)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLiPlugin));
 
@@ -77,16 +78,26 @@ namespace MoLiPlugin
                 {
                     if (resModel.data != null && resModel.data.Count >= 1)
                     {
+                        List<BaseChain> baseChains = new List<BaseChain>();
                         foreach (var item in resModel.data)
                         {
-                            obj.s.SendGroupMessage(groupUin: groupUin, message: item.content);
+                            if (item.typed == "1") {
+                                baseChains.Add(TextChain.Create(item.content));
+                            } else if (item.typed == "2") {
+                                string imageUrl = "https://files.molicloud.com/" + item.content;
+                                baseChains.Add(ImageChain.CreateFromUrl(url: imageUrl));
+                            } else {
+                                baseChains.Add(TextChain.Create(item.content));
+                            }
+                            baseChains.Add(TextChain.Create("\r\n"));
                         }
+                        await obj.s.SendGroupMessage(groupUin: groupUin, chains: baseChains.ToArray());
                     }
                 }
             }
         }
 
-        public void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)
+        public async void OnFriendMessage((Bot s, FriendMessageEvent e) obj, string message, uint friendUin)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLiPlugin));
 
@@ -133,10 +144,20 @@ namespace MoLiPlugin
                 {
                     if (resModel.data != null && resModel.data.Count >= 1)
                     {
+                        List<BaseChain> baseChains = new List<BaseChain>();
                         foreach (var item in resModel.data)
                         {
-                            obj.s.SendFriendMessage(friendUin: friendUin, message: item.content);
+                            if (item.typed == "1") {
+                                baseChains.Add(TextChain.Create(item.content));
+                            } else if (item.typed == "2") {
+                                string imageUrl = "https://files.molicloud.com/" + item.content;
+                                baseChains.Add(ImageChain.CreateFromUrl(url: imageUrl));
+                            } else {
+                                baseChains.Add(TextChain.Create(item.content));
+                            }
+                            baseChains.Add(TextChain.Create("\r\n"));
                         }
+                        await obj.s.SendFriendMessage(friendUin: friendUin, chains: baseChains.ToArray());
                     }
                 }
             }

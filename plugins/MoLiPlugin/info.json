@@ -3,6 +3,6 @@
 	"DisplayName": "茉莉机器人",
 	"Description": "对接 茉莉 API",
 	"Author": "yiyun",
-	"Version": "1.0.2",
+	"Version": "1.0.3",
 	"SupportedVersions": [ "0.0.1" ]
 }
