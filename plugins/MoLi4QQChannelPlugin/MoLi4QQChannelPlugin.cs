@@ -145,6 +145,11 @@ namespace MoLi4QQChannelPlugin
             {
                 return;
             }
+            if (!string.IsNullOrEmpty(settingsModel.Prefix) && text.Trim().StartsWith(settingsModel.Prefix))
+            {
+                // 移除前缀, 不考虑空格前缀
+                text = text.Trim().Substring(settingsModel.Prefix.Length);
+            }
 
             Console.WriteLine("茉莉准备回复: ");
             MoLiApiResponseModel resModel = new MoLiApiResponseModel();
