@@ -97,7 +97,14 @@ namespace MoLi4QQChannelPlugin
                 {
                     foreach (var item in resModel.data)
                     {
-                        qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        if (item.typed == "1") {
+                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        } else if (item.typed == "2") {
+                            string imageUrl = "https://files.molicloud.com/" + item.content;
+                            qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                        } else {
+                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        }
                     }
                 }
             }
@@ -177,7 +184,14 @@ namespace MoLi4QQChannelPlugin
                 {
                     foreach (var item in resModel.data)
                     {
-                        qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        if (item.typed == "1") {
+                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        } else if (item.typed == "2") {
+                            string imageUrl = "https://files.molicloud.com/" + item.content;
+                            qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                        } else {
+                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        }
                     }
                 }
             }
