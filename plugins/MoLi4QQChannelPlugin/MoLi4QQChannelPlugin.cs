@@ -8,6 +8,7 @@ using System.Text;
 using QQChannelPlugin.IPlugins;
 using QQChannelFramework.Models.MessageModels;
 using QQChannelFramework.Api;
+using System.Text.RegularExpressions;
 
 namespace MoLi4QQChannelPlugin
 {
@@ -47,12 +48,33 @@ namespace MoLi4QQChannelPlugin
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLi4QQChannelPlugin));
             Console.WriteLine($"茉莉: 来自: {message.ChannelId}-{message.Author.UserName}");
 
+            string text = message.Content;
+
+            #region 去除 @
+            try
+            {
+                // 在吗 <@!13214513123523> 你还好吗  <@!131245451434>
+                // 去除 @ 字符
+                //string text = message.Content.Replace($"<@!{qChannelApi.GetUserApi().GetCurrentUserAsync().Result.Id}>", "");
+                Regex atRegex = new Regex(@"<@\![0-9]*>");
+                //var atMatches = atRegex.Matches(message.Content);
+                text = atRegex.Replace(message.Content, "");
+            }
+            catch (Exception ex)
+            { } 
+            #endregion
+
+            // 排除启用前缀且不满足前缀
+            if (!string.IsNullOrEmpty(settingsModel.Prefix) && !text.Trim().StartsWith(settingsModel.Prefix))
+            {
+                return;
+            }
+
             Console.WriteLine("茉莉准备回复: ");
             MoLiApiResponseModel resModel = new MoLiApiResponseModel();
             try
             {
-                // 去除 @机器人 字符
-                string text = message.Content.Replace($"<@!{qChannelApi.GetUserApi().GetCurrentUserAsync().Result.Id}>", "");
+
                 resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                 {
                     content = text,
@@ -86,10 +108,32 @@ namespace MoLi4QQChannelPlugin
             // 私信
         }
 
+        /// <summary>
+        /// 无 @
+        /// </summary>
+        /// <param name="botAppId"></param>
+        /// <param name="message"></param>
+        /// <param name="qChannelApi"></param>
         public void ReceivedUserMessage(string botAppId, Message message, QQChannelApi qChannelApi)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLi4QQChannelPlugin));
             Console.WriteLine($"茉莉: 来自: {message.ChannelId}-{message.Author.UserName}");
+
+            string text = message.Content;
+
+            #region 去除 @
+            try
+            {
+                // 在吗 <@!13214513123523> 你还好吗  <@!131245451434>
+                // 去除 @ 字符
+                //string text = message.Content.Replace($"<@!{qChannelApi.GetUserApi().GetCurrentUserAsync().Result.Id}>", "");
+                Regex atRegex = new Regex(@"<@\![0-9]*>");
+                //var atMatches = atRegex.Matches(message.Content);
+                text = atRegex.Replace(message.Content, "");
+            }
+            catch (Exception ex)
+            { }
+            #endregion
 
             // 排除 at
             if (settingsModel.AtEnable)
@@ -97,7 +141,7 @@ namespace MoLi4QQChannelPlugin
                 return;
             }
             // 排除启用前缀且不满足前缀
-            if (!string.IsNullOrEmpty(settingsModel.Prefix) && !message.Content.Trim().StartsWith(settingsModel.Prefix))
+            if (!string.IsNullOrEmpty(settingsModel.Prefix) && !text.Trim().StartsWith(settingsModel.Prefix))
             {
                 return;
             }
@@ -106,7 +150,6 @@ namespace MoLi4QQChannelPlugin
             MoLiApiResponseModel resModel = new MoLiApiResponseModel();
             try
             {
-                string text = message.Content;
                 resModel = Utils.MoLiApiUtil.Reply(new MoLiApiRequestModel
                 {
                     content = text,
