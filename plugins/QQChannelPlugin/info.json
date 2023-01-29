@@ -3,6 +3,6 @@
 	"DisplayName": "QQ频道插件",
 	"Description": "QQ频道基础插件",
 	"Author": "yiyun",
-	"Version": "0.1.1",
+	"Version": "0.1.2",
 	"SupportedVersions": [ "0.0.1" ]
 }

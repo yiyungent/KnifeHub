@@ -91,20 +91,24 @@ namespace QQChannelPlugin.Controllers
             }
 
             // TODO: 暂时这么做, 以后优化界面
-            return Content("尝试登录 设置 里的 QQ频道机器人中, 请耐性等待! 注意查看控制台!");
+            return Content("尝试登录 设置 里的QQ频道机器人中, 请耐性等待! 看到此页面可能已上线/登录中");
         }
 
-        private async void ChannelBotItem(SettingsModel.BotDevItemModel botConfig, SettingsModel settings)
+        [NonAction]
+        public async void ChannelBotItem(SettingsModel.BotDevItemModel botConfig, SettingsModel settings)
         {
             // https://www.yuque.com/chianne1025/mybot/otkzzg
 
             // 声明鉴权信息
+            #region OpenApiAccessInfo
             OpenApiAccessInfo openApiAccessInfo = new OpenApiAccessInfo();
             openApiAccessInfo.BotAppId = botConfig.BotAppId;
             openApiAccessInfo.BotToken = botConfig.BotToken;
             openApiAccessInfo.BotSecret = botConfig.BotSecret;
+            #endregion
 
             // 使用QQChannelApi获取相应的Api接口
+            #region QQChannelApi
             // 鉴权信息在实例化时传入
             QQChannelApi qChannelApi = new(openApiAccessInfo);
 
@@ -121,13 +125,34 @@ namespace QQChannelPlugin.Controllers
                 // 不指定的情况下默认是正式模式
                 //qChannelApi.UseReleaseMode();
             }
+            #endregion
 
             // 实例化一个 ChannelBot,该类是一个容易理解且简单的类
+            #region ChannelBot
             // 帮助你快速实现一个利于理解学习与开发的机器人原型
             // 将鉴权信息 (openApiAccessInfo) 传入构造函数
             ChannelBot channelBot = new(qChannelApi);
             // 注册接受@机器人消息时间，否则无法收到消息
-            channelBot.RegisterAtMessageEvent();
+            //channelBot.RegisterAtMessageEvent();
+            channelBot.RegisterGuildsEvent() // 订阅 主频道相关事件
+                        .RegisterGuildMembersEvent() // 订阅 频道成员相关事件
+                        .RegisterAtMessageEvent() // 订阅 @机器人的消息事件
+                        .RegisterUserMessageEvent() // 订阅 无需@机器人的消息事件
+                        .RegisterAudioActionEvent() // 订阅 音频机器人相关事件
+                        .RegisterForumEvent(); // 订阅 论坛相关事件
+
+            if (botConfig.UsePrivateBot)
+            {
+                channelBot.UsePrivateBot();
+            }
+            if (botConfig.EnableUserMessageTriggerCommand)
+            {
+                channelBot.EnableUserMessageTriggerCommand();
+            }
+            else
+            {
+                channelBot.CloseUserMessageTriggerCommand();
+            }
 
             #region 事件
 
@@ -230,6 +255,8 @@ namespace QQChannelPlugin.Controllers
                     plugin.ReceivedUserMessage(openApiAccessInfo.BotAppId, message, qChannelApi);
                 }
             };
+
+            #endregion 
 
             #endregion
 

@@ -5,6 +5,8 @@
       "BotToken": "",
       "BotSecret": "",
       "UseSandBoxMode": true,
+      "UsePrivateBot": true,
+      "EnableUserMessageTriggerCommand": true,
       "UseDemoModel": true
     },
     {
@@ -12,6 +14,8 @@
       "BotToken": "",
       "BotSecret": "",
       "UseSandBoxMode": true,
+      "UsePrivateBot": true,
+      "EnableUserMessageTriggerCommand": true,
       "UseDemoModel": true
     }
   ]

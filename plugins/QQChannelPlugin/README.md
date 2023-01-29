@@ -5,12 +5,33 @@
 
 > 本项目为 QQ频道 基础插件, 可通过依赖本插件开发相关插件
 
+
+## 设置
+
+> 可配置多个机器人, 当然不需要那么多, 可删除, 只留一个
+
 ```json
 "UseSandBoxMode": true,
+"UsePrivateBot": true,
+"EnableUserMessageTriggerCommand": true,
 "UseDemoModel": true
 ```
 
+> `UseSandBoxMode`: true    
+> 指定Api通道模式为沙盒模式 (测试时使用), 不指定的情况下默认是正式模式  
+
+> `UsePrivateBot`: true   
+> 指定为私域机器人  
+> 在想要使用一些私域机器人功能时，需要通过以下方法指定机器人为私域，否则无法正常使用。  
+> 例如： 无需 @机器人 可收到频道内用户消息
+
+> `EnableUserMessageTriggerCommand`: true    
+> 启用无须@ 触发指令功能 (私域机器人可用)  
+> 启用后，频道内触发机器人指令 无需 @机器人
+
+> `UseDemoModel`: true    
 > 当开启 `UseDemoModel` 时, 可在机器人加入的频道内 `@机器人` , 它会自动回复, 此项功能用于测试
+
 
 
 ## 登录
