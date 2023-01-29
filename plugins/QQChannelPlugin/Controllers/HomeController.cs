@@ -132,27 +132,81 @@ namespace QQChannelPlugin.Controllers
             // 帮助你快速实现一个利于理解学习与开发的机器人原型
             // 将鉴权信息 (openApiAccessInfo) 传入构造函数
             ChannelBot channelBot = new(qChannelApi);
-            // 注册接受@机器人消息时间，否则无法收到消息
-            //channelBot.RegisterAtMessageEvent();
-            channelBot.RegisterGuildsEvent() // 订阅 主频道相关事件
-                        .RegisterGuildMembersEvent() // 订阅 频道成员相关事件
-                        .RegisterAtMessageEvent() // 订阅 @机器人的消息事件
-                        .RegisterUserMessageEvent() // 订阅 无需@机器人的消息事件
-                        .RegisterAudioActionEvent() // 订阅 音频机器人相关事件
-                        .RegisterForumEvent(); // 订阅 论坛相关事件
+            try
+            {
+                if (botConfig.UsePrivateBot)
+                {
+                    // 注意: 配置在之前, 否则注册事件报错
+                    channelBot.UsePrivateBot();
+                }
+                if (botConfig.EnableUserMessageTriggerCommand)
+                {
+                    channelBot.EnableUserMessageTriggerCommand();
+                }
+                else
+                {
+                    channelBot.CloseUserMessageTriggerCommand();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterGuildsEvent(); // 订阅 主频道相关事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 主频道相关事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterGuildMembersEvent(); // 订阅 频道成员相关事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 频道成员相关事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterAtMessageEvent(); // 订阅 @机器人的消息事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 @机器人的消息事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterUserMessageEvent(); // 订阅 无需@机器人的消息事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 无需@机器人的消息事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterAudioActionEvent(); // 订阅 音频机器人相关事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 音频机器人相关事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
+            try
+            {
+                channelBot.RegisterForumEvent(); // 订阅 论坛相关事件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("订阅 论坛相关事件 失败");
+                Console.WriteLine(ex.ToString());
+            }
 
-            if (botConfig.UsePrivateBot)
-            {
-                channelBot.UsePrivateBot();
-            }
-            if (botConfig.EnableUserMessageTriggerCommand)
-            {
-                channelBot.EnableUserMessageTriggerCommand();
-            }
-            else
-            {
-                channelBot.CloseUserMessageTriggerCommand();
-            }
 
             #region 事件
 
