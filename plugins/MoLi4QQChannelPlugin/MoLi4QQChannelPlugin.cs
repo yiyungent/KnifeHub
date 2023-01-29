@@ -43,7 +43,7 @@ namespace MoLi4QQChannelPlugin
 
         }
 
-        public void ReceivedAtMessage(string botAppId, Message message, QQChannelApi qChannelApi)
+        public async void ReceivedAtMessage(string botAppId, Message message, QQChannelApi qChannelApi)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLi4QQChannelPlugin));
             Console.WriteLine($"茉莉: 来自: {message.ChannelId}-{message.Author.UserName}");
@@ -98,12 +98,12 @@ namespace MoLi4QQChannelPlugin
                     foreach (var item in resModel.data)
                     {
                         if (item.typed == "1") {
-                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
                         } else if (item.typed == "2") {
                             string imageUrl = "https://files.molicloud.com/" + item.content;
-                            qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
                         } else {
-                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
                         }
                     }
                 }
@@ -121,7 +121,7 @@ namespace MoLi4QQChannelPlugin
         /// <param name="botAppId"></param>
         /// <param name="message"></param>
         /// <param name="qChannelApi"></param>
-        public void ReceivedUserMessage(string botAppId, Message message, QQChannelApi qChannelApi)
+        public async void ReceivedUserMessage(string botAppId, Message message, QQChannelApi qChannelApi)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MoLi4QQChannelPlugin));
             Console.WriteLine($"茉莉: 来自: {message.ChannelId}-{message.Author.UserName}");
@@ -185,12 +185,12 @@ namespace MoLi4QQChannelPlugin
                     foreach (var item in resModel.data)
                     {
                         if (item.typed == "1") {
-                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
                         } else if (item.typed == "2") {
                             string imageUrl = "https://files.molicloud.com/" + item.content;
-                            qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
                         } else {
-                            qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
                         }
                     }
                 }
