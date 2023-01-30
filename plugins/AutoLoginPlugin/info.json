@@ -3,6 +3,6 @@
   "DisplayName": "自动重新登录插件",
   "Description": "出现异常离线后,自动重新登录",
   "Author": "yiyun",
-  "Version": "0.1.1",
+  "Version": "0.1.2",
   "SupportedVersions": [ "0.0.1" ]
 }
