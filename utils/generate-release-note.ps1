@@ -13,7 +13,8 @@ if ($targetTags.Count -lt 2) {
     # <2
     # $projectTagScope = $targetTags[$targetTags.Count - 1]
     # 注意: 这里尤其需要注意: 当它只有一个时, 就不再是数组, 而是一个值
-    $projectTagScope = $targetTags
+    # 只有一个,即为最开始, 此时不再限定 tag 范围, 因为之前历史全为 changelog
+    $projectTagScope = ""
 } else {
     # >=2
     $projectTagScope = $targetTags[$targetTags.Count - 2] + ".." + $targetTags[$targetTags.Count - 1]
