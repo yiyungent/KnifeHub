@@ -89,7 +89,7 @@ namespace MoLiPlugin
                             } else {
                                 baseChains.Add(TextChain.Create(item.content));
                             }
-                            baseChains.Add(TextChain.Create("\r\n"));
+                            // baseChains.Add(TextChain.Create("\r\n"));
                         }
                         await obj.s.SendGroupMessage(groupUin: groupUin, chains: baseChains.ToArray());
                     }
@@ -155,7 +155,7 @@ namespace MoLiPlugin
                             } else {
                                 baseChains.Add(TextChain.Create(item.content));
                             }
-                            baseChains.Add(TextChain.Create("\r\n"));
+                            // baseChains.Add(TextChain.Create("\r\n"));
                         }
                         await obj.s.SendFriendMessage(friendUin: friendUin, chains: baseChains.ToArray());
                     }
