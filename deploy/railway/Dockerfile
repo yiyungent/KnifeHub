@@ -1,6 +1,6 @@
 # Railway Dockerfile
 
-FROM yiyungent/knifehub:v1.0.5-amd-chrome
+FROM yiyungent/knifehub:v1.0.6-amd-chrome
 
 # 处于 /app 目录下
 ADD railway-entrypoint.sh ./railway-entrypoint.sh
