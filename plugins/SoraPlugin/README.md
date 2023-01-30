@@ -62,6 +62,6 @@ servers:
 > 本项目基于 [Hoshikawa-Kaguya/Sora: .Net 6异步机器人框架，跨平台，OneBot协议（原CQHTTP协议），在兼容协议的同时主要为Go-Cqhttp提供支持](https://github.com/Hoshikawa-Kaguya/Sora)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.SoraPlugin.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.SoraPlugin-v0.1.2.README" style="border:0" alt="" />
 <!-- End Matomo -->
 
