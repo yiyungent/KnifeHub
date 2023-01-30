@@ -11,14 +11,16 @@ $targetTags = git tag | where { $_ -like "${projectTagName}-v*" }
 
 if ($targetTags.Count -lt 2) {
     # <2
-    $projectTagScope = $targetTags[$targetTags.Count - 1]
+    # $projectTagScope = $targetTags[$targetTags.Count - 1]
+    # 注意: 这里尤其需要注意: 当它只有一个时, 就不再是数组, 而是一个值
+    $projectTagScope = $targetTags
 } else {
     # >=2
     $projectTagScope = $targetTags[$targetTags.Count - 2] + ".." + $targetTags[$targetTags.Count - 1]
 }
 
 
-$projectLogs = git log $projectTagScope --format=%H----DELIMITER----%s $projectPath
+$projectLogs = git log $projectTagScope --format=%H----DELIMITER----%s -- $projectPath
 
 # TODO: 顺序可能不一致, 导致无法一一对应
 # $projectCommitIds = git log $projectTagScope --format=%H $projectPath
