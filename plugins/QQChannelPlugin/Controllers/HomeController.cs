@@ -67,27 +67,55 @@ namespace QQChannelPlugin.Controllers
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQChannelPlugin));
             // 确保以前的都取消
             #region 确保以前的都取消
-            foreach (var item in QQChannelBotStore.Bots)
+            if (QQChannelBotStore.Bots != null && QQChannelBotStore.Bots.Count >= 1) {
+                foreach (var item in QQChannelBotStore.Bots)
+                {
+                    try
+                    {
+                        await item.ChannelBot.OfflineAsync();
+                    }
+                    catch (Exception ex)
+                    { }
+                    try
+                    {
+                        await item.ChannelBot.CloseAsync();
+                    }
+                    catch (Exception ex)
+                    { }
+                    try
+                    {
+                        item.ChannelBot = null;
+                    }
+                    catch (Exception ex)
+                    { }
+                    try
+                    {
+                        item.OpenApiAccessInfo = new OpenApiAccessInfo();
+                    }
+                    catch (Exception ex)
+                    { }
+                    try
+                    {
+                        item.QQChannelApi = null;
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+                QQChannelBotStore.Bots.Clear();
+            }
+            #endregion
+            
+            foreach (var botConfig in settingsModel.Bots)
             {
                 try
                 {
-                    await item.ChannelBot.OfflineAsync();
-                    await item.ChannelBot.CloseAsync();
-                    item.ChannelBot = null;
-                    item.OpenApiAccessInfo = new OpenApiAccessInfo();
-                    item.QQChannelApi = null;
+                    ChannelBotItem(botConfig, settingsModel);
                 }
                 catch (Exception ex)
                 {
-
+                    System.Console.WriteLine($"{botConfig.BotAppId} 登录失败");
+                    System.Console.WriteLine(ex.ToString());
                 }
-            }
-            QQChannelBotStore.Bots.Clear();
-
-            #endregion
-            foreach (var botConfig in settingsModel.Bots)
-            {
-                ChannelBotItem(botConfig, settingsModel);
             }
 
             // TODO: 暂时这么做, 以后优化界面

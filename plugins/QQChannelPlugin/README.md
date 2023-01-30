@@ -55,5 +55,5 @@
 > 本项目基于 [Chianne1025/QQChannelFramework: MyBot - QQ频道机器人开发框架(C#)](https://github.com/Chianne1025/QQChannelFramework)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.QQChannelPlugin-v0.1.4.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.QQChannelPlugin-v0.1.5.README" style="border:0" alt="" />
 <!-- End Matomo -->
