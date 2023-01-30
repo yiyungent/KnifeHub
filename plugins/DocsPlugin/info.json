@@ -3,6 +3,6 @@
 	"DisplayName": "文档插件",
 	"Description": "提供文档检索",
 	"Author": "yiyun",
-	"Version": "0.0.1",
+	"Version": "0.0.2",
 	"SupportedVersions": [ "0.0.1" ]
 }
