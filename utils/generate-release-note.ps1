@@ -11,19 +11,27 @@ $targetTags = git tag | where { $_ -like "${projectTagName}-v*" }
 
 $projectTagScope = $targetTags[$targetTags.Count - 2] + ".." + $targetTags[$targetTags.Count - 1]
 
-$projectCommitIds = git log $projectTagScope --format=%H $projectPath
-$projectMessages = git log $projectTagScope --format=%s $projectPath
 
+$projectLogs = git log $projectTagScope --format=%H----DELIMITER----%s $projectPath
+
+# TODO: 顺序可能不一致, 导致无法一一对应
+# $projectCommitIds = git log $projectTagScope --format=%H $projectPath
+# $projectMessages = git log $projectTagScope --format=%s $projectPath
 # $projectCommitIds
 # $projectMessages
 
 $projectCommits = @()
 
-for ($i = 0; $i -lt $projectCommitIds.Count; $i++) {
+for ($i = 0; $i -lt $projectLogs.Count; $i++) {
+
+    $itemTemp = $projectLogs[$i] -split "----DELIMITER----"
+    $commitId = $itemTemp[0]
+    $message = $itemTemp[1]
+
     # $itemObject = New-Object PSObject –Property @{CommitId = $projectCommitIds[$i]; Message = $projectMessages[$i - 1] }
     $itemObject = New-Object -TypeName PSObject
-    $itemObject | Add-Member -Name 'CommitId' -MemberType Noteproperty -Value $projectCommitIds[$i]
-    $itemObject | Add-Member -Name 'Message' -MemberType Noteproperty -Value $projectMessages[$i - 1]
+    $itemObject | Add-Member -Name 'CommitId' -MemberType Noteproperty -Value $commitId
+    $itemObject | Add-Member -Name 'Message' -MemberType Noteproperty -Value $message
     $projectCommits += $itemObject
 }
 
