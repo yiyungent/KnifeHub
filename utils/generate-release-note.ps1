@@ -9,7 +9,13 @@ $projectPath = $env:GitProjectPath
 
 $targetTags = git tag | where { $_ -like "${projectTagName}-v*" }
 
-$projectTagScope = $targetTags[$targetTags.Count - 2] + ".." + $targetTags[$targetTags.Count - 1]
+if ($targetTags.Count -lt 2) {
+    # <2
+    $projectTagScope = $targetTags[$targetTags.Count - 1]
+} else {
+    # >=2
+    $projectTagScope = $targetTags[$targetTags.Count - 2] + ".." + $targetTags[$targetTags.Count - 1]
+}
 
 
 $projectLogs = git log $projectTagScope --format=%H----DELIMITER----%s $projectPath
