@@ -34,3 +34,6 @@
 > 项目地址: [https://github.com/yiyungent/QQBotHub/tree/main/plugins/CocoaPlugin](https://github.com/yiyungent/QQBotHub/tree/main/plugins/CocoaPlugin)             
 > 本项目基于 [Miyakowww/CocoaFramework2: 基于 mirai 的 QQ 机器人开发框架](https://github.com/Miyakowww/CocoaFramework2)
 
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.CocoaPlugin-v0.0.2.README" style="border:0" alt="" />
+<!-- End Matomo -->
