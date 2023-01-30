@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoLoginPlugin.ResponseModels
+namespace AutoLogin4QQChannelPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

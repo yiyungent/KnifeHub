@@ -6,22 +6,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 
-namespace AutoLoginPlugin.Controllers
+namespace AutoLogin4QQChannelPlugin.Controllers
 {
     /// <summary>
-    /// 其实也可以不写这个, 直接访问 Plugins/AutoLoginPlugin/index.html
+    /// 其实也可以不写这个, 直接访问 Plugins/AutoLogin4QQChannelPlugin/index.html
     /// 
     /// 下面的方法, 是去掉 index.html
     /// 
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
     /// 这样访问 Plugins/AutoLoginPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{nameof(AutoLoginPlugin)}")]
+    [Route($"Plugins/{nameof(AutoLogin4QQChannelPlugin)}")]
     public class HomeController : Controller
     {
         public async Task<ActionResult> Get()
         {
-            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(AutoLoginPlugin)), "index.html");
+            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(AutoLogin4QQChannelPlugin)), "index.html");
 
             return PhysicalFile(indexFilePath, "text/html");
         }
