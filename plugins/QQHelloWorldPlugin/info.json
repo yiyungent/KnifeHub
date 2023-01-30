@@ -3,6 +3,6 @@
 	"DisplayName": "QQHelloWorldPlugin 示例",
 	"Description": "这是一个示例插件1号。",
 	"Author": "yiyun",
-	"Version": "1.0.0",
+	"Version": "1.0.1",
 	"SupportedVersions": [ "0.0.1" ]
 }

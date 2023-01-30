@@ -21,4 +21,6 @@
   - [/api/plugincore/PluginWidget/Widget?widgetKey=%22PluginCore.Admin.Footer%22&extraPars=%22a%22,%22b%22,%22c%22](/api/plugincore/PluginWidget/Widget?widgetKey=%22PluginCore.Admin.Footer%22&extraPars=%22a%22,%22b%22,%22c%22)
 
 
-
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.QQHelloWorldPlugin-v1.0.1.README" style="border:0" alt="" />
+<!-- End Matomo -->
