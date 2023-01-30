@@ -114,6 +114,11 @@
     - [x] 下载 群聊 数据库
     - [x] `#日历`
     - [x] `#折线`
+  - [AutoLogin4QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=AutoLogin4QQChannelPlugin&expanded=true) 
+    - [x] **启用前需保证 QQChannelPlugin 处于已启用状态** 
+    - [x] 定时 检测在线状态 (频率:1分钟), 专为 QQ频道机器人
+    - [x] 当出现意外离线后, 将自动利用 `QQChannelPlugin` 设置里的数据 重新登录
+    - [x] 可设置监控频率 `SecondsPeriod`
   - [AutoLoginPlugin](https://github.com/yiyungent/KnifeHub/releases?q=AutoLoginPlugin&expanded=true) 
     - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
     - [x] 定时 检测在线状态 (频率:1分钟)
