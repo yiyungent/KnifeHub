@@ -3,6 +3,6 @@
 	"DisplayName": "QQ写笔记",
 	"Description": "利用 QQ 写笔记 (随笔/零碎知识点)",
 	"Author": "yiyun",
-	"Version": "1.0.0",
+	"Version": "1.0.1",
 	"SupportedVersions": [ "0.0.1" ]
 }
