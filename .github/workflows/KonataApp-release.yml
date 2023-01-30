@@ -46,6 +46,14 @@ jobs:
         zip -r KonataApp-linux-arm64.zip ./linux-arm64/
         zip -r KonataApp-osx-x64.zip ./osx-x64/
         zip -r KonataApp-osx.10.10-x64.zip ./osx.10.10-x64/
+
+    - name: Create temp-release-note.md
+      run: |
+        cp utils/generate-release-note.ps1 generate-release-note.ps1
+        $env:GitProjectTagName="KonataApp"
+        $env:GitProjectPath="test/KonataApp/*"
+        ./generate-release-note.ps1
+      shell: pwsh
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -53,8 +61,8 @@ jobs:
       with:
         #tag_name: ${{ github.ref }}
         #name: ${{ github.ref }}
-        body: TODO New Release.
-        #body_path: CHANGELOG.txt
+        # body: TODO New Release.
+        body_path: temp-release-note.md
         draft: false
         prerelease: false
         files: |

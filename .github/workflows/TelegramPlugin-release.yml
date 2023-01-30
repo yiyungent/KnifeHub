@@ -33,6 +33,14 @@ jobs:
         zip -r TelegramPlugin-net6.0.zip *
         cd ../../../../../
         mv ./plugins/TelegramPlugin/bin/Release/net6.0/*.zip ./
+
+    - name: Create temp-release-note.md
+      run: |
+        cp utils/generate-release-note.ps1 generate-release-note.ps1
+        $env:GitProjectTagName="TelegramPlugin"
+        $env:GitProjectPath="plugins/TelegramPlugin/*"
+        ./generate-release-note.ps1
+      shell: pwsh
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -40,8 +48,8 @@ jobs:
       with:
         #tag_name: ${{ github.ref }}
         #name: ${{ github.ref }}
-        body: TODO New Release.
-        #body_path: CHANGELOG.txt
+        # body: TODO New Release.
+        body_path: temp-release-note.md
         draft: false
         prerelease: false
         files: |

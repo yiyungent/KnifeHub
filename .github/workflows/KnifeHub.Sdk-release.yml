@@ -32,6 +32,14 @@ jobs:
         zip -r KnifeHub.Sdk-net6.0.zip ./net6.0/ 
         cd ../../../../
         mv ./src/KnifeHub.Sdk/bin/Release/*.zip ./
+
+    - name: Create temp-release-note.md
+      run: |
+        cp utils/generate-release-note.ps1 generate-release-note.ps1
+        $env:GitProjectTagName="KnifeHub.Sdk"
+        $env:GitProjectPath="src/KnifeHub.Sdk/*"
+        ./generate-release-note.ps1
+      shell: pwsh
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -39,8 +47,8 @@ jobs:
       with:
         #tag_name: ${{ github.ref }}
         #name: ${{ github.ref }}
-        body: TODO New Release.
-        #body_path: CHANGELOG.txt
+        # body: TODO New Release.
+        body_path: temp-release-note.md
         draft: false
         prerelease: false
         files: |
