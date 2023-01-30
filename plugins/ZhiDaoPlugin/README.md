@@ -38,3 +38,6 @@
 
 - [下载数据库 (ZhiDaoPlugin.sqlite)](/Plugins/ZhiDaoPlugin/Download)
 
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.ZhiDaoPlugin-v1.0.1.README" style="border:0" alt="" />
+<!-- End Matomo -->
