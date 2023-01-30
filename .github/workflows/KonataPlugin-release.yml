@@ -40,6 +40,8 @@ jobs:
     - name: Create temp-release-note.md
       run: |
         cp utils/generate-release-note.ps1 generate-release-note.ps1
+        $env:GitProjectTagName="KonataPlugin"
+        $env:GitProjectPath="plugins/KonataPlugin/*"
         ./generate-release-note.ps1
       shell: pwsh
       
