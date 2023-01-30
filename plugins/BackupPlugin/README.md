@@ -68,3 +68,6 @@ Plugins_wwwroot
 
 设置 `LocalBackupsMaxNum` 本地备份文件最大保存份数, 当超过份数, 会自动删除较早的本地备份文件
 
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.BackupPlugin-v0.1.1.README" style="border:0" alt="" />
+<!-- End Matomo -->

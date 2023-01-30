@@ -3,6 +3,6 @@
 	"DisplayName": "插件备份",
 	"Description": "插件数据导出,导入",
 	"Author": "yiyun",
-	"Version": "0.1.0",
+	"Version": "0.1.1",
 	"SupportedVersions": [ "0.0.1" ]
 }
