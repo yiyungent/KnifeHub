@@ -192,5 +192,5 @@ localStorage.setItem("WebMonitorPlugin.Storage.FirstDynamicText", newFirstDynami
 > 项目地址: [https://github.com/yiyungent/KnifeHub/tree/main/plugins/WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/tree/main/plugins/WebMonitorPlugin)             
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.WebMonitorPlugin-v0.4.4.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.WebMonitorPlugin-v0.4.5.README" style="border:0" alt="" />
 <!-- End Matomo -->
