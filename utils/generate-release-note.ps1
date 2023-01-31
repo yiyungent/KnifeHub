@@ -31,9 +31,10 @@ $projectLogs = git log $projectTagScope --format=%H----DELIMITER----%s -- $proje
 
 $projectCommits = @()
 
-for ($i = 0; $i -lt $projectLogs.Count; $i++) {
-
-    $itemTemp = $projectLogs[$i] -split "----DELIMITER----"
+if ($projectLogs.Count -lt 2) {
+    # <2
+    # 注意: 这里尤其需要注意: 当它只有一个时, 就不再是数组, 而是一个值
+    $itemTemp = $projectLogs -split "----DELIMITER----"
     $commitId = $itemTemp[0]
     $message = $itemTemp[1]
 
@@ -42,7 +43,21 @@ for ($i = 0; $i -lt $projectLogs.Count; $i++) {
     $itemObject | Add-Member -Name 'CommitId' -MemberType Noteproperty -Value $commitId
     $itemObject | Add-Member -Name 'Message' -MemberType Noteproperty -Value $message
     $projectCommits += $itemObject
+} else {
+    # >=2
+    for ($i = 0; $i -lt $projectLogs.Count; $i++) {
+        $itemTemp = $projectLogs[$i] -split "----DELIMITER----"
+        $commitId = $itemTemp[0]
+        $message = $itemTemp[1]
+    
+        # $itemObject = New-Object PSObject –Property @{CommitId = $projectCommitIds[$i]; Message = $projectMessages[$i - 1] }
+        $itemObject = New-Object -TypeName PSObject
+        $itemObject | Add-Member -Name 'CommitId' -MemberType Noteproperty -Value $commitId
+        $itemObject | Add-Member -Name 'Message' -MemberType Noteproperty -Value $message
+        $projectCommits += $itemObject
+    }
 }
+
 
 $projectCommits | Format-Table -Auto
 
