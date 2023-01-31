@@ -87,7 +87,7 @@ namespace MoLi4QQChannelPlugin
             }
             catch (Exception ex)
             {
-                Console.WriteLine("茉莉回复出错: ");
+                Console.WriteLine("茉莉API回复出错: ");
                 Console.WriteLine(ex.ToString());
             }
 
@@ -97,13 +97,21 @@ namespace MoLi4QQChannelPlugin
                 {
                     foreach (var item in resModel.data)
                     {
-                        if (item.typed == "1") {
-                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
-                        } else if (item.typed == "2") {
-                            string imageUrl = "https://files.molicloud.com/" + item.content;
-                            await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
-                        } else {
-                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        try
+                        {
+                            if (item.typed == "1") {
+                                await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            } else if (item.typed == "2") {
+                                string imageUrl = "https://files.molicloud.com/" + item.content;
+                                await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                            } else {
+                                await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            }
+                        }
+                        catch (System.Exception ex)
+                        {
+                            System.Console.WriteLine($"{botAppId} 回复出错:");
+                            System.Console.WriteLine(ex.ToString());
                         }
                     }
                 }
@@ -174,7 +182,7 @@ namespace MoLi4QQChannelPlugin
             }
             catch (Exception ex)
             {
-                Console.WriteLine("茉莉回复出错: ");
+                Console.WriteLine("茉莉API回复出错: ");
                 Console.WriteLine(ex.ToString());
             }
 
@@ -184,13 +192,21 @@ namespace MoLi4QQChannelPlugin
                 {
                     foreach (var item in resModel.data)
                     {
-                        if (item.typed == "1") {
-                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
-                        } else if (item.typed == "2") {
-                            string imageUrl = "https://files.molicloud.com/" + item.content;
-                            await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
-                        } else {
-                            await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                        try
+                        {
+                            if (item.typed == "1") {
+                                await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            } else if (item.typed == "2") {
+                                string imageUrl = "https://files.molicloud.com/" + item.content;
+                                await qChannelApi.GetMessageApi().SendImageMessageAsync(channelId: message.ChannelId, imageUrl: imageUrl, passiveReference: message.Id);
+                            } else {
+                                await qChannelApi.GetMessageApi().SendTextMessageAsync(channelId: message.ChannelId, content: item.content, passiveReference: message.Id);
+                            }
+                        }
+                        catch (System.Exception ex)
+                        {
+                            System.Console.WriteLine($"{botAppId} 回复出错:");
+                            System.Console.WriteLine(ex.ToString());
                         }
                     }
                 }
