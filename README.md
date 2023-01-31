@@ -240,7 +240,7 @@
 > **注意** : 请不要映射/挂载 容器内 **/app/Plugins/** 目录, 否则可能导致 **插件无法正常上传** , 此问题解决中
 
 ```bash
-docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
+docker run -d --restart=always -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 ```
 
 ```bash
@@ -300,7 +300,7 @@ docker rmi yiyungent/knifehub
 # 建议不要使用 latest , 而是指定最新的版本号, 有可能你使用的 docker 仓储源还未同步, 而导致 latest 仍为旧版
 #docker pull yiyungent/knifehub:v1.0.0
 docker pull yiyungent/knifehub:latest
-docker run -d -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
+docker run -d --restart=always -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub
 
 # 这里我将原本备份的数据保存到了这个路径, 进入这个路径, 将备份数据覆盖到 docker 容器中
 cd docker-data
