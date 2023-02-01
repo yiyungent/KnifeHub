@@ -268,6 +268,8 @@ docker exec -it knifehub bash
 
 #### Windows    
 
+##### 方式1: 简易 PowerShell 实现
+
 > PowerShell 实现简易 `KnifeHub.Web.exe` 异常退出时自动重启 `KnifeHub.Web.exe`       
 > 下载 仓库根目录 [utils/start.ps1](https://raw.githubusercontent.com/yiyungent/KnifeHub/main/utils/start.ps1) [utils/corn.ps1](https://raw.githubusercontent.com/yiyungent/KnifeHub/main/utils/corn.ps1)            
 > 将 `start.ps1` 与 `corn.ps1` 放入与 `KnifeHub.Web.exe` 同目录文件夹下,   
@@ -279,6 +281,9 @@ cd "KnifeHub-win-x64/win-x64"
 
 ./start.ps1
 ```
+##### 方式2: [ProcessGuard](https://github.com/KamenRiderKuuga/ProcessGuard)
+
+> 强烈推荐新人使用, 稳定强大
 
 #### Linux
 
