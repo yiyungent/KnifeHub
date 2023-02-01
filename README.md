@@ -275,9 +275,7 @@ docker exec -it knifehub bash
 
 #### Linux
 
-> 推荐使用 Supervisor
-
-> PowerShell   
+> 推荐使用 `Supervisor`
 
 ### 更新 KnifeHub
 
