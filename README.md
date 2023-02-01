@@ -262,8 +262,24 @@ docker exec -it knifehub bash
 > 
 > 然后直接 `上传 -> 安装 -> 文档 -> 设置 -> 启用 -> 文档` 即可
 
+### 守护进程(daemon)
 
-## 更新 KnifeHub
+> 守护进程: 开机自启动, 程序异常退出时自动重启程序
+
+#### Windows    
+
+> PowerShell 实现简易 `KnifeHub.Web.exe` 异常退出时自动重启 `KnifeHub.Web.exe`       
+> 下载 仓库根目录 [utils/start.ps1](https://raw.githubusercontent.com/yiyungent/KnifeHub/main/utils/start.ps1) [utils/corn.ps1](https://raw.githubusercontent.com/yiyungent/KnifeHub/main/utils/corn.ps1)            
+> 将 `start.ps1` 与 `corn.ps1` 放入与 `KnifeHub.Web.exe` 同目录文件夹下,   
+> 使用 `Windows Terminal` / `PowerShell` 运行 `start.ps1` 即可
+
+#### Linux
+
+> 推荐使用 Supervisor
+
+> PowerShell   
+
+### 更新 KnifeHub
 
 > 查看最新版 [Releases - KnifeHub](https://github.com/yiyungent/KnifeHub/releases?q=KnifeHub&expanded=true)
 
