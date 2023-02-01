@@ -273,6 +273,13 @@ docker exec -it knifehub bash
 > 将 `start.ps1` 与 `corn.ps1` 放入与 `KnifeHub.Web.exe` 同目录文件夹下,   
 > 使用 `Windows Terminal` / `PowerShell` 运行 `start.ps1` 即可
 
+```powershell
+# 确保进入程序目录再执行
+cd "KnifeHub-win-x64/win-x64"
+
+./start.ps1
+```
+
 #### Linux
 
 > 推荐使用 `Supervisor`
