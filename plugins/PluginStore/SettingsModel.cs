@@ -8,19 +8,16 @@ namespace PluginStore
 {
     public class SettingsModel : PluginSettingsModel
     {
-        public long SecondsPeriod { get; set; }
+        public SourceModel Source { get; set; }
 
-        public int LocalBackupsMaxNum { get; set; }
-
-        public TelegramModel Telegram { get; set; }
-
-        public class TelegramModel
+        public sealed class SourceModel
         {
-            public bool Enable { get; set; }
+            public GitHubModel GitHub { get; set; }
 
-            public string Token { get; set; }
-
-            public string ChatId { get; set; }
+            public sealed class GitHubModel
+            {
+                public string SearchTerm { get; set; }
+            }
         }
 
     }

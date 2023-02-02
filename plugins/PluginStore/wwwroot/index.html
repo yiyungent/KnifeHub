@@ -1,18 +1,154 @@
-﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>HelloWorldPlugin</title>
-	<!-- 注意:路径, 前置 /plugins/BackupPlugin/ -->
-	<link href="/plugins/BackupPlugin/css/main.css" rel="stylesheet" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PluginStore-v0.0.1</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
-	<div id="app">
-		暂无
+	<div class="container">
+		<!-- PluginCore.IPlugins.IWidgetPlugin.Widget(PluginStore.Home,header) -->
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col">
+				<div class="card text-center border-dark">
+					<div class="card-header">
+						<span class="badge text-bg-success">MIT</span>
+					</div>
+					<div class="card-body position-relative">
+						<h5 class="card-title">
+							<a href="#" class="card-link">yiyungent/KnifeHub</a>
+						</h5>
+						<p class="card-text">工具平台 | 日常生活/学习/工作/开发 工具集</p>
+						<a href="#" class="btn btn-primary">查看</a>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+							300
+							<span class="visually-hidden"></span>
+						</span>
+					</div>
+					<div class="card-footer">
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-center border-dark">
+					<div class="card-header">
+						<span class="badge text-bg-success">MIT</span>
+					</div>
+					<div class="card-body position-relative">
+						<h5 class="card-title">
+							<a href="#" class="card-link">yiyungent/KnifeHub</a>
+						</h5>
+						<p class="card-text">工具平台 | 日常生活/学习/工作/开发 工具集</p>
+						<a href="#" class="btn btn-primary">查看</a>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+							300
+							<span class="visually-hidden"></span>
+						</span>
+					</div>
+					<div class="card-footer">
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card text-center border-dark">
+					<div class="card-header">
+						<span class="badge text-bg-success">MIT</span>
+					</div>
+					<div class="card-body position-relative">
+						<h5 class="card-title">
+							<a href="#" class="card-link">yiyungent/KnifeHub</a>
+						</h5>
+						<p class="card-text">工具平台 | 日常生活/学习/工作/开发 工具集</p>
+						<a href="#" class="btn btn-primary">查看</a>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+							300
+							<span class="visually-hidden"></span>
+						</span>
+					</div>
+					<div class="card-footer">
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item active"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- PluginCore.IPlugins.IWidgetPlugin.Widget(PluginStore.Home,footer) -->
 	</div>
-    <script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+        // 参数转成对象
+        function queryString(str) {
+            let params = str.split('?')[1];
+            let param = params.split('&');
+            let obj = {};
+            for (let i = 0; i < param.length; i++) {
+                let paramsA = param[i].split('=');
+                let key = paramsA[0];
+                let value = paramsA[1];
 
+                if (obj[key]) {
+                    // 主要是在这里做了一下处理,判断值是不是一个数组
+                    obj[key] = Array.isArray(obj[key]) ? obj[key] : [obj[key]];
+                    obj[key].push(value);
+                } else {
+                    obj[key] = value;
+                }
+            }
+            return obj;
+		}
+
+		function getReposList() {
+			// 从 地址栏中 读取 page
+			let page = queryString(document.location.href).page || 1;
+            axios({
+                method: "get",
+                url: "/api/Plugins/PluginStore/ReposList",
+				responseType: "json",
+                params: {
+                    page: page
+                },
+            }).then(function (res) {
+                res = res.data;
+                if (res.code > 0) {
+                    document.querySelector("#login-input-uin").value = res.data;
+                } else {
+                    alert("获取保存的QQ号失败");
+                }
+            });
+		}
+
+        window.onload = function () {
+            getReposList();
+            
+        };
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/@yiyungent/plugincore/dist/PluginCore.min.js"></script>
+	<script>
+		var p = new PluginCore({
+			baseUrl: "",
+		});
+
+		p.start();
 	</script>
 </body>
 </html>

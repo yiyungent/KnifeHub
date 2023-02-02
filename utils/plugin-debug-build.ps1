@@ -16,7 +16,7 @@ ls ./bin/Debug/net6.0
 cd ./bin/Debug/net6.0
 
 # 移除框架相关, 防止重复加载 导致 类型对不齐
-rm PluginCore.IPlugins*
+# rm PluginCore.IPlugins*
 
 # 返回仓库根目录
 cd ../../../../../

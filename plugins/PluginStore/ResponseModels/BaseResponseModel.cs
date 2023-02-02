@@ -4,12 +4,12 @@ using System.Text;
 
 namespace PluginStore.ResponseModels
 {
-    public class BaseResponseModel
+    public class BaseResponseModel<T>
     {
         public int Code { get; set; }
 
         public string Message { get; set; }
 
-        public object Data { get; set; }
+        public T Data { get; set; }
     }
 }
