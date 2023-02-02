@@ -1,0 +1,9 @@
+{
+  "SecondsPeriod": 180,
+  "LocalBackupsMaxNum": 10,
+  "Telegram": {
+    "Enable": false,
+    "Token": "",
+    "ChatId": ""
+  }
+}
