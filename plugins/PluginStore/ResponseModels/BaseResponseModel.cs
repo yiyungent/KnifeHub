@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BackupPlugin.ResponseModels
+namespace PluginStore.ResponseModels
 {
     public class BaseResponseModel
     {

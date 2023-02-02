@@ -1,8 +1,8 @@
 {
-	"PluginId": "BackupPlugin",
-	"DisplayName": "插件备份",
-	"Description": "插件数据导出,导入",
+	"PluginId": "PluginStore",
+	"DisplayName": "插件商店",
+	"Description": "海量插件在线安装",
 	"Author": "yiyun",
-	"Version": "0.1.1",
+	"Version": "0.0.1",
 	"SupportedVersions": [ "0.0.1" ]
 }

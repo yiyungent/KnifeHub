@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace BackupPlugin.Utils
+namespace PluginStore.Utils
 {
     public class ZipUtil
     {

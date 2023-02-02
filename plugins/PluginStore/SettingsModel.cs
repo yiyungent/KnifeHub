@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using PluginCore.Models;
 
-namespace BackupPlugin
+namespace PluginStore
 {
     public class SettingsModel : PluginSettingsModel
     {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 
-namespace BackupPlugin.Controllers
+namespace PluginStore.Controllers
 {
     /// <summary>
     /// 其实也可以不写这个, 直接访问 Plugins/BackupPlugin/index.html
@@ -16,12 +16,12 @@ namespace BackupPlugin.Controllers
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
     /// 这样访问 Plugins/BackupPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{nameof(BackupPlugin)}")]
+    [Route($"Plugins/{nameof(PluginStore)}")]
     public class HomeController : Controller
     {
         public async Task<ActionResult> Get()
         {
-            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(BackupPlugin)), "index.html");
+            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(PluginStore)), "index.html");
 
             return PhysicalFile(indexFilePath, "text/html");
         }
