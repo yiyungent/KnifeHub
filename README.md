@@ -39,7 +39,8 @@
 <details>
   <summary><strong>点我 打开/关闭 本仓库 维护的 官方插件</strong></summary>
 
-> > PUP (Public Universal Plugin)   
+> > **PUP (Public Universal Plugin)**            
+> 
 > **不依赖于特定主程序, 可在 `PluginCore` 环境通用**   
 > 若有前置依赖插件, 安装启用后, 可独立运行   
 
