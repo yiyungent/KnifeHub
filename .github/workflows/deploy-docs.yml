@@ -25,12 +25,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          #cd docs
+          cd docs
           npm ci
 
       - name: Build website
         run: |
-          #cd docs
+          cd docs
           npm run build
 
       # Popular action to deploy to GitHub Pages:
