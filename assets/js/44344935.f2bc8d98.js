@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[1243],{9656:e=>{e.exports=JSON.parse('{"label":"hello","permalink":"/KnifeHub/blog/tags/hello","allTagsPath":"/KnifeHub/blog/tags","count":2}')}}]);
