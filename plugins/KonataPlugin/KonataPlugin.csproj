@@ -9,7 +9,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>PluginCore.KonataPlugin</PackageId>
-		<Version>0.1.9</Version>
+		<Version>0.1.10</Version>
 		<Company>yiyun</Company>
 		<Authors>yiyun</Authors>
 		<Description>PluginCore 插件: QQ基础插件</Description>
