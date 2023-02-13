@@ -5,14 +5,29 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<FileVersion>1.0.2.0</FileVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<!-- 方便开发debug,与发布到nuget -->
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
 		<ProjectReference Include="..\KonataPlugin\KonataPlugin.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="PluginCore.KonataPlugin" Version="0.1.10">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<!-- 发布插件相关文件 -->
