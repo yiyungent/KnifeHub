@@ -1,6 +1,6 @@
 # fly.io Dockerfile
 
-FROM yiyungent/knifehub:v1.3.0-amd-chrome
+FROM yiyungent/knifehub:v1.3.1-amd-chrome
 
 ADD flyio-entrypoint.sh ./flyio-entrypoint.sh
 RUN chmod +x ./flyio-entrypoint.sh
