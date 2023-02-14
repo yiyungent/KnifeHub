@@ -12,6 +12,7 @@
 [![docker version](https://img.shields.io/docker/v/yiyungent/knifehub/latest?label=docker%20image%20ver.)](https://hub.docker.com/r/yiyungent/knifehub)
 [![Docker Image CI/CD - Release - knifehub](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml/badge.svg)](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml)
 [![Github All Releases](https://img.shields.io/github/downloads/yiyungent/KnifeHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=KnifeHub)
+[![CLA assistant](https://cla-assistant.io/readme/badge/yiyungent/KnifeHub)](https://cla-assistant.io/yiyungent/KnifeHub)
 
 
 
