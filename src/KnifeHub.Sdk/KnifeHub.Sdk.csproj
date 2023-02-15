@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>KnifeHub.Sdk</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.1.0</Version>
 		<Company>yiyun</Company>
 		<Authors>yiyun</Authors>
 		<Description>KnifeHub 插件开发包</Description>
@@ -18,7 +18,7 @@
 
 	<!-- 方便开发debug,与发布到nuget -->
 	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1" />
+		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
 		<ProjectReference Include="..\PluginCore\src\PluginCore.IPlugins.AspNetCore\PluginCore.IPlugins.AspNetCore.csproj" />
