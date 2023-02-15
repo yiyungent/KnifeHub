@@ -371,7 +371,8 @@ src/KnifeHub.Web/Plugins_wwwroot/
 # 注意: 由于前面排除了 Backup*/ , 这里需要包括
 !plugins/BackupPlugin/
 
-
+# idea
+.idea/
 
 
 
