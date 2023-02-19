@@ -88,7 +88,9 @@ RUN apt-get update && apt-get install -y vim && apt-get install -y net-tools && 
 # /etc/nginx/nginx.conf
 COPY --from=build /src/docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /src/docker/nginx-site.conf /etc/nginx/sites-enabled/default 
-RUN /usr/sbin/nginx -s reload
+# TODO: ERROR: failed to solve: process "/bin/sh -c /usr/sbin/nginx -s reload" did not complete successfully: exit code: 1
+# TODO: Error: Process completed with exit code 1.
+# RUN /usr/sbin/nginx -s reload
 RUN mkdir /nginx-app
 # end nginx
 
