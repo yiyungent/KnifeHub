@@ -1,5 +1,5 @@
 {
-  "port": 5031,
+  "port": 54322,
   "baseURL": "/filebrowser",
   "address": "",
   "log": "stdout",
