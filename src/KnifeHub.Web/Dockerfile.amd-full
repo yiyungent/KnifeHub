@@ -84,7 +84,7 @@ RUN touch /var/run/supervisor.sock
 RUN chmod 777 /var/run/supervisor.sock
 # end supervisord
 # start nginx
-RUN apt-get update && apt-get install -y vim && apt-get install -y nginx
+RUN apt-get update && apt-get install -y vim && apt-get install -y net-tools && apt-get install -y nginx
 # /etc/nginx/nginx.conf
 COPY --from=build /src/docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /src/docker/nginx-site.conf /etc/nginx/sites-enabled/default 
