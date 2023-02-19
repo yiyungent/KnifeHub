@@ -1,6 +1,6 @@
 # Heroku Dockerfile
 
-FROM yiyungent/knifehub:v1.4.2-amd-full
+FROM yiyungent/knifehub:v1.4.3-amd-full
 
 # 处于 /app 目录下
 ADD heroku-entrypoint.sh ./heroku-entrypoint.sh
