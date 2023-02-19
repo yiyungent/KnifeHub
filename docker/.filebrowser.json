@@ -1,6 +1,6 @@
 {
   "port": 5031,
-  "baseURL": "",
+  "baseURL": "/filebrowser",
   "address": "",
   "log": "stdout",
   "database": "/filebrowser-app/database.db",
