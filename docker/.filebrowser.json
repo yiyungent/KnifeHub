@@ -1,0 +1,8 @@
+{
+  "port": 8031,
+  "baseURL": "",
+  "address": "",
+  "log": "stdout",
+  "database": "/database.db",
+  "root": "/srv"
+}
