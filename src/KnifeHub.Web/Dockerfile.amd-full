@@ -56,11 +56,11 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # start filebrowser
-COPY --from=build /src/docker/.filebrowser.json /filebrowser-app/.filebrowser.json
+COPY --from=build /src/docker/.filebrowser.json /app-filebrowser/.filebrowser.json
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 # /usr/local/bin/filebrowser
-RUN mkdir /filebrowser-app; \
-    cd /filebrowser-app; \ 
+RUN mkdir /app-filebrowser; \
+    cd /app-filebrowser; \ 
     curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 # end filebrowser
 # start supervisord
