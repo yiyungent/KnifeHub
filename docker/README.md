@@ -4,7 +4,7 @@
 ## yiyungent/knifehub:latest-amd-full
 
 ```bash
-docker run -d --restart=always -p 53213:80 -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai"  --name knifehub yiyungent/knifehub:latest-amd-full
+docker run -d --restart=always -p 53213:80 -e ASPNETCORE_ENVIRONMENT="Production" -e TZ="Asia/Shanghai" -v ./app-filebrowser:/app-filebrowser  --name knifehub yiyungent/knifehub:latest-amd-full
 ```
 
 ### KnifeHub
