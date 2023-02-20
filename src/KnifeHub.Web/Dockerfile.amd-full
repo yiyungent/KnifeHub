@@ -91,6 +91,7 @@ COPY --from=build /src/docker/nginx-site.conf /etc/nginx/sites-enabled/default
 # TODO: ERROR: failed to solve: process "/bin/sh -c /usr/sbin/nginx -s reload" did not complete successfully: exit code: 1
 # TODO: Error: Process completed with exit code 1.
 # RUN /usr/sbin/nginx -s reload
+RUN nginx -c /etc/nginx/nginx.conf
 RUN mkdir /nginx-app
 # end nginx
 
