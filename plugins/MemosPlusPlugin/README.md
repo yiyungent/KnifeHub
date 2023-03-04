@@ -27,12 +27,26 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(hm, s);
 })();
 
-window.onload = function () {
-  var p = new PluginCore({
+
+function startPluginCore() {
+  // let oldHtml = document.querySelector(".banner-wrapper").innerHTML;
+
+  // document.querySelector(".banner-wrapper").innerHTML = oldHtml + "<!-- PluginCore.IPlugins.IWidgetPlugin.Widget(memos,0.11.0,banner-wrapper) -->"
+
+  window.memosPluginCore = new PluginCore({
     baseUrl: "https://api-onetree.moeci.com"
   });
 
-  p.start();
+  memosPluginCore.start();
+}
+
+var global = global || window;
+window.addEventListener("load", () => {
+  startPluginCore();
+});
+
+window.onload = function () {
+
 }
 ```
 
