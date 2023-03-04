@@ -16,6 +16,25 @@
 
 ## 嵌入 memos 默认前端
 
+> `系统` -> `自定义脚本` 
+
+```javascript
+var _hmt = _hmt || [];
+(function () {
+    var hm = document.createElement("script");
+    hm.src = "https://cdn.jsdelivr.net/npm/@yiyungent/plugincore/dist/PluginCore.min.js";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+
+window.onload = function () {
+  var p = new PluginCore({
+    baseUrl: "https://api-onetree.moeci.com"
+  });
+
+  p.start();
+}
+```
 
 
 ### 设置 `GitHub`
