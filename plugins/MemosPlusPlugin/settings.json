@@ -1,0 +1,10 @@
+{
+  "AllowFriends": [ "QQ号1", "QQ号2" ],
+  "GitHub": {
+    "AccessToken": "your GitHub Personal Access Token",
+    "RepoOwner": "your GitHub UserName",
+    "RepoName": "your Repository Name",
+    "RepoBranch": "your branch: master/main",
+    "RepoTargetFilePath": "示例: source/_posts/分类-杂记/杂记-来自QQ.md"
+  }
+}
