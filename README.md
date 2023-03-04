@@ -1,4 +1,3 @@
-﻿
 <h1 align="center">KnifeHub</h1>
 
 > 工具平台 | 日常生活/学习/工作/开发 工具集
@@ -159,6 +158,7 @@
 ### PluginCore Admin
 
 ![PluginCore Admin](./screenshots/PluginCore-Admin.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_shield)
 
 ### [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
 
@@ -483,3 +483,7 @@ Authored and maintained by yiyun with help from contributors ([list](https://git
 <!-- Matomo Image Tracker-->
 <img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=GitHub.KnifeHub.README" style="border:0" alt="" />
 <!-- End Matomo -->
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_large)
