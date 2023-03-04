@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konata.Core" Version="1.3.2" />
+    <PackageReference Include="Konata.Core" Version="1.3.3" />
   </ItemGroup>
 
 </Project>

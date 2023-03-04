@@ -5,7 +5,7 @@ using Konata.Core.Interfaces.Api;
 using System.Text.Json;
 using static Konata.Core.Events.Model.CaptchaEvent;
 
-Console.WriteLine("QQBotHub KonataApp - QQ登录软件");
+Console.WriteLine("KonataPlugin KonataApp-v0.2.0 - QQ登录软件");
 
 
 // Create a bot instance
