@@ -17,5 +17,8 @@ docker run -d --restart=always -p 53213:80 -e ASPNETCORE_ENVIRONMENT="Production
 
 - http://your-domain/filebrowser/
 
+
+> 默认用户名/密码: `admin` / `admin`
+
 ### 内置 Selenium 相关
 
