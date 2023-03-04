@@ -12,7 +12,7 @@
 [![Docker Image CI/CD - Release - knifehub](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml/badge.svg)](https://github.com/yiyungent/KnifeHub/actions/workflows/docker-push-knifehub-release.yml)
 [![Github All Releases](https://img.shields.io/github/downloads/yiyungent/KnifeHub/total.svg)](https://hanadigital.github.io/grev/?user=yiyungent&repo=KnifeHub)
 [![CLA assistant](https://cla-assistant.io/readme/badge/yiyungent/KnifeHub)](https://cla-assistant.io/yiyungent/KnifeHub)
-
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_shield)
 
 
 ## Introduce
@@ -158,7 +158,6 @@
 ### PluginCore Admin
 
 ![PluginCore Admin](./screenshots/PluginCore-Admin.png)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_shield)
 
 ### [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
 
@@ -460,6 +459,10 @@ We accept donations through these channels:
 - <a href="https://afdian.net/@yiyun" target="_blank">爱发电</a> (￥5.00 起)
 - <a href="https://dun.mianbaoduo.com/@yiyun" target="_blank">面包多</a> (￥1.00 起)
 
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_large)
+
 ## Author
 
 - KnifeHub.Web `Apache-2.0`
@@ -485,5 +488,3 @@ Authored and maintained by yiyun with help from contributors ([list](https://git
 <!-- End Matomo -->
 
 
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fyiyungent%2FKnifeHub?ref=badge_large)
