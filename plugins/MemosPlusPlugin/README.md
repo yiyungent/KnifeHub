@@ -3,9 +3,11 @@
 
 ## 功能
 
+
+- 修改 `memos` 默认前端
 - 备份 `memos` 内容到 `GitHub` 仓库 指定文件
   - `纯文本内容 (包括 markdown)`
-  - `二进制文件`
+  - 资源库 `二进制文件`
 
 
 
@@ -13,45 +15,24 @@
 
 ## 使用
 
-
-## 嵌入 memos 默认前端
+## 1. 嵌入 memos 默认前端
 
 > `系统` -> `自定义脚本` 
 
+> **重要** : 将 `https://qqbothub.moeci.com` 替换为你的 url, 末尾不要带 `/`
+
 ```javascript
-var _hmt = _hmt || [];
 (function () {
-    var hm = document.createElement("script");
-    hm.src = "https://cdn.jsdelivr.net/npm/@yiyungent/plugincore/dist/PluginCore.min.js";
+    window.memosPlusBaseUrl = "https://qqbothub.moeci.com";
+    var memosPlus = document.createElement("script");
+    memosPlus.src = `${memosPlusBaseUrl}/plugins/MemosPlusPlugin/js/insert.js`;
     var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
+    s.parentNode.insertBefore(memosPlus, s);
 })();
-
-
-function startPluginCore() {
-  // let oldHtml = document.querySelector(".banner-wrapper").innerHTML;
-
-  // document.querySelector(".banner-wrapper").innerHTML = oldHtml + "<!-- PluginCore.IPlugins.IWidgetPlugin.Widget(memos,0.11.0,banner-wrapper) -->"
-
-  window.memosPluginCore = new PluginCore({
-    baseUrl: "https://api-onetree.moeci.com"
-  });
-
-  memosPluginCore.start();
-}
-
-var global = global || window;
-window.addEventListener("load", () => {
-  startPluginCore();
-});
-
-window.onload = function () {
-
-}
 ```
 
 
-### 设置 `GitHub`
+### 2. 设置 `GitHub`
 
 1. 前往此处获取 `GitHub Personal Access Token`, [点我前往](https://github.com/settings/tokens/new) , 注意: 一定要勾选 `repo Full control of private repositories`
 

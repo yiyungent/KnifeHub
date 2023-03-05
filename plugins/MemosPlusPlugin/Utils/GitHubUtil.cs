@@ -1,3 +1,5 @@
+using Octokit;
+
 namespace MemosPlusPlugin.Utils
 {
     public class GitHubUtil
@@ -45,7 +47,7 @@ namespace MemosPlusPlugin.Utils
 
         public void CreateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, byte[] fileContent, string accessToken)
         {
-            return CreateFile(repoOwner: repoOwner, repoName: repoName, repoBranch: repoBranch, repoTargetFilePath: repoTargetFilePath,
+            CreateFile(repoOwner: repoOwner, repoName: repoName, repoBranch: repoBranch, repoTargetFilePath: repoTargetFilePath, 
             fileContent: Convert.ToBase64String(fileContent), accessToken: accessToken);
         }
 
@@ -63,7 +65,9 @@ namespace MemosPlusPlugin.Utils
         /// <returns></returns>
         public string ReadFile() 
         {
-            
+            string fileContent = "";
+
+            return fileContent;
         }
 
     }

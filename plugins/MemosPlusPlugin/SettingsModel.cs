@@ -8,8 +8,7 @@ namespace MemosPlusPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
-        public List<string> AllowFriends { get; set; }
-
+        public bool AllowAllCors { get; set; }
 
         public GitHubModel GitHub { get; set; }
 
