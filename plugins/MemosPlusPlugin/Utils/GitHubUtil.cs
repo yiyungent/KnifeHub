@@ -72,7 +72,11 @@ namespace MemosPlusPlugin.Utils
                 if (existingFile != null && existingFile.Count >= 1)
                 {
                     existFile = true;
-                    // string oldFileContent = existingFile.First().Content;
+                    string oldFileContent = existingFile.First().Content;
+                    if (oldFileContent == fileContent) {
+                        System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容未变, 放弃提交");
+                        return;
+                    }
                     // update the file
                     var updateChangeSet = gitHubClient.Repository.Content.UpdateFile(owner, repo, targetFilePath,
                    new UpdateFileRequest(message: $"{nameof(MemosPlusPlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
