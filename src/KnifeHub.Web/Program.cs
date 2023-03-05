@@ -2,8 +2,13 @@ using PluginCore.AspNetCore.Extensions;
 using PluginCore.AspNetCore.lmplements;
 using PluginCore.Interfaces;
 using PluginCore.lmplements;
+using KnifeHub.Web.Config;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 配置注入
+ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
+builder.Services.Configure<ConfigOptions>(builder.Configuration.GetSection(ConfigOptions.Config));
 
 builder.WebHost.UseSentry(o =>
 {
@@ -25,10 +30,50 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    // ��ֹ��ͬ�� SchemaId ��ͻ
+    // 防止相同的 SchemaId 冲突
     // https://stackoverflow.com/questions/61881770/invalidoperationexception-cant-use-schemaid-the-same-schemaid-is-already-us
     options.CustomSchemaIds(type => type.ToString());
 });
+
+#region 跨域配置
+if (configOptions.AllowAllCors)
+{
+    Console.WriteLine("跨域: AllowAllCors");
+    builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader()));
+}
+else
+{
+    Console.WriteLine("跨域: AllowedCorsOrigins");
+    #region CorsWhiteList
+    var corsWhiteList = configOptions.CorsWhiteList;
+    // 所有允许跨域的 Origin
+    List<string> allAllowedCorsOrigins = new List<string>();
+    if (corsWhiteList != null && corsWhiteList.Count > 0)
+    {
+        foreach (var item in corsWhiteList)
+        {
+            allAllowedCorsOrigins.Add(item);
+        }
+
+        // 允许 AspNetCoreClient 跨域请求
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: "AllowedCorsOrigins",
+                builder =>
+                {
+                    // ConfigOptions 里配置的白名单都允许
+                    builder.WithOrigins(allAllowedCorsOrigins.ToArray())
+
+                            // 解决发送json,复杂请求问题: https://blog.csdn.net/yangyiboshigou/article/details/78738228
+                            // 解决方法: Access-Control-Allow-Headers: Content-Type
+                            // 参考: https://www.cnblogs.com/jpfss/p/10102132.html
+                            .WithHeaders("Content-Type");
+                });
+        });
+    }
+    #endregion
+}
+#endregion
 
 builder.Services.AddPluginCore();
 
@@ -46,6 +91,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+#region 跨域配置
+if (configOptions.AllowAllCors)
+{
+    app.UseCors("AllowAllCors");
+    Console.WriteLine("AllowAllCors");
+}
+else
+{
+    app.UseCors("AllowedCorsOrigins");
+    Console.WriteLine("AllowedCorsOrigins");
+}
+#endregion
 
 app.UsePluginCore();
 
