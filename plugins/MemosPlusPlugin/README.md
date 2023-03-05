@@ -4,8 +4,8 @@
 
 - [x] 注入 `memos` 默认前端
   - [ ] 具体功能待添加 
-- [ ] 备份 `memos` 内容到 `GitHub` 仓库 指定文件夹
-  - [ ] 纯文本内容 (包括 `markdown`)
+- [x] 备份 `memos` 内容到 `GitHub` 仓库 指定文件夹
+  - [x] 纯文本内容 (包括 `markdown`)
   - [ ] 资源库 `二进制文件`
 
 ## 使用
@@ -33,14 +33,13 @@
 > 注意: 一定要勾选 `repo Full control of private repositories`
 
 > `RepoTargetDirPath` 为内容写入文件夹路径 (相对于此仓库根目录),      
-> 此文件夹路径需先存在,         
 > 例如: `source/_posts/分类-memos/`
 
 
 
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlusPlugin-v0.1.0.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlusPlugin-v0.1.1.README" style="border:0" alt="" />
 <!-- End Matomo -->
 
 

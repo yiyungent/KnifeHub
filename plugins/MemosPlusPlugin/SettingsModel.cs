@@ -8,10 +8,14 @@ namespace MemosPlusPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
+        public long SecondsPeriod { get; set; }
+
         public MemosModel Memos { get; set; }
 
         public class MemosModel 
         {
+            public string BaseUrl { get; set; }
+
             public string OpenId { get; set; }
 
             public string MemosSession { get; set; }
@@ -30,6 +34,13 @@ namespace MemosPlusPlugin
             public string RepoBranch { get; set; }
 
             public string RepoTargetDirPath { get; set; }
+        }
+
+        public BackupModel Backup { get; set; }
+
+        public class BackupModel 
+        {
+            public bool EnableBackupToGitHub { get;set; }
         }
     }
 }

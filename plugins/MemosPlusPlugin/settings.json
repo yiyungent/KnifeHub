@@ -1,5 +1,7 @@
 {
+  "SecondsPeriod": 3600,
   "Memos": {
+    "BaseUrl": "",
     "OpenId": "xxxxxx-xxxx-xxxx-xxxxx-xxxxxxxx",
     "MemosSession": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
   },
@@ -9,5 +11,8 @@
     "RepoName": "your Repository Name",
     "RepoBranch": "your branch: master/main",
     "RepoTargetDirPath": "示例: source/_posts/分类-memos/"
+  },
+  "Backup": {
+    "EnableBackupToGitHub": false
   }
 }
