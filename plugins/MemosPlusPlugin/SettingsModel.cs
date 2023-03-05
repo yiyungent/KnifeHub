@@ -8,7 +8,14 @@ namespace MemosPlusPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
-        public bool AllowAllCors { get; set; }
+        public MemosModel Memos { get; set; }
+
+        public class MemosModel 
+        {
+            public string OpenId { get; set; }
+
+            public string MemosSession { get; set; }
+        }
 
         public GitHubModel GitHub { get; set; }
 
@@ -22,8 +29,7 @@ namespace MemosPlusPlugin
 
             public string RepoBranch { get; set; }
 
-            public string RepoTargetFilePath { get; set; }
-
+            public string RepoTargetDirPath { get; set; }
         }
     }
 }

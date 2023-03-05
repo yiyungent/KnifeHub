@@ -26,7 +26,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
-		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
+		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

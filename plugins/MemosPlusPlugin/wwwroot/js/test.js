@@ -1,5 +1,5 @@
 (function () {
-    window.memosPlusBaseUrl = "https://api-onetree.moeci.com";
+    window.memosPlusBaseUrl = "http://localhost:5193";
     var memosPlus = document.createElement("script");
     memosPlus.src = `${memosPlusBaseUrl}/plugins/MemosPlusPlugin/js/insert.js`;
     var s = document.getElementsByTagName("script")[0];

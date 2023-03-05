@@ -12,7 +12,7 @@ using System.IO;
 
 namespace MemosPlusPlugin
 {
-    public class MemosPlusPlugin : BasePlugin, IWidgetPlugin, IStartupPlugin
+    public class MemosPlusPlugin : BasePlugin, IWidgetPlugin, IStartupXPlugin
     {
         public override (bool IsSuccess, string Message) AfterEnable()
         {
@@ -31,14 +31,28 @@ namespace MemosPlusPlugin
             string rtnStr = null;
             if (widgetKey == "memos")
             {
-                if (extraPars != null)
+                if (extraPars != null && extraPars.Length >= 1)
                 {
                     Console.WriteLine(string.Join(",", extraPars));
+                    string memosVersion = extraPars[0];
+                    string memosPart = "";
+                    if (extraPars.Length >= 2) {
+                        memosPart = extraPars[1];
+                        switch (memosPart)
+                        {
+                            case "banner-wrapper":
+                            // banner-wrapper
+                            rtnStr = @"<script>
+                                    console.log(""测试"");
+                                    </script>";
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                    }
+                    
                 }
-                rtnStr = @"<script>
-                           console.log(""测试"");
-                           </script>";
-
             }
 
             return await Task.FromResult(rtnStr);
@@ -46,14 +60,12 @@ namespace MemosPlusPlugin
 
         public void Configure(IApplicationBuilder app)
         {
-            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlusPlugin));
-            
+            app.UseMiddleware<Middlewares.CorsMiddleware>();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlusPlugin));
-            
+
         }
 
         public int ConfigureServicesOrder => 0;
