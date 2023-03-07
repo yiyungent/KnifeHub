@@ -16,6 +16,18 @@ jobs:
       with:
         # 为了让 git 有日志 (git log) 可寻，还得在检出的时候顺带把所有提交历史一并拉下来，指定 fetch-depth 就能做到
         fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+    - name: Set outputs
+      id: vars
+      run: |
+        tagPrefix=refs/tags/MemosPlus-
+        # 获取字符串长度
+        tagPrefixLen=${#tagPrefix}
+        # 去掉前面的 refs/tags/MemosPlus-
+        RELEASE_VERSION=${GITHUB_REF:$tagPrefixLen}
+        # 提取出 v1.0.0
+        echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
+      shell: bash
       
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -29,13 +41,13 @@ jobs:
         ls
         ls ./bin/Release/
         ls ./bin/Release/net6.0/
+      shell: bash
       
     - name: Zip the Build
       run: |
         cd ./plugins/MemosPlus/bin/Release/net6.0
-        zip -r MemosPlus-net6.0.zip *
-        cd ../../../../../
-        mv ./plugins/MemosPlus/bin/Release/net6.0/*.zip ./
+        zip -r MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
+      shell: bash
 
     - name: Create temp-release-note.md
       run: |
@@ -56,6 +68,6 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          MemosPlus-net6.0.zip
-          LICENSE 
-          README.md
+          ./plugins/MemosPlus/bin/Release/net6.0/MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip
+          ./plugins/MemosPlus/README.md
+          ./plugins/MemosPlus/LICENSE 
