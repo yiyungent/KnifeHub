@@ -1,9 +1,9 @@
-name: MemosPlusPlugin Release
+name: MemosPlus Release
 
 on: 
   push:
     tags:
-      - 'MemosPlusPlugin-v*'
+      - 'MemosPlus-v*'
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         
     - name: Build
       run: |
-        cd ./plugins/MemosPlusPlugin
+        cd ./plugins/MemosPlus
         dotnet build --configuration Release
         ls
         ls ./bin/Release/
@@ -32,16 +32,16 @@ jobs:
       
     - name: Zip the Build
       run: |
-        cd ./plugins/MemosPlusPlugin/bin/Release/net6.0
-        zip -r MemosPlusPlugin-net6.0.zip *
+        cd ./plugins/MemosPlus/bin/Release/net6.0
+        zip -r MemosPlus-net6.0.zip *
         cd ../../../../../
-        mv ./plugins/MemosPlusPlugin/bin/Release/net6.0/*.zip ./
+        mv ./plugins/MemosPlus/bin/Release/net6.0/*.zip ./
 
     - name: Create temp-release-note.md
       run: |
         cp utils/generate-release-note.ps1 generate-release-note.ps1
-        $env:GitProjectTagName="MemosPlusPlugin"
-        $env:GitProjectPath="plugins/MemosPlusPlugin/*"
+        $env:GitProjectTagName="MemosPlus"
+        $env:GitProjectPath="plugins/MemosPlus/*"
         ./generate-release-note.ps1
       shell: pwsh
       
@@ -56,6 +56,6 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          MemosPlusPlugin-net6.0.zip
+          MemosPlus-net6.0.zip
           LICENSE 
           README.md

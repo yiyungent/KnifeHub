@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PluginCore.IPlugins;
-using MemosPlusPlugin.Utils;
+using MemosPlus.Utils;
 using System.Text;
 using Octokit;
 using System.Linq;
@@ -11,9 +11,9 @@ using System.Collections.Generic;
 using System.IO;
 using PluginCore;
 
-namespace MemosPlusPlugin
+namespace MemosPlus
 {
-    public class MemosPlusPlugin : BasePlugin, IWidgetPlugin, IStartupXPlugin, ITimeJobPlugin
+    public class MemosPlus : BasePlugin, IWidgetPlugin, IStartupXPlugin, ITimeJobPlugin
     {
 
         #region Props
@@ -21,7 +21,7 @@ namespace MemosPlusPlugin
         {
             get
             {
-                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlusPlugin));
+                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlus));
 
                 return settings.SecondsPeriod;
             }
@@ -30,13 +30,13 @@ namespace MemosPlusPlugin
 
         public override (bool IsSuccess, string Message) AfterEnable()
         {
-            Console.WriteLine($"{nameof(MemosPlusPlugin)}: {nameof(AfterEnable)}");
+            Console.WriteLine($"{nameof(MemosPlus)}: {nameof(AfterEnable)}");
             return base.AfterEnable();
         }
 
         public override (bool IsSuccess, string Message) BeforeDisable()
         {
-            Console.WriteLine($"{nameof(MemosPlusPlugin)}: {nameof(BeforeDisable)}");
+            Console.WriteLine($"{nameof(MemosPlus)}: {nameof(BeforeDisable)}");
             return base.BeforeDisable();
         }
 
@@ -45,7 +45,7 @@ namespace MemosPlusPlugin
         {
             try
             {
-                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlusPlugin));
+                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlus));
 
                 #region 备份到 GitHub
                 // TODO: 备份到 GitHub

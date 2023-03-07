@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using PluginCore.Interfaces;
 using PluginCore.IPlugins;
 
-namespace MemosPlusPlugin.Middlewares
+namespace MemosPlus.Middlewares
 {
     public class CorsMiddleware
     {

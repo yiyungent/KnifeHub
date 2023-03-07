@@ -1,6 +1,6 @@
 using Octokit;
 
-namespace MemosPlusPlugin.Utils
+namespace MemosPlus.Utils
 {
     public class GitHubUtil
     {
@@ -16,7 +16,7 @@ namespace MemosPlusPlugin.Utils
         public void CreateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, string fileContent, string accessToken,bool convertContentToBase64 = true)
         {
             #region GitHub
-            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue(nameof(MemosPlusPlugin)));
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue(nameof(MemosPlus)));
             gitHubClient.Credentials = new Credentials(accessToken);
 
             // github variables
@@ -29,7 +29,7 @@ namespace MemosPlusPlugin.Utils
             try
             {
                 var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                   new CreateFileRequest(message: $"{nameof(MemosPlusPlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                   new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                    content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64))
                     .Result;
             }
@@ -54,7 +54,7 @@ namespace MemosPlusPlugin.Utils
         public void UpdateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, string fileContent, string accessToken, bool convertContentToBase64 = true)
         {
             #region GitHub
-            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue(nameof(MemosPlusPlugin)));
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue(nameof(MemosPlus)));
             gitHubClient.Credentials = new Credentials(accessToken);
 
             // github variables
@@ -79,7 +79,7 @@ namespace MemosPlusPlugin.Utils
                     }
                     // update the file
                     var updateChangeSet = gitHubClient.Repository.Content.UpdateFile(owner, repo, targetFilePath,
-                   new UpdateFileRequest(message: $"{nameof(MemosPlusPlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                   new UpdateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                    content: fileContent, sha: existingFile.First().Sha, branch: branch, convertContentToBase64: convertContentToBase64))
                     .Result;
                 }
@@ -87,7 +87,7 @@ namespace MemosPlusPlugin.Utils
                 {
                     // if file is not found, create it
                     var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                    new CreateFileRequest(message: $"{nameof(MemosPlusPlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                    new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                    content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
                 }
             }
@@ -96,7 +96,7 @@ namespace MemosPlusPlugin.Utils
             {
                 // if file is not found, create it
                 var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                new CreateFileRequest(message: $"{nameof(MemosPlusPlugin)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
             }
             #endregion

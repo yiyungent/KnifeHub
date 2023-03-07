@@ -8,7 +8,7 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>PluginCore.MemosPlusPlugin</PackageId>
+		<PackageId>PluginCore.MemosPlus</PackageId>
 		<Version>0.1.1</Version>
 		<FileVersion>0.1.1.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>

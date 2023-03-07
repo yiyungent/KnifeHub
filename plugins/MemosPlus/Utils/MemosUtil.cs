@@ -1,4 +1,4 @@
-namespace MemosPlusPlugin.Utils
+namespace MemosPlus.Utils
 {
     public class MemosUtil
     {
