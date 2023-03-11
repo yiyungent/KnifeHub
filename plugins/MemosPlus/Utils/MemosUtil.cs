@@ -76,11 +76,11 @@ namespace MemosPlus.Utils
         /// </summary>
         public long creatorId { get; set; }
         /// <summary>
-        /// 
+        /// 10位
         /// </summary>
         public long createdTs { get; set; }
         /// <summary>
-        /// 
+        /// 10位
         /// </summary>
         public long updatedTs { get; set; }
         /// <summary>
@@ -88,7 +88,7 @@ namespace MemosPlus.Utils
         /// </summary>
         public string content { get; set; }
         /// <summary>
-        /// 
+        /// PRIVATE
         /// </summary>
         public string visibility { get; set; }
         /// <summary>

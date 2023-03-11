@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using PluginCore;
+using Scriban;
 
 namespace MemosPlus
 {
@@ -56,21 +57,36 @@ namespace MemosPlus
                     GitHubUtil gitHubUtil = new GitHubUtil();
                     settings.GitHub.RepoTargetDirPath = settings.GitHub.RepoTargetDirPath.Trim().TrimEnd('/');
                     while(list != null && list.Count >= 1) {
-                        foreach (var item in list)
+                        foreach (Utils.MemoItemModel item in list)
                         {
                             try
                             {
                                 DateTime dateTime = DateTimeUtil.ToDateTime10(item.createdTs);
                                 // 纯文本
+                                // 解析模版
+                                string githubTemplateFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(MemosPlus), "templates", "github.md");
+                                string githubTemplateContent = File.ReadAllText(githubTemplateFilePath, System.Text.Encoding.UTF8);
+                                // https://github.com/scriban/scriban
+                                var githubTemplate = Template.Parse(githubTemplateContent);
+                                string githubRenderResult = githubTemplate.Render(new { 
+                                    Memo = item,
+                                    CreateTime = item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH-mm-ss"),
+                                    UpdateTime = item.updatedTs.ToDateTime10().ToString("yyyy-MM-dd HH-mm-ss"),
+                                    Public = item.visibility != "PRIVATE"
+                                });
                                 gitHubUtil.UpdateFile(
                                     repoOwner: settings.GitHub.RepoOwner,
                                     repoName: settings.GitHub.RepoName,
                                     repoBranch: settings.GitHub.RepoBranch,
                                     repoTargetFilePath:  $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{dateTime.ToString("yyyy-MM-dd HH-mm-ss")}.md",
-                                    fileContent: item.content,
+                                    fileContent: githubRenderResult,
                                     accessToken: settings.GitHub.AccessToken
                                 );
+
+
                                 // TODO: 资源文件
+
+                                // TODO: 清理不存在的文件: 对于存放 memos 的文件夹, 清理 memos 中已删除的对应文件
 
                             }
                             catch (System.Exception ex)
