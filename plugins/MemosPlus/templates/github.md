@@ -1,6 +1,7 @@
 ---
 title: {{ createTime }}
 date: {{ createTime }}
+updated: {{ updateTime }}
 tags:
   - memos
 categories:
