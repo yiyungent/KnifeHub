@@ -32,19 +32,19 @@ function insertPluginCoreWidget() {
     }
 }
 
-window.memosNodes = []
-window.memosNodesWidgetInserted = []
-function findNodes(nodeStrArr, callback) {
-    nodeStrArr.forEach(nodeStr => {
-        memosNodes[nodeStr] = document.querySelector(nodeStr);
-        if (node && !memosNodesWidgetInserted[nodeStr]) {
-            memosNodesWidgetInserted[nodeStr] = true;
-        } else if (memosNodesWidgetInserted[nodeStr] && window.plugincoreJsLoaded) {
-            clearInterval(memosPluginCoreTimer);
-            callback(memosNodes[nodeStr]);
-        }
-    });
-}
+// window.memosNodes = []
+// window.memosNodesWidgetInserted = []
+// function findNodes(nodeStrArr, callback) {
+//     nodeStrArr.forEach(nodeStr => {
+//         memosNodes[nodeStr] = document.querySelector(nodeStr);
+//         if (node && !memosNodesWidgetInserted[nodeStr]) {
+//             memosNodesWidgetInserted[nodeStr] = true;
+//         } else if (memosNodesWidgetInserted[nodeStr] && window.plugincoreJsLoaded) {
+//             clearInterval(memosPluginCoreTimer);
+//             callback(memosNodes[nodeStr]);
+//         }
+//     });
+// }
 
 memosPluginCoreTimer = setInterval(() => {
     insertPluginCoreWidget();
