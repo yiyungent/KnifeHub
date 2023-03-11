@@ -4,14 +4,14 @@
 
 - [x] 注入 `memos` 默认前端
   - [ ] 具体功能待添加 
-- [x] 备份 `memos` 内容到 `GitHub` 仓库 指定文件夹
-  - [x] 纯文本内容 (包括 `markdown`)
-    - [x] 自定义模版 (默认适配 `Hexo post` 风格)  
-  - [ ] 资源库 `二进制文件`
+- [x] 定时同步 `memos` 内容到 `GitHub` 仓库 指定文件夹
+  - [x] 纯文本内容 (包含 `markdown`)
+    - [x] 自定义模版 (默认适配 `Hexo post` 风格, 配合 `GitHub Actions` 即可实现 `memos` 同步发布到 `Hexo`)  
+  - [ ] 资源库 (`二进制文件`)
 
 ## 使用
 
-## 1. 嵌入 memos 默认前端
+### 1. 嵌入 memos 默认前端
 
 > `系统` -> `自定义脚本` 
 
@@ -40,9 +40,13 @@
 
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.3.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.4.README" style="border:0" alt="" />
 <!-- End Matomo -->
 
+
+### 其它
+
+> `设置` 中 `SecondsPeriod` 为 `定时周期`: 单位为 `秒`
 
 
 <!-- ## 临时 -->
