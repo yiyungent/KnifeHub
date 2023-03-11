@@ -56,7 +56,7 @@
     - [x] 将 备份文件 发送到 Telegram 
     - 备份时资源占用较大
 
-  - [MemosPlusPlugin](https://github.com/yiyungent/KnifeHub/releases?q=MemosPlusPlugin&expanded=true) `PUP`
+  - [MemosPlus](https://github.com/yiyungent/KnifeHub/releases?q=MemosPlus&expanded=true) `PUP`
     - [x] [memos](https://github.com/usememos/memos) 辅助插件
 
   - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true) `PUP`
