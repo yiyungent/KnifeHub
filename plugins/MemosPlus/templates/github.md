@@ -1,15 +1,15 @@
 ---
-title: {{ createTime }}
-date: {{ createTime }}
-updated: {{ updateTime }}
+title: {{date}}
+date: {{date}}
+updated: {{updated}}
 tags:
   - memos
 categories:
   - ["memos"]
-public: {{ public }}
+public: {{public}}
 ---
 
-{{ memo.content }}
+{{memo.content}}
 
 
 <!-- 语法解析: https://scribanonline.azurewebsites.net/ -->

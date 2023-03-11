@@ -14,7 +14,7 @@ namespace MemosPlus.Utils
             List<MemoItemModel> rtn = new List<MemoItemModel>();
             try
             {
-                string resJson = HttpUtil.HttpGet(url: $"{MemosBaseUrl}/api/memo?rowStatus={rowStatus}&offset={offset}0&limit={limit}",
+                string resJson = HttpUtil.HttpGet(url: $"{MemosBaseUrl}/api/memo?rowStatus={rowStatus}&offset={offset}&limit={limit}",
                 headers: new string[] { $"cookie: memos_session={memosSession}" });
                 var resModel = System.Text.Json.JsonSerializer.Deserialize<MemosListResponseModel>(resJson);
                 if (resModel != null && resModel.data.Count >= 1)

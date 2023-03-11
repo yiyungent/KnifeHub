@@ -6,6 +6,7 @@
   - [ ] 具体功能待添加 
 - [x] 备份 `memos` 内容到 `GitHub` 仓库 指定文件夹
   - [x] 纯文本内容 (包括 `markdown`)
+    - [x] 自定义模版 (默认适配 `Hexo post` 风格)  
   - [ ] 资源库 `二进制文件`
 
 ## 使用
@@ -39,7 +40,7 @@
 
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.1.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.3.README" style="border:0" alt="" />
 <!-- End Matomo -->
 
 
