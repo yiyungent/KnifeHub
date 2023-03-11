@@ -21,7 +21,7 @@
 (function () {
     window.memosPlusBaseUrl = "https://qqbothub.moeci.com";
     var memosPlus = document.createElement("script");
-    memosPlus.src = `${memosPlusBaseUrl}/plugins/MemosPlusPlugin/js/insert.js`;
+    memosPlus.src = `${memosPlusBaseUrl}/plugins/MemosPlus/js/insert.js`;
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(memosPlus, s);
 })();
