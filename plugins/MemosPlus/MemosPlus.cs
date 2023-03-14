@@ -71,6 +71,9 @@ namespace MemosPlus
                             try
                             {
                                 // 纯文本
+                                string repoTargetFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH-mm-ss")}.md";
+                                // 注意: 先放进来, 防止后面报错导致没有放进去, 从而最终导致没有记录而误删
+                                memoFilePaths.Add(repoTargetFilePath);
                                 string createTimeStr = item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH:mm:ss");
                                 string updateTimeStr = item.updatedTs.ToDateTime10().ToString("yyyy-MM-dd HH:mm:ss");
                                 // TODO: 这里发现 scriban 有个 Bug: CreateTime, UpdateTime 这两个属性名解析为空, 还不会报错
@@ -81,7 +84,7 @@ namespace MemosPlus
                                     Updated = updateTimeStr,
                                     Public = item.visibility != "PRIVATE"
                                 });
-                                string repoTargetFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH-mm-ss")}.md";
+
                                 gitHubUtil.UpdateFile(
                                     repoOwner: settings.GitHub.RepoOwner,
                                     repoName: settings.GitHub.RepoName,
@@ -90,7 +93,6 @@ namespace MemosPlus
                                     fileContent: githubRenderResult,
                                     accessToken: settings.GitHub.AccessToken
                                 );
-                                memoFilePaths.Add(repoTargetFilePath);
 
                                 // TODO: 资源文件
                                 // 注意: 资源文件路径也要放入其中
