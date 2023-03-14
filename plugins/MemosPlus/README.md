@@ -40,10 +40,8 @@
 
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.4.README" style="border:0" alt="" />
-<!-- End Matomo -->
-
-
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.5.README" style="border:0" alt="" />
+<!-- 
 ### 其它
 
 > `设置` 中 `SecondsPeriod` 为 `定时周期`: 单位为 `秒`

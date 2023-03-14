@@ -10,7 +10,8 @@
     "RepoOwner": "your GitHub UserName",
     "RepoName": "your Repository Name",
     "RepoBranch": "your branch: master/main",
-    "RepoTargetDirPath": "示例: source/_posts/分类-memos/"
+    "RepoTargetDirPath": "示例: source/_posts/分类-memos/",
+    "MemoFileName": "memo-{{date}}.md"
   },
   "Backup": {
     "EnableBackupToGitHub": false

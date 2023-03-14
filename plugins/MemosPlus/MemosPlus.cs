@@ -71,7 +71,8 @@ namespace MemosPlus
                             try
                             {
                                 // 纯文本
-                                string repoTargetFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH-mm-ss")}.md";
+                                string memoFileName = settings.GitHub.MemoFileName.Replace("{{date}}", item.createdTs.ToDateTime10().ToString("yyyy-MM-dd-HH-mm-ss"));
+                                string repoTargetFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{memoFileName}";
                                 // 注意: 先放进来, 防止后面报错导致没有放进去, 从而最终导致没有记录而误删
                                 memoFilePaths.Add(repoTargetFilePath);
                                 string createTimeStr = item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH:mm:ss");

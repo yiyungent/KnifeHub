@@ -34,6 +34,13 @@ namespace MemosPlus
             public string RepoBranch { get; set; }
 
             public string RepoTargetDirPath { get; set; }
+
+            /// <summary>
+            /// 默认: memo-{{date}}.md
+            /// eg: memo-2022-10-12-22-12-23.md
+            /// </summary>
+            /// <value></value>
+            public string MemoFileName { get; set; }
         }
 
         public BackupModel Backup { get; set; }
