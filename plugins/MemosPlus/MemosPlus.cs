@@ -49,12 +49,23 @@ namespace MemosPlus
                 var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlus));
 
                 #region 备份到 GitHub
-                // TODO: 备份到 GitHub
+                // 备份到 GitHub
                 if (settings.Backup.EnableBackupToGitHub)
                 {
                     MemosUtil memosUtil = new MemosUtil(settings.Memos.BaseUrl);
                     int offset = 0;
-                    var list = memosUtil.List(memosSession: settings.Memos.MemosSession, offset: 0, limit: 20);
+                    bool isErrorMemosApi = false;
+                    var list = new List<MemoItemModel>();
+                    try
+                    {
+                        list = memosUtil.List(memosSession: settings.Memos.MemosSession, offset: 0, limit: 20);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        // 只要 memosUtil.List 出现一次 异常, 就标记放弃删除 GitHub 文件, 防止因为没有记录 而误删除 GitHub 文件
+                        isErrorMemosApi = true;
+                        System.Console.WriteLine(ex.ToString());
+                    }
                     GitHubUtil gitHubUtil = new GitHubUtil();
                     settings.GitHub.RepoTargetDirPath = settings.GitHub.RepoTargetDirPath.Trim().TrimEnd('/');
 
@@ -106,35 +117,56 @@ namespace MemosPlus
                             }
                         }
                         offset = offset + list.Count;
-                        list = memosUtil.List(memosSession: settings.Memos.MemosSession, offset: offset, limit: 20);
-                    }
-                    // 清理不存在的文件: 对于存放 memos 的文件夹, 清理 memos 中已删除的对应文件
-                    List<string> githubExistFilePaths = gitHubUtil.Files(
-                        repoOwner: settings.GitHub.RepoOwner,
-                        repoName: settings.GitHub.RepoName,
-                        repoBranch: settings.GitHub.RepoBranch,
-                        repoTargetDirPath: $"{settings.GitHub.RepoTargetDirPath}/",
-                        accessToken: settings.GitHub.AccessToken);
-                    // 对于 GitHub 存在 但 memos 并没有此对应文件, 就需要删除
-                    List<string> deletedFilePaths = githubExistFilePaths.Where(m => !memoFilePaths.Contains(m)).ToList();
-                    foreach (var deletedFilePath in deletedFilePaths)
-                    {
                         try
                         {
-                            gitHubUtil.Delete(
-                                repoOwner: settings.GitHub.RepoOwner,
-                                repoName: settings.GitHub.RepoName,
-                                repoBranch: settings.GitHub.RepoBranch,
-                                repoTargetFilePath: deletedFilePath,
-                                accessToken: settings.GitHub.AccessToken
-                            );
+                            list = memosUtil.List(memosSession: settings.Memos.MemosSession, offset: offset, limit: 20);
                         }
                         catch (System.Exception ex)
                         {
-                            System.Console.WriteLine($"删除失败: {deletedFilePath}");
+                            isErrorMemosApi = true;
                             System.Console.WriteLine(ex.ToString());
                         }
                     }
+
+                    #region 清理不存在的文件
+                    if (!isErrorMemosApi) {
+                        // 清理不存在的文件: 对于存放 memos 的文件夹, 清理 memos 中已删除的对应文件
+                        try
+                        {
+                            List<string> githubExistFilePaths = gitHubUtil.Files(
+                                repoOwner: settings.GitHub.RepoOwner,
+                                repoName: settings.GitHub.RepoName,
+                                repoBranch: settings.GitHub.RepoBranch,
+                                repoTargetDirPath: $"{settings.GitHub.RepoTargetDirPath}/",
+                                accessToken: settings.GitHub.AccessToken);
+                            // 对于 GitHub 存在 但 memos 并没有此对应文件, 就需要删除
+                            List<string> deletedFilePaths = githubExistFilePaths.Where(m => !memoFilePaths.Contains(m)).ToList();
+                            foreach (var deletedFilePath in deletedFilePaths)
+                            {
+                                try
+                                {
+                                    gitHubUtil.Delete(
+                                        repoOwner: settings.GitHub.RepoOwner,
+                                        repoName: settings.GitHub.RepoName,
+                                        repoBranch: settings.GitHub.RepoBranch,
+                                        repoTargetFilePath: deletedFilePath,
+                                        accessToken: settings.GitHub.AccessToken
+                                    );
+                                }
+                                catch (System.Exception ex)
+                                {
+                                    System.Console.WriteLine($"删除失败: {deletedFilePath}");
+                                    System.Console.WriteLine(ex.ToString());
+                                }
+                            }
+                        }
+                        catch (System.Exception ex)
+                        {
+                            System.Console.WriteLine(ex.ToString());
+                        }
+                    }
+                    #endregion
+
                 }
                 #endregion
 
