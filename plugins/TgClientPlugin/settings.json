@@ -1,7 +1,9 @@
 ﻿{
-  "Uin": "",
-  "Password": "",
-  "UseDemoModel": false,
-  "AdminQQ": "",
-  "BotKeyStore": null
+  "ApiId": 0,
+  "ApiHash": "",
+  "Proxy": {
+    "ProxyEnabled": false,
+    "ProxyHost": "127.0.0.1",
+    "ProxyPort": 10808
+  }
 }

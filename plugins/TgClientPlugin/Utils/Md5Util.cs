@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KonataPlugin.Utils
+namespace TgClientPlugin.Utils
 {
     public class Md5Util
     {

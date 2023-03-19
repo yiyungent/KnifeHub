@@ -1,8 +1,8 @@
 {
-	"PluginId": "KonataPlugin",
-	"DisplayName": "QQ插件",
-	"Description": "QQ基础插件",
+	"PluginId": "TgClientPlugin",
+	"DisplayName": "TgClient插件",
+	"Description": "TgClient插件",
 	"Author": "yiyun",
-	"Version": "0.2.0",
+	"Version": "0.0.1",
 	"SupportedVersions": [ "0.0.1" ]
 }

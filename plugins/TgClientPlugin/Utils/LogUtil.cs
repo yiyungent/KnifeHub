@@ -4,11 +4,11 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace KonataPlugin.Utils
+namespace TgClientPlugin.Utils
 {
     public class LogUtil
     {
-        public const string Sign = nameof(KonataPlugin);
+        public const string Sign = nameof(TgClientPlugin);
 
         public static void Info(string message)
         {

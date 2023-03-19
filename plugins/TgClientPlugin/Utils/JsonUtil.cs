@@ -1,7 +1,7 @@
 ﻿//using Newtonsoft.Json;
 using System.Text.Json;
 
-namespace KonataPlugin.Utils
+namespace TgClientPlugin.Utils
 {
     public class JsonUtil
     {

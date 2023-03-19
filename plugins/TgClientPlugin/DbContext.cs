@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using PluginCore;
-using KonataPlugin.Models;
+using TgClientPlugin.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KonataPlugin
+namespace TgClientPlugin
 {
     public class DbContext
     {
@@ -18,7 +18,7 @@ namespace KonataPlugin
         {
             get
             {
-                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(KonataPlugin), $"{nameof(KonataPlugin)}.sqlite");
+                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(TgClientPlugin), $"{nameof(TgClientPlugin)}.sqlite");
 
                 return dbFilePath;
             }
@@ -33,51 +33,58 @@ namespace KonataPlugin
         }
 
 
-        public static int InsertIntoQABox(QABox model)
+        public static int InsertIntoMessage(Message model)
         {
             using (IDbConnection con = new SQLiteConnection(ConnStr))
             {
                 con.Open();
 
-                string sql = "INSERT INTO QABox (Question,Answer,CreateTime,UpdateTime,QQGroup) Values (@Question,@Answer,@CreateTime,@UpdateTime,@QQGroup);";
+                string sql = "INSERT INTO Message (UName,UId,Content,GroupName,GroupId,CreateTime) Values (@UName,@UId,@Content,@GroupName,@GroupId,@CreateTime);";
 
                 return con.Execute(sql, model);
             }
         }
 
-        public static int UpdateQABox(QABox model)
+        public static List<Message> QueryAllMessage()
         {
             using (IDbConnection con = new SQLiteConnection(ConnStr))
             {
                 con.Open();
 
-                string sql = "UPDATE QABox SET Question=@Question, Answer=@Answer, CreateTime=@CreateTime, UpdateTime=@UpdateTime, QQGroup=@QQGroup WHERE Id=@Id;";
+                string sql = "SELECT * FROM Message;";
 
-                return con.Execute(sql, model);
+                return con.Query<Message>(sql).ToList();
             }
         }
 
-        public static int DeleteQABox(QABox model)
+        public async static Task<long> Count()
         {
             using (IDbConnection con = new SQLiteConnection(ConnStr))
             {
                 con.Open();
 
-                string sql = "DELETE FROM QABox WHERE Id=@Id;";
+                string sql = "SELECT COUNT(*) FROM Message;";
 
-                return con.Execute(sql, model);
+                return await con.QueryFirstAsync<long>(sql);
             }
         }
 
-        public static List<QABox> QueryAllQABox()
+        public async static Task<IEnumerable<(string UId, long TotalContentLen)>> TopByGroup(string groupId)
         {
             using (IDbConnection con = new SQLiteConnection(ConnStr))
             {
                 con.Open();
 
-                string sql = "SELECT * FROM QABox;";
+                string sql = @"SELECT UId, SUM(ContentLen) AS TotalContentLen
+                                FROM(SELECT Id, UId, LENGTH(Content) AS ContentLen FROM Message WHERE GroupId = @GroupId)
+                                GROUP BY UId
+                                ORDER BY TotalContentLen DESC
+                                LIMIT 10;";
 
-                return con.Query<QABox>(sql).ToList();
+                return await con.QueryAsync<(string UId, long TotalContentLen)>(sql, new
+                {
+                    GroupId = groupId
+                });
             }
         }
 

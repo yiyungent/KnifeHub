@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KonataPlugin.ResponseModels
+namespace TgClientPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

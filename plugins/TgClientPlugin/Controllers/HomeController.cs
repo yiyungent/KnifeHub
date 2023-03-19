@@ -10,13 +10,12 @@ using PluginCore.Interfaces;
 using TgClientPlugin.Utils;
 using TgClientPlugin.ResponseModels;
 using TgClientPlugin.RequestModels;
-using Konata.Core.Common;
-using Konata.Core.Interfaces;
-using static Konata.Core.Events.Model.CaptchaEvent;
 using PluginCore.IPlugins;
-using Konata.Core.Interfaces.Api;
-using Konata.Core.Message;
-using Konata.Core.Message.Model;
+using Starksoft.Net.Proxy;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TL;
 
 namespace TgClientPlugin.Controllers
 {
@@ -26,7 +25,7 @@ namespace TgClientPlugin.Controllers
     /// 下面的方法, 是去掉 index.html
     /// 
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
-    /// 这样访问 Plugins/HelloWorldPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
+    /// 这样访问 Plugins/TgClientPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
     [Route($"api/Plugins/{nameof(TgClientPlugin)}")]
     [Authorize("PluginCore.Admin")]
@@ -35,8 +34,17 @@ namespace TgClientPlugin.Controllers
         #region Fields
 
         private readonly IPluginFinder _pluginFinder;
-
         private readonly bool _debug;
+
+        #endregion
+
+        #region Propertities
+
+        public static WTelegram.Client Client;
+        public static User My;
+        public static readonly Dictionary<long, User> Users = new();
+        public static readonly Dictionary<long, ChatBase> Chats = new();
+        public static bool TgClientConnected { get; set; }
 
         #endregion
 
@@ -68,121 +76,22 @@ namespace TgClientPlugin.Controllers
             return PhysicalFile(indexFilePath, "text/html");
         }
 
-        /// <summary>
-        /// 登录后，定时访问此api, 获取验证等信息
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Route(nameof(Info))]
         public async Task<BaseResponseModel> Info()
         {
             BaseResponseModel responseModel = new BaseResponseModel();
-            InfoResponseDataModel dataModel = new InfoResponseDataModel();
-
-            if (KonataBotStore.Bot == null)
-            {
-                // 未点击登录过
-                responseModel.Code = 1;
-                responseModel.Message = "未登录";
-
-                dataModel.CaptchaTip = "";
-                dataModel.IsOnline = false;
-                dataModel.CaptchaType = "";
-                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                responseModel.Data = dataModel;
-
-                return responseModel;
-            }
-
-            //if (QQBotStore.Bot.IsOnline())
-            if (CaptchaStore.IsOnline)
-            {
-                responseModel.Code = 2;
-                responseModel.Message = "已处于登录状态, 无需验证";
-
-                dataModel.CaptchaTip = "";
-                dataModel.IsOnline = true;
-                dataModel.CaptchaType = "";
-                dataModel.CaptchaUpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                responseModel.Data = dataModel;
-
-                return responseModel;
-            }
-
-            // 已经点击登录过一次
-            responseModel.Code = 3;
-            responseModel.Message = "需要验证";
-            switch (CaptchaStore.CaptchaType)
-            {
-                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
-                    dataModel.CaptchaType = "短信验证";
-                    break;
-                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
-                    dataModel.CaptchaType = "滑块验证";
-                    break;
-                case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
-                    dataModel.CaptchaType = "未知验证";
-                    break;
-                default:
-                    dataModel.CaptchaType = "未知验证-不匹配的验证类型";
-                    break;
-            }
-            dataModel.IsOnline = false;
-            dataModel.CaptchaTip = CaptchaStore.CaptchaTip;
-            dataModel.CaptchaUpdateTime = CaptchaStore.UpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
-
-            responseModel.Data = dataModel;
-
-            return await Task.FromResult(responseModel);
-        }
-
-        /// <summary>
-        /// 提交验证信息
-        /// </summary>
-        /// <param name="captcha"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route(nameof(SubmitCaptcha))]
-        public async Task<BaseResponseModel> SubmitCaptcha([FromBody] SubmitCaptchaRequestModel requestModel)
-        {
-            BaseResponseModel responseModel = new BaseResponseModel();
-            string captcha = requestModel.Captcha;
-            if (string.IsNullOrEmpty(captcha))
-            {
-                responseModel.Code = -1;
-                responseModel.Message = "captcha 不能为空";
-
-                return responseModel;
-            }
-            bool isSuccessCaptcha = false;
             try
             {
-                switch (CaptchaStore.CaptchaType)
-                {
-                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Sms:
-                        isSuccessCaptcha = KonataBotStore.Bot.SubmitSmsCode(captcha);
-                        break;
-                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Slider:
-                        isSuccessCaptcha = KonataBotStore.Bot.SubmitSliderTicket(captcha);
-                        break;
-                    case Konata.Core.Events.Model.CaptchaEvent.CaptchaType.Unknown:
-                        break;
-                    default:
-                        break;
-                }
-
+                // TODO: Info
                 responseModel.Code = 1;
-                responseModel.Message = $"{(isSuccessCaptcha ? "验证通过" : "验证失败, 请重新验证")}";
+                responseModel.Message = "成功";
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                responseModel.Code = -3;
-                responseModel.Message = "提交验证失败";
+                responseModel.Code = -1;
+                responseModel.Message = "失败";
                 responseModel.Data = ex.ToString();
-
-                Utils.LogUtil.Exception(ex);
             }
 
             return await Task.FromResult(responseModel);
@@ -193,15 +102,80 @@ namespace TgClientPlugin.Controllers
         public async Task<BaseResponseModel> Login([FromBody] LoginRequestModel requestModel)
         {
             BaseResponseModel responseModel = new BaseResponseModel();
+            LoginResponseDataModel dataModel = new LoginResponseDataModel();
             try
             {
-                var oldSettings = Utils.SettingsUtil.Get(nameof(TgClientPlugin));
-                
-
-                Task<bool> taskLogin = KonataBotStore.Bot.Login();
+                var settings = Utils.SettingsUtil.Get(nameof(TgClientPlugin));
+                if (Client == null)
+                {
+                    Client = new WTelegram.Client(apiID: settings.ApiId, apiHash: settings.ApiHash);
+                    if (settings.Proxy != null && settings.Proxy.ProxyEnabled)
+                    {
+                        // [WTelegramClient/EXAMPLES.md at master · wiz0u/WTelegramClient](https://github.com/wiz0u/WTelegramClient/blob/master/EXAMPLES.md#use-a-proxy-or-mtproxy-to-connect-to-telegram)
+                        // SOCKS/HTTPS proxies 
+                        Client.TcpHandler = async (address, port) =>
+                        {
+                            // ProxyHost, ProxyPort, ProxyUsername, ProxyPassword
+                            var proxy = new Socks5ProxyClient(proxyHost: settings.Proxy.ProxyHost, proxyPort: settings.Proxy.ProxyPort);
+                            //var proxy = xNet.Socks5ProxyClient.Parse("host:port:username:password");
+                            return proxy.CreateConnection(address, port);
+                        };
+                    }
+                    Client.OnUpdate += Client_OnUpdate;
+                }
+                if (Client.User == null)
+                {
+                    // 先尝试一下不使用 requestModel.LoginInfo, 因为可能保存了登录 Session, 而无需
+                    string loginNeed = "请在输入框中输入 手机号(中国大陆 +86), 再次点击登录 (1)";
+                    try
+                    {
+                        loginNeed = await Client.Login(requestModel.LoginInfo);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Console.WriteLine(ex.ToString());
+                    }
+                    if (loginNeed == null)
+                    {
+                        // 登录成功: loginNeed 一定为 null
+                        try
+                        {
+                            System.Console.WriteLine("登录成功");
+                            // We collect all infos about the users/chats so that updates can be printed with their names
+                            var dialogs = await Client.Messages_GetAllDialogs(); // dialogs = groups/channels/users
+                            dialogs.CollectUsersChats(Users, Chats);
+                            dataModel.LoginNeed = null;
+                        }
+                        catch (System.Exception ex)
+                        {
+                            System.Console.WriteLine(ex.ToString());
+                            dataModel.LoginNeed = ex.ToString();
+                        }
+                    }
+                    else
+                    {
+                        switch (loginNeed)
+                        {
+                            case "verification_code":
+                                dataModel.LoginNeed = "请在输入框中输入 验证码, 再次点击登录";
+                                break;
+                            case "phone_number":
+                                dataModel.LoginNeed = "请在输入框中输入 手机号(中国大陆 +86), 再次点击登录";
+                                break;
+                            default:
+                                dataModel.LoginNeed = loginNeed;
+                                break;
+                        }
+                    }
+                }
 
                 responseModel.Code = 1;
-                responseModel.Message = "提交登录成功";
+                responseModel.Message = dataModel.LoginNeed;
+                if (dataModel.LoginNeed == null)
+                {
+                    responseModel.Message = $"登录成功";
+                }
+                responseModel.Data = dataModel;
             }
             catch (Exception ex)
             {
@@ -220,7 +194,22 @@ namespace TgClientPlugin.Controllers
             BaseResponseModel responseModel = new BaseResponseModel();
             try
             {
-                Task<bool> taskLogout = KonataBotStore.Bot.Logout();
+                if (Client != null)
+                {
+                    try
+                    {
+                        Client.DisableUpdates();
+                        await Client.Auth_LogOut();
+                        Client.Dispose();
+                        Client = null;
+                        GC.Collect();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Console.WriteLine(nameof(Logout));
+                        System.Console.WriteLine(ex.ToString());
+                    }
+                }
 
                 responseModel.Code = 1;
                 responseModel.Message = "提交退出成功";
@@ -237,174 +226,6 @@ namespace TgClientPlugin.Controllers
 
         #endregion
 
-        #region Helpers
-
-        [NonAction]
-        public void InitQQBot(BotKeyStore botKeyStore)
-        {
-            #region Bot
-
-            // Create a bot instance
-            #region 准备数据
-            // 优先从 环境变量 中获取
-            BotConfig botConfig = BotConfig.Default();
-            string botConfigJsonStr = EnvUtil.GetEnv("BOT_CONFIG");
-            if (!string.IsNullOrEmpty(botConfigJsonStr))
-            {
-                botConfig = JsonUtil.JsonStr2Obj<BotConfig>(botConfigJsonStr);
-            }
-
-            BotDevice botDevice = BotDevice.Default();
-            string botDeviceJsonStr = EnvUtil.GetEnv("BOT_DEVICE");
-            if (!string.IsNullOrEmpty(botDeviceJsonStr))
-            {
-                botDevice = JsonUtil.JsonStr2Obj<BotDevice>(botDeviceJsonStr);
-            }
-
-            string botKeyStoreJsonStr = EnvUtil.GetEnv("BOT_KEYSTORE");
-            if (!string.IsNullOrEmpty(botKeyStoreJsonStr))
-            {
-                botKeyStore = JsonUtil.JsonStr2Obj<BotKeyStore>(botKeyStoreJsonStr);
-            }
-            var settings = Utils.SettingsUtil.Get(nameof(TgClientPlugin));
-            #endregion
-
-            var bot = BotFather.Create(botConfig, botDevice, botKeyStore);
-            {
-                // Print the log
-                bot.OnLog += (s, e) =>
-                {
-                    //#if DEBUG
-                    //                    Utils.LogUtil.Info(e.EventMessage);
-                    //#endif
-                    if (_debug)
-                    {
-                        Utils.LogUtil.Info(e.EventMessage);
-                    }
-                };
-
-                // Handle the captcha
-                bot.OnCaptcha += (s, e) =>
-                {
-                    Utils.LogUtil.Info("QQ 登录验证:");
-                    CaptchaStore.UpdateTime = DateTime.Now;
-                    CaptchaStore.CaptchaType = e.Type;
-                    if (e.Type == CaptchaType.Slider)
-                    {
-                        Utils.LogUtil.Info(e.SliderUrl);
-                        //((Bot)s).SubmitSliderTicket(Console.ReadLine());
-                        CaptchaStore.CaptchaTip = $"{e.SliderUrl}";
-                    }
-                    else if (e.Type == CaptchaType.Sms)
-                    {
-                        Utils.LogUtil.Info(e.Phone);
-                        //((Bot)s).SubmitSmsCode(Console.ReadLine());
-                        CaptchaStore.CaptchaTip = $"{e.Phone}";
-                    }
-                };
-
-                // Handle messages from group
-                bot.OnGroupMessage += (s, e) =>
-                {
-                    Utils.LogUtil.Info($"群消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
-
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
-                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                    foreach (var plugin in plugins)
-                    {
-                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-                        if (e.Message.Sender.Uin != s.Uin)
-                        {
-                            // 排除机器人自己
-                            plugin.OnGroupMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.GroupName, e.GroupUin, e.MemberUin);
-                        }
-                    }
-
-                    // 演示模式
-                    if (settings.UseDemoModel)
-                    {
-                        if (e.Message.Sender.Uin != s.Uin)
-                        {
-                            // 排除机器人自己
-                            // 只回应 @机器人
-                            if (IsAtBot(e.Message.Chain, s.Uin))
-                            {
-                                bot.SendGroupMessage(e.GroupUin, $"收到消息啦！您发送的消息为 -> {ConvertToString(e.Message.Chain)}");
-                            }
-                        }
-                    }
-                };
-
-                // Handle messages from friend
-                bot.OnFriendMessage += (s, e) =>
-                {
-                    Utils.LogUtil.Info($"好友消息: {DateTime.Now.ToString()}: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
-
-                    // 在获取插件这步正常, 没有触发 bot.OnFriendMessage 
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>().ToList();
-                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                    //Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件: {e.Message.Chain?.FirstOrDefault()?.ToString() ?? ""}");
-                    foreach (var plugin in plugins)
-                    {
-                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-                        if (e.Message.Sender.Uin != s.Uin)
-                        {
-                            // 排除机器人自己
-                            plugin.OnFriendMessage((s, e), e.Message.Chain?.FirstOrDefault()?.ToString() ?? "", e.FriendUin);
-                        }
-                    }
-                };
-
-                bot.OnBotOnline += (s, e) =>
-                {
-                    Utils.LogUtil.Info($"{s.Name} 上线");
-
-                    CaptchaStore.IsOnline = true;
-
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
-                    foreach (var plugin in plugins)
-                    {
-                        plugin.OnBotOnline((s, e), s.Name, s.Uin);
-                    }
-                };
-
-                bot.OnBotOffline += (s, e) =>
-                {
-                    Utils.LogUtil.Info($"{s.Name} 离线");
-
-                    CaptchaStore.IsOnline = false;
-
-                    var plugins = _pluginFinder.EnablePlugins<IQQBotPlugin>();
-                    foreach (var plugin in plugins)
-                    {
-                        plugin.OnBotOffline((s, e), s.Name, s.Uin);
-                    }
-                };
-                // ... More handlers
-            }
-
-            // Do login
-            //Task<bool> loginTask = bot.Login();
-
-            // 下方操作会阻塞, 并且是阻塞到过登录验证
-            //if (!bot.Login().Result)
-            //{
-            //    Utils.LogUtil.Info($"{nameof(QQBotPlugin)} 启用后 QQ 自动登录失败");
-            //    return base.AfterEnable();
-            //}
-            //else
-            //{
-            //    Utils.LogUtil.Info($"{nameof(QQBotPlugin)} 启用后 QQ 自动登录成功");
-            //}
-
-            #endregion
-
-            // 登录成功, 保存起来
-            KonataBotStore.Bot = bot;
-        }
-
-        #endregion
-
         [Route(nameof(Download))]
         public async Task<ActionResult> Download()
         {
@@ -415,109 +236,68 @@ namespace TgClientPlugin.Controllers
             return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(TgClientPlugin)}.sqlite", enableRangeProcessing: true);
         }
 
-        [NonAction]
-        private string ConvertToString(MessageChain chains)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in chains)
-            {
-                switch (item.Type)
-                {
-                    case BaseChain.ChainType.At:
-                        break;
-                    case BaseChain.ChainType.Reply:
-                        break;
-                    case BaseChain.ChainType.Text:
-                        sb.AppendLine(item.ToString());
-                        break;
-                    case BaseChain.ChainType.Image:
-                        break;
-                    case BaseChain.ChainType.Flash:
-                        break;
-                    case BaseChain.ChainType.Record:
-                        break;
-                    case BaseChain.ChainType.Video:
-                        break;
-                    case BaseChain.ChainType.QFace:
-                        break;
-                    case BaseChain.ChainType.BFace:
-                        break;
-                    case BaseChain.ChainType.Xml:
-                        break;
-                    case BaseChain.ChainType.MultiMsg:
-                        break;
-                    case BaseChain.ChainType.Json:
-                        break;
-                    default:
-                        break;
-                }
-            }
+        #region TgClient
 
-            return sb.ToString();
+        private static async Task Client_OnUpdate(IObject arg)
+        {
+            if (arg is not UpdatesBase updates) return;
+            updates.CollectUsersChats(Users, Chats);
+            foreach (var update in updates.UpdateList)
+                switch (update)
+                {
+                    case UpdateNewMessage unm:
+                        await DisplayMessage(unm.message);
+
+                        #region UpdateNewMessage
+                        int count = DbContext.InsertIntoMessage(new Models.Message
+                        {
+                            UId = unm.message.From.ID.ToString(),
+                            UName = unm.message.From.ToString() ?? "",
+                            GroupId = unm.message.Peer.ID.ToString(),
+                            GroupName = unm.message.Peer.ToString(),
+                            Content = unm.message.ToString(),
+                            CreateTime = unm.message.Date.ToTimeStamp13()
+                        });
+                        if (count < 1)
+                        {
+                            System.Console.WriteLine($"{nameof(Client_OnUpdate)}: 插入数据库失败");
+                        }
+                        #endregion
+
+                        break;
+                    case UpdateEditMessage uem: await DisplayMessage(uem.message, true); break;
+                    // Note: UpdateNewChannelMessage and UpdateEditChannelMessage are also handled by above cases
+                    case UpdateDeleteChannelMessages udcm: Console.WriteLine($"{udcm.messages.Length} message(s) deleted in {Chat(udcm.channel_id)}"); break;
+                    case UpdateDeleteMessages udm: Console.WriteLine($"{udm.messages.Length} message(s) deleted"); break;
+                    case UpdateUserTyping uut: Console.WriteLine($"{User(uut.user_id)} is {uut.action}"); break;
+                    case UpdateChatUserTyping ucut: Console.WriteLine($"{Peer(ucut.from_id)} is {ucut.action} in {Chat(ucut.chat_id)}"); break;
+                    case UpdateChannelUserTyping ucut2: Console.WriteLine($"{Peer(ucut2.from_id)} is {ucut2.action} in {Chat(ucut2.channel_id)}"); break;
+                    case UpdateChatParticipants { participants: ChatParticipants cp }: Console.WriteLine($"{cp.participants.Length} participants in {Chat(cp.chat_id)}"); break;
+                    case UpdateUserStatus uus: Console.WriteLine($"{User(uus.user_id)} is now {uus.status.GetType().Name[10..]}"); break;
+                    case UpdateUserName uun: Console.WriteLine($"{User(uun.user_id)} has changed profile name: {uun.first_name} {uun.last_name}"); break;
+                    case UpdateUser uu: Console.WriteLine($"{User(uu.user_id)} has changed infos/photo"); break;
+                    default: Console.WriteLine(update.GetType().Name); break; // there are much more update types than the above example cases
+                }
         }
 
-        [NonAction]
-        private bool IsAtBot(MessageChain baseChains, uint botUin)
+        // in this example method, we're not using async/await, so we just return Task.CompletedTask
+        private static Task DisplayMessage(MessageBase messageBase, bool edit = false)
         {
-            bool isAtBot = false;
-            foreach (var item in baseChains)
+            if (edit) Console.Write("(Edit): ");
+            switch (messageBase)
             {
-                switch (item.Type)
-                {
-                    case BaseChain.ChainType.At:
-                        AtChain atChain = (AtChain)item;
-                        isAtBot = atChain.AtUin == botUin;
-                        //if (isAtBot = atChain.AtUin == botUin)
-                        //{
-                        //    break;
-                        //}
-                        break;
-                    case BaseChain.ChainType.Reply:
-                        //ReplyChain replyChain = (ReplyChain)item;
-                        //isAtBot = atChain.AtUin == botUin;
-                        break;
-                    case BaseChain.ChainType.Text:
-                        break;
-                    case BaseChain.ChainType.Image:
-                        break;
-                    case BaseChain.ChainType.Flash:
-                        break;
-                    case BaseChain.ChainType.Record:
-                        break;
-                    case BaseChain.ChainType.Video:
-                        break;
-                    case BaseChain.ChainType.QFace:
-                        break;
-                    case BaseChain.ChainType.BFace:
-                        break;
-                    case BaseChain.ChainType.Xml:
-                        break;
-                    case BaseChain.ChainType.MultiMsg:
-                        break;
-                    case BaseChain.ChainType.Json:
-                        break;
-                    default:
-                        break;
-                }
+                case Message m: Console.WriteLine($"{Peer(m.from_id) ?? m.post_author} in {Peer(m.peer_id)}> {m.message}"); break;
+                case MessageService ms: Console.WriteLine($"{Peer(ms.from_id)} in {Peer(ms.peer_id)} [{ms.action.GetType().Name[13..]}]"); break;
             }
-
-            return isAtBot;
+            return Task.CompletedTask;
         }
+
+        private static string User(long id) => Users.TryGetValue(id, out var user) ? user.ToString() : $"User {id}";
+        private static string Chat(long id) => Chats.TryGetValue(id, out var chat) ? chat.ToString() : $"Chat {id}";
+        private static string Peer(Peer peer) => peer is null ? null : peer is PeerUser user ? User(user.user_id)
+            : peer is PeerChat or PeerChannel ? Chat(peer.ID) : $"Peer {peer.ID}";
+
+        #endregion
+
     }
-
-    #region More
-
-    public static class CaptchaStore
-    {
-        public static Konata.Core.Events.Model.CaptchaEvent.CaptchaType CaptchaType { get; set; }
-
-        public static string CaptchaTip { get; set; }
-
-        public static DateTime UpdateTime { get; set; }
-
-        public static bool IsOnline { get; set; }
-    }
-
-    #endregion
-
 }
