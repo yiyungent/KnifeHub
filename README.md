@@ -59,6 +59,9 @@
   - [MemosPlus](https://github.com/yiyungent/KnifeHub/releases?q=MemosPlus&expanded=true) `PUP`
     - [x] [memos](https://github.com/usememos/memos) 辅助插件
 
+  - [TgClientPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TgClientPlugin&expanded=true) `PUP`
+    - [x] Telegram 客户端 辅助插件
+
   - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true) `PUP`
     - [x] Duplicati 辅助插件
     - [x] Duplicati 备份通知 Telegram
