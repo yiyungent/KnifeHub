@@ -15,11 +15,19 @@ namespace TgClientPlugin
 
         public ProxyModel Proxy { get; set; }
 
+        public AutoLoginModel AutoLogin { get; set; }
+
         public class ProxyModel
         {
             public bool ProxyEnabled { get; set; }
             public string ProxyHost { get; set; }
             public int ProxyPort { get; set; }
+        }
+
+        public class AutoLoginModel
+        {
+            public bool Enabled { get; set; }
+            public string Phone { get; set; }
         }
     }
 }

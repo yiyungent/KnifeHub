@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace TgClientPlugin
 {
-    public class TgClientPlugin : BasePlugin
+    public class TgClientPlugin : BasePlugin, ITimeJobPlugin
     {
         public override (bool IsSuccess, string Message) AfterEnable()
         {
@@ -24,5 +24,34 @@ namespace TgClientPlugin
             return base.BeforeDisable();
         }
 
+        public long SecondsPeriod => 60;
+        public async Task ExecuteAsync()
+        {
+            var settings = Utils.SettingsUtil.Get(nameof(TgClientPlugin));
+            if (settings.AutoLogin == null || !settings.AutoLogin.Enabled)
+            {
+                await Task.CompletedTask;
+                return;
+            }
+            // TODO: 暂时没用到 IPluginFinder, 直接传递 null
+            Controllers.HomeController homeController = new Controllers.HomeController(null);
+            try
+            {
+                if (Controllers.HomeController.Client == null || Controllers.HomeController.Client.User == null)
+                {
+                    await homeController.Login(new RequestModels.LoginRequestModel
+                    {
+                        LoginInfo = settings.AutoLogin.Phone
+                    });
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine($"{nameof(TgClientPlugin)}.{nameof(ExecuteAsync)}");
+                System.Console.WriteLine(ex.ToString());
+            }
+
+            await Task.CompletedTask;
+        }
     }
 }

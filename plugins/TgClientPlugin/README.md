@@ -46,5 +46,5 @@
 > 本项目基于 [wiz0u/WTelegramClient: Telegram Client API (MTProto) library written 100% in C# and .NET Standard](https://github.com/wiz0u/WTelegramClient)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.TgClientPlugin-v0.0.1.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.TgClientPlugin-v0.0.2.README" style="border:0" alt="" />
 <!-- End Matomo -->
