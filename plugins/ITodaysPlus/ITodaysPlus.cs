@@ -89,7 +89,7 @@ namespace ITodaysPlus
                                     string dateRecordFilePath = Path.Combine(folderPath, dateRecordFileName);
                                     Console.WriteLine($"{dateRecordFileName} - 尝试");
 
-                                    var dateRecordFileNames = folderDir.GetFiles("DateRecord-*.json")?.Select(m => m.FullName)?.ToArray();
+                                    var dateRecordFileNames = folderDir.GetFiles("DateRecord-*.json")?.Select(m => m.Name)?.ToArray();
                                     if (dateRecordFileNames != null && !dateRecordFileNames.Contains(dateRecordFileName))
                                     {
                                         // 不存在此记录才 新增保存

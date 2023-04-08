@@ -67,7 +67,15 @@ namespace ITodaysPlus.Utils
                 resultModel.responseModel = System.Text.Json.JsonSerializer.Deserialize<DateRecordResponseModel>(jsonStr);
                 if (resultModel.responseModel.status == 1)
                 {
-                    resultModel.dataModel = System.Text.Json.JsonSerializer.Deserialize<DateRecordResponseModel.dataModel>(resultModel.responseModel.data);
+                    try
+                    {
+                        resultModel.dataModel = System.Text.Json.JsonSerializer.Deserialize<DateRecordResponseModel.dataModel>(resultModel.responseModel.data);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"resultModel.responseModel.data: \n {resultModel.responseModel.data}");
+                        throw ex;
+                    }
                 }
             }
             catch (Exception ex)
