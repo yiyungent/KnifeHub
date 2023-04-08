@@ -1,6 +1,6 @@
 ﻿<h1 align="center">KnifeHub</h1>
 
-> 工具平台 | 日常生活/学习/工作/开发 工具集
+> 🧰 工具平台 | 日常生活/学习/工作/开发 工具集
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/KnifeHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/KnifeHub.svg?style=flat)](https://github.com/yiyungent/KnifeHub/blob/master/LICENSE)
