@@ -63,7 +63,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PluginStore", "plugins\Plug
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemosPlus", "plugins\MemosPlus\MemosPlus.csproj", "{A6F0747B-A885-4D8C-82C5-131ACFFBF337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgClientPlugin", "plugins\TgClientPlugin\TgClientPlugin.csproj", "{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgClientPlugin", "plugins\TgClientPlugin\TgClientPlugin.csproj", "{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITodaysPlus", "plugins\ITodaysPlus\ITodaysPlus.csproj", "{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +185,10 @@ Global
 		{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -215,6 +221,7 @@ Global
 		{F657DBCF-ED2B-4ECA-9434-F1A205A02D31} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{A6F0747B-A885-4D8C-82C5-131ACFFBF337} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{6FFD13E0-ED0C-44C5-8017-2F8179E4C6CB} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
