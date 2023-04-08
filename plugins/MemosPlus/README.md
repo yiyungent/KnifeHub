@@ -1,4 +1,14 @@
 
+
+## 简介
+
+> 提升 memos 使用体验, 更快捷的 memos 自动备份/导出
+
+
+
+> 当前适配 [memos](https://usememos.com/) v0.11.0
+
+
 ## 功能
 
 
@@ -13,9 +23,12 @@
 
 ### 1. 嵌入 memos 默认前端
 
-> `系统` -> `自定义脚本` 
+> `设置` -> `系统` -> `自定义脚本` -> `复制粘贴` -> `保存`
 
-> **重要** : 将 `https://qqbothub.moeci.com` 替换为你的 url, 末尾不要带 `/`
+> **重要** : 将 `https://qqbothub.moeci.com` 替换为你的 url, 末尾不要带 `/`     
+> `memosPlusBaseUrl` 为部署 MemosPlus 的 URL, 而不是部署 memos 的 URL
+
+- [右键复制这个链接地址, 一般此为 memosPlusBaseUrl](/)
 
 ```javascript
 (function () {
@@ -26,6 +39,8 @@
     s.parentNode.insertBefore(memosPlus, s);
 })();
 ```
+
+> 将以上内容复制粘贴到 `自定义脚本` 中, 点击 `保存`
 
 
 ### 2. 设置 `GitHub`
@@ -40,7 +55,7 @@
 
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.6.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.MemosPlus-v0.1.7.README" style="border:0" alt="" />
 <!-- 
 ### 其它
 
