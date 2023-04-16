@@ -95,5 +95,6 @@ COPY --from=build /src/docker/nginx-site.conf /etc/nginx/sites-enabled/default
 RUN mkdir /app-nginx
 # end nginx
 
+RUN ulimit -c 0
 # ENTRYPOINT ["dotnet", "KnifeHub.Web.dll"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
