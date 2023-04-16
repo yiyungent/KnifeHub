@@ -10,8 +10,40 @@
 <body>
 	<div id="app">
 		<h3>ITodaysPlus! </h3>
-        <div></div>
+		<div></div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+        var pageECharts = null;
 
+        function loadCalendar() {
+            calendarECharts.showLoading();
+
+            axios({
+                method: "get",
+                url: "/api/Plugins/ITodaysPlus/EChartsOption",
+                params: {
+                },
+            }).then(res => {
+                calendarECharts.hideLoading();
+                if (res.status == 200) {
+                    res = res.data;
+                    if (res.code > 0) {
+                        // 成功
+                        pageECharts.setOption(res.data);
+                    } else {
+                        alert(res.message);
+                    }
+                }
+            });
+
+        }
+
+        window.onload = function () {
+            pageECharts = echarts.init(document.getElementById("calendar-container"));
+            loadCalendar();
+        }
+	</script>
 </body>
 </html>
