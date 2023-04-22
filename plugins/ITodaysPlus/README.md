@@ -8,7 +8,8 @@
 ## 功能
 
 
-- [x] 备份 `爱今天/时间朋友` 时间记录
+- [x] 备份 `爱今天/时间朋友` 时间记录   
+- [x] [管理](/plugins/ITodaysPlus)
 
 
 <!-- Matomo Image Tracker-->

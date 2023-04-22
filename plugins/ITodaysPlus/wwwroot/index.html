@@ -2,48 +2,70 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8" />
-	<title>ITodaysPlus</title>
-	<!-- 注意:路径, 前置 /plugins/ITodaysPlus/ -->
-	<link href="/plugins/ITodaysPlus/css/main.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>ITodaysPlus</title>
+    <!-- 注意:路径, 前置 /plugins/ITodaysPlus/ -->
+    <link href="/plugins/ITodaysPlus/css/main.css" rel="stylesheet" />
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/zui/1.10.0/css/zui.min.css">
 </head>
 <body>
-	<div id="app">
-		<h3>ITodaysPlus! </h3>
-		<div></div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script>
-        var pageECharts = null;
+    <div id="app">
+        <h3>ITodaysPlus</h3>
+        <div>
+            <div id="zui-uploader-excel" class="uploader">
+                <div class="file-list" data-drag-placeholder="请拖拽文件(爱今天导出文件.xls)到此处"></div>
+                <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
+            </div>
+        </div>
+        <div id="page-echart"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcdn.net/ajax/libs/zui/1.10.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcdn.net/ajax/libs/zui/1.10.0/js/zui.min.js"></script>
+    <script>
+
+        // https://www.openzui.com/#view/uploader
+        $('#zui-uploader-excel').uploader({
+            // 当选择文件后立即自动进行上传操作
+            autoUpload: true,
+            // 文件上传提交地址
+            url: '/api/Plugins/ITodaysPlus/ExcelUpload',
+            responseHandler: function (responseObject, file) {
+                console.log(responseObject);
+            }
+        });
+
+        var pageEChart = null;
 
         function loadCalendar() {
-            calendarECharts.showLoading();
-
+            pageEChart.showLoading();
             axios({
                 method: "get",
-                url: "/api/Plugins/ITodaysPlus/EChartsOption",
+                url: "/api/Plugins/ITodaysPlus/EChartOption",
                 params: {
                 },
             }).then(res => {
-                calendarECharts.hideLoading();
+                pageEChart.hideLoading();
                 if (res.status == 200) {
                     res = res.data;
                     if (res.code > 0) {
                         // 成功
-                        pageECharts.setOption(res.data);
+                        pageEChart.setOption(res.data);
                     } else {
                         alert(res.message);
                     }
                 }
             });
-
         }
 
         window.onload = function () {
-            pageECharts = echarts.init(document.getElementById("calendar-container"));
+            pageEChart = echarts.init(document.getElementById("page-echart"));
             loadCalendar();
         }
-	</script>
+    </script>
 </body>
 </html>

@@ -32,8 +32,8 @@ namespace ITodaysPlus.Controllers
             return PhysicalFile(indexFilePath, "text/html");
         }
 
-        [HttpPost, Route(nameof(ITodaysOne))]
-        public async Task<ActionResult<BaseResponseModel>> ITodaysOne([FromForm] IFormFile file)
+        [HttpPost, Route(nameof(ExcelUpload))]
+        public async Task<ActionResult<BaseResponseModel>> ExcelUpload([FromForm] IFormFile file)
         {
             BaseResponseModel responseModel = null;
 
