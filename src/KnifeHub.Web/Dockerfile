@@ -19,5 +19,9 @@ RUN dotnet publish "KnifeHub.Web.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN ulimit -c 0
-ENTRYPOINT ["dotnet", "KnifeHub.Web.dll"]
+ADD railway-entrypoint.sh ./railway-entrypoint.sh
+RUN chmod +x ./railway-entrypoint.sh
+
+ENTRYPOINT ["/bin/sh", "./entrypoint.sh"]
+# RUN ulimit -c 0
+# ENTRYPOINT ["dotnet", "KnifeHub.Web.dll"]
