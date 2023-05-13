@@ -1,3 +1,6 @@
 [submodule "src/PluginCore"]
 	path = src/PluginCore
 	url = git@github.com:yiyungent/PluginCore.git
+[submodule "src/Konata.Core"]
+	path = src/Konata.Core
+	url = git@github.com:KonataDev/Konata.Core.git
