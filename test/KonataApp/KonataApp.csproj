@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konata.Core" Version="1.3.3" />
+    <Reference Include="Konata.Core">
+      <HintPath>..\..\repos-packages\Konata.Core\Konata.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
