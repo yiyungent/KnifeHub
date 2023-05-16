@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,8 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    
     <Reference Include="Konata.Core">
       <HintPath>..\..\repos-packages\Konata.Core\Konata.Core.dll</HintPath>
+    </Reference>
+    <!-- 其它 dll 会根据 Konata.Core 引用自动添加引用, 只要在与 Konata.Core.dll 同一目录即可 -->
+    <!-- 对于下方框架 dll 框架本身存在引用(共享型), 若上方包要求版本不一致, 则强制引用,否则不会被复制到 bin 目录下 -->
+	<Reference Include="System.Text.Json">
+	  <HintPath>..\..\repos-packages\Konata.Core\System.Text.Json.dll</HintPath>
+    </Reference>
+	<Reference Include="System.Text.Encodings.Web">
+	  <HintPath>..\..\repos-packages\Konata.Core\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
 
