@@ -1,73 +1,86 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<EnableDynamicLoading>true</EnableDynamicLoading>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
 
-    <PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<PackageId>PluginCore.KonataPlugin</PackageId>
-		<Version>0.2.0</Version>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>0.2.0.0</FileVersion>
-		<Company>yiyun</Company>
-		<Authors>yiyun</Authors>
-		<Description>PluginCore 插件: QQ基础插件</Description>
-		<Copyright>Copyright (c) 2022-present yiyun</Copyright>
-		<RepositoryUrl>https://github.com/yiyungent/KnifeHub</RepositoryUrl>
-		<PackageLicenseUrl>https://github.com/yiyungent/KnifeHub/blob/main/LICENSE</PackageLicenseUrl>
-		<PackageTags>PluginCore PluginCore.IPlugins</PackageTags>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    </PropertyGroup>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>PluginCore.KonataPlugin</PackageId>
+    <Version>0.2.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>0.2.0.0</FileVersion>
+    <Company>yiyun</Company>
+    <Authors>yiyun</Authors>
+    <Description>PluginCore 插件: QQ基础插件</Description>
+    <Copyright>Copyright (c) 2022-present yiyun</Copyright>
+    <RepositoryUrl>https://github.com/yiyungent/KnifeHub</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/yiyungent/KnifeHub/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageTags>PluginCore PluginCore.IPlugins</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
-		<!--<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <!--<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>-->
-		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="Konata.Core" Version="1.3.2" />
-		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
-		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
-	</ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <!--<PackageReference Include="Konata.Core" Version="1.3.2" />-->
+    <Reference Include="Konata.Core">
+      <HintPath>..\..\repos-packages\Konata.Core\Konata.Core.dll</HintPath>
+    </Reference>
+    <!-- 其它 dll 会根据 Konata.Core 引用自动添加引用, 只要在与 Konata.Core.dll 同一目录即可 -->
+    <!-- 对于下方框架 dll 框架本身存在引用(共享型), 若上方包要求版本不一致, 则强制引用, 否则不会被复制到 bin 目录下 -->
+    <!--<Reference Include="System.Text.Json">
+      <HintPath>..\..\repos-packages\Konata.Core\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>..\..\repos-packages\Konata.Core\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>-->
+    <!-- 文件引用方式无法强制覆盖, 使用 nuget 引用方式强制覆盖 -->
+    <PackageReference Include="System.Text.Json" Version="8.0.0-preview.3.23174.8" />
+    <PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.0.1">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+  </ItemGroup>
 
-	<!-- 方便开发debug,与发布到nuget -->
-	<!--<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <!-- 方便开发debug,与发布到nuget -->
+  <!--<ItemGroup Condition="'$(Configuration)' == 'Debug'">
 		<ProjectReference Include="..\..\src\QQBotHub.Sdk\QQBotHub.Sdk.csproj">
 			<Private>false</Private>
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</ProjectReference>
 	</ItemGroup>-->
 
-	<!-- 发布插件相关文件 -->
-	<ItemGroup>
-		<Content Include="info.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="README.md">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="settings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-		<Content Include="KonataPlugin.sqlite">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+  <!-- 发布插件相关文件 -->
+  <ItemGroup>
+    <Content Include="info.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="KonataPlugin.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
-	<!-- 发布 wwwroot -->
-	<ItemGroup>
-		<Content Include="wwwroot\**\*">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+  <!-- 发布 wwwroot -->
+  <ItemGroup>
+    <Content Include="wwwroot\**\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
