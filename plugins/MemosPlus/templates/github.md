@@ -11,8 +11,6 @@ public: {{public}}
 
 {{memo.content}}
 
-
-{{resourceListStr}}
-
+{{resource_list}}
 
 <!-- 语法解析: https://scribanonline.azurewebsites.net/ -->

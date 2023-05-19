@@ -124,17 +124,18 @@ namespace MemosPlus
                                 if (!isErrorMemosApiResource)
                                 {
                                     #region md 文件内容
-                                    // TODO: 这里发现 scriban 有个 Bug: CreateTime, UpdateTime 这两个属性名解析为空, 还不会报错
+                                    // 注意: By default, Properties and methods of .NET objects are automatically exposed with lowercase and `_` names. 
+                                    // It means that a property like `MyMethodIsNice` will be exposed as `my_method_is_nice`.
+                                    // https://github.com/scriban/scriban
                                     string githubRenderResult = githubTemplate.Render(new
                                     {
                                         Memo = item,
                                         Date = createTimeStr,
                                         Updated = updateTimeStr,
                                         Public = item.visibility != "PRIVATE",
-                                        // TODO: 未知原因, 未渲染出 ResourceListStr
-                                        ResourceListStr = resourceFileMdSb.ToString()
+                                        ResourceList = resourceFileMdSb.ToString()
                                     });
-                                    githubRenderResult += resourceFileMdSb.ToString();
+                                    // githubRenderResult += resourceFileMdSb.ToString();
 
                                     gitHubUtil.UpdateFile(
                                         repoOwner: settings.GitHub.RepoOwner,
