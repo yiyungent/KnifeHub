@@ -17,7 +17,7 @@
 - [x] 定时同步 `memos` 内容到 `GitHub` 仓库 指定文件夹
   - [x] 纯文本内容 (包含 `markdown`)
     - [x] 自定义模版 (默认适配 `Hexo post` 风格, 配合 `GitHub Actions` 即可实现 `memos` 同步发布到 `Hexo`)  
-  - [ ] 资源库 (`二进制文件`)
+  - [x] 资源库 (`二进制文件`)
 
 ## 使用
 
