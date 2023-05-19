@@ -131,8 +131,10 @@ namespace MemosPlus
                                         Date = createTimeStr,
                                         Updated = updateTimeStr,
                                         Public = item.visibility != "PRIVATE",
+                                        // TODO: 未知原因, 未渲染出 ResourceListStr
                                         ResourceListStr = resourceFileMdSb.ToString()
                                     });
+                                    githubRenderResult += resourceFileMdSb.ToString();
 
                                     gitHubUtil.UpdateFile(
                                         repoOwner: settings.GitHub.RepoOwner,
