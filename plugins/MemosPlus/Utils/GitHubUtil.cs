@@ -74,13 +74,28 @@ namespace MemosPlus.Utils
                 {
                     existFile = true;
                     // 注意: Content 只有在为纯文本时(非二进制) 才有值, 否则为 null
-                    string oldFileContent = existingFile.First().Content;
-                    if (oldFileContent == null)
+                    string oldFileContent = null;
+                    try
+                    {
+                        oldFileContent = existingFile.First().Content;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Console.WriteLine("existingFile.First().Content:");
+                        System.Console.WriteLine(ex.ToString());
+                    }
+                    // if (oldFileContent == null)
+                    if (string.IsNullOrEmpty(oldFileContent))
                     {
                         // 二进制文件
                         // TODO: 这里简单通过比较文件大小来确认是否文件有更新
                         //int oldFileSize = existingFile.First().Size;
                         // TODO: 暂时二进制文件只支持创建, 不支持更新
+                        System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
+                        return;
+                    }
+                    if (!existingFile.First().Path.EndsWith(".md"))
+                    {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
                         return;
                     }
