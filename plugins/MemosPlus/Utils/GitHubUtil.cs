@@ -52,7 +52,7 @@ namespace MemosPlus.Utils
         /// <summary>
         /// 若不存在此文件, 则进行创建文件
         /// </summary>
-        public void UpdateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, string fileContent, string accessToken, bool convertContentToBase64 = true)
+        public void UpdateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, string fileContent, string accessToken, bool convertContentToBase64 = true, DateTime? fileUpdateTime = null)
         {
             #region GitHub
             GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue(nameof(MemosPlus)));
@@ -81,6 +81,10 @@ namespace MemosPlus.Utils
                         // TODO: 这里简单通过比较文件大小来确认是否文件有更新
                         //int oldFileSize = existingFile.First().Size;
                         // TODO: 暂时二进制文件只支持创建, 不支持更新
+                        if (fileUpdateTime> existingFile.First().)
+                        {
+
+                        }
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
                         return;
                     }
@@ -117,10 +121,10 @@ namespace MemosPlus.Utils
             #endregion
         }
 
-        public void UpdateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, byte[] fileContent, string accessToken)
+        public void UpdateFile(string repoOwner, string repoName, string repoBranch, string repoTargetFilePath, byte[] fileContent, string accessToken, DateTime? fileUpdateTime = null)
         {
             UpdateFile(repoOwner: repoOwner, repoName: repoName, repoBranch: repoBranch, repoTargetFilePath: repoTargetFilePath,
-            fileContent: Convert.ToBase64String(fileContent), accessToken: accessToken, convertContentToBase64: false);
+            fileContent: Convert.ToBase64String(fileContent), accessToken: accessToken, convertContentToBase64: false, fileUpdateTime: fileUpdateTime);
         }
 
         /// <summary>
