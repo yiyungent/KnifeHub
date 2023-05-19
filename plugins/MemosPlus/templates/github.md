@@ -12,7 +12,7 @@ public: {{public}}
 {{memo.content}}
 
 
-{{resourceList}}
+{{resourceListStr}}
 
 
 <!-- 语法解析: https://scribanonline.azurewebsites.net/ -->
