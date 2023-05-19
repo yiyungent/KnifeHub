@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +55,7 @@ namespace MemosPlus
                     MemosUtil memosUtil = new MemosUtil(settings.Memos.BaseUrl);
                     int offset = 0;
                     bool isErrorMemosApi = false;
+                    bool isErrorMemosApiResource = false;
                     var list = new List<MemoItemModel>();
                     try
                     {
@@ -88,28 +89,61 @@ namespace MemosPlus
                                 memoFilePaths.Add(repoTargetFilePath);
                                 string createTimeStr = item.createdTs.ToDateTime10().ToString("yyyy-MM-dd HH:mm:ss");
                                 string updateTimeStr = item.updatedTs.ToDateTime10().ToString("yyyy-MM-dd HH:mm:ss");
-                                // TODO: 这里发现 scriban 有个 Bug: CreateTime, UpdateTime 这两个属性名解析为空, 还不会报错
-                                string githubRenderResult = githubTemplate.Render(new
+
+                                // 资源文件
+                                StringBuilder resourceFileMdSb = new StringBuilder();
+                                foreach (var resourceItem in item.resourceList)
                                 {
-                                    Memo = item,
-                                    Date = createTimeStr,
-                                    Updated = updateTimeStr,
-                                    Public = item.visibility != "PRIVATE"
-                                });
+                                    string memoResourceFileName = $"image-{resourceItem.id}{Path.GetExtension(resourceItem.filename)}";
+                                    string repoTargetResourceFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName}";
+                                    try
+                                    {
+                                        var resourceFile = memosUtil.Resource(resourceId: resourceItem.id.ToString(), fileName: resourceItem.filename, memosSession: settings.Memos.MemosSession);
+                                        if (resourceFile != null && resourceFile.Length > 0)
+                                        {
+                                            gitHubUtil.UpdateFile(
+                                                repoOwner: settings.GitHub.RepoOwner,
+                                                repoName: settings.GitHub.RepoName,
+                                                repoBranch: settings.GitHub.RepoBranch,
+                                                repoTargetFilePath: repoTargetResourceFilePath,
+                                                fileContent: resourceFile,
+                                                accessToken: settings.GitHub.AccessToken
+                                            );
+                                            resourceFileMdSb.AppendLine($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   ");
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        System.Console.WriteLine(ex.ToString());
+                                        isErrorMemosApiResource = true;
+                                    }
 
-                                gitHubUtil.UpdateFile(
-                                    repoOwner: settings.GitHub.RepoOwner,
-                                    repoName: settings.GitHub.RepoName,
-                                    repoBranch: settings.GitHub.RepoBranch,
-                                    repoTargetFilePath: repoTargetFilePath,
-                                    fileContent: githubRenderResult,
-                                    accessToken: settings.GitHub.AccessToken
-                                );
+                                    // 注意: 资源文件路径也要放入其中
+                                    memoFilePaths.Add(repoTargetResourceFilePath);
+                                }
+                                if (!isErrorMemosApiResource)
+                                {
+                                    #region md 文件内容
+                                    // TODO: 这里发现 scriban 有个 Bug: CreateTime, UpdateTime 这两个属性名解析为空, 还不会报错
+                                    string githubRenderResult = githubTemplate.Render(new
+                                    {
+                                        Memo = item,
+                                        Date = createTimeStr,
+                                        Updated = updateTimeStr,
+                                        Public = item.visibility != "PRIVATE",
+                                        ResourceList = resourceFileMdSb.ToString()
+                                    });
 
-                                // TODO: 资源文件
-                                // 注意: 资源文件路径也要放入其中
-                                // memoFilePaths.Add();
-
+                                    gitHubUtil.UpdateFile(
+                                        repoOwner: settings.GitHub.RepoOwner,
+                                        repoName: settings.GitHub.RepoName,
+                                        repoBranch: settings.GitHub.RepoBranch,
+                                        repoTargetFilePath: repoTargetFilePath,
+                                        fileContent: githubRenderResult,
+                                        accessToken: settings.GitHub.AccessToken
+                                    );
+                                    #endregion
+                                }
                             }
                             catch (System.Exception ex)
                             {
@@ -129,7 +163,8 @@ namespace MemosPlus
                     }
 
                     #region 清理不存在的文件
-                    if (!isErrorMemosApi) {
+                    if (!isErrorMemosApi && !isErrorMemosApiResource)
+                    {
                         // 清理不存在的文件: 对于存放 memos 的文件夹, 清理 memos 中已删除的对应文件
                         try
                         {

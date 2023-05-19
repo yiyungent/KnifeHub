@@ -1,5 +1,5 @@
 ---
-title: {{date}}
+title: memo-{{date}}
 date: {{date}}
 updated: {{updated}}
 tags:
@@ -10,6 +10,9 @@ public: {{public}}
 ---
 
 {{memo.content}}
+
+
+{{resourceList}}
 
 
 <!-- 语法解析: https://scribanonline.azurewebsites.net/ -->

@@ -50,7 +50,8 @@ namespace MemosPlus.Utils
             }
             catch (System.Exception ex)
             {
-
+                System.Console.WriteLine(ex.ToString());
+                throw ex;
             }
 
             return rtn.ToArray();
