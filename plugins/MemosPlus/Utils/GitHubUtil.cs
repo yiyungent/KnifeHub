@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using Octokit;
+using PluginCore;
 
 namespace MemosPlus.Utils
 {
@@ -75,6 +76,7 @@ namespace MemosPlus.Utils
                     existFile = true;
                     // 注意: Content 只有在为纯文本时(非二进制) 才有值, 否则为 null
                     string oldFileContent = null;
+                    bool isBinaryFile = false;
                     try
                     {
                         oldFileContent = existingFile.First().Content;
@@ -88,18 +90,25 @@ namespace MemosPlus.Utils
                     if (string.IsNullOrEmpty(oldFileContent))
                     {
                         // 二进制文件
-                        // TODO: 这里简单通过比较文件大小来确认是否文件有更新
-                        //int oldFileSize = existingFile.First().Size;
-                        // TODO: 暂时二进制文件只支持创建, 不支持更新
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
-                        return;
+                        // return;
+                        isBinaryFile = true;
                     }
-                    if (!existingFile.First().Path.EndsWith(".md"))
+                    var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlus));
+                    string fileExt = Path.GetExtension(settings.GitHub.MemoFileName);
+                    if (!existingFile.First().Path.EndsWith(fileExt))
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
-                        return;
+                        // return;
+                        isBinaryFile = true;
                     }
-
+                    if (isBinaryFile)
+                    {
+                        System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
+                        System.Console.WriteLine("GitHubUtil.UpdateFile: 获取 二进制文件 内容");
+                        var temp = gitHubClient.Repository.Content.GetRawContentByRef(owner: owner, name: repo, path: targetFilePath, reference: branch).Result;
+                        oldFileContent = Convert.ToBase64String(temp);
+                    }
                     if (oldFileContent == fileContent)
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容未变, 放弃提交");
