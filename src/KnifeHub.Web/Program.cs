@@ -38,6 +38,8 @@ namespace KnifeHub.Web
                 // 隐藏控制台窗口
                 ShowWindow(handle, SW_HIDE);
             }
+            // 输出当前平台信息
+            Console.WriteLine($"CurrentPlatform: {Utils.OSUtil.PlatformInfo()}");
 
             var builder = WebApplication.CreateBuilder(args);
 
