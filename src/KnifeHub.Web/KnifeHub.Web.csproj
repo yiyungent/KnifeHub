@@ -11,9 +11,9 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<Version>1.4.8</Version>
-		<FileVersion>1.4.8.0</FileVersion>
-		<AssemblyVersion>1.4.8.0</AssemblyVersion>
+		<Version>1.4.9</Version>
+		<FileVersion>1.4.9.0</FileVersion>
+		<AssemblyVersion>1.4.9.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
