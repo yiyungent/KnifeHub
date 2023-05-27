@@ -1,6 +1,6 @@
 ﻿<h1 align="center">KnifeHub</h1>
 
-> 🧰 工具平台 | 日常生活/学习/工作/开发 工具集
+> 🧰 简单易用的效率工具平台
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/KnifeHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/KnifeHub.svg?style=flat)](https://github.com/yiyungent/KnifeHub/blob/master/LICENSE)
@@ -17,8 +17,9 @@
 
 ## Introduce
 
-工具平台 | 日常生活/学习/工作/开发 工具集
+> 🧰 简单易用的效率工具平台
 
+- **简单易用** - 拒绝折腾, 专注于工作, 而非工具
 - **Web 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
 - **多平台多架构** - win,linux,osx,amd,arm 均可
