@@ -5,26 +5,43 @@
  */
 
 /* You can override the default Infima variables here. */
+/* 参考配色: 简洁风格(黑灰白): https://typora.io */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #fbfbfb;
+  --ifm-color-primary-dark: #333333;
+  --ifm-color-primary-darker: #333333;
+  --ifm-color-primary-darkest: #333333;
+  --ifm-color-primary-light: #c5c5c5;
+  --ifm-color-primary-lighter: #333333;
+  --ifm-color-primary-lightest: #333333;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
+.hero__title {
+  color: #000;
+}
+
+.hero__subtitle {
+  color: #000;
+}
+
+
+.footer--dark {
+  --ifm-footer-background-color: #29292a;
+  --ifm-footer-color: #c5c5c5;
+  --ifm-footer-link-color: #c5c5c5;
+  --ifm-footer-title-color: #c5c5c5;
+}
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+[data-theme="dark"] {
+  --ifm-color-primary: #333333;
+  --ifm-color-primary-dark: #333333;
+  --ifm-color-primary-darker: #333333;
+  --ifm-color-primary-darkest: #333333;
+  --ifm-color-primary-light: #333333;
+  --ifm-color-primary-lighter: #333333;
+  --ifm-color-primary-lightest: #333333;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }

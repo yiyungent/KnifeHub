@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: '简单易用的效率工具平台',
+  tagline: '拒绝折腾, 专注于工作, 而非工具',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -66,9 +66,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'KnifeHub',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'KnifeHub Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -76,7 +76,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: '入门',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
