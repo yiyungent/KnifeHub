@@ -16,11 +16,13 @@ namespace AnkiPlus.Controllers
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
     /// 这样访问 Plugins/AnkiPlus/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{(nameof(AnkiPlus))}")]
+    [Route($"api/Plugins/{(nameof(AnkiPlus))}")]
+    [Authorize("PluginCore.Admin")]
     public class HomeController : Controller
     {
         [HttpGet]
-        public async Task<ActionResult> Get()
+        [Route($"/Plugins/{nameof(AnkiPlus)}")]
+        public async Task<ActionResult> Index()
         {
             string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(AnkiPlus)), "index.html");
 
@@ -31,18 +33,22 @@ namespace AnkiPlus.Controllers
         /// 转换单个 markdown 文件为多个笔记卡片
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> ConvertMd2Notes(string mdFilePath)
+        [HttpGet]
+        [Route(nameof(ConvertMd2Notes))]
+        public async Task<ActionResult> ConvertMd2Notes([FromQuery] string mdFilePath)
         {
             try
             {
+                Utils.AnkiConnectUtil ankiConnectUtil = new Utils.AnkiConnectUtil();
 
+                await ankiConnectUtil.ConvertMd2Notes(mdFilePath);
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
 
-            return Content("");
+            return Ok("Ok");
         }
 
     }

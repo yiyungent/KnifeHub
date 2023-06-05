@@ -73,22 +73,35 @@ namespace AnkiPlus.Utils
                 var settings = this.Settings;
 
                 string content = await File.ReadAllTextAsync(mdFilePath);
+
                 // Split the YAML and Markdown content.
-                var parts = content.Split(new string[] { "---" }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Length < 2)
-                {
-                    throw new Exception("Invalid Markdown file format.");
-                }
-                string yamlContent = parts[0].Trim();
-                string mdContent = parts[1].Trim();
-                var yamlInput = new StringReader(yamlContent);
-                var yamlDeserializer = new YamlDotNet.Serialization.DeserializerBuilder().Build();
-                var yamlMetadata = yamlDeserializer.Deserialize<dynamic>(yamlInput);
-                string mdTitle = yamlMetadata.title.ToString();
+                #region Temp
+                //var parts = content.Split(new string[] { "---" }, StringSplitOptions.RemoveEmptyEntries);
+                //content.IndexOf();
+                //if (parts.Length < 2)
+                //{
+                //    throw new Exception("Invalid Markdown file format.");
+                //}
+                //string yamlContent = parts[0].Trim();
+                //string mdContent = "";
+                //for (int i = 1; i < parts.Length; i++)
+                //{
+                //    mdContent = mdContent + parts[i];
+                //}
+                //mdContent = mdContent.Trim();
+                //var yamlInput = new StringReader(yamlContent);
+                //var yamlDeserializer = new YamlDotNet.Serialization.DeserializerBuilder().Build();
+                //var yamlMetadata = yamlDeserializer.Deserialize<dynamic>(yamlInput);
+                //string mdTitle = yamlMetadata["title"].ToString(); 
+                #endregion
+
+                string mdContent = content;
 
                 List<MarkdownNode> nodes = new List<MarkdownNode>();
                 MarkdownPipeline pipeline = new MarkdownPipelineBuilder()
                                             .UseAdvancedExtensions()
+                                            .EnableTrackTrivia()
+                                            //.DisableHeadings()
                                             .Build();
                 var document = MarkdownParser.Parse(mdContent, pipeline);
 
@@ -104,31 +117,53 @@ namespace AnkiPlus.Utils
                 ParseNodes(document, nodes, 1);
 
                 //nodes.Reverse();
-                int level = -1;
-                string deckName = settings.AnkiConnect.Note.DeckName;
+                //int level = -1;
+                //Queue<string> deckNameQueue = new Queue<string>();
                 foreach (var node in nodes)
                 {
-                    // TODO: 层级顺序
-                    if (node.Level > level)
-                    {
-                        deckName = deckName + "::" + node.Title;
-                    }
-                    level = node.Level;
-                    Console.WriteLine("{0} {1}", node.Level.ToString(), node.Title);
+                    #region Temp
+                    //// TODO: 层级顺序
+                    //if (node.Level > level)
+                    //{
+                    //    // 本次 level > 上次 level
+                    //    deckNameQueue.Enqueue(node.Title);
+                    //}
+                    //else if (node.Level == level)
+                    //{
+                    //    // 本次 level = 上次 level
+                    //    deckNameQueue.Dequeue();
+                    //    deckNameQueue.Enqueue(node.Title);
+                    //}
+                    //else
+                    //{
+                    //    // 本次 level < 上次 level
+                    //    for (int i = 0; node.Level < level; i++)
+                    //    {
+
+                    //    }
+                    //    deckNameQueue.Dequeue();
+                    //    deckNameQueue.Enqueue(node.Title);
+                    //}
+                    //level = node.Level; 
+                    #endregion
+
+                    Console.WriteLine($"Level: {node.Level}");
+                    Console.WriteLine($"Title: {node.Title}");
+                    Console.WriteLine($"FullTitle: {node.FullTitle}");
                     if (!string.IsNullOrEmpty(node.Content))
                     {
                         Console.WriteLine(node.Content);
 
                         try
                         {
-                            await AddNoteAsync(deckName: deckName, modelName: settings.AnkiConnect.Note.ModelName, front: node.Title, back: node.Content);
+                            string fullDeckName = settings.AnkiConnect.Note.DeckName + "::" + node.FullTitle;
+                            await AddNoteAsync(deckName: fullDeckName, modelName: settings.AnkiConnect.Note.ModelName, front: node.Title, back: node.Content);
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.ToString());
                         }
                     }
-
                 }
             }
         }
@@ -137,7 +172,8 @@ namespace AnkiPlus.Utils
         {
             if (!imageUrl.StartsWith("http"))
             {
-                imageUrl = Path.Combine(mdFilePath, imageUrl);
+                imageUrl = Path.Combine(Directory.GetParent(mdFilePath).FullName, imageUrl);
+                imageUrl = imageUrl.Replace("\\", "/");
             }
             var imageBytes = await File.ReadAllBytesAsync(imageUrl);
 
@@ -157,9 +193,11 @@ namespace AnkiPlus.Utils
                 var node = new MarkdownNode();
                 node.Title = heading.Inline.FirstChild.ToString();
                 node.Level = level;
+                node.FullTitle = (string.IsNullOrEmpty(node.FullTitle) ? "" : "::") + heading.Inline.FirstChild.ToString();
 
                 StringBuilder builder = new StringBuilder();
-                foreach (var child in heading.LinesAfter)
+                // TODO: 无法获取标题下方普通内容
+                foreach (var child in heading.Descendants())
                 {
                     if (child is HeadingBlock)
                     {
@@ -191,6 +229,7 @@ namespace AnkiPlus.Utils
             public string Title { get; set; }
             public string Content { get; set; }
             public int Level { get; set; }
+            public string FullTitle { get; set; }
         }
     }
 }

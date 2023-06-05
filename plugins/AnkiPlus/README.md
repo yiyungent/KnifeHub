@@ -4,6 +4,7 @@
 
 
 - [AnkiPlus 控制台](/plugins/AnkiPlus)
+- [ConvertMd2Notes](/api/plugins/AnkiPlus/ConvertMd2Notes?mdFilePath=F:/Repos/notebook/source/_posts/2023/05/web-interview-note.md)
 
 
 ## 功能
