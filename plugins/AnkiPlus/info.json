@@ -1,0 +1,8 @@
+{
+  "PluginId": "AnkiPlus",
+  "DisplayName": "anki+",
+  "Description": "提升 Anki 体验",
+  "Author": "yiyun",
+  "Version": "0.1.0",
+  "SupportedVersions": [ "0.0.1" ]
+}
