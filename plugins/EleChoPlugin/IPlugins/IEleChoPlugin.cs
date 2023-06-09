@@ -1,4 +1,5 @@
 using EleCho.GoCqHttpSdk;
+using EleChoPlugin;
 using PluginCore.IPlugins;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace PluginCore.IPlugins
 {
     public interface IEleChoPlugin : IPlugin
     {
-        public List<CqPostPlugin> UseCqPostPlugins();
+        public List<CqPostPlugin> UseCqPostPlugins(EleChoBotStore.BotItemModel bot);
     }
 }

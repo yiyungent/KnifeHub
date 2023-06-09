@@ -165,7 +165,7 @@ namespace EleChoPlugin.Controllers
 
                     #region 注册事件
                     // 使用 EleCho 特性: 主动使用插件
-                    bot.CqRHttpSession.UsePlugin(new DemoPlugin());
+                    bot.CqRHttpSession.UsePlugin(new DemoPlugin(bot));
 
                     #region 插件事件派发: UsePlugin
                     Utils.LogUtil.Info($"{botConfig.ConfigId} 开始配置");
@@ -176,7 +176,7 @@ namespace EleChoPlugin.Controllers
                         Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
                         try
                         {
-                            var cqPostPlugins = plugin.UseCqPostPlugins();
+                            var cqPostPlugins = plugin.UseCqPostPlugins(bot);
                             if (cqPostPlugins != null && cqPostPlugins.Count >= 1)
                             {
                                 foreach (var item in cqPostPlugins)
@@ -214,6 +214,29 @@ namespace EleChoPlugin.Controllers
 
     public class DemoPlugin : CqPostPlugin
     {
+        public EleChoBotStore.BotItemModel Bot { get; set; }
+
+        public ICqActionSession CqActionSession { get; set; }
+
+        public DemoPlugin(EleChoBotStore.BotItemModel bot)
+        {
+            this.Bot = bot;
+            switch (bot.Mode)
+            {
+                case "http":
+                    this.CqActionSession = this.Bot.CqHttpSession;
+                    break;
+                case "ws":
+                    this.CqActionSession = this.Bot.CqWsSession;
+                    break;
+                case "ws reverse":
+                    this.CqActionSession = this.Bot.CqRWsSession;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public override async Task OnGroupMessageReceivedAsync(CqGroupMessagePostContext context)
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(EleChoPlugin));
@@ -222,21 +245,16 @@ namespace EleChoPlugin.Controllers
                 return;
             }
 
-            if (context.Session is not ICqActionSession actionSession)   // 判断是否能够发送 Action
-            {
-                return;
-            }
-
             string text = context.Message.Text;
-            if (text.StartsWith("TTS:", StringComparison.OrdinalIgnoreCase))
+            if (text.StartsWith("TTS:", StringComparison.InvariantCultureIgnoreCase))
             {
-                await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(new CqTtsMsg(text[4..])));
+                await this.CqActionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(new CqTtsMsg(text[4..])));
             }
-            else if (text.StartsWith("ToFace:"))
+            else if (text.StartsWith("ToFace:", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (CqFaceMsg.FromName(text[7..]) is CqFaceMsg face)
                 {
-                    await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(face));
+                    await this.CqActionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(face));
                 }
             }
         }
@@ -249,14 +267,11 @@ namespace EleChoPlugin.Controllers
                 return;
             }
 
-            if (context.Session is not ICqActionSession actionSession)   // 判断是否能够发送 Action
+            var msg = (await this.CqActionSession.GetMessageAsync(context.MessageId));
+            if (msg.Message.Text.StartsWith("test:", StringComparison.InvariantCultureIgnoreCase))
             {
-                return;
+                await this.CqActionSession.SendGroupMessageAsync(context.GroupId, new CqMessage("让我康康你撤回了什么: ", msg.Message));
             }
-
-            var msg = (await actionSession.GetMessageAsync(context.MessageId));
-
-            await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage("让我康康你撤回了什么: ", msg.Message));
         }
     }
 }
