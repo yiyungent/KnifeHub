@@ -1,0 +1,31 @@
+{
+  "Mode": "server",
+  "ServerConfig": {
+    "Port": 8080,
+    "AccessToken": "",
+    "AutoMarkMessageRead": true,
+    "BlockUsers": [],
+    "EnableSocketMessage": false,
+    "EnableSoraCommandManager": true,
+    "Host": "127.0.0.1",
+    "SendCommandErrMsg": true,
+    "SuperUsers": [],
+    "ThrowCommandException": false,
+    "UniversalPath": ""
+  },
+  "ClientConfig": {
+    "Port": 6700,
+    "AccessToken": "",
+    "AutoMarkMessageRead": true,
+    "BlockUsers": [],
+    "EnableSocketMessage": false,
+    "EnableSoraCommandManager": true,
+    "Host": "127.0.0.1",
+    "SendCommandErrMsg": true,
+    "SuperUsers": [],
+    "ThrowCommandException": false,
+    "UniversalPath": ""
+  },
+  "AdminQQ": 1231312,
+  "UseDemoModel": true
+}
