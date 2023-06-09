@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,9 @@ using System.Net;
 
 namespace EleChoPlugin.Middlewares
 {
+    /// <summary>
+    /// TODO: 目的: 反向 HTTP 与 ASP.NET Core Kestrel 共用一个端口
+    /// </summary>
     public class GoCqHttpMiddleware
     {
         #region Fields
@@ -61,30 +64,30 @@ namespace EleChoPlugin.Middlewares
                 byte[] data = ms.ToArray();
                 if (Verify(httpContext.Request.Headers["X-Signature"], data))
                 {
-                    string json = GlobalConfig.TextEncoding.GetString(data);
-                    CqWsDataModel? wsDataModel = JsonSerializer.Deserialize<CqWsDataModel>(json, JsonHelper.Options);
-                    if (wsDataModel is CqPostModel postModel)
-                    {
-                        CqPostContext? postContext = CqPostContext.FromModel(postModel);
+                    // string json = GlobalConfig.TextEncoding.GetString(data);
+                    // CqWsDataModel? wsDataModel = JsonSerializer.Deserialize<CqWsDataModel>(json, JsonHelper.Options);
+                    // if (wsDataModel is CqPostModel postModel)
+                    // {
+                    //     CqPostContext? postContext = CqPostContext.FromModel(postModel);
 
-                        // 从存储中取出目标 Session 
-                        var bot = EleChoBotStore.Bots.FirstOrDefault(m => m.ConfigId == configId);
-                        if (bot != null && bot.CqHttpSession != null) {
-                            postContext?.SetSession(bot.CqHttpSession);
+                    //     // 从存储中取出目标 Session 
+                    //     var bot = EleChoBotStore.Bots.FirstOrDefault(m => m.ConfigId == configId);
+                    //     if (bot != null && bot.CqHttpSession != null) {
+                    //         postContext?.SetSession(bot.CqHttpSession);
 
-                            if (postContext is CqPostContext)
-                            {
-                                await postPipeline.ExecuteAsync(postContext);
+                    //         if (postContext is CqPostContext)
+                    //         {
+                    //             await postPipeline.ExecuteAsync(postContext);
 
-                                if (postContext.QuickOperationModel is object quickActionModel)
-                                    JsonSerializer.Serialize(httpContext.Response.Body, quickActionModel, quickActionModel.GetType(), JsonHelper.Options);
+                    //             if (postContext.QuickOperationModel is object quickActionModel)
+                    //                 JsonSerializer.Serialize(httpContext.Response.Body, quickActionModel, quickActionModel.GetType(), JsonHelper.Options);
 
-                                httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
-                                // context.Response.Close();
-                                // continue;
-                            }
-                        }
-                    }
+                    //             httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                    //             // context.Response.Close();
+                    //             // continue;
+                    //         }
+                    //     }
+                    //}
 
                     httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     // context.Response.Close();
@@ -116,6 +119,5 @@ namespace EleChoPlugin.Middlewares
             return signature == realSignature;
         }
         #endregion
-
     }
 }

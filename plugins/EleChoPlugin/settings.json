@@ -1,31 +1,19 @@
 {
-  "Mode": "server",
-  "ServerConfig": {
-    "Port": 8080,
-    "AccessToken": "",
-    "AutoMarkMessageRead": true,
-    "BlockUsers": [],
-    "EnableSocketMessage": false,
-    "EnableSoraCommandManager": true,
-    "Host": "127.0.0.1",
-    "SendCommandErrMsg": true,
-    "SuperUsers": [],
-    "ThrowCommandException": false,
-    "UniversalPath": ""
-  },
-  "ClientConfig": {
-    "Port": 6700,
-    "AccessToken": "",
-    "AutoMarkMessageRead": true,
-    "BlockUsers": [],
-    "EnableSocketMessage": false,
-    "EnableSoraCommandManager": true,
-    "Host": "127.0.0.1",
-    "SendCommandErrMsg": true,
-    "SuperUsers": [],
-    "ThrowCommandException": false,
-    "UniversalPath": ""
-  },
   "AdminQQ": 1231312,
-  "UseDemoModel": true
+  "UseDemoModel": true,
+  "EleChoConfigs": [
+    {
+      "ConfigId": "test-http",
+      "Enable": true,
+      "Mode": "http",
+      "CqHttpSession": {
+        "BaseUri": "http://remote.go-cqhttp.com",
+        "AccessToken": "test AccessToken"
+      },
+      "CqRHttpSession": {
+        "BaseUri": "http://localhost:8080",
+        "Secret": "test Secret"
+      }
+    }
+  ]
 }

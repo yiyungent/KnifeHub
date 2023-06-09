@@ -1,4 +1,3 @@
-﻿using Sora.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +23,16 @@ namespace EleChoPlugin
             /// 唯一标识, 用于与设置中一一对应上
             /// </summary>
             public string ConfigId { get; set; }
-            public CqWsSession CqWsSession { get; set; }
+
+            public string Mode { get; set; }
+
             public CqHttpSession CqHttpSession { get; set; }
+
+            public CqRHttpSession CqRHttpSession { get; set; }
+
+            public CqWsSession CqWsSession { get; set; }
+
+            public CqRWsSession CqRWsSession { get; set; }
         }
     }
 }

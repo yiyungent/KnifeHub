@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,5 +24,9 @@ namespace EleChoPlugin
             return base.BeforeDisable();
         }
 
+        public override void AppStart()
+        {
+            base.AppStart();
+        }
     }
 }

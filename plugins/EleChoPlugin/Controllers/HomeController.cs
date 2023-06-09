@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 using PluginCore.Interfaces;
 using EleChoPlugin.Utils;
-using Sora;
-using Sora.Interfaces;
-using Sora.Net.Config;
-using Sora.Util;
-using YukariToolBox.LightLog;
 using PluginCore.IPlugins;
+using EleCho.GoCqHttpSdk;
+using EleCho.GoCqHttpSdk.Post;
+using EleCho.GoCqHttpSdk.Message;
 
 namespace EleChoPlugin.Controllers
 {
@@ -52,6 +50,7 @@ namespace EleChoPlugin.Controllers
         }
         #endregion
 
+        #region Actions
         public async Task<ActionResult> Get()
         {
             string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(EleChoPlugin)), "index.html");
@@ -69,120 +68,58 @@ namespace EleChoPlugin.Controllers
         {
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(EleChoPlugin));
 
-            // 确保以前的都取消
-            #region 确保以前的都取消
-            if (SoraBotStore.Bot.SoraService != null)
+            // 确保以前的都释放
+            #region 确保以前的都释放
+            if (EleChoBotStore.Bots != null && EleChoBotStore.Bots.Count >= 1)
             {
-                try
+                foreach (var bot in EleChoBotStore.Bots)
                 {
-                    await SoraBotStore.Bot.SoraService.StopService();
-                    SoraBotStore.Bot.SoraService = null;
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-            #endregion
-
-            #region 日志
-            //设置log等级
-            Log.LogConfiguration
-               .EnableConsoleOutput()
-               .SetLogLevel(LogLevel.Info);
-            #endregion
-
-            #region 配置
-            // 默认端口为8080
-            // 实例化Sora服务器
-            ISoraConfig soraConfig = null;
-            if (settingsModel.Mode == "server")
-            {
-                // 反向 Websocket 连接
-                soraConfig = new ServerConfig()
-                {
-                    Port = settingsModel.ServerConfig.Port,
-                    AccessToken = settingsModel.ServerConfig.AccessToken,
-                    AutoMarkMessageRead = settingsModel.ServerConfig.AutoMarkMessageRead,
-                    BlockUsers = settingsModel.ServerConfig.BlockUsers,
-                    EnableSocketMessage = settingsModel.ServerConfig.EnableSocketMessage,
-                    EnableSoraCommandManager = settingsModel.ServerConfig.EnableSoraCommandManager,
-                    Host = settingsModel.ServerConfig.Host,
-                    SendCommandErrMsg = settingsModel.ServerConfig.SendCommandErrMsg,
-                    SuperUsers = settingsModel.ServerConfig.SuperUsers,
-                    ThrowCommandException = settingsModel.ServerConfig.ThrowCommandException,
-                    UniversalPath = settingsModel.ServerConfig.UniversalPath
-                };
-            }
-            else if (settingsModel.Mode == "client")
-            {
-                // 正向 Websocket 连接
-                soraConfig = new ClientConfig()
-                {
-                    Port = settingsModel.ClientConfig.Port,
-                    AccessToken = settingsModel.ClientConfig.AccessToken,
-                    AutoMarkMessageRead = settingsModel.ClientConfig.AutoMarkMessageRead,
-                    BlockUsers = settingsModel.ClientConfig.BlockUsers,
-                    EnableSocketMessage = settingsModel.ClientConfig.EnableSocketMessage,
-                    EnableSoraCommandManager = settingsModel.ClientConfig.EnableSoraCommandManager,
-                    Host = settingsModel.ClientConfig.Host,
-                    SendCommandErrMsg = settingsModel.ClientConfig.SendCommandErrMsg,
-                    SuperUsers = settingsModel.ClientConfig.SuperUsers,
-                    ThrowCommandException = settingsModel.ClientConfig.ThrowCommandException,
-                    UniversalPath = settingsModel.ClientConfig.UniversalPath,
-                };
-            }
-            else
-            {
-                // 非法 mode
-                return Content("[Error]: 设置中的 Mode 无法识别");
-            }
-            var service = SoraServiceFactory.CreateService(soraConfig);
-            #endregion
-
-            #region 注册事件
-            service.Event.OnGroupMessage += async (msgType, eventArgs) =>
-            {
-                var plugins = _pluginFinder.EnablePlugins<IEleChoPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
-                {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-
-                    plugin.OnGroupMessage(msgType, eventArgs);
-                }
-
-                #region 演示模式
-                if (settingsModel.UseDemoModel)
-                {
-                    if (eventArgs.Message.GetText().Contains("hello"))
+                    try
                     {
-                        //发送群消息(List消息段)
-                        await eventArgs.SourceGroup.SendGroupMessage(eventArgs.Message.MessageBody);
+                        var botConfig = settingsModel.EleChoConfigs.FirstOrDefault(m => m.ConfigId == bot.ConfigId);
+                        if (botConfig != null)
+                        {
+                            // TODO: 关闭并释放
+                            switch (botConfig.Mode)
+                            {
+                                case "http":
+                                    bot.CqHttpSession.Dispose();
+                                    await bot.CqRHttpSession.StopAsync();
+                                    bot.CqRHttpSession.Dispose();
+                                    break;
+                                case "ws":
+                                    // TODO: ws
+                                    break;
+                                case "ws reverse":
+                                    // TODO: ws reverse
+                                    break;
+                                default:
+                                    // TODO: default
+                                    break;
+                            }
+                            bot.CqHttpSession = null;
+                            bot.CqRHttpSession = null;
+                            bot.CqWsSession = null;
+                            bot.CqRWsSession = null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("确保以前的都释放: ");
+                        Console.WriteLine(ex.ToString());
                     }
                 }
-                #endregion
-            };
-            service.Event.OnPrivateMessage += async (msgType, eventArgs) =>
+                EleChoBotStore.Bots.Clear();
+            }
+            #endregion
+
+            foreach (var botConfig in settingsModel.EleChoConfigs)
             {
-                var plugins = _pluginFinder.EnablePlugins<IEleChoPlugin>().ToList();
-                Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
-                foreach (var plugin in plugins)
+                if (botConfig.Enable)
                 {
-                    Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
-
-                    plugin.OnPrivateMessage(msgType, eventArgs);
+                    BotItem(botConfig, settingsModel);
                 }
-            };
-            #endregion
-
-            #region 启动
-            //启动服务并捕捉错误
-            await service.StartService()
-                         .RunCatch(e => Log.Error("Sora Service", Log.ErrorLogBuilder(e)));
-            #endregion
-
-            // 保存起来
-            SoraBotStore.Bot.SoraService = service;
+            }
 
             // TODO: 暂时这么做, 以后优化界面
             return Content("尝试启动中, 请耐心等待, 出现本页面也有可能已启动完成");
@@ -197,6 +134,129 @@ namespace EleChoPlugin.Controllers
             //System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
 
             return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(EleChoPlugin)}.sqlite", enableRangeProcessing: true);
+        }
+        #endregion
+
+        #region NonActions
+        [NonAction]
+        private async void BotItem(SettingsModel.EleChoConfigItemModel botConfig, SettingsModel settings)
+        {
+            var bot = new EleChoBotStore.BotItemModel();
+            bot.ConfigId = botConfig.ConfigId;
+            bot.Mode = botConfig.Mode;
+
+            #region 配置并启动
+            switch (botConfig.Mode)
+            {
+                case "http":
+                    bot.CqHttpSession = new CqHttpSession(new CqHttpSessionOptions
+                    {
+                        AccessToken = botConfig.CqHttpSession.BaseUri,
+                        BaseUri = new Uri(botConfig.CqHttpSession.BaseUri)
+                    });
+                    bot.CqRHttpSession = new CqRHttpSession(new CqRHttpSessionOptions
+                    {
+                        BaseUri = new Uri(botConfig.CqRHttpSession.BaseUri),
+                        Secret = botConfig.CqRHttpSession.Secret
+                    });
+
+                    // 启动
+                    await bot.CqRHttpSession.RunAsync();
+
+                    #region 注册事件
+                    // 使用 EleCho 特性: 主动使用插件
+                    bot.CqRHttpSession.UsePlugin(new DemoPlugin());
+
+                    #region 插件事件派发: UsePlugin
+                    Utils.LogUtil.Info($"{botConfig.ConfigId} 开始配置");
+                    var plugins = _pluginFinder.EnablePlugins<IEleChoPlugin>().ToList();
+                    Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
+                    foreach (var plugin in plugins)
+                    {
+                        Utils.LogUtil.Info($"插件: {plugin.GetType().ToString()}");
+                        try
+                        {
+                            var cqPostPlugins = plugin.UseCqPostPlugins();
+                            if (cqPostPlugins != null && cqPostPlugins.Count >= 1)
+                            {
+                                foreach (var item in cqPostPlugins)
+                                {
+                                    bot.CqRHttpSession.UsePlugin(item);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogUtil.Exception(ex);
+                        }
+                    }
+                    #endregion
+
+                    #endregion
+                    break;
+                case "ws":
+                    // TODO: websocket
+                    break;
+                case "ws reverse":
+                    // TODO: websocket reverse
+                    break;
+                default:
+                    // TODO: 默认
+                    break;
+            }
+            #endregion
+
+            // 保存起来
+            EleChoBotStore.Bots.Add(bot);
+        }
+        #endregion
+    }
+
+    public class DemoPlugin : CqPostPlugin
+    {
+        public override async Task OnGroupMessageReceivedAsync(CqGroupMessagePostContext context)
+        {
+            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(EleChoPlugin));
+            if (!settingsModel.UseDemoModel)
+            {
+                return;
+            }
+
+            if (context.Session is not ICqActionSession actionSession)   // 判断是否能够发送 Action
+            {
+                return;
+            }
+
+            string text = context.Message.Text;
+            if (text.StartsWith("TTS:", StringComparison.OrdinalIgnoreCase))
+            {
+                await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(new CqTtsMsg(text[4..])));
+            }
+            else if (text.StartsWith("ToFace:"))
+            {
+                if (CqFaceMsg.FromName(text[7..]) is CqFaceMsg face)
+                {
+                    await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage(face));
+                }
+            }
+        }
+
+        public override async Task OnGroupMessageRecalledAsync(CqGroupMessageRecalledPostContext context)
+        {
+            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(EleChoPlugin));
+            if (!settingsModel.UseDemoModel)
+            {
+                return;
+            }
+
+            if (context.Session is not ICqActionSession actionSession)   // 判断是否能够发送 Action
+            {
+                return;
+            }
+
+            var msg = (await actionSession.GetMessageAsync(context.MessageId));
+
+            await actionSession.SendGroupMessageAsync(context.GroupId, new CqMessage("让我康康你撤回了什么: ", msg.Message));
         }
     }
 }

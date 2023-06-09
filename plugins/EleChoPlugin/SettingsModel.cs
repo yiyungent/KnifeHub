@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -25,19 +25,24 @@ namespace EleChoPlugin
             /// <value></value>
             public string ConfigId { get; set; }
 
-            /// <summary>
-            /// 反向 WebSocket: ws
-            /// 反向 HTTP: http
-            /// </summary>
-            /// <value></value>
-            public string SessionMode { get; set; }
+            public bool Enable { get; set; }
 
-            public string CqWsSession { get; set; }
+            public string Mode { get; set; }
 
-            public class CqWsSessionModel
+            public CqHttpSessionModel CqHttpSession { get; set; }
+
+            public CqRHttpSessionModel CqRHttpSession { get; set; }
+
+            public class CqHttpSessionModel
             {
+                public string BaseUri { get; set; }
                 public string AccessToken { get; set; }
-                public bool UseGroupMessage { get; set; }
+            }
+
+            public class CqRHttpSessionModel
+            {
+                public string BaseUri { get; set; }
+                public string Secret { get; set; }
             }
         }
     }

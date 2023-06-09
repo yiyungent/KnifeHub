@@ -1,5 +1,5 @@
-﻿using PluginCore.IPlugins;
-using Sora.EventArgs.SoraEvent;
+using EleCho.GoCqHttpSdk;
+using PluginCore.IPlugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,6 @@ namespace PluginCore.IPlugins
 {
     public interface IEleChoPlugin : IPlugin
     {
-        void OnGroupMessage(string msgType, GroupMessageEventArgs eventArgs);
-
-        void OnPrivateMessage(string msgType, PrivateMessageEventArgs eventArgs);
+        public List<CqPostPlugin> UseCqPostPlugins();
     }
 }
