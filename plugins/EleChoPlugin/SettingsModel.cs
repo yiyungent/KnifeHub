@@ -4,20 +4,10 @@ using System.Collections.ObjectModel;
 using System.Text;
 using PluginCore.Models;
 
-namespace SoraPlugin
+namespace EleChoPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
-        /// <summary>
-        /// server
-        /// client
-        /// </summary>
-        public string Mode { get; set; }
-
-        public ServerConfigModel ServerConfig { get; set; }
-
-        public ClientConfigModel ClientConfig { get; set; }
-
         public long AdminQQ { get; set; }
 
         /// <summary>
@@ -25,34 +15,30 @@ namespace SoraPlugin
         /// </summary>
         public bool UseDemoModel { get; set; } = true;
 
-        public sealed class ClientConfigModel
-        {
-            public ushort Port { get; set; }
-            public string AccessToken { get; set; }
-            public bool AutoMarkMessageRead { get; set; }
-            public long[] BlockUsers { get; set; }
-            public bool EnableSocketMessage { get; set; }
-            public bool EnableSoraCommandManager { get; set; }
-            public string Host { get; set; }
-            public bool SendCommandErrMsg { get; set; }
-            public long[] SuperUsers { get; set; }
-            public bool ThrowCommandException { get; set; }
-            public string UniversalPath { get; set; }
-        }
+        public List<EleChoConfigItemModel> EleChoConfigs { get; set; }
 
-        public sealed class ServerConfigModel
+        public class EleChoConfigItemModel
         {
-            public ushort Port { get; set; }
-            public string AccessToken { get; set; }
-            public bool AutoMarkMessageRead { get; set; }
-            public long[] BlockUsers { get; set; }
-            public bool EnableSocketMessage { get; set; }
-            public bool EnableSoraCommandManager { get; set; }
-            public string Host { get; set; }
-            public bool SendCommandErrMsg { get; set; }
-            public long[] SuperUsers { get; set; }
-            public bool ThrowCommandException { get; set; }
-            public string UniversalPath { get; set; }
+            /// <summary>
+            /// 用于唯一标识此配置, 将被用于路径前缀 /EleChoPlugin-{ConfigId}
+            /// </summary>
+            /// <value></value>
+            public string ConfigId { get; set; }
+
+            /// <summary>
+            /// 反向 WebSocket: ws
+            /// 反向 HTTP: http
+            /// </summary>
+            /// <value></value>
+            public string SessionMode { get; set; }
+
+            public string CqWsSession { get; set; }
+
+            public class CqWsSessionModel
+            {
+                public string AccessToken { get; set; }
+                public bool UseGroupMessage { get; set; }
+            }
         }
     }
 }

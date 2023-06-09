@@ -4,11 +4,11 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace SoraPlugin.Utils
+namespace EleChoPlugin.Utils
 {
     public class LogUtil
     {
-        public const string Sign = nameof(SoraPlugin);
+        public const string Sign = nameof(EleChoPlugin);
 
         public static void Info(string message)
         {

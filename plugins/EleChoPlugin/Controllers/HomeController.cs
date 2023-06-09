@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
 using PluginCore.Interfaces;
-using SoraPlugin.Utils;
+using EleChoPlugin.Utils;
 using Sora;
 using Sora.Interfaces;
 using Sora.Net.Config;
@@ -15,17 +15,17 @@ using Sora.Util;
 using YukariToolBox.LightLog;
 using PluginCore.IPlugins;
 
-namespace SoraPlugin.Controllers
+namespace EleChoPlugin.Controllers
 {
     /// <summary>
-    /// 其实也可以不写这个, 直接访问 Plugins/SoraPlugin/index.html
+    /// 其实也可以不写这个, 直接访问 Plugins/EleChoPlugin/index.html
     /// 
     /// 下面的方法, 是去掉 index.html
     /// 
     /// 若 wwwroot 下有其它需要访问的文件, 如何 css, js, 而你又不想每次新增 action 指定返回, 则 Route 必须 Plugins/{PluginId},
-    /// 这样访问 Plugins/SoraPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
+    /// 这样访问 Plugins/EleChoPlugin/css/main.css 就会访问到你插件下的 wwwroot/css/main.css
     /// </summary>
-    [Route($"Plugins/{nameof(SoraPlugin)}")]
+    [Route($"Plugins/{nameof(EleChoPlugin)}")]
     public class HomeController : Controller
     {
         #region Fields
@@ -54,7 +54,7 @@ namespace SoraPlugin.Controllers
 
         public async Task<ActionResult> Get()
         {
-            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(SoraPlugin)), "index.html");
+            string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(EleChoPlugin)), "index.html");
 
             return PhysicalFile(indexFilePath, "text/html");
         }
@@ -67,7 +67,7 @@ namespace SoraPlugin.Controllers
         [Authorize("PluginCore.Admin")]
         public async Task<ActionResult> Start()
         {
-            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(SoraPlugin));
+            SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(EleChoPlugin));
 
             // 确保以前的都取消
             #region 确保以前的都取消
@@ -142,7 +142,7 @@ namespace SoraPlugin.Controllers
             #region 注册事件
             service.Event.OnGroupMessage += async (msgType, eventArgs) =>
             {
-                var plugins = _pluginFinder.EnablePlugins<ISoraPlugin>().ToList();
+                var plugins = _pluginFinder.EnablePlugins<IEleChoPlugin>().ToList();
                 Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
                 foreach (var plugin in plugins)
                 {
@@ -164,7 +164,7 @@ namespace SoraPlugin.Controllers
             };
             service.Event.OnPrivateMessage += async (msgType, eventArgs) =>
             {
-                var plugins = _pluginFinder.EnablePlugins<ISoraPlugin>().ToList();
+                var plugins = _pluginFinder.EnablePlugins<IEleChoPlugin>().ToList();
                 Utils.LogUtil.Info($"响应: {plugins?.Count.ToString()} 个插件:");
                 foreach (var plugin in plugins)
                 {
@@ -196,7 +196,7 @@ namespace SoraPlugin.Controllers
             var fileStream = System.IO.File.OpenRead(dbFilePath);
             //System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
 
-            return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(SoraPlugin)}.sqlite", enableRangeProcessing: true);
+            return File(fileStream: fileStream, contentType: "application/x-sqlite3", fileDownloadName: $"{nameof(EleChoPlugin)}.sqlite", enableRangeProcessing: true);
         }
     }
 }

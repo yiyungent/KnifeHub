@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PluginCore.IPlugins
 {
-    public interface ISoraPlugin : IPlugin
+    public interface IEleChoPlugin : IPlugin
     {
         void OnGroupMessage(string msgType, GroupMessageEventArgs eventArgs);
 

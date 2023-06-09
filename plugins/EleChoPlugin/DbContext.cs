@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using PluginCore;
-using SoraPlugin.Models;
+using EleChoPlugin.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoraPlugin
+namespace EleChoPlugin
 {
     public class DbContext
     {
@@ -18,7 +18,7 @@ namespace SoraPlugin
         {
             get
             {
-                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(SoraPlugin), $"{nameof(SoraPlugin)}.sqlite");
+                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(EleChoPlugin), $"{nameof(EleChoPlugin)}.sqlite");
 
                 return dbFilePath;
             }

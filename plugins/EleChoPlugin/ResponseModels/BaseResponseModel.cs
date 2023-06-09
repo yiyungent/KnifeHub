@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SoraPlugin.ResponseModels
+namespace EleChoPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

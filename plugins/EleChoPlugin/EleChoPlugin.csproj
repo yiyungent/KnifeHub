@@ -8,7 +8,7 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>PluginCore.SoraPlugin</PackageId>
+		<PackageId>PluginCore.EleChoPlugin</PackageId>
 		<Version>0.1.4</Version>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>0.1.4.0</FileVersion>
@@ -34,7 +34,7 @@
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
-		<PackageReference Include="Sora" Version="1.1.0" />
+		<PackageReference Include="EleCho.GoCqHttpSdk" Version="1.1.2" />
 	</ItemGroup>
 
 	<!-- 方便开发debug,与发布到nuget -->

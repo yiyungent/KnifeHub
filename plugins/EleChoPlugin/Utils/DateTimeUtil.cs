@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SoraPlugin.Utils
+namespace EleChoPlugin.Utils
 {
     /// <summary>
     /// JavaScript时间戳：是指格林威治时间1970年01月01日00时00分00秒(北京时间1970年01月01日08时00分00秒)起至现在的总毫秒数。（13 位数字）

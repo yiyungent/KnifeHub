@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoraPlugin.Utils
+namespace EleChoPlugin.Utils
 {
     public class EnvUtil
     {

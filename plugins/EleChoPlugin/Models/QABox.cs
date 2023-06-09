@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoraPlugin.Models
+namespace EleChoPlugin.Models
 {
     /// <summary>
     /// 某人发消息
