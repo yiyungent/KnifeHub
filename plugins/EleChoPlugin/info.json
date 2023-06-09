@@ -3,6 +3,6 @@
   "DisplayName": "QQ插件",
   "Description": "QQ基础插件 for go-cqhttp",
   "Author": "yiyun",
-  "Version": "0.1.0",
+  "Version": "0.1.1",
   "SupportedVersions": [ "0.0.1" ]
 }

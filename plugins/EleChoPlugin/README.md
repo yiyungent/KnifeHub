@@ -40,6 +40,6 @@
 > 本项目基于 [OrgEleCho/EleCho.GoCqHttpSdk: 专为 Go-CqHttp 打造, 完全遵守 C# 编码规范, 优雅与便捷的通信 SDK](https://github.com/OrgEleCho/EleCho.GoCqHttpSdk)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.EleChoPlugin-v0.1.0.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.EleChoPlugin-v0.1.1.README" style="border:0" alt="" />
 <!-- End Matomo -->
 
