@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimUpdater", "src\SimUpdate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnkiPlus", "plugins\AnkiPlus\AnkiPlus.csproj", "{6EDE027E-01BC-4794-AB66-5C17C33E741C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EleChoPlugin", "plugins\EleChoPlugin\EleChoPlugin.csproj", "{7A809BC4-778C-404E-B1EB-DF50F7A71F83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,6 +203,10 @@ Global
 		{6EDE027E-01BC-4794-AB66-5C17C33E741C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EDE027E-01BC-4794-AB66-5C17C33E741C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDE027E-01BC-4794-AB66-5C17C33E741C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A809BC4-778C-404E-B1EB-DF50F7A71F83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A809BC4-778C-404E-B1EB-DF50F7A71F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A809BC4-778C-404E-B1EB-DF50F7A71F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A809BC4-778C-404E-B1EB-DF50F7A71F83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -236,6 +242,7 @@ Global
 		{0C8F60EA-06BA-4EEC-ACDB-3DAF9970F86D} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{B2E00EDF-816C-49BB-A455-51C7830F5226} = {BDFD03E4-0A99-49A3-95A7-F7132EC4FF00}
 		{6EDE027E-01BC-4794-AB66-5C17C33E741C} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{7A809BC4-778C-404E-B1EB-DF50F7A71F83} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
