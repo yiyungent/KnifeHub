@@ -139,7 +139,7 @@ namespace EleChoPlugin.Controllers
 
         #region NonActions
         [NonAction]
-        private async void BotItem(SettingsModel.EleChoConfigItemModel botConfig, SettingsModel settings)
+        public async void BotItem(SettingsModel.EleChoConfigItemModel botConfig, SettingsModel settings)
         {
             var bot = new EleChoBotStore.BotItemModel();
             bot.ConfigId = botConfig.ConfigId;
