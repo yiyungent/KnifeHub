@@ -101,6 +101,13 @@
     - [x] 订阅私聊/群聊
     - [x] 演示模式
 
+  - [EleChoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=EleChoPlugin&expanded=true) `PUP`
+    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
+    - [x] 依赖 [OrgEleCho/EleCho.GoCqHttpSdk](https://github.com/OrgEleCho/EleCho.GoCqHttpSdk)
+    - [x] 对接 `go-cqhttp`
+    - [x] `UsePlugin` 方式订阅事件
+    - [x] 演示模式
+
   - [SoraPlugin](https://github.com/yiyungent/KnifeHub/releases?q=SoraPlugin&expanded=true) `PUP`
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [Hoshikawa-Kaguya/Sora](https://github.com/Hoshikawa-Kaguya/Sora)
