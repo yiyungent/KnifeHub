@@ -118,6 +118,7 @@ namespace EleChoPlugin.Controllers
                 if (botConfig.Enable)
                 {
                     BotItem(botConfig, settingsModel);
+                    //await BotItem(botConfig, settingsModel);
                 }
             }
 
@@ -139,7 +140,7 @@ namespace EleChoPlugin.Controllers
 
         #region NonActions
         [NonAction]
-        public async void BotItem(SettingsModel.EleChoConfigItemModel botConfig, SettingsModel settings)
+        public async Task BotItem(SettingsModel.EleChoConfigItemModel botConfig, SettingsModel settings)
         {
             var bot = new EleChoBotStore.BotItemModel();
             bot.ConfigId = botConfig.ConfigId;
@@ -161,7 +162,7 @@ namespace EleChoPlugin.Controllers
                     });
 
                     // 启动
-                    await bot.CqRHttpSession.RunAsync();
+                    await bot.CqRHttpSession.StartAsync();
 
                     #region 注册事件
                     // 使用 EleCho 特性: 主动使用插件
