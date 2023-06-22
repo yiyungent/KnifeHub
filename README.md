@@ -203,8 +203,26 @@
 > 黑窗口中会显示一个 url 地址（Now listening on:后跟随的地址）, 复制到浏览器中打开即可 
 > 保持此黑窗口在后台运行即可
 
+#### 方式2: 使用 Zeabur 免费 一键部署
 
-#### 方式2: 使用 Render 免费 一键部署 
+> - 点击下方按钮 一键部署        
+> - 免费注册, 无需信用卡验证      
+> - 每月 `$5.00` 免费额度
+> - 无需保活, 在免费额度用完之前永不停止运行
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://dash.zeabur.com/templates/OD3I6T)
+
+##### Zeabur 环境变量
+
+| 环境变量名称                | 必填 | 备注                    |
+| --------------------------- | ---- | ----------------------- |
+| `PLUGINCORE_ADMIN_USERNAME` | √    | PluginCore Admin 用户名 |
+| `PLUGINCORE_ADMIN_PASSWORD` | √    | PluginCore Admin 密码   |
+
+> 注意:    
+> 修改环境变量后, 需 `Redeploy` 才能生效
+
+#### 方式3: 使用 Render 免费 一键部署 
 
 > 注意: 此种方式 `KonataPlugin` 可能无法登录上线
 
@@ -225,7 +243,7 @@
 | `PLUGINCORE_ADMIN_USERNAME` | √    | PluginCore Admin 用户名 |
 | `PLUGINCORE_ADMIN_PASSWORD` | √    | PluginCore Admin 密码   |
 
-#### 方式3: 使用 Railway 免费 一键部署 
+#### 方式4: 使用 Railway 免费 一键部署 
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
@@ -247,7 +265,7 @@
 > - Railway 修改环境变量 会 触发 重新 Deploy   
 > - Railway 重新 Deploy 后会删除数据, 你安装的所有插件及数据都将清空。
 
-#### 方式4: 使用 Heroku 一键部署 
+#### 方式5: 使用 Heroku 一键部署 
 
 > 注意：此种方式 `KonataPlugin` 可能无法登录上线
 
@@ -257,8 +275,6 @@
 <!-- [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/yiyungent/KnifeHub) -->
 [![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://yourls.yiyungent.eu.org/knifehubdeployheroku)
 
-
-
 ##### Heroku 环境变量
 
 | 环境变量名称                | 必填 | 备注                    |
@@ -266,10 +282,7 @@
 | `PLUGINCORE_ADMIN_USERNAME` | √    | PluginCore Admin 用户名 |
 | `PLUGINCORE_ADMIN_PASSWORD` | √    | PluginCore Admin 密码   |
 
-
-
-
-#### 方式5: 使用 Docker
+#### 方式6: 使用 Docker
 
 > **注意** : 请不要映射/挂载 容器内 **/app/Plugins/** 目录, 否则可能导致 **插件无法正常上传** , 此问题解决中
 
