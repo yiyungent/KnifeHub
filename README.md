@@ -1,6 +1,8 @@
-﻿<h1 align="center">KnifeHub</h1>
+﻿![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=200&section=header&reversal=true&animation=twinkling&fontSize=70&fontAlignY=30&descAlignY=50&text=KnifeHub&desc=🧰%20简单易用的效率工具平台)
 
-> 🧰 简单易用的效率工具平台
+<!-- <h1 align="center">KnifeHub</h1> -->
+
+<!-- > 🧰 简单易用的效率工具平台 -->
 
 [![repo size](https://img.shields.io/github/repo-size/yiyungent/KnifeHub.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/github/license/yiyungent/KnifeHub.svg?style=flat)](https://github.com/yiyungent/KnifeHub/blob/master/LICENSE)
