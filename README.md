@@ -104,6 +104,7 @@
     - [x] 演示模式
 
   - [EleChoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=EleChoPlugin&expanded=true) `PUP`
+    - **未通过测试**
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
     - [x] 依赖 [OrgEleCho/EleCho.GoCqHttpSdk](https://github.com/OrgEleCho/EleCho.GoCqHttpSdk)
     - [x] 对接 `go-cqhttp`
@@ -118,6 +119,7 @@
     - [x] 演示模式
 
   - [CocoaPlugin](https://github.com/yiyungent/KnifeHub/releases?q=CocoaPlugin&expanded=true) `PUP`
+    - **未测试**
     - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供模块化事件派发, 机器人管理
     - [x] 依赖 [Miyakowww/CocoaFramework2](https://github.com/Miyakowww/CocoaFramework2)
     - [x] 对接 `mirai-api-http`

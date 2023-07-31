@@ -1,0 +1,8 @@
+{
+	"PluginId": "QQStat4SoraPlugin",
+	"DisplayName": "QQ消息统计分析",
+	"Description": "QQ消息等数据收集, 分析",
+	"Author": "yiyun",
+	"Version": "0.1.1",
+	"SupportedVersions": [ "0.0.1" ]
+}

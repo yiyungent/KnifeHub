@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <div id="calendar-container" style="height: 800px; width: 100%;"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        var calendarECharts = null;
+
+        function loadCalendar() {
+            calendarECharts.showLoading();
+
+            axios({
+                method: "get",
+                url: "/api/Plugins/QQStatPlugin/Calendar/EChartsOption",
+                //params: {
+                //    memeberUin: "{{memeberUin}}",
+                //    groupUin: "{{groupUin}}"
+                //},
+            }).then(res => {
+                calendarECharts.hideLoading();
+                if (res.status == 200) {
+                    res = res.data;
+                    if (res.code > 0) {
+                        // 成功
+                        calendarECharts.setOption(res.data);
+                    } else {
+                        alert(res.message);
+                    }
+                }
+            });
+
+        }
+
+        window.onload = function () {
+            calendarECharts = echarts.init(document.getElementById("calendar-container"));
+            loadCalendar();
+        }
+
+        window.onresize = function () {
+            calendarECharts.resize();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "AdminQQ": "",
+  "AdminGroups": [ "", "" ],
+  "ChartGroups": [ "", "" ],
+  "BaseUrl": "https://qqbothub.moeci.com",
+  "ScreenshotUrl": "https://webstack-screenshot.vercel.app/?viewport=1920x1080&fullPage=true&url="
+}

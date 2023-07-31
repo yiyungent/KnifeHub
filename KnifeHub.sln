@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPluginLoader", "plugins\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloaderPlugin", "plugins\DownloaderPlugin\DownloaderPlugin.csproj", "{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQStat4SoraPlugin", "plugins\QQStat4SoraPlugin\QQStat4SoraPlugin.csproj", "{FC609C38-3126-4D90-96EE-B481F0BA846A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +221,10 @@ Global
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC609C38-3126-4D90-96EE-B481F0BA846A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC609C38-3126-4D90-96EE-B481F0BA846A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC609C38-3126-4D90-96EE-B481F0BA846A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC609C38-3126-4D90-96EE-B481F0BA846A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -257,6 +263,7 @@ Global
 		{7A809BC4-778C-404E-B1EB-DF50F7A71F83} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{0AA6DFD6-EB3F-41A7-9E70-F67FBC8E5C50} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{FC609C38-3126-4D90-96EE-B481F0BA846A} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
