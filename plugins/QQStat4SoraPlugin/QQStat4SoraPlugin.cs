@@ -30,7 +30,7 @@ namespace QQStat4SoraPlugin
 
         public void OnGroupMessage(string msgType, GroupMessageEventArgs eventArgs)
         {
-            var groupInfo = eventArgs.SourceGroup.GetGroupInfo().Result.groupInfo
+            var groupInfo = eventArgs.SourceGroup.GetGroupInfo().Result.groupInfo;
             string groupName = groupInfo.GroupName;
             long groupUin = groupInfo.GroupId;
             long memberUin = eventArgs.SenderInfo.UserId;
