@@ -1,10 +1,9 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
+FROM yiyungent/knifehub:latest
 
-# start Selenium
+
+#region Selenium
 # 注意: 以下 为了使用 Selenium
 # 复制 attachments/selenium/ 文件夹下的文件到 ./attachments/selenium/ 即 /app/attachments/selenium/
 COPY attachments/selenium/ ./attachments/selenium/
@@ -38,22 +37,6 @@ RUN apt install -y --force-yes --no-install-recommends ttf-wqy-zenhei
 RUN apt-get install libglib2.0 -y
 RUN apt-get install libnss3-dev -y
 RUN apt-get install libxcb1 -y
-# end Selenium
+#endregion Selenium
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["src/KnifeHub.Web/KnifeHub.Web.csproj", "src/KnifeHub.Web/"]
-COPY ["src/KnifeHub.Sdk/KnifeHub.Sdk.csproj", "src/KnifeHub.Sdk/"]
-RUN dotnet restore "src/KnifeHub.Web/KnifeHub.Web.csproj"
-COPY . .
-WORKDIR "/src/src/KnifeHub.Web"
-RUN dotnet build "KnifeHub.Web.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "KnifeHub.Web.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-RUN ulimit -c 0
-ENTRYPOINT ["dotnet", "KnifeHub.Web.dll"]
