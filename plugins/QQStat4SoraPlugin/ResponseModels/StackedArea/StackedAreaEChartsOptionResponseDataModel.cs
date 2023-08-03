@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResponseModels.StackedArea
+namespace QQStat4SoraPlugin.ResponseModels.StackedArea
 {
     /// <summary>
     /// https://echarts.apache.org/examples/zh/editor.html?c=area-stack

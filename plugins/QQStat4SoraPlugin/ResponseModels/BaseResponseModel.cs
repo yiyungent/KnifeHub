@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQStatPlugin.ResponseModels
+namespace QQStat4SoraPlugin.ResponseModels
 {
     public class BaseResponseModel
     {

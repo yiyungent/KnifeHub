@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QQStatPlugin.ResponseModels.Calendar
+namespace QQStat4SoraPlugin.ResponseModels.Calendar
 {
     public class CalendarEChartsOptionResponseDataModel
     {

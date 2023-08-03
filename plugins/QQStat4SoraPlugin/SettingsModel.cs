@@ -12,12 +12,5 @@ namespace QQStat4SoraPlugin
         /// AdminQQ 在任何情况都拥有权限
         /// </summary>
         public string AdminQQ { get; set; }
-
-        public AutoLoginModel AutoLogin { get; set; }
-
-        public class AutoLoginModel
-        {
-            public bool Enabled { get; set; }
-        }
     }
 }

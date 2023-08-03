@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ using Sora.Entities;
 
 namespace QQStat4SoraPlugin
 {
-    public class QQStat4SoraPlugin : BasePlugin, ISoraPlugin, PluginCore.IPlugins.
+    public class QQStat4SoraPlugin : BasePlugin, ISoraPlugin
     {
 
         public override (bool IsSuccess, string Message) AfterEnable()
@@ -27,8 +27,6 @@ namespace QQStat4SoraPlugin
             Console.WriteLine($"{nameof(QQStat4SoraPlugin)}: {nameof(BeforeDisable)}");
             return base.BeforeDisable();
         }
-
-        public override 
 
         public void OnGroupMessage(string msgType, GroupMessageEventArgs eventArgs)
         {
