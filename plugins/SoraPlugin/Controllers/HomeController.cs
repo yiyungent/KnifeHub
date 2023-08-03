@@ -177,7 +177,7 @@ namespace SoraPlugin.Controllers
 
             #region 启动
             //启动服务并捕捉错误
-            await service.StartService()
+            service.StartService()
                          .RunCatch(e => Log.Error("Sora Service", Log.ErrorLogBuilder(e)));
             #endregion
 
