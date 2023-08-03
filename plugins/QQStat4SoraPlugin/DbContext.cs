@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using PluginCore;
-using QQStatPlugin.Models;
+using QQStat4SoraPlugin.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQStatPlugin
+namespace QQStat4SoraPlugin
 {
     public class DbContext
     {
@@ -18,7 +18,7 @@ namespace QQStatPlugin
         {
             get
             {
-                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(QQStatPlugin), $"{nameof(QQStatPlugin)}.sqlite");
+                string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(QQStat4SoraPlugin), $"{nameof(QQStat4SoraPlugin)}.sqlite");
 
                 return dbFilePath;
             }

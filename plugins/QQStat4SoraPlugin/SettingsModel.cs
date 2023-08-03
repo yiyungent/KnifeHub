@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using PluginCore.Models;
 
-namespace QQStatPlugin
+namespace QQStat4SoraPlugin
 {
     public class SettingsModel : PluginSettingsModel
     {
@@ -13,21 +13,11 @@ namespace QQStatPlugin
         /// </summary>
         public string AdminQQ { get; set; }
 
-        /// <summary>
-        /// 这些群 必须是 管理员/群主 才可以 使用 图表
-        /// </summary>
-        public List<string> AdminGroups { get; set; }
+        public AutoLoginModel AutoLogin { get; set; }
 
-
-        /// <summary>
-        /// 这些群 普通成员 也可以使用 图表
-        /// </summary>
-        public List<string> ChartGroups { get; set; }
-
-
-        public string BaseUrl { get; set; }
-
-        public string ScreenshotUrl { get; set; }
-
+        public class AutoLoginModel
+        {
+            public bool Enabled { get; set; }
+        }
     }
 }

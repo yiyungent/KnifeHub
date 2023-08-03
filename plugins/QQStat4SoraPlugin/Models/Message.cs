@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QQStatPlugin.Models
+namespace QQStat4SoraPlugin.Models
 {
     /// <summary>
     /// 某人发消息
