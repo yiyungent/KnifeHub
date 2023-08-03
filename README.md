@@ -26,8 +26,6 @@
 - **插件化架构** - 轻松使用插件扩展
 - **多平台多架构** - win,linux,osx,amd,arm 均可
 
-> **注意** : **QQBotHub** 更名为 **KnifeHub** , 将不再局限于机器人开发
-
 > **通知**         
 > 请尽快更新到 最新版 (KnifeHub-**v1.1.0** +) ,        
 > **v1.1.0** 开始将静默发送异常日志等到服务端, 使用本软件即代表同意此隐私授权
@@ -251,7 +249,7 @@
 
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
-> - 每月 `$5.00` 免费额度 / 每月 500 小时免费执行时间
+> - **一次性** `$5.00` 免费额度 / 500 小时免费执行时间
 > - 无需保活, 在免费额度用完之前永不停止运行
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/A3JY-J?referralCode=8eKBDA)
@@ -516,7 +514,7 @@ We accept donations through these channels:
 - QQChannelPlugin `MIT`
 - MoLi4QQChannelPlugin `MIT`
 
-**KnifeHub** © [yiyun](https://github.com/yiyungent), Released under the [GPL-3.0](./LICENSE) License.<br>
+**KnifeHub** © [yiyun](https://github.com/yiyungent), Released under the [Apache-2.0](./LICENSE) License.<br>
 Authored and maintained by yiyun with help from contributors ([list](https://github.com/yiyungent/KnifeHub/contributors)).
 
 > GitHub [@yiyungent](https://github.com/yiyungent) Gitee [@yiyungent](https://gitee.com/yiyungent)
