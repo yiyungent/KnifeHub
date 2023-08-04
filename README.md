@@ -212,7 +212,7 @@
 > - 每月 `$5.00` 免费额度
 > - 无需保活, 在免费额度用完之前永不停止运行
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://dash.zeabur.com/templates/IW8G70)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/IW8G70?referralCode=yiyungent)
 
 ##### Zeabur 环境变量
 
