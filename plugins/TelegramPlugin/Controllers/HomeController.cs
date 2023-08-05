@@ -90,7 +90,9 @@ namespace TelegramPlugin.Controllers
                     item.CancellationTokenSource = null;
                 }
                 catch (Exception ex)
-                { }
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             }
             TelegramBotStore.Bots.Clear();
             #endregion
@@ -99,7 +101,14 @@ namespace TelegramPlugin.Controllers
             {
                 if (botConfig.Enable)
                 {
-                    TelegramBotItem(botConfig, settingsModel);
+                    try
+                    {
+                        TelegramBotItem(botConfig, settingsModel);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
                 }
             }
 
@@ -141,24 +150,32 @@ namespace TelegramPlugin.Controllers
                 TelegramBotClient = botClient
             });
 
-            // TODO: 可能放在这里上线不合适
-            // 完成以上配置后将机器人上线
-            botClient.StartReceiving(
-                updateHandler: async (ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) =>
-                {
-                    await HandleUpdateAsync(botClient, update, cancellationToken, botConfig.BotToken);
-                },
-                pollingErrorHandler: async (ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken) =>
-                {
-                    await HandlePollingErrorAsync(botClient, exception, cancellationToken, botConfig.BotToken);
-                },
-                receiverOptions: receiverOptions,
-                cancellationToken: cts.Token
-            );
+            try
+            {
+                // TODO: 可能放在这里上线不合适
+                // 完成以上配置后将机器人上线
+                botClient.StartReceiving(
+                    updateHandler: async (ITelegramBotClient botClient, Update update, CancellationToken cancellationToken) =>
+                    {
+                        await HandleUpdateAsync(botClient, update, cancellationToken, botConfig.BotToken);
+                    },
+                    pollingErrorHandler: async (ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken) =>
+                    {
+                        await HandlePollingErrorAsync(botClient, exception, cancellationToken, botConfig.BotToken);
+                    },
+                    receiverOptions: receiverOptions,
+                    cancellationToken: cts.Token
+                );
 
-            var me = await botClient.GetMeAsync();
+                var me = await botClient.GetMeAsync();
 
-            Console.WriteLine($"Start listening for @{me.Username}");
+                Console.WriteLine($"Start listening for @{me.Username}");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
         }
 
         [NonAction]
