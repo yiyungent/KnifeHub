@@ -39,7 +39,7 @@ namespace TgBotStatPlugin
 
             var chatId = message.Chat.Id;
 
-            if (message.Chat.Type == Telegram.Bot.Types.Enums.ChatType.Group)
+            if (message.Chat.Type != Telegram.Bot.Types.Enums.ChatType.Private)
             {
                 // 只在群聊有效
 
@@ -65,24 +65,26 @@ namespace TgBotStatPlugin
 
                 #region /export
                 // 导出当前群聊记录 (分片导出: 多个文件)
-
-                long count = await DbContext.CountByGroupId(groupId: chatId.ToString());
-                for (int i = 1; i <= Math.Floor((decimal)count / (decimal)50); i++)
+                if (messageText.Trim().StartsWith("/export"))
                 {
-                    List<Models.Message> tempList = (await DbContext.QueryByGroupId(groupId: chatId.ToString(), new Pager(page: i, pageSize: 50))).ToList();
-                    string tempJsonStr = Utils.JsonUtil.Obj2JsonStr(tempList);
+                    long count = await DbContext.CountByGroupId(groupId: chatId.ToString());
+                    for (int i = 1; i <= (int)Math.Ceiling((decimal)count / (decimal)50); i++)
+                    {
+                        List<Models.Message> tempList = (await DbContext.QueryByGroupId(groupId: chatId.ToString(), new Pager(page: i, pageSize: 50))).ToList();
+                        string tempJsonStr = Utils.JsonUtil.Obj2JsonStr(tempList);
 
-                    try
-                    {
-                        Stream fileStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(tempJsonStr));
-                        Message newMessage = await botClient.SendDocumentAsync(
-                            chatId: chatId,
-                            document: new Telegram.Bot.Types.InputFiles.InputOnlineFile(content: fileStream, fileName: $"export-{i}.json"),
-                            caption: $"export-{i}.json");
-                    }
-                    catch (System.Exception ex)
-                    {
-                        System.Console.WriteLine(ex.ToString());
+                        try
+                        {
+                            Stream fileStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(tempJsonStr));
+                            Message newMessage = await botClient.SendDocumentAsync(
+                                chatId: chatId,
+                                document: new Telegram.Bot.Types.InputFiles.InputOnlineFile(content: fileStream, fileName: $"export-{i}.json"),
+                                caption: $"export-{i}.json");
+                        }
+                        catch (System.Exception ex)
+                        {
+                            System.Console.WriteLine(ex.ToString());
+                        }
                     }
                 }
                 #endregion

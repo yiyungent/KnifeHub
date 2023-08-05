@@ -114,14 +114,14 @@ namespace TgBotStatPlugin
                 string sql = @"SELECT * FROM Message 
                                WHERE GroupId = @GroupId
                                ORDER BY Id
-                               OFFSET @Offset ROWS
-                               FETCH NEXT @Next ROWS ONLY;";
+                               LIMIT @PageSize OFFSET (@PageIndex * @PageSize);";
 
                 return await con.QueryAsync<Message>(sql, new
                 {
                     GroupId = groupId,
-                    Offset = pager.Offset,
-                    Next = pager.Next
+                    PageSize = pager.PageSize,
+                    // PageIndex 从 0 开始
+                    PageIndex = pager.Page - 1
                 });
             }
         }

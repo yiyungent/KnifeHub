@@ -1,4 +1,5 @@
 ﻿//using Newtonsoft.Json;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace TgBotStatPlugin.Utils
@@ -20,7 +21,11 @@ namespace TgBotStatPlugin.Utils
         {
             //return JsonConvert.SerializeObject(jsonObj);
             return JsonSerializer.Serialize(jsonObj,
-               new JsonSerializerOptions { WriteIndented = true });
+               new JsonSerializerOptions
+               {
+                   WriteIndented = true,
+                   Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+               });
         }
         #endregion
 

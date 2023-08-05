@@ -3,7 +3,7 @@
   "DisplayName": "TgBotStatPlugin",
   "Description": "TgBotStatPlugin",
   "Author": "yiyun",
-  "Version": "0.1.3",
+  "Version": "0.1.4",
   "SupportedVersions": ["0.0.1"],
   "DependPlugins": ["TelegramPlugin"]
 }
