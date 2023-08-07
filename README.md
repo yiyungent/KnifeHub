@@ -169,6 +169,15 @@
 
 </details>
 
+
+## Online demo
+
+- [https://knifehub.onrender.com](https://knifehub.onrender.com/)
+  - 用户名: `admin` 密码: `ABC12345`
+  - 不定时重置数据
+  - 非最新版本
+
+
 ## Screenshots
 
 ### PluginCore Admin
