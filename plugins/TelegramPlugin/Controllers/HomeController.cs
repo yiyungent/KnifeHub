@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PluginCore;
 using PluginCore.Interfaces;
 using PluginCore.IPlugins;
@@ -35,12 +37,19 @@ namespace TelegramPlugin.Controllers
 
         private readonly bool _debug;
 
+        private readonly IServiceProvider _serviceProvider;
+
+        private readonly ILogger<HomeController> _logger;
+
         #endregion
 
         #region Ctor
-        public HomeController(IPluginFinder pluginFinder)
+        public HomeController(IServiceProvider serviceProvider)
         {
-            _pluginFinder = pluginFinder;
+            _serviceProvider = serviceProvider;
+            _pluginFinder = serviceProvider.GetService<IPluginFinder>();
+            _logger = serviceProvider.GetService<ILogger<HomeController>>();
+
             string debugStr = EnvUtil.GetEnv("DEBUG");
             if (!string.IsNullOrEmpty(debugStr) && bool.TryParse(debugStr, out bool debug))
             {
@@ -84,7 +93,28 @@ namespace TelegramPlugin.Controllers
                             item.CancellationTokenSource.Cancel();
                         }
                         catch (Exception ex)
-                        { }
+                        {
+                            Console.WriteLine(ex.ToString());
+                            _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.Start()");
+                        }
+                        try
+                        {
+                            await item.TelegramBotClient.LogOutAsync();
+                        }
+                        catch (System.Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                            _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.Start()");
+                        }
+                        try
+                        {
+                            await item.TelegramBotClient.CloseAsync();
+                        }
+                        catch (System.Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                            _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.Start()");
+                        }
                     }
                     item.TelegramBotClient = null;
                     item.CancellationTokenSource = null;
@@ -108,6 +138,7 @@ namespace TelegramPlugin.Controllers
                     catch (System.Exception ex)
                     {
                         Console.WriteLine(ex.ToString());
+                        _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.Start()");
                     }
                 }
             }
@@ -174,6 +205,7 @@ namespace TelegramPlugin.Controllers
             catch (System.Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.TelegramBotItem()");
             }
 
         }
@@ -205,6 +237,7 @@ namespace TelegramPlugin.Controllers
                 catch (Exception ex)
                 {
                     LogUtil.Exception(ex);
+                    _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.HandleUpdateAsync()");
                 }
             }
             #endregion
@@ -272,6 +305,7 @@ namespace TelegramPlugin.Controllers
                 catch (Exception ex)
                 {
                     LogUtil.Exception(ex);
+                    _logger.LogError(ex, $"{nameof(TelegramPlugin)}.Controllers.HomeController.HandlePollingErrorAsync()");
                 }
             }
             #endregion
