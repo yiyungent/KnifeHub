@@ -219,7 +219,8 @@
 > - 点击下方按钮 一键部署        
 > - 免费注册, 无需信用卡验证      
 > - 每月 `$5.00` 免费额度
-> - 无需保活, 在免费额度用完之前永不停止运行
+> - 需要一定天数后延长免费时长
+> - 支持 **支付宝**
 
 [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/IW8G70?referralCode=yiyungent)
 
