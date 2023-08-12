@@ -21,16 +21,16 @@ namespace TelegramPlugin
         /// </summary>
         public long SecondsPeriod => 60;
 
-        private readonly IPluginFinder _pluginFinder;
+        private readonly IServiceProvider _serviceProvider;
 
         private readonly bool _debug;
 
         #endregion
 
         #region Ctor
-        public TelegramPlugin(IPluginFinder pluginFinder)
+        public TelegramPlugin(IServiceProvider serviceProvider)
         {
-            _pluginFinder = pluginFinder;
+            _serviceProvider = serviceProvider;
         }
         #endregion
 
@@ -61,7 +61,7 @@ namespace TelegramPlugin
                 {
                     try
                     {
-                        var homeController = new Controllers.HomeController(_pluginFinder);
+                        var homeController = new Controllers.HomeController(_serviceProvider);
                         await homeController.Start();
                     }
                     catch (Exception ex)
