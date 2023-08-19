@@ -118,6 +118,9 @@ namespace MemosPlus
                                         isErrorMemosApiResource = true;
                                     }
 
+                                    // 注意: 对于资源文件的引用来说，无论资源文件是否成功获取, 它都是存在的，其在 md 文件中的引用字符串不会变
+                                    resourceFileMdSb.AppendLine($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   ");
+
                                     // 注意: 资源文件路径也要放入其中
                                     memoFilePaths.Add(repoTargetResourceFilePath);
                                 }
@@ -127,9 +130,6 @@ namespace MemosPlus
                                 // }
                                 #region md 文件内容
                                 // 其实总体来看 md 文件内容不会因为 具体的资源文件API成功与否改变内容，因此不需要关联资源 API Error
-
-                                // 注意: 对于资源文件的引用来说，无论资源文件是否成功获取, 它都是存在的，其在 md 文件中的引用字符串不会变
-                                resourceFileMdSb.AppendLine($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   ");
 
                                 // 注意: By default, Properties and methods of .NET objects are automatically exposed with lowercase and `_` names. 
                                 // It means that a property like `MyMethodIsNice` will be exposed as `my_method_is_nice`.
