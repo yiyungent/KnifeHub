@@ -67,7 +67,8 @@ namespace QQChannelPlugin.Controllers
             SettingsModel settingsModel = PluginCore.PluginSettingsModelFactory.Create<SettingsModel>(nameof(QQChannelPlugin));
             // 确保以前的都取消
             #region 确保以前的都取消
-            if (QQChannelBotStore.Bots != null && QQChannelBotStore.Bots.Count >= 1) {
+            if (QQChannelBotStore.Bots != null && QQChannelBotStore.Bots.Count >= 1)
+            {
                 foreach (var item in QQChannelBotStore.Bots)
                 {
                     try
@@ -104,12 +105,12 @@ namespace QQChannelPlugin.Controllers
                 QQChannelBotStore.Bots.Clear();
             }
             #endregion
-            
+
             foreach (var botConfig in settingsModel.Bots)
             {
                 try
                 {
-                    ChannelBotItem(botConfig, settingsModel);
+                    await ChannelBotItem(botConfig, settingsModel);
                 }
                 catch (Exception ex)
                 {
@@ -123,7 +124,7 @@ namespace QQChannelPlugin.Controllers
         }
 
         [NonAction]
-        public async void ChannelBotItem(SettingsModel.BotDevItemModel botConfig, SettingsModel settings)
+        public async Task ChannelBotItem(SettingsModel.BotDevItemModel botConfig, SettingsModel settings)
         {
             // https://www.yuque.com/chianne1025/mybot/otkzzg
 
