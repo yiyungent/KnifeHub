@@ -34,7 +34,10 @@ dependencies:
     version: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)
   react-scripts:
     specifier: 5.0.1
-    version: registry.npmmirror.com/react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.53.0)(react@18.2.0)(typescript@4.9.5)
+    version: registry.npmmirror.com/react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.53.0)(react@18.2.0)(sass@1.69.5)(typescript@4.9.5)
+  sass:
+    specifier: ^1.69.5
+    version: registry.npmmirror.com/sass@1.69.5
   typescript:
     specifier: ^4.9.5
     version: registry.npmmirror.com/typescript@4.9.5
@@ -7180,6 +7183,12 @@ packages:
     version: 9.0.21
     dev: false
 
+  registry.npmmirror.com/immutable@4.3.4:
+    resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/immutable/-/immutable-4.3.4.tgz}
+    name: immutable
+    version: 4.3.4
+    dev: false
+
   registry.npmmirror.com/import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/import-fresh/-/import-fresh-3.3.0.tgz}
     name: import-fresh
@@ -10712,7 +10721,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  registry.npmmirror.com/react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.53.0)(react@18.2.0)(typescript@4.9.5):
+  registry.npmmirror.com/react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.53.0)(react@18.2.0)(sass@1.69.5)(typescript@4.9.5):
     resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-scripts/-/react-scripts-5.0.1.tgz}
     id: registry.npmmirror.com/react-scripts/5.0.1
     name: react-scripts
@@ -10765,7 +10774,7 @@ packages:
       react-refresh: registry.npmmirror.com/react-refresh@0.11.0
       resolve: registry.npmmirror.com/resolve@1.22.8
       resolve-url-loader: registry.npmmirror.com/resolve-url-loader@4.0.0
-      sass-loader: registry.npmmirror.com/sass-loader@12.6.0(webpack@5.89.0)
+      sass-loader: registry.npmmirror.com/sass-loader@12.6.0(sass@1.69.5)(webpack@5.89.0)
       semver: registry.npmmirror.com/semver@7.5.4
       source-map-loader: registry.npmmirror.com/source-map-loader@3.0.2(webpack@5.89.0)
       style-loader: registry.npmmirror.com/style-loader@3.3.3(webpack@5.89.0)
@@ -11186,7 +11195,7 @@ packages:
     version: 13.0.0
     dev: false
 
-  registry.npmmirror.com/sass-loader@12.6.0(webpack@5.89.0):
+  registry.npmmirror.com/sass-loader@12.6.0(sass@1.69.5)(webpack@5.89.0):
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sass-loader/-/sass-loader-12.6.0.tgz}
     id: registry.npmmirror.com/sass-loader/12.6.0
     name: sass-loader
@@ -11210,7 +11219,20 @@ packages:
     dependencies:
       klona: registry.npmmirror.com/klona@2.0.6
       neo-async: registry.npmmirror.com/neo-async@2.6.2
+      sass: registry.npmmirror.com/sass@1.69.5
       webpack: registry.npmmirror.com/webpack@5.89.0
+    dev: false
+
+  registry.npmmirror.com/sass@1.69.5:
+    resolution: {integrity: sha512-qg2+UCJibLr2LCVOt3OlPhr/dqVHWOa9XtZf2OjbLs/T4VPSJ00udtgJxH3neXZm+QqX8B+3cU7RaLqp1iVfcQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sass/-/sass-1.69.5.tgz}
+    name: sass
+    version: 1.69.5
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: registry.npmmirror.com/chokidar@3.5.3
+      immutable: registry.npmmirror.com/immutable@4.3.4
+      source-map-js: registry.npmmirror.com/source-map-js@1.0.2
     dev: false
 
   registry.npmmirror.com/sax@1.2.4:
