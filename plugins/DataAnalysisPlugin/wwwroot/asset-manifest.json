@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/plugins/DataAnalysisPlugin/static/css/main.b2ef4cf9.css",
+    "main.js": "/plugins/DataAnalysisPlugin/static/js/main.41decc99.js",
+    "static/js/384.03434803.chunk.js": "/plugins/DataAnalysisPlugin/static/js/384.03434803.chunk.js",
+    "index.html": "/plugins/DataAnalysisPlugin/index.html",
+    "main.b2ef4cf9.css.map": "/plugins/DataAnalysisPlugin/static/css/main.b2ef4cf9.css.map",
+    "main.41decc99.js.map": "/plugins/DataAnalysisPlugin/static/js/main.41decc99.js.map",
+    "384.03434803.chunk.js.map": "/plugins/DataAnalysisPlugin/static/js/384.03434803.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2ef4cf9.css",
+    "static/js/main.41decc99.js"
+  ]
+}
