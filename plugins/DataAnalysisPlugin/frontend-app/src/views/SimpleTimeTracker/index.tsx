@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import * as echarts from "echarts";
+import request from "../../utils/request";
 
 
 const SimpleTimeTracker = () => {
