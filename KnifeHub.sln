@@ -71,15 +71,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimUpdater", "src\SimUpdate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnkiPlus", "plugins\AnkiPlus\AnkiPlus.csproj", "{6EDE027E-01BC-4794-AB66-5C17C33E741C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EleChoPlugin", "plugins\EleChoPlugin\EleChoPlugin.csproj", "{7A809BC4-778C-404E-B1EB-DF50F7A71F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EleChoPlugin", "plugins\EleChoPlugin\EleChoPlugin.csproj", "{7A809BC4-778C-404E-B1EB-DF50F7A71F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPluginLoader", "plugins\ApiPluginLoader\ApiPluginLoader.csproj", "{0AA6DFD6-EB3F-41A7-9E70-F67FBC8E5C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiPluginLoader", "plugins\ApiPluginLoader\ApiPluginLoader.csproj", "{0AA6DFD6-EB3F-41A7-9E70-F67FBC8E5C50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloaderPlugin", "plugins\DownloaderPlugin\DownloaderPlugin.csproj", "{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DownloaderPlugin", "plugins\DownloaderPlugin\DownloaderPlugin.csproj", "{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQStat4SoraPlugin", "plugins\QQStat4SoraPlugin\QQStat4SoraPlugin.csproj", "{FC609C38-3126-4D90-96EE-B481F0BA846A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQStat4SoraPlugin", "plugins\QQStat4SoraPlugin\QQStat4SoraPlugin.csproj", "{FC609C38-3126-4D90-96EE-B481F0BA846A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgBotStatPlugin", "plugins\TgBotStatPlugin\TgBotStatPlugin.csproj", "{D4A90D39-260A-4066-BA1A-823372F4711F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgBotStatPlugin", "plugins\TgBotStatPlugin\TgBotStatPlugin.csproj", "{D4A90D39-260A-4066-BA1A-823372F4711F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAnalysisPlugin", "plugins\DataAnalysisPlugin\DataAnalysisPlugin.csproj", "{4797D839-C99B-41D7-AB65-64B6F7E9335F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -231,6 +233,10 @@ Global
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -271,6 +277,7 @@ Global
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{FC609C38-3126-4D90-96EE-B481F0BA846A} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{D4A90D39-260A-4066-BA1A-823372F4711F} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
+		{4797D839-C99B-41D7-AB65-64B6F7E9335F} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
