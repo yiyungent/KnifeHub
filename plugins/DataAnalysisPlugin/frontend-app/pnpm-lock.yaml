@@ -8,6 +8,9 @@ dependencies:
   '@fluentui/react-components':
     specifier: ^9.37.3
     version: registry.npmmirror.com/@fluentui/react-components@9.37.3(@types/react-dom@18.2.14)(@types/react@18.2.34)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.20.2)
+  '@fluentui/react-icons':
+    specifier: ^2.0.222
+    version: registry.npmmirror.com/@fluentui/react-icons@2.0.222(react@18.2.0)
   '@testing-library/jest-dom':
     specifier: ^5.17.0
     version: registry.npmmirror.com/@testing-library/jest-dom@5.17.0
@@ -29,6 +32,9 @@ dependencies:
   '@types/react-dom':
     specifier: ^18.2.14
     version: registry.npmmirror.com/@types/react-dom@18.2.14
+  normalize.css:
+    specifier: ^8.0.1
+    version: registry.npmmirror.com/normalize.css@8.0.1
   react:
     specifier: ^18.2.0
     version: registry.npmmirror.com/react@18.2.0
@@ -10546,6 +10552,12 @@ packages:
     name: normalize-url
     version: 6.1.0
     engines: {node: '>=10'}
+    dev: false
+
+  registry.npmmirror.com/normalize.css@8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/normalize.css/-/normalize.css-8.0.1.tgz}
+    name: normalize.css
+    version: 8.0.1
     dev: false
 
   registry.npmmirror.com/npm-run-path@4.0.1:
