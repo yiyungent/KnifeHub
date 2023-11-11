@@ -3,66 +3,68 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper.Configuration.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataAnalysisPlugin.Models.SimpleTimeTracker
+namespace DataAnalysisPlugin.Domain.Entities.SimpleTimeTracker
 {
     /// <summary>
     /// Simple Time Tracker 
     /// Android App v1.29
     /// </summary>
-    public class CsvModel
+    public class SimpleTimeTrackerCsvEntity : BaseEntity
     {
         /// <summary>
         /// 睡眠
         /// </summary>
-        [Name("activity name")]
+        [StringLength(1000)]
+        [Column(TypeName = "text")]
         public string ActivityName { get; set; }
 
         /// <summary>
         /// 2022-06-19 13:02:31
         /// </summary>
-        [Name("time started")]
-        public string TimeStarted { get; set; }
+        public DateTime TimeStarted { get; set; }
+
+        public long TimeStartedStamp { get; set; }
 
         /// <summary>
         /// 2022-06-19 13:09:47
         /// </summary>
-        [Name("time ended")]
-        public string TimeEnded { get; set; }
+        public DateTime TimeEnded { get; set; }
+
+        public long TimeEndedStamp { get; set; }
 
         /// <summary>
         /// 趴在桌子睡
         /// </summary>
-        [Name("comment")]
+        [StringLength(1000)]
+        [Column(TypeName = "text")]
         public string Comment { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [Name("categories")]
+        [StringLength(1000)]
+        [Column(TypeName = "text")]
         public string Categories { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [Name("record tags")]
+        [StringLength(1000)]
+        [Column(TypeName = "text")]
         public string RecordTags { get; set; }
 
         /// <summary>
         /// 0:6:14
         /// </summary>
-        [Name("duration")]
+        [StringLength(30)]
         public string Duration { get; set; }
 
         /// <summary>
         /// 5
         /// </summary>
-        [Name("duration minutes")]
         public long DurationMinutes { get; set; }
     }
 }
