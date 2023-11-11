@@ -9,11 +9,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAnalysisPlugin.Domain;
+using DataAnalysisPlugin.Repositories.EFCore.Core;
 
-namespace DataAnalysisPlugin.Services.EFCore
+namespace DataAnalysisPlugin.Services.EFCore.Core
 {
-    //public abstract class BaseService<T> : IService<T>, IDependency where T : BaseEntity, new()
-    public abstract class BaseService<T>
+    public abstract class BaseService<T> : IService<T>, IDependency
         where T : BaseEntity, new()
     {
         #region Fields
@@ -59,7 +59,7 @@ namespace DataAnalysisPlugin.Services.EFCore
         /// <returns></returns>
         public virtual async Task<PageModel<T>> FilterAsync<TOrder>(int index, int size, Expression<Func<T, bool>> filter, Expression<Func<T, TOrder>> order, bool isAsc = true)
         {
-            return await _repository.FilterAsync<TOrder>(index, size, filter, order, isAsc);
+            return await _repository.FilterAsync(index, size, filter, order, isAsc);
         }
 
         /// <summary>

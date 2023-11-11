@@ -5,7 +5,7 @@
 using DataAnalysisPlugin.Domain.Entities.SimpleTimeTracker;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAnalysisPlugin.Repositories.EFCore
+namespace DataAnalysisPlugin.Repositories.EFCore.Core
 {
     public class EFCoreDbContext : DbContext
     {

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAnalysisPlugin.Domain
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         [Key]
         public long Id { get; set; }
