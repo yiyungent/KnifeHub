@@ -11,32 +11,25 @@
 // https://github.com/yiyungent/KnifeHub
 // Author: yiyun <yiyungent@gmail.com>
 // LastUpadteTime: <#Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));#>
-
-using DataAnalysisPlugin.Domain;
-using DataAnalysisPlugin.Repositories.EFCore.Core;
-using DataAnalysisPlugin.Repositories.EFCore.Interface;
 <# manager.EndBlock(); #>
 <#
-	// 当前 Template.tt 所在的模板路径　　
-    // Host.Template 是当前文本模板 Template.tt 的路径
-    var currentPath = Path.GetDirectoryName(Host.TemplateFile);
-	string projectPath = currentPath.Replace("\\Repositories\\EFCore\\Auto\\Implement", "");
-	// 实体文件所在路径
-	string modelFile = Path.Combine(projectPath, @"bin\Debug\net6.0\DataAnalysisPlugin.dll");
-	// 读取
-	byte[] fileData = File.ReadAllBytes(modelFile);
-	Assembly assembly = Assembly.Load(fileData);
-	IEnumerable<Type> entityTypes = assembly.GetTypes().Where(m=>!m.IsAbstract && m.IsClass && m.BaseType.FullName == "BaseEntity");
-	foreach(Type type in entityTypes)
+    string[] entityNames = new string[] { 
+        "SimpleTimeTrackerCsv"
+    };
+    
+	foreach(string entityName in entityNames)
 	{
-		string entityName = type.Name.Replace("Entity", "");
-		string fileName = entityName + "Repository.cs";
+		string fileName = entityName + "Service.cs";
 #>
 <# manager.StartNewFile(fileName); #>
 
-namespace Services.Interface
+
+using DataAnalysisPlugin.Domain.Entities;
+using DataAnalysisPlugin.Services.EFCore.Core;
+
+namespace DataAnalysisPlugin.Services.EFCore.Interface
 {
-    public partial interface I<#Write(entityName);#>Service : IService<<#Write(entityName);#>>
+    public partial interface I<#Write(entityName);#>Service : IService<<#Write(entityName);#>Entity>
     { }
 }
 <# manager.EndBlock(); #>

@@ -13,37 +13,23 @@
 // LastUpadteTime: <#Write(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));#>
 <# manager.EndBlock(); #>
 <#
-	// 当前 Template.tt 所在的模板路径　　
-    // Host.Template 是当前文本模板 Template.tt 的路径
-    var currentPath = Path.GetDirectoryName(Host.TemplateFile);
-	string projectPath = currentPath.Replace("\\Repositories\\EFCore\\Auto\\Interface", "");
-	// 实体文件所在路径
-	string modelFile = Path.Combine(projectPath, @"bin\Release\net6.0\DataAnalysisPlugin.dll");
-	// 读取
-	byte[] fileData = File.ReadAllBytes(modelFile);
-    IEnumerable<Type> entityTypes = null;
-    try {
-        Assembly assembly = Assembly.ReflectionOnlyLoad(fileData);
-        entityTypes = assembly.DefinedTypes.Where(m=>!m.IsAbstract && m.IsClass && m.BaseType.FullName == "BaseEntity");
-    }
-    catch (ReflectionTypeLoadException ex) {
-        
-    }
+    string[] entityNames = new string[] { 
+        "SimpleTimeTrackerCsv"
+    };
     
-	
-	foreach(Type type in entityTypes)
+	foreach(string entityName in entityNames)
 	{
-		string entityName = type.Name.Replace("Entity", "");
 		string fileName = entityName + "Repository.cs";
 #>
 <# manager.StartNewFile(fileName); #>
 
-using DataAnalysisPlugin.Domain;
+
+using DataAnalysisPlugin.Domain.Entities;
 using DataAnalysisPlugin.Repositories.EFCore.Core;
 
 namespace DataAnalysisPlugin.Repositories.EFCore.Interface
 {
-    public partial interface I<#Write(entityName);#>Repository : IRepository<<#Write(entityName);#>>
+    public partial interface I<#Write(entityName);#>Repository : IRepository<<#Write(entityName);#>Entity>
     { }
 }
 <# manager.EndBlock(); #>

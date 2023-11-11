@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataAnalysisPlugin.Domain.Entities.SimpleTimeTracker
+namespace DataAnalysisPlugin.Domain.Entities
 {
     /// <summary>
     /// Simple Time Tracker 
