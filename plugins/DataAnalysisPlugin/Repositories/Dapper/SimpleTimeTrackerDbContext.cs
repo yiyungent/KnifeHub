@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using DataAnalysisPlugin.Domain.Entities.SimpleTimeTracker;
+using DataAnalysisPlugin.Domain.Entities;
 using DataAnalysisPlugin.Repositories.Dapper.Core;
 
 namespace DataAnalysisPlugin.Repositories.Dapper
