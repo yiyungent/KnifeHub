@@ -124,7 +124,7 @@ namespace DataAnalysisPlugin.Controllers
                     var item = new RecordEChartOptionModel.Series();
                     item.name = type;
                     item.type = "line";
-                    item.stack = "共花费(秒)";
+                    item.stack = "共花费(小时)";
                     item.areaStyle = new RecordEChartOptionModel.Areastyle();
                     item.emphasis = new RecordEChartOptionModel.Emphasis();
                     item.emphasis.focus = "series";
@@ -132,7 +132,7 @@ namespace DataAnalysisPlugin.Controllers
                     foreach (string day in recordDays)
                     {
                         long daySecond = recordModels.Where(m => m.Type == type && m.StartTime.ToString("yyyy-MM-dd") == day)?.Select(m => m.SpendSecond)?.Sum() ?? 0;
-                        double dayHour = Math.Round((double)daySecond / 60 / 60, 1);
+                        double dayHour = Math.Round((double)((double)daySecond / 60 / 60), 2);
                         item.data.Add(dayHour);
                     }
 
