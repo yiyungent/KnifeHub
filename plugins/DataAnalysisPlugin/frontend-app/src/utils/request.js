@@ -1,13 +1,15 @@
 import axios from "axios";
 
+// dev 环境
+const devBaseUrl = "http://localhost:5193";
 // build 环境
-// axios.defaults.baseURL = 'http://api.tikotiko.fun';
-axios.defaults.baseURL = 'http://localhost:5193';
-// axios.defaults.baseURL = process.env.VUE_APP_API;
+const proBaseUrl = "/";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? devBaseUrl : proBaseUrl;
 
 // axios 请求拦截 - 在发送请求之前做某件事
 axios.interceptors.request.use(
-  function(request) {
+  function (request) {
     // 如果有登录状态token的话，则添加到请求头
     if (localStorage.token) {
       // 在 headers 中设置 Authorization 属性放token，token是存在缓存中的
@@ -16,7 +18,7 @@ axios.interceptors.request.use(
 
     return request;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
@@ -28,19 +30,19 @@ axios.interceptors.request.use(
  * @param {Object} params 对象参数
  * @returns {Promise<unknown>}
  */
-const request = function(url, method, params) {
+const request = function (url, method, params) {
   return new Promise((resolve, reject) => {
     if (method == "get") {
       axios({
         url: url,
         method: "get",
-        params: params
+        params: params,
       })
-        .then(res => {
+        .then((res) => {
           res.data.status = res.status;
           resolve(res.data);
         })
-        .catch(err => {
+        .catch((err) => {
           err.data.status = err.status;
           reject(err.data);
         });
@@ -48,13 +50,13 @@ const request = function(url, method, params) {
       axios({
         url: url,
         method: method,
-        data: params
+        data: params,
       })
-        .then(res => {
+        .then((res) => {
           res.data.status = res.status;
           resolve(res.data);
         })
-        .catch(err => {
+        .catch((err) => {
           err.data.status = err.status;
           reject(err.data);
         });
