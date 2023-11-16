@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace DataAnalysisPlugin.Controllers
 {
     [ApiController]
-    [Route($"Plugins/{(nameof(DataAnalysisPlugin))}/[controller]/[action]")]
+    [Route($"api/Plugins/{(nameof(DataAnalysisPlugin))}/[controller]/[action]")]
     [Authorize("PluginCore.Admin")]
     public class SimpleTimeTrackerController : ControllerBase
     {
@@ -39,10 +39,10 @@ namespace DataAnalysisPlugin.Controllers
             }
             // 文件后缀
             string fileExtension = Path.GetExtension(file.FileName);// 获取文件格式，拓展名
-            if (fileExtension != ".xls")
+            if (fileExtension != ".csv")
             {
                 responseModel.Code = -1;
-                responseModel.Message = "只能上传 xls 格式文件";
+                responseModel.Message = "只能上传 csv 格式文件";
                 return responseModel;
             }
             // 判断文件大小
@@ -69,7 +69,7 @@ namespace DataAnalysisPlugin.Controllers
 
                 #region RecordModel
                 List<RecordModel> recordModels = new();
-                for (int i = 0; i < recordModels.Count; i++)
+                for (int i = 0; i < csvModels.Count; i++)
                 {
                     recordModels.Add(new RecordModel
                     {

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DataAnalysisPlugin.Controllers
 {
     [ApiController]
-    [Route($"Plugins/{(nameof(DataAnalysisPlugin))}/[controller]/[action]")]
+    [Route($"api/Plugins/{(nameof(DataAnalysisPlugin))}/[controller]/[action]")]
     public class UserController : ControllerBase
     {
         [HttpPost]

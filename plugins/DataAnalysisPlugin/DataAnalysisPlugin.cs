@@ -15,7 +15,7 @@ using System.Text.Json;
 
 namespace DataAnalysisPlugin
 {
-    public class DataAnalysisPlugin : BasePlugin, ITimeJobPlugin
+    public class DataAnalysisPlugin : BasePlugin, ITimeJobPlugin, IStartupXPlugin
     {
         #region Props
         public long SecondsPeriod
@@ -154,6 +154,20 @@ namespace DataAnalysisPlugin
             await Task.CompletedTask;
         }
         #endregion
+
+        public void Configure(IApplicationBuilder app)
+        {
+            app.UseMiddleware<Middlewares.CorsMiddleware>();
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+        }
+
+        public int ConfigureServicesOrder => 0;
+
+        public int ConfigureOrder => 0;
 
     }
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // build 环境
 // axios.defaults.baseURL = 'http://api.tikotiko.fun';
-// axios.defaults.baseURL = 'http://localhost:4530/';
+axios.defaults.baseURL = 'http://localhost:5193';
 // axios.defaults.baseURL = process.env.VUE_APP_API;
 
 // axios 请求拦截 - 在发送请求之前做某件事

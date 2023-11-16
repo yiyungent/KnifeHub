@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as echarts from "echarts";
-import request from "../../utils/request";
+import { apiUpload } from "../../api/SimpleTimeTracker";
+
+let echartObj: any = null;
 
 const SimpleTimeTracker = () => {
   //#region file upload
@@ -18,22 +20,23 @@ const SimpleTimeTracker = () => {
 
   const handleUpload = async () => {
     if (file) {
+      console.log("echartObj", echartObj);
+      echartObj.showLoading();
       console.log("Uploading file...");
 
       const formData = new FormData();
       formData.append("file", file);
 
       try {
-        // You can write the URL of your server or any other endpoint used for file upload
-        const result = await fetch("https://httpbin.org/post", {
-          method: "POST",
-          body: formData,
-        });
+        const res: any = await apiUpload(file);
 
-        const data = await result.json();
-
-        console.log(data);
+        console.log(res);
         setStatus("success");
+
+        // res.data.title.text = "";
+        // res.data.toolbox.feature = {};
+        echartObj.setOption(res.data);
+        echartObj.hideLoading();
       } catch (error) {
         console.error(error);
         setStatus("fail");
@@ -43,10 +46,17 @@ const SimpleTimeTracker = () => {
   //#endregion
 
   const echartRef = useRef(null);
+  useEffect(() => {
+    console.log("init");
+    console.log("echartRef", echartRef);
+    echartObj = echarts.init(echartRef.current);
+    console.log("echartObj", echartObj);
+    echartObj.resize();
+  }, []);
 
   return (
     <>
-      <div>
+      <div style={{ width: "100%" }}>
         <div className="input-group">
           <label htmlFor="file" className="sr-only">
             Choose a file
@@ -72,7 +82,7 @@ const SimpleTimeTracker = () => {
 
         <Result status={status} />
       </div>
-      <div ref={echartRef}></div>
+      <div ref={echartRef} style={{ width: "100%", height: "800px" }}></div>
     </>
   );
 };
