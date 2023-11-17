@@ -59,7 +59,7 @@ const SimpleTimeTracker = () => {
       <div style={{ width: "100%" }}>
         <div className="input-group">
           <label htmlFor="file" className="sr-only">
-            Choose a file
+            Choose a file (csv)
           </label>
           <input id="file" type="file" onChange={handleFileChange} />
         </div>
