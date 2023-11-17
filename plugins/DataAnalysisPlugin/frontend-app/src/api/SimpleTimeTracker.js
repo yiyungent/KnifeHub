@@ -5,7 +5,7 @@ const apiUpload = (file) => {
   formData.append("file", file);
   
   return request(
-    "api/plugins/DataAnalysisPlugin/SimpleTimeTracker/Upload",
+    "/api/plugins/DataAnalysisPlugin/SimpleTimeTracker/Upload",
     "POST",
     formData
   );

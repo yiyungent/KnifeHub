@@ -5,7 +5,7 @@ const apiUpload = (file) => {
   formData.append("file", file);
   
   return request(
-    "api/plugins/DataAnalysisPlugin/ITodays/Upload",
+    "/api/plugins/DataAnalysisPlugin/ITodays/Upload",
     "POST",
     formData
   );
