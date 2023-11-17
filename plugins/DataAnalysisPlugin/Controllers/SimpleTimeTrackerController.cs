@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DataAnalysisPlugin.Utils;
 using Microsoft.AspNetCore.Authorization;
+using DataAnalysisPlugin.Models.ECharts;
 
 namespace DataAnalysisPlugin.Controllers
 {
@@ -26,7 +27,7 @@ namespace DataAnalysisPlugin.Controllers
         #region Actions
 
         [HttpPost]
-        public async Task<BaseResponseModel> Upload([FromForm] IFormFile file)
+        public async Task<BaseResponseModel> Upload([FromForm] IFormFile file, ChartTypeEnum chartType = ChartTypeEnum.ECharts_StackedAreaChart)
         {
             BaseResponseModel responseModel = new BaseResponseModel();
 
@@ -84,49 +85,49 @@ namespace DataAnalysisPlugin.Controllers
                 #endregion
 
                 #region EChartOption
-                RecordEChartOptionModel chartOption = new();
-                chartOption.title = new RecordEChartOptionModel.Title();
-                chartOption.title.text = "堆叠区域图";
-                chartOption.tooltip = new RecordEChartOptionModel.Tooltip();
+                StackedAreaChartOptionModel chartOption = new();
+                chartOption.title = new StackedAreaChartOptionModel.Title();
+                chartOption.title.text = "堆叠面积图";
+                chartOption.tooltip = new StackedAreaChartOptionModel.Tooltip();
                 chartOption.tooltip.trigger = "axis";
-                chartOption.tooltip.axisPointer = new RecordEChartOptionModel.Axispointer();
+                chartOption.tooltip.axisPointer = new StackedAreaChartOptionModel.Axispointer();
                 chartOption.tooltip.axisPointer.type = "cross";
-                chartOption.tooltip.axisPointer.label = new RecordEChartOptionModel.Label();
+                chartOption.tooltip.axisPointer.label = new StackedAreaChartOptionModel.Label();
                 chartOption.tooltip.axisPointer.label.backgroundColor = "#6a7985";
-                chartOption.legend = new RecordEChartOptionModel.Legend();
+                chartOption.legend = new StackedAreaChartOptionModel.Legend();
                 chartOption.legend.data = recordModels.Select(m => m.Type).Distinct().ToList();
-                chartOption.toolbox = new RecordEChartOptionModel.Toolbox();
-                chartOption.toolbox.feature = new RecordEChartOptionModel.Feature();
-                chartOption.toolbox.feature.saveAsImage = new RecordEChartOptionModel.Saveasimage();
-                chartOption.grid = new RecordEChartOptionModel.Grid();
+                chartOption.toolbox = new StackedAreaChartOptionModel.Toolbox();
+                chartOption.toolbox.feature = new StackedAreaChartOptionModel.Feature();
+                chartOption.toolbox.feature.saveAsImage = new StackedAreaChartOptionModel.Saveasimage();
+                chartOption.grid = new StackedAreaChartOptionModel.Grid();
                 chartOption.grid.left = "3%";
                 chartOption.grid.right = "4%";
                 chartOption.grid.bottom = "3%";
                 chartOption.grid.containLabel = true;
-                chartOption.xAxis = new List<RecordEChartOptionModel.Xaxi>();
+                chartOption.xAxis = new List<StackedAreaChartOptionModel.Xaxi>();
                 IList<string> recordDays = recordModels.OrderBy(m => m.Num).Select(m => m.StartTime.ToString("yyyy-MM-dd"))
                     .Distinct().ToList();
-                chartOption.xAxis.Add(new RecordEChartOptionModel.Xaxi()
+                chartOption.xAxis.Add(new StackedAreaChartOptionModel.Xaxi()
                 {
                     type = "category",
                     boundaryGap = false,
                     data = recordDays
                 });
-                chartOption.yAxis = new List<RecordEChartOptionModel.Yaxi>();
-                chartOption.yAxis.Add(new RecordEChartOptionModel.Yaxi()
+                chartOption.yAxis = new List<StackedAreaChartOptionModel.Yaxi>();
+                chartOption.yAxis.Add(new StackedAreaChartOptionModel.Yaxi()
                 {
                     type = "value"
                 });
-                chartOption.series = new List<RecordEChartOptionModel.Series>();
+                chartOption.series = new List<StackedAreaChartOptionModel.Series>();
                 IList<string> types = chartOption.legend.data;
                 foreach (var type in types)
                 {
-                    var item = new RecordEChartOptionModel.Series();
+                    var item = new StackedAreaChartOptionModel.Series();
                     item.name = type;
                     item.type = "line";
                     item.stack = "共花费(小时)";
-                    item.areaStyle = new RecordEChartOptionModel.Areastyle();
-                    item.emphasis = new RecordEChartOptionModel.Emphasis();
+                    item.areaStyle = new StackedAreaChartOptionModel.Areastyle();
+                    item.emphasis = new StackedAreaChartOptionModel.Emphasis();
                     item.emphasis.focus = "series";
                     item.data = new List<double>();
                     foreach (string day in recordDays)
@@ -154,7 +155,7 @@ namespace DataAnalysisPlugin.Controllers
             }
 
             return responseModel;
-        } 
+        }
 
         #endregion
     }

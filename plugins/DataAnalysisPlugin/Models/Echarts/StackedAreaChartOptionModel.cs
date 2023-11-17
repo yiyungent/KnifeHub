@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAnalysisPlugin.Models.SimpleTimeTracker
+namespace DataAnalysisPlugin.Models.ECharts
 {
     /// <summary>
     /// https://echarts.apache.org/examples/zh/editor.html?c=area-stack
     /// </summary>
-    public class RecordEChartOptionModel
+    public class StackedAreaChartOptionModel
     {
         public Title title { get; set; }
         public Tooltip tooltip { get; set; }
