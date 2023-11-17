@@ -13,6 +13,8 @@
 - [x] 爱今天/时间朋友
   - 测试在 `Android App v5.9.7-general`
   - [x] 备份 `爱今天/时间朋友` 时间记录 (仅测试旧版本爱今天)
+  - [x] 可视化 (导出 xls)
+    - [x] 堆叠面积图
 
 - [x] Simple Time Tracker
   - 测试在 `Android App v1.29`
@@ -32,7 +34,7 @@
 
 
 <!-- Matomo Image Tracker -->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.DataAnalysisPlugin-v0.1.0.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.DataAnalysisPlugin-v0.1.1.README" style="border:0" alt="" />
 <!-- End Matomo Image Tracker -->
 
 
