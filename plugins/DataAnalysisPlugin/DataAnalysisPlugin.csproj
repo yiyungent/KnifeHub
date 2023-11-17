@@ -38,6 +38,7 @@
     <PackageReference Include="Octokit.Reactive" Version="0.51.0" />
     <PackageReference Include="Scriban" Version="5.7.0" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
     <!-- start: Dapper for SQLite -->
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />

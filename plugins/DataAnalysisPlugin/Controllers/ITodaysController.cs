@@ -10,19 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using DataAnalysisPlugin.Models;
-using DataAnalysisPlugin.Models.SimpleTimeTracker;
+using DataAnalysisPlugin.Models.ITodays;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DataAnalysisPlugin.Utils;
 using Microsoft.AspNetCore.Authorization;
 using DataAnalysisPlugin.Models.ECharts;
+using System.Data;
 
 namespace DataAnalysisPlugin.Controllers
 {
     [ApiController]
     [Route($"api/Plugins/{(nameof(DataAnalysisPlugin))}/[controller]/[action]")]
     [Authorize("PluginCore.Admin")]
-    public class SimpleTimeTrackerController : ControllerBase
+    public class ITodaysController : ControllerBase
     {
         #region Actions
 
@@ -40,10 +41,10 @@ namespace DataAnalysisPlugin.Controllers
             }
             // 文件后缀
             string fileExtension = Path.GetExtension(file.FileName);// 获取文件格式，拓展名
-            if (fileExtension != ".csv")
+            if (fileExtension != ".xls")
             {
                 responseModel.Code = -1;
-                responseModel.Message = "只能上传 csv 格式文件";
+                responseModel.Message = "只能上传 xls 格式文件";
                 return responseModel;
             }
             // 判断文件大小
@@ -58,29 +59,32 @@ namespace DataAnalysisPlugin.Controllers
 
             try
             {
-                #region CsvModel
-                List<CsvModel> csvModels = new();
+                #region xls -> RecordModel
                 Stream stream = file.OpenReadStream();
-                using (var reader = new StreamReader(stream, Encoding.UTF8))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                DataTable dt = NPOIUtil.ImportExcelForITodays(stream, fileExtension);
+                int totalCount = dt.Rows.Count, importSuccessCount = 0;
+                IList<RecordModel> recordModels = new List<RecordModel>();
+                foreach (DataRow row in dt.Rows)
                 {
-                    csvModels = csv.GetRecords<CsvModel>().ToList();
-                }
-                #endregion
-
-                #region CsvModel -> RecordModel
-                List<RecordModel> recordModels = new();
-                for (int i = 0; i < csvModels.Count; i++)
-                {
-                    recordModels.Add(new RecordModel
+                    long num = Convert.ToInt64(row["序号"]?.ToString());
+                    string target = row["目标"]?.ToString();
+                    string type = row["类型"]?.ToString();
+                    DateTime startTime = Convert.ToDateTime(row["开始时间"]?.ToString());
+                    DateTime endTime = Convert.ToDateTime(row["结束时间"]?.ToString());
+                    long spendSecond = Convert.ToInt64(row["共花费(秒)"]?.ToString());
+                    string remark = row["备注"]?.ToString();
+                    var model = new RecordModel()
                     {
-                        Num = (i + 1),
-                        Type = csvModels[i].ActivityName,
-                        Remark = csvModels[i].Comment,
-                        StartTime = DateTime.Parse(csvModels[i].TimeStarted),
-                        EndTime = DateTime.Parse(csvModels[i].TimeEnded),
-                        SpendSecond = (long)(DateTime.Parse(csvModels[i].TimeEnded) - DateTime.Parse(csvModels[i].TimeStarted)).TotalSeconds,
-                    });
+                        Num = num,
+                        Target = target,
+                        Type = type,
+                        StartTime = startTime,
+                        EndTime = endTime,
+                        SpendSecond = spendSecond,
+                        Remark = remark
+                    };
+
+                    recordModels.Add(model);
                 }
                 #endregion
 
