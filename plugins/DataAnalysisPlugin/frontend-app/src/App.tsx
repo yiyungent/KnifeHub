@@ -2,6 +2,7 @@ import "./App.css";
 import * as React from "react";
 import SimpleTimeTracker from "./views/SimpleTimeTracker";
 import ITodays from "./views/ITodays";
+import AccountingDuck from "./views/AccountingDuck";
 import {
   makeStyles,
   shorthands,
@@ -82,12 +83,16 @@ function App() {
           SimpleTimeTracker
         </Tab>
         <Tab id="ITodays" icon={<AirplaneTakeOff />} value="ITodays">
-          ITodays
+          爱今天/时间朋友
+        </Tab>
+        <Tab id="AccountingDuck" icon={<AirplaneTakeOff />} value="AccountingDuck">
+          记账鸭
         </Tab>
       </TabList>
       <div className={styles.panels} style={{ width: "100%", height: "100%" }}>
         {selectedValue === "SimpleTimeTracker" && <SimpleTimeTracker />}
         {selectedValue === "ITodays" && <ITodays />}
+        {selectedValue === "AccountingDuck" && <AccountingDuck />}
       </div>
     </div>
   );
