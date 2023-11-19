@@ -72,8 +72,8 @@ namespace DataAnalysisPlugin.Controllers
                 IList<RecordModel> recordModels = new List<RecordModel>();
                 foreach (var row in rows)
                 {
-                    // 过滤: 支出
-                    if (row.AccountingType?.Trim() == "支出")
+                    // 过滤: 支出/收入
+                    if (row.AccountingType?.Trim() == "支出" || row.AccountingType?.Trim() == "收入")
                     {
                         var model = new RecordModel()
                         {
@@ -91,7 +91,7 @@ namespace DataAnalysisPlugin.Controllers
                 #region RecordModel -> EChartOption
                 StackedAreaChartOptionModel chartOption = new();
                 chartOption.title = new StackedAreaChartOptionModel.Title();
-                chartOption.title.text = "支出-堆叠面积图";
+                chartOption.title.text = "支出/收入-堆叠面积图";
                 chartOption.tooltip = new StackedAreaChartOptionModel.Tooltip();
                 chartOption.tooltip.trigger = "axis";
                 chartOption.tooltip.axisPointer = new StackedAreaChartOptionModel.Axispointer();
