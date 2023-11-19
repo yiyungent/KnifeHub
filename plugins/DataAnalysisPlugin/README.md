@@ -23,7 +23,10 @@
 
 - [ ] ActivityWatch
 
-- [ ] 记账鸭
+- [x] 记账鸭
+  - 测试在 `Android App v3.7.2`
+  - [x] 可视化 (导出 xlsx)
+    - [x] 堆叠面积图
 
 - [ ] 圈子账本
 
@@ -33,8 +36,16 @@
 
 
 
+
+
+
+
+
+
+
+
 <!-- Matomo Image Tracker -->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.DataAnalysisPlugin-v0.1.2.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.DataAnalysisPlugin-v0.1.3.README" style="border:0" alt="" />
 <!-- End Matomo Image Tracker -->
 
 
