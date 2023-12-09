@@ -22,7 +22,7 @@
 > 🧰 简单易用的效率工具平台
 
 - **简单易用** - 拒绝折腾, 专注于工作, 而非工具
-- **Web 可视化** - 无需再在 Console 上操作, 轻松上手
+- **WebUI 可视化** - 无需再在 Console 上操作, 轻松上手
 - **插件化架构** - 轻松使用插件扩展
 - **多平台多架构** - win,linux,osx,amd,arm 均可
 
@@ -45,127 +45,8 @@
 > **不依赖于特定主程序, 可在 `PluginCore` 环境通用**   
 > 若有前置依赖插件, 安装启用后, 可独立运行   
 
-  - [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true) `PUP`
-    - [x] 自动签到等
-    - [x] 监控网页变化, 及时提醒
-    - [x] 运行 WebUI 自动化测试
-    - [x] 爬虫, 数据采集
-    - [x] 一切可用浏览器完成的操作，都可自动化运行
-  
-  - [BackupPlugin](https://github.com/yiyungent/KnifeHub/releases?q=BackupPlugin&expanded=true) `PUP`
-    - [x] 定时 自动 备份 插件数据
-    - [x] 将 备份文件 发送到 Telegram 
-    - 备份时资源占用较大
-
-  - [MemosPlus](https://github.com/yiyungent/KnifeHub/releases?q=MemosPlus&expanded=true) `PUP`
-    - [x] [memos](https://github.com/usememos/memos) 辅助插件
-
-  - [TgClientPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TgClientPlugin&expanded=true) `PUP`
-    - [x] Telegram 客户端 辅助插件
-
-  - [DuplicatiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=DuplicatiPlugin&expanded=true) `PUP`
-    - [x] Duplicati 辅助插件
-    - [x] Duplicati 备份通知 Telegram
-
-  - [QQNotePlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQNotePlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 利用 QQ 写笔记 (随笔/零碎知识点)
-      - 笔记写入 GitHub 指定仓库的指定文件中
-
-  - [ZhiDaoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=ZhiDaoPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
-    - [x] 自定义问答
-      - [x] 群主/管理员/AdminQQ 自定义问答
-      - [x] 分群自定义问答    
-      - [x] 关键词自动回复 
-
-  - [TelegramPlugin](https://github.com/yiyungent/KnifeHub/releases?q=TelegramPlugin&expanded=true) `PUP`
-    - [x] Telegram 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
-    - [x] 依赖 [TelegramBots/Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot)
-    - [x] 订阅所有类型消息
-    - [x] 多机器人管理
-    - [x] 演示模式
-
-  - [QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQChannelPlugin&expanded=true) `PUP`
-    - [x] QQ频道 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
-    - [x] 依赖 [Chianne1025/QQChannelFramework](https://github.com/Chianne1025/QQChannelFramework)
-    - [x] 订阅频道消息/私信 
-    - [x] 多频道机器人管理
-    - [x] 沙盒模式
-    - [x] 演示模式
-
-  - [KonataPlugin](https://github.com/yiyungent/KnifeHub/releases?q=KonataPlugin&expanded=true) `PUP`
-    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
-    - [x] 依赖 [KonataDev/Konata.Core](https://github.com/KonataDev/Konata.Core)
-    - [x] 账号密码/配置 登录 
-    - [x] 订阅私聊/群聊
-    - [x] 演示模式
-
-  - [EleChoPlugin](https://github.com/yiyungent/KnifeHub/releases?q=EleChoPlugin&expanded=true) `PUP`
-    - **未通过测试**
-    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
-    - [x] 依赖 [OrgEleCho/EleCho.GoCqHttpSdk](https://github.com/OrgEleCho/EleCho.GoCqHttpSdk)
-    - [x] 对接 `go-cqhttp`
-    - [x] `UsePlugin` 方式订阅事件
-    - [x] 演示模式
-
-  - [SoraPlugin](https://github.com/yiyungent/KnifeHub/releases?q=SoraPlugin&expanded=true) `PUP`
-    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供事件派发, 机器人管理
-    - [x] 依赖 [Hoshikawa-Kaguya/Sora](https://github.com/Hoshikawa-Kaguya/Sora)
-    - [x] 对接 `go-cqhttp`
-    - [x] 订阅私聊/群聊等
-    - [x] 演示模式
-
-  - [CocoaPlugin](https://github.com/yiyungent/KnifeHub/releases?q=CocoaPlugin&expanded=true) `PUP`
-    - **未测试**
-    - [x] QQ 基础插件, 可依赖本插件开发相关插件, 提供模块化事件派发, 机器人管理
-    - [x] 依赖 [Miyakowww/CocoaFramework2](https://github.com/Miyakowww/CocoaFramework2)
-    - [x] 对接 `mirai-api-http`
-    - [x] 订阅私聊/群聊
-    - [x] 演示模式
-
-  - [MoLi4QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=MoLi4QQChannelPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 QQChannelPlugin 处于已启用状态**
-    - [x] 专为 QQ 频道, 支持多个机器人 
-    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-KnifeHub)
-      - 自定义知识库, 各种娱乐功能
-    - [x] `@机器人` / `聊天前缀`
-    - [x] 免费API调用次数：500次/天
-      - 专属8折优惠码：`qqbothub`
-
-  - [MoLiPlugin](https://github.com/yiyungent/KnifeHub/releases?q=MoLiPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 对接 [茉莉机器人 API](https://mlyai.com?from=GitHub-KnifeHub)
-      - 自定义知识库, 各种娱乐功能
-    - [x] 设置 机器人聊天群, 好友
-    - [x] `@机器人` / `聊天前缀`
-    - [x] 免费API调用次数：500次/天
-      - 专属8折优惠码：`qqbothub`
-
-  - [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 收集群聊消息 
-    - [x] 下载 群聊 数据库
-    - [x] `#日历`
-    - [x] `#折线`
-
-  - [AutoLogin4QQChannelPlugin](https://github.com/yiyungent/KnifeHub/releases?q=AutoLogin4QQChannelPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 QQChannelPlugin 处于已启用状态** 
-    - [x] 定时 检测在线状态 (频率:1分钟), 专为 QQ频道机器人
-    - [x] 当出现意外离线后, 将自动利用 `QQChannelPlugin` 设置里的数据 重新登录
-    - [x] 可设置监控频率 `SecondsPeriod`
-
-  - [AutoLoginPlugin](https://github.com/yiyungent/KnifeHub/releases?q=AutoLoginPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态** 
-    - [x] 定时 检测在线状态 (频率:1分钟)
-    - [x] 当由于异常离线后, 自动利用登录成功的数据 重新登录
-    - [x] 重新登录成功后, 通知 `AdminQQ`
-
-  - [QQHelloWorldPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQHelloWorldPlugin&expanded=true) `PUP`
-    - [x] **启用前需保证 KonataPlugin 处于已启用状态**  
-    - [x] 复读好友私聊
-    - [x] 上下线通知 设置 里的 AdminQQ
-
+请自行前往 [plugins](https://github.com/yiyungent/KnifeHub/tree/main/plugins) 查看插件列表,    
+插件可在 [Releases](https://github.com/yiyungent/KnifeHub/releases) 搜索下载
 
 </details>
 
@@ -184,20 +65,7 @@
 
 ![PluginCore Admin](./screenshots/PluginCore-Admin.png)
 
-### [WebMonitorPlugin](https://github.com/yiyungent/KnifeHub/releases?q=WebMonitorPlugin&expanded=true)
 
-![](./screenshots/2022-03-09-20-46-26.png)
-![](./screenshots/2022-03-09-20-47-33.png)
-
-> Telegram 通知, 还会附加一张网页截图
-
-![](./screenshots/2022-03-09-20-48-16.png)
-
-
-### [QQStatPlugin](https://github.com/yiyungent/KnifeHub/releases?q=QQStatPlugin&expanded=true)
-
-![](./screenshots/2022-04-18-15-46-04.png)
-![](./screenshots/2022-04-18-15-47-02.png)
 
 ## Quick Start
 
