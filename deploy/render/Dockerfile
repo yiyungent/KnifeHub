@@ -1,7 +1,7 @@
 # render Dockerfile
 
 # FROM yiyungent/knifehub:v1.4.3-amd-full
-FROM yiyungent/knifehub:v1.4.3-amd-chrome
+FROM yiyungent/knifehub:v1.5.0-amd-chrome
 
 # 处于 /app 目录下
 ADD render-entrypoint.sh ./render-entrypoint.sh
