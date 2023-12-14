@@ -267,6 +267,11 @@ docker cp Plugins_wwwroot/ knifehub:/app/
 docker restart knifehub
 ```
 
+> 注意:   
+> 使用 `yiyungent/knifehub:latest-amd-full` 完整版,  
+> 每次升级, 内嵌的 `filebrowser` 都会被重置为默认用户名: `admin`, 默认密码: `admin`, 升级完需立即修改为自己的用户名及密码
+
+
 
 
 ## 插件开发
