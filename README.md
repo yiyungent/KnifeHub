@@ -284,7 +284,7 @@ docker restart knifehub
 
 
 > 插件开发 可参考:   
-> - [插件开发 | PluginCore](https://moeci.com/PluginCore/zh/PluginDev/Guide/)      
+> - [插件开发 | PluginCore](http://yiyungent.github.io/PluginCore/zh/PluginDev/Guide/)      
 > - **建议** 参考: [./plugins/QQHelloWorldPlugin](https://github.com/yiyungent/KnifeHub/tree/main/plugins/QQHelloWorldPlugin)
 
 > KnifeHub 插件开发包  
