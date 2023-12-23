@@ -81,8 +81,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QQStat4SoraPlugin", "plugin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgBotStatPlugin", "plugins\TgBotStatPlugin\TgBotStatPlugin.csproj", "{D4A90D39-260A-4066-BA1A-823372F4711F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAnalysisPlugin", "plugins\DataAnalysisPlugin\DataAnalysisPlugin.csproj", "{4797D839-C99B-41D7-AB65-64B6F7E9335F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,10 +231,6 @@ Global
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A90D39-260A-4066-BA1A-823372F4711F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4797D839-C99B-41D7-AB65-64B6F7E9335F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -277,7 +271,6 @@ Global
 		{3EBDDC28-E821-4683-A5BC-23B8DDF0CF2C} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{FC609C38-3126-4D90-96EE-B481F0BA846A} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 		{D4A90D39-260A-4066-BA1A-823372F4711F} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
-		{4797D839-C99B-41D7-AB65-64B6F7E9335F} = {4B4BFBBE-8CE4-453C-B05A-EAFE933B79C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F1D77E3-11F8-4B5B-BEED-EE2816D57A86}
