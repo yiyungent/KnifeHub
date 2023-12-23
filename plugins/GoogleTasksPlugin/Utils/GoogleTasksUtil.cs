@@ -1,6 +1,9 @@
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Services;
 using Google.Apis.Tasks.v1;
+using Google.Apis.Util.Store;
 using PluginCore;
 using System;
 using System.Collections.Generic;
@@ -10,17 +13,55 @@ using System.Threading.Tasks;
 
 namespace GoogleTasksPlugin.Utils
 {
+    //public class CustomDataStore : IDataStore
+    //{
+    //    public Task ClearAsync()
+    //    {
+    //        return Task.CompletedTask;
+    //    }
+
+    //    public Task DeleteAsync<T>(string key)
+    //    {
+    //        return Task.CompletedTask;
+    //    }
+
+    //    public Task<T> GetAsync<T>(string key)
+    //    {
+    //        return Task.CompletedTask;
+    //    }
+
+    //    public Task StoreAsync<T>(string key, T value)
+    //    {
+    //        return Task.CompletedTask;
+    //    }
+    //}
+
     public class GoogleTasksUtil
     {
-        public static GoogleTasksModel Tasks(string appName, string apiKey)
+        public static GoogleTasksModel Tasks(string appName, string oAuthClientId, string oAuthClientSecret, string tokenJsonStr)
         {
             var rtnModel = new GoogleTasksModel();
             rtnModel.Items = new List<GoogleTasksModel.TaskListItemModel>();
 
+            var scopes = new string[] { "openid", "email", "profile", TasksService.Scope.TasksReadonly, };
+            string fileDataStoreDirPath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(GoogleTasksPlugin), "FileDataStore");
+            var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+            {
+                ClientSecrets = new ClientSecrets
+                {
+                    ClientId = oAuthClientId,
+                    ClientSecret = oAuthClientSecret,
+                },
+                Scopes = scopes, // 设置授权范围
+                //DataStore = new CustomDataStore(),
+                DataStore = new FileDataStore(fileDataStoreDirPath),
+            });
+            TokenResponse tokenResponseJsonModel = JsonUtil.JsonStr2Obj<TokenResponse>(tokenJsonStr);
             var tasksService = new TasksService(new BaseClientService.Initializer
             {
                 ApplicationName = appName,
-                ApiKey = apiKey,
+                //ApiKey = apiKey,
+                HttpClientInitializer = new UserCredential(flow: flow, userId: "userId", token: tokenResponseJsonModel),
             });
 
             Dictionary<string, object> dataModel = new Dictionary<string, object>();
