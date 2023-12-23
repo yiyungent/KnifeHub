@@ -1,0 +1,16 @@
+{
+  "AppName": "KnifeHub.GoogleTasksPlugin",
+  "ApiKey": "",
+  "GitHub": {
+    "AccessToken": "your GitHub Personal Access Token",
+    "RepoOwner": "your GitHub UserName",
+    "RepoName": "your Repository Name",
+    "RepoBranch": "your branch: master/main",
+    "RepoTargetDirPath": "示例: source/_posts/分类-google-tasks/",
+    "FileName": "google-tasks.md"
+  },
+  "Backup": {
+    "SecondsPeriod": 3600,
+    "EnabledBackupToGitHub": false
+  }
+}

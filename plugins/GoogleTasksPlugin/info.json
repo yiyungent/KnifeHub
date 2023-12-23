@@ -1,0 +1,8 @@
+{
+  "PluginId": "GoogleTasksPlugin",
+  "DisplayName": "GoogleTasksPlugin",
+  "Description": "GoogleTasksPlugin",
+  "Author": "yiyun",
+  "Version": "0.1.0",
+  "SupportedVersions": [ "0.0.1" ]
+}
