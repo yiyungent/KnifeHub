@@ -14,7 +14,19 @@ public class HangfirePluginAuthorizationFilter : IDashboardAuthorizationFilter
     //     _accountManager = accountManager;
     // }
 
+    /// <summary>
+    /// 注意: 不是每次请求都会 new 构造函数, 而只有一开始会 new
+    /// </summary>
+    public HangfirePluginAuthorizationFilter()
+    {
+        
+    }
 
+    /// <summary>
+    /// 每次请求 /hangfire 授权页面都会调用此方法
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public bool Authorize(DashboardContext context)
     {
         var httpContext = context.GetHttpContext();

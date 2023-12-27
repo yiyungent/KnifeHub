@@ -21,14 +21,14 @@ namespace HangfirePlugin
     {
         #region Fields
         private readonly ILogger<HangfirePlugin> _logger;
-        private readonly IBackgroundJobClient _backgroundJobClient;
+        // private readonly IBackgroundJobClient _backgroundJobClient;
         #endregion
 
         #region Ctor
-        public HangfirePlugin(ILogger<HangfirePlugin> logger, IBackgroundJobClient backgroundJobClient)
+        public HangfirePlugin(ILogger<HangfirePlugin> logger)
         {
             _logger = logger;
-            _backgroundJobClient = backgroundJobClient;
+            // _backgroundJobClient = backgroundJobClient;
         }
         #endregion
 
@@ -52,18 +52,19 @@ namespace HangfirePlugin
             {
                 Authorization = new[] { new HangfirePluginAuthorizationFilter() }
             });
-            _backgroundJobClient.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            // _backgroundJobClient.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Hangfire services.
-            // https://github.com/raisedapp/Hangfire.Storage.SQLite
+            string dbFilePath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(HangfirePlugin), "hangfire.db");
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseSQLiteStorage("hangfire.db", new SQLiteStorageOptions()
+                // https://github.com/raisedapp/Hangfire.Storage.SQLite
+                .UseSQLiteStorage(nameOrConnectionString: dbFilePath, options: new SQLiteStorageOptions()
                 {
 
                 }));

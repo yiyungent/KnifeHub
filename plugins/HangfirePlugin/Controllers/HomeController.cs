@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore;
@@ -19,8 +20,17 @@ namespace HangfirePlugin.Controllers
     [Route($"Plugins/{(nameof(HangfirePlugin))}")]
     public class HomeController : Controller
     {
+        private readonly IBackgroundJobClient _backgroundJobClient;
+
+        public HomeController(IBackgroundJobClient backgroundJobClient)
+        {
+            _backgroundJobClient = backgroundJobClient;
+        }
+
         public async Task<ActionResult> Get()
         {
+            _backgroundJobClient.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+
             string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(HangfirePlugin)), "index.html");
 
             return PhysicalFile(indexFilePath, "text/html");
