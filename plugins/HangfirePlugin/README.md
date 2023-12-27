@@ -3,8 +3,12 @@
 
 
 
+# 使用
 
-
+- [Hangfire 管理面板](/hangfire)
+  - 与 `PluginCore Admin` 相同登录 (认证授权)
+- [HangfirePlugin 后台管理](/Plugins/HangfirePlugin)
+  - 与 `PluginCore Admin` 相同登录 (认证授权)
 
 
 

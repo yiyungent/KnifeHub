@@ -36,7 +36,13 @@ namespace HangfirePlugin
         public override (bool IsSuccess, string Message) AfterEnable()
         {
             Console.WriteLine($"{nameof(HangfirePlugin)}: {nameof(AfterEnable)}");
-            return base.AfterEnable();
+            var res = base.AfterEnable();
+            if (res.IsSuccess)
+            {
+                res.Message = $"注意: 插件({nameof(HangfirePlugin)})需主程序重启后才能正式完成启用";
+            }
+
+            return res;
         }
 
         public override (bool IsSuccess, string Message) BeforeDisable()
