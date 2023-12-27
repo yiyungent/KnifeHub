@@ -9,9 +9,12 @@
   - 与 `PluginCore Admin` 相同登录 (认证授权)
 - [HangfirePlugin 后台管理](/Plugins/HangfirePlugin)
   - 与 `PluginCore Admin` 相同登录 (认证授权)
+  - 未完工
 
 
+# 注意
 
+> 本插件启用后 (已启用), 需 **重启主程序(重启 KnifeHub)** 才能完成正式启用
 
 
 
