@@ -32,6 +32,7 @@ namespace KnifeHub.Web
             // Serilog.AspNetCore 已依赖 Serilog.Sinks.Console , Serilog.Sinks.File
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
+                .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
                 .WriteTo.File($"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
