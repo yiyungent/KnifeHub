@@ -60,6 +60,9 @@ namespace KnifeHub.Web
 
                     var builder = WebApplication.CreateBuilder(args);
 
+                    // UseSerilog
+                    builder.Host.UseSerilog();
+
                     // 配置注入
                     ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
                     builder.Services.Configure<ConfigOptions>(builder.Configuration.GetSection(ConfigOptions.Config));
