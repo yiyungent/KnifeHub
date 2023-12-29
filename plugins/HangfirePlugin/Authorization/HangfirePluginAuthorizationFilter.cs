@@ -19,7 +19,7 @@ public class HangfirePluginAuthorizationFilter : IDashboardAuthorizationFilter
     /// </summary>
     public HangfirePluginAuthorizationFilter()
     {
-        
+
     }
 
     /// <summary>
@@ -32,6 +32,19 @@ public class HangfirePluginAuthorizationFilter : IDashboardAuthorizationFilter
         var httpContext = context.GetHttpContext();
 
         // Allow all authenticated users to see the Dashboard (potentially dangerous).
-        return httpContext.User.Identity?.IsAuthenticated ?? false;
+        // return httpContext.User.Identity?.IsAuthenticated ?? false;
+
+        var authenticationType = httpContext.User.Identity?.AuthenticationType;
+
+        // AspNetCoreAuthenticationClaimType: 旧版: "PluginCore.Token" , 新版: "PluginCore.Admin.Token"
+        List<string> allowedClaimTypes = new List<string>
+        {
+            "PluginCore.Token",
+            "PluginCore.Admin.Token"
+        };
+        bool result = httpContext.User.Claims.Any(x => allowedClaimTypes.Contains(x.Type));
+        result = result && (httpContext.User.Identity?.IsAuthenticated ?? false);
+
+        return result;
     }
 }
