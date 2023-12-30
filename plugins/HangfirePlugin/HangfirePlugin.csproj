@@ -9,8 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>PluginCore.HangfirePlugin</PackageId>
-    <Version>0.1.0</Version>
-    <FileVersion>0.1.0.0</FileVersion>
+    <Version>0.1.1</Version>
+    <FileVersion>0.1.1.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Company>yiyun</Company>
     <Authors>yiyun</Authors>
@@ -29,7 +29,7 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App">
       <ExcludeAssets>runtime</ExcludeAssets>
     </FrameworkReference>
-    <PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.0">
+    <PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.1">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Hangfire.Core" Version="1.8.*" />
