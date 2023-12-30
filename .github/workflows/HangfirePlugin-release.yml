@@ -46,7 +46,9 @@ jobs:
     - name: Zip the Build
       run: |
         cd ./plugins/HangfirePlugin/bin/Release/net6.0
+        ls
         zip -r HangfirePlugin-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
+        ls
       shell: bash
 
     - name: Create temp-release-note.md
