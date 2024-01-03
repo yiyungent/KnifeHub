@@ -8,17 +8,17 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageId>PluginCore.HangfirePlugin</PackageId>
-    <Version>0.1.1</Version>
-    <FileVersion>0.1.1.0</FileVersion>
+    <PackageId>PluginCore.Plugins.HangfirePlugin</PackageId>
+    <Version>0.1.2</Version>
+    <FileVersion>0.1.2.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Company>yiyun</Company>
     <Authors>yiyun</Authors>
-    <Description>PluginCore 插件: HangfirePlugin</Description>
+    <Description>PluginCore Plugin: HangfirePlugin</Description>
     <Copyright>Copyright (c) 2023-present yiyun</Copyright>
     <RepositoryUrl>https://github.com/yiyungent/KnifeHub</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/yiyungent/KnifeHub/blob/main/LICENSE</PackageLicenseUrl>
-    <PackageTags>PluginCore PluginCore.IPlugins</PackageTags>
+    <PackageTags>PluginCore PluginCore.Plugins</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
