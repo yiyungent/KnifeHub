@@ -9,8 +9,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>PluginCore.ITodaysPlus</PackageId>
-		<Version>0.1.1</Version>
-		<FileVersion>0.1.1.0</FileVersion>
+		<Version>0.1.2</Version>
+		<FileVersion>0.1.2.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Company>yiyun</Company>
 		<Authors>yiyun</Authors>
@@ -23,12 +23,15 @@
     </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
+		<!--<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
-		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.0">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
+		</PackageReference>-->
+    <FrameworkReference Include="Microsoft.AspNetCore.App">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </FrameworkReference>
+    <PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.1">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Octokit" Version="0.51.0" />
 		<PackageReference Include="Octokit.Reactive" Version="0.51.0" />
