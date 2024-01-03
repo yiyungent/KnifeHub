@@ -8,7 +8,7 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>PluginCore.ITodaysPlus</PackageId>
+		<PackageId>PluginCore.Plugins.ITodaysPlus</PackageId>
 		<Version>0.1.2</Version>
 		<FileVersion>0.1.2.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -18,7 +18,7 @@
 		<Copyright>Copyright (c) 2023-present yiyun</Copyright>
 		<RepositoryUrl>https://github.com/yiyungent/KnifeHub</RepositoryUrl>
 		<PackageLicenseUrl>https://github.com/yiyungent/KnifeHub/blob/main/LICENSE</PackageLicenseUrl>
-		<PackageTags>PluginCore PluginCore.IPlugins</PackageTags>
+		<PackageTags>PluginCore PluginCore.Plugins</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
