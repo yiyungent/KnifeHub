@@ -8,21 +8,16 @@ namespace ITodaysPlus
 {
     public class SettingsModel : PluginSettingsModel
     {
-        public long SecondsPeriod { get; set; }
+        public string UserName { get; set; }
 
-        public ITodaysModel ITodays { get; set; }
-
-        public class ITodaysModel
-        {
-            public string UserName { get; set; }
-
-            public string Password { get; set; }
-        }
+        public string Password { get; set; }
 
         public BackupModel Backup { get; set; }
 
         public class BackupModel
         {
+            public long SecondsPeriod { get; set; }
+
             public bool EnabledBackupToLocal { get; set; }
 
             /// <summary>

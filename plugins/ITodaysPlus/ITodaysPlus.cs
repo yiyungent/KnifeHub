@@ -23,11 +23,11 @@ namespace ITodaysPlus
         {
             get
             {
-                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(ITodaysPlus));
-
-                return settings.SecondsPeriod;
+                return 1;
             }
         }
+
+        public DateTime ITodaysBackupLastExecute { get; set; }
         #endregion
 
         public override (bool IsSuccess, string Message) AfterEnable()
@@ -49,84 +49,100 @@ namespace ITodaysPlus
             {
                 var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(ITodaysPlus));
 
-                #region 备份到 本地
-                // 备份到 本地
-                if (settings.Backup.EnabledBackupToLocal)
+                #region 爱今天-备份记录
+                try
                 {
-                    ITodaysUtil iTodaysUtil = new ITodaysUtil();
-                    var jsonOptions = new JsonSerializerOptions
+                    if (DateTime.Now - ITodaysBackupLastExecute > TimeSpan.FromSeconds(settings.Backup.SecondsPeriod))
                     {
-                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                        WriteIndented = true
-                    };
-                    try
-                    {
-                        var loginResModel = iTodaysUtil.Login(settings.ITodays.UserName, settings.ITodays.Password);
-                        if (loginResModel.status == "1")
+                        ITodaysBackupLastExecute = DateTime.Now;
+
+                        #region 备份到 本地
+                        // 备份到 本地
+                        if (settings.Backup.EnabledBackupToLocal)
                         {
-                            // 登录成功
-                            string folderPath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(ITodaysPlus), "Backups");
-                            if (!Directory.Exists(folderPath))
+                            ITodaysUtil iTodaysUtil = new ITodaysUtil();
+                            var jsonOptions = new JsonSerializerOptions
                             {
-                                Directory.CreateDirectory(folderPath);
-                            }
-                            string loginResFilePath = Path.Combine(folderPath, "login.json");
-                            await File.WriteAllTextAsync(path: loginResFilePath, System.Text.Json.JsonSerializer.Serialize(loginResModel, jsonOptions), Encoding.UTF8);
-
-                            #region 备份日期记录
-                            if (!string.IsNullOrEmpty(settings.Backup?.DateRecordStartTime)
-                                &&
-                                DateTime.TryParse(settings.Backup.DateRecordStartTime, out DateTime startTime)
-                                &&
-                                !string.IsNullOrEmpty(settings.Backup?.DateRecordEndTime)
-                                &&
-                                DateTime.TryParse(settings.Backup.DateRecordEndTime, out DateTime endTime))
+                                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                                WriteIndented = true
+                            };
+                            try
                             {
-                                var folderDir = new DirectoryInfo(folderPath);
-                                while (startTime <= endTime)
+                                var loginResModel = iTodaysUtil.Login(settings.UserName, settings.Password);
+                                if (loginResModel.status == "1")
                                 {
-                                    string dateRecordFileName = $"DateRecord-{startTime.ToString("yyyy-MM-dd")}.json";
-                                    string dateRecordFilePath = Path.Combine(folderPath, dateRecordFileName);
-                                    Console.WriteLine($"{dateRecordFileName} - 尝试");
-
-                                    var dateRecordFileNames = folderDir.GetFiles("DateRecord-*.json")?.Select(m => m.Name)?.ToArray();
-                                    if (dateRecordFileNames != null && !dateRecordFileNames.Contains(dateRecordFileName))
+                                    // 登录成功
+                                    string folderPath = Path.Combine(PluginPathProvider.PluginsRootPath(), nameof(ITodaysPlus), "Backups");
+                                    if (!Directory.Exists(folderPath))
                                     {
-                                        // 不存在此记录才 新增保存
-                                        try
-                                        {
-                                            var dateRecordResModel = iTodaysUtil.GetDateRecord(loginResModel.token, startTime);
-                                            if (dateRecordResModel.ResponseModel != null
-                                                && dateRecordResModel.ResponseModel.status == 1
-                                                && dateRecordResModel.DataModel != null
-                                                && dateRecordResModel.DataModel.items.Length >= 1)
-                                            {
-                                                // 按日期/每一天 保存, 而不按每一条记录保存
-                                                await File.WriteAllTextAsync(path: dateRecordFilePath,
-                                                    System.Text.Json.JsonSerializer.Serialize(dateRecordResModel.DataModel, jsonOptions),
-                                                    Encoding.UTF8);
-                                                Console.WriteLine($"{dateRecordFileName} - 新增保存");
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine(ex.ToString());
-                                        }
-
-                                        // 避免频繁
-                                        Thread.Sleep(2000);
+                                        Directory.CreateDirectory(folderPath);
                                     }
+                                    string loginResFilePath = Path.Combine(folderPath, "login.json");
+                                    await File.WriteAllTextAsync(path: loginResFilePath, System.Text.Json.JsonSerializer.Serialize(loginResModel, jsonOptions), Encoding.UTF8);
 
-                                    startTime = startTime.AddDays(1);
+                                    #region 备份日期记录
+                                    if (!string.IsNullOrEmpty(settings.Backup?.DateRecordStartTime)
+                                        &&
+                                        DateTime.TryParse(settings.Backup.DateRecordStartTime, out DateTime startTime)
+                                        &&
+                                        !string.IsNullOrEmpty(settings.Backup?.DateRecordEndTime)
+                                        &&
+                                        DateTime.TryParse(settings.Backup.DateRecordEndTime, out DateTime endTime))
+                                    {
+                                        var folderDir = new DirectoryInfo(folderPath);
+                                        while (startTime <= endTime)
+                                        {
+                                            string dateRecordFileName = $"DateRecord-{startTime.ToString("yyyy-MM-dd")}.json";
+                                            string dateRecordFilePath = Path.Combine(folderPath, dateRecordFileName);
+                                            Console.WriteLine($"{dateRecordFileName} - 尝试");
+
+                                            var dateRecordFileNames = folderDir.GetFiles("DateRecord-*.json")?.Select(m => m.Name)?.ToArray();
+                                            if (dateRecordFileNames != null && !dateRecordFileNames.Contains(dateRecordFileName))
+                                            {
+                                                // 不存在此记录才 新增保存
+                                                try
+                                                {
+                                                    var dateRecordResModel = iTodaysUtil.GetDateRecord(loginResModel.token, startTime);
+                                                    if (dateRecordResModel.ResponseModel != null
+                                                        && dateRecordResModel.ResponseModel.status == 1
+                                                        && dateRecordResModel.DataModel != null
+                                                        && dateRecordResModel.DataModel.items.Length >= 1)
+                                                    {
+                                                        // 按日期/每一天 保存, 而不按每一条记录保存
+                                                        await File.WriteAllTextAsync(path: dateRecordFilePath,
+                                                            System.Text.Json.JsonSerializer.Serialize(dateRecordResModel.DataModel, jsonOptions),
+                                                            Encoding.UTF8);
+                                                        Console.WriteLine($"{dateRecordFileName} - 新增保存");
+                                                    }
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine(ex.ToString());
+                                                }
+
+                                                // 避免频繁
+                                                Thread.Sleep(2000);
+                                            }
+
+                                            startTime = startTime.AddDays(1);
+                                        }
+                                    }
+                                    #endregion
                                 }
                             }
-                            #endregion
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"爱今天-备份记录: {ex.ToString()}");
+                            }
                         }
+                        #endregion
+
+                        Console.WriteLine($"执行定时任务成功: 爱今天-备份记录");
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"执行定时任务失败: 爱今天-备份记录: {ex.ToString()}");
                 }
                 #endregion
 
