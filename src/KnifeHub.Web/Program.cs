@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Serilog;
+using KnifeHub.Web.Utils;
 
 namespace KnifeHub.Web
 {
@@ -40,6 +41,15 @@ namespace KnifeHub.Web
             try
             {
                 Log.Information("Starting web application");
+
+                #region 输出版本等
+                string gitBranch = AppBuildStampUtil.Branch;
+                string gitHash = AppBuildStampUtil.CommitHash;
+                string version = AppBuildStampUtil.Version;
+                string buildTime = AppBuildStampUtil.BuildTime;
+                Log.Information($"Git: {gitBranch} {gitHash}");
+                Log.Information($"Build: {version} {buildTime}");
+                #endregion
 
                 {
                     #region 启动参数

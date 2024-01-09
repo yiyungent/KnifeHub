@@ -1,56 +1,104 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerfileContext>..\..</DockerfileContext>
-	</PropertyGroup>
-	
-	<PropertyGroup>
-		<Version>1.5.1</Version>
-		<FileVersion>1.5.1.0</FileVersion>
-		<AssemblyVersion>1.5.1.0</AssemblyVersion>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="Sentry.AspNetCore" Version="3.26.2" />
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-	</ItemGroup>
+  <PropertyGroup>
+    <Version>1.5.1</Version>
+    <FileVersion>1.5.1.0</FileVersion>
+    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+  </PropertyGroup>
 
-	<!-- 方便开发debug,与发布到nuget -->
-	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="PluginCore.AspNetCore" Version="1.3.4" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<ProjectReference Include="..\PluginCore\src\PluginCore.AspNetCore\PluginCore.AspNetCore.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Sentry.AspNetCore" Version="3.26.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
 
-	<!-- 方便开发debug,与发布到nuget -->
-	<ItemGroup Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="KnifeHub.Sdk" Version="1.1.1" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<ProjectReference Include="..\..\src\KnifeHub.Sdk\KnifeHub.Sdk.csproj" />
-	</ItemGroup>
+  <!-- 方便开发debug,与发布到nuget -->
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <PackageReference Include="PluginCore.AspNetCore" Version="1.3.4" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\PluginCore\src\PluginCore.AspNetCore\PluginCore.AspNetCore.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Update="wwwroot\**\*">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+  <!-- 方便开发debug,与发布到nuget -->
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <PackageReference Include="KnifeHub.Sdk" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\..\src\KnifeHub.Sdk\KnifeHub.Sdk.csproj" />
+  </ItemGroup>
 
-	<!-- 生成注释xml -->
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-		<DocumentationFile>bin\Release\net6.0\KnifeHub.Web.xml</DocumentationFile>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-		<DocumentationFile>bin\Debug\net6.0\KnifeHub.Web.xml</DocumentationFile>
-	</PropertyGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\**\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- 生成注释xml -->
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+    <DocumentationFile>bin\Release\net6.0\KnifeHub.Web.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+    <DocumentationFile>bin\Debug\net6.0\KnifeHub.Web.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <!-- Get Build Stamp -->
+  <Target Name="GetBuildStamp" BeforeTargets="GenerateBuildStamp" Condition="'$(BuildHash)' == ''">
+    <PropertyGroup>
+      <BuildStampFile>$(IntermediateOutputPath)BuildStamp</BuildStampFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <BuildDate>$([System.DateTime]::Now.ToString(s))</BuildDate>
+    </PropertyGroup>
+
+    <!-- Git Branch -->
+    <Exec Command="git -C $(ProjectDir) rev-parse --abbrev-ref HEAD &gt; $(BuildStampFile)" />
+
+    <!-- Git Commit Hash -->
+    <Exec Command="git -C $(ProjectDir) rev-parse HEAD &gt;&gt; $(BuildStampFile)" />
+
+    <!--Build Date -->
+    <Exec Command="echo $(BuildDate) &gt;&gt; $(BuildStampFile)" />
+
+    <ReadLinesFromFile File="$(BuildStampFile)">
+      <Output TaskParameter="Lines" ItemName="Stamp" />
+    </ReadLinesFromFile>
+
+    <PropertyGroup>
+      <BuildStamp>@(Stamp)</BuildStamp>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Generate Build Stamp -->
+  <Target Name="GenerateBuildStamp" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <CustomAssemblyInfoFile>$(IntermediateOutputPath)CustomAssemblyInfo.cs</CustomAssemblyInfoFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="$(CustomAssemblyInfoFile)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AssemblyAttributes Include="AssemblyMetadata">
+        <_Parameter1>BuildStamp</_Parameter1>
+        <_Parameter2>$(BuildStamp)</_Parameter2>
+      </AssemblyAttributes>
+    </ItemGroup>
+
+    <WriteCodeFragment Language="C#" OutputFile="$(CustomAssemblyInfoFile)" AssemblyAttributes="@(AssemblyAttributes)" />
+  </Target>
 
 </Project>
