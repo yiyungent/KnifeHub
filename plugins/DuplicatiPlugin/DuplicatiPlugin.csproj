@@ -9,8 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>PluginCore.Plugins.DuplicatiPlugin</PackageId>
-    <Version>0.2.3</Version>
-    <FileVersion>0.2.3.0</FileVersion>
+    <Version>0.2.4</Version>
+    <FileVersion>0.2.4.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Company>yiyun</Company>
     <Authors>yiyun</Authors>

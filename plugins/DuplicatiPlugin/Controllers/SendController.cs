@@ -99,7 +99,14 @@ namespace DuplicatiPlugin.Controllers
                     string temp = $"Duplicati: {jsonModel.OperationName} \r\n"
                                   + $"{jsonModel.BackupName} \r\n"
                                   + $"{badge} {badgeStr}";
+
+                    // fixed: Telegram.Bot.Exceptions.ApiRequestException: Bad Request: message is too long
                     temp += string.IsNullOrEmpty(extraInfo) ? string.Empty : $"\r\n{extraInfo}";
+                    int telegramMaxMessageLength = 4096;
+                    if (temp.Length > telegramMaxMessageLength)
+                    {
+                        temp = temp.Substring(0, telegramMaxMessageLength - 6) + "...";
+                    }
 
                     // 发送
                     await botClient.SendTextMessageAsync(
