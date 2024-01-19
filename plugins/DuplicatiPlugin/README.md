@@ -33,7 +33,7 @@
 --send-http-url=替换为你的链接
 ```
 
-### 2. 方式2: 全局设置 Duplicati
+### 2. 方式2: 全局设置 Duplicati (推荐)
 
 - [右键复制本链接, 然后再替换其中内容](/api/Duplicati/replace-your-key/apply)
 
@@ -66,5 +66,5 @@
 > 本项目基于 [TelegramBots/Telegram.Bot: .NET Client for Telegram Bot API](https://github.com/TelegramBots/Telegram.Bot)
 
 <!-- Matomo Image Tracker-->
-<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=Plugins.DuplicatiPlugin-v0.2.1.README" style="border:0" alt="" />
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.moeci.com/matomo.php?idsite=2&amp;rec=1&amp;action_name=PluginCore.Plugins..DuplicatiPlugin-v0.2.2.README" style="border:0" alt="" />
 <!-- End Matomo -->

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,19 +64,36 @@ namespace DuplicatiPlugin.Controllers
                 if (settings.Telegram != null && settings.Telegram.Enable)
                 {
                     var botClient = new TelegramBotClient(settings.Telegram.BotToken);
-                    string badge = "🔴";
-                    switch (jsonModel.ParsedResult)
+                    string badge = string.Empty;
+                    string badgeStr = string.Empty;
+                    string extraInfo = string.Empty;
+                    switch (jsonModel.ParsedResult.Trim())
                     {
                         case "Success":
                             badge = "✅";
+                            badgeStr = "Success";
+                            break;
+                        case "Warning":
+                            badge = "⚠️";
+                            badgeStr = "Warning";
+                            extraInfo = duplicatiStr;
+                            break;
+                        case "Fatal":
+                            badge = "🔴";
+                            badgeStr = "Fatal";
+                            extraInfo = duplicatiStr;
                             break;
                         default:
-                            badge = "🔴";
+                            badge = "❓";
+                            badgeStr = jsonModel.ParsedResult.Trim();
+                            extraInfo = duplicatiStr;
                             break;
                     }
                     string temp = $"Duplicati: {jsonModel.OperationName} \r\n"
                                   + $"{jsonModel.BackupName} \r\n"
-                                  + $"{badge}";
+                                  + $"{badge} {badgeStr}";
+                    temp += string.IsNullOrEmpty(extraInfo) ? string.Empty : $"\r\n{extraInfo}";
+
                     // 发送
                     await botClient.SendTextMessageAsync(
                         chatId: settings.Telegram.ChatId,
@@ -89,7 +106,7 @@ namespace DuplicatiPlugin.Controllers
                 Utils.LogUtil.Exception(ex);
 
                 return Ok("fail");
-            } 
+            }
             #endregion
 
             #region 保存数据库, key 做来源区分

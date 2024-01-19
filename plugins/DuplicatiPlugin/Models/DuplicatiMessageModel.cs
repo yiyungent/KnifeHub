@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,11 @@ namespace DuplicatiPlugin.Models
 
         public string BackupName { get; set; }
 
+        /// <summary>
+        /// Success
+        /// Warning
+        /// Fatal
+        /// </summary>
         public string ParsedResult { get; set; }
 
         public string LocalPath { get; set; }
