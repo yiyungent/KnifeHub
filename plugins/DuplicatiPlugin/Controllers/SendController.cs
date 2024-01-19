@@ -8,6 +8,7 @@ using DuplicatiPlugin.RequestModel;
 using Telegram.Bot;
 using DuplicatiPlugin.Models;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
 namespace DuplicatiPlugin.Controllers
 {
@@ -15,6 +16,13 @@ namespace DuplicatiPlugin.Controllers
     [Route("api/Duplicati")]
     public class SendController : ControllerBase
     {
+        private readonly ILogger<SendController> _logger;
+
+        public SendController(ILogger<SendController> logger)
+        {
+            _logger = logger;
+        }
+
         #region Actions
 
         [HttpGet, HttpPost]
@@ -46,9 +54,8 @@ namespace DuplicatiPlugin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Utils.LogUtil.Exception(ex);
+                    _logger.LogError(ex, message: nameof(DuplicatiPlugin));
                 }
-
             }
 
             // 解析 message
@@ -103,7 +110,7 @@ namespace DuplicatiPlugin.Controllers
             }
             catch (Exception ex)
             {
-                Utils.LogUtil.Exception(ex);
+                _logger.LogError(ex, message: nameof(DuplicatiPlugin));
 
                 return Ok("fail");
             }
@@ -174,7 +181,7 @@ namespace DuplicatiPlugin.Controllers
             }
             catch (Exception ex)
             {
-                Utils.LogUtil.Exception(ex);
+                _logger.LogError(ex, message: nameof(DuplicatiPlugin));
 
                 return Ok("fail");
             }
