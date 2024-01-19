@@ -1,7 +1,7 @@
 **/.classpath
 **/.dockerignore
 **/.env
-**/.git
+#**/.git # dotnet build "KnifeHub.Web.csproj" 需要从 git 获取信息
 **/.gitignore
 **/.project
 **/.settings
