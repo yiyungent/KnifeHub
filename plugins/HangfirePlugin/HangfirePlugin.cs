@@ -73,10 +73,41 @@ namespace HangfirePlugin
                 .UseSQLiteStorage(nameOrConnectionString: dbFilePath, options: new SQLiteStorageOptions()
                 {
 
-                }));
+                })
+                // https://github.com/HangfireIO/Hangfire/issues/470
+                .UseTypeResolver((typeName) =>
+                {
+                    try
+                    {
+                        return Hangfire.Common.TypeHelper.DefaultTypeResolver(typeName); //try using default resolver
+                    }
+                    catch (Exception) //if couldn't find
+                    {
+                        //get it from AppDomain loaded assemblies.
+                        var reqType = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes().Where(x => typeName.StartsWith(x.FullName))).FirstOrDefault();
+
+                        if (reqType != null)
+                            return reqType;
+
+                        throw;
+                    }
+                })
+            );
 
             // Add the processing server as IHostedService
             services.AddHangfireServer();
+
+            // https://github.com/HangfireIO/Hangfire/issues/470
+            //Hangfire.Common.TypeHelper.CurrentTypeResolver += typeName =>
+            //{
+            //    if (typeName.Contains("MyCompany.Services.Messaging"))
+            //    {
+            //        // Load assembly from the specific place and use it to find the type
+            //        return Assembly.GetType(typeName);
+            //    }
+
+            //    return TypeHelper.DefaultTypeResolver(typeName);
+            //};
         }
 
         public int ConfigureServicesOrder => -999;
