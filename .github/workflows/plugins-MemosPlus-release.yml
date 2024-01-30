@@ -1,9 +1,9 @@
-name: QQStat4SoraPlugin Release
+name: MemosPlus Release
 
 on:
   push:
     tags:
-      - "QQStat4SoraPlugin-v*"
+      - "MemosPlus-v*"
 
 jobs:
   build:
@@ -19,40 +19,43 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          tagPrefix=refs/tags/QQStat4SoraPlugin-
+          tagPrefix=refs/tags/MemosPlus-
           # 获取字符串长度
           tagPrefixLen=${#tagPrefix}
-          # 去掉前面的 refs/tags/QQStat4SoraPlugin-
+          # 去掉前面的 refs/tags/MemosPlus-
           RELEASE_VERSION=${GITHUB_REF:$tagPrefixLen}
           # 提取出 v1.0.0
           echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.100
+          dotnet-version: |
+            6.0.100
 
       - name: Build
         run: |
-          cd ./plugins/QQStat4SoraPlugin
+          cd ./plugins/MemosPlus
           dotnet build --configuration Release
+          dotnet pack --configuration Release
+          dotnet pack --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
           ls
           ls ./bin/Release/
           ls ./bin/Release/net6.0/
         shell: bash
 
-      - name: Zip the Build
+      - name: Zip the Build - net6.0
         run: |
-          cd ./plugins/QQStat4SoraPlugin/bin/Release/net6.0
-          zip -r QQStat4SoraPlugin-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
+          cd ./plugins/MemosPlus/bin/Release/net6.0
+          zip -r MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
         shell: bash
 
       - name: Create temp-release-note.md
         run: |
           cp utils/generate-release-note.ps1 generate-release-note.ps1
-          $env:GitProjectTagName="QQStat4SoraPlugin"
-          $env:GitProjectPath="plugins/QQStat4SoraPlugin/*"
+          $env:GitProjectTagName="MemosPlus"
+          $env:GitProjectPath="plugins/MemosPlus/*"
           ./generate-release-note.ps1
         shell: pwsh
 
@@ -67,6 +70,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./plugins/QQStat4SoraPlugin/bin/Release/net6.0/QQStat4SoraPlugin-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip
-            ./plugins/QQStat4SoraPlugin/README.md
-            ./plugins/QQStat4SoraPlugin/LICENSE
+            ./plugins/MemosPlus/bin/Release/*.nupkg
+            ./plugins/MemosPlus/bin/Release/*.snupkg
+            ./plugins/MemosPlus/bin/Release/net6.0/MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip
+            ./plugins/MemosPlus/README.md
+            ./plugins/MemosPlus/LICENSE

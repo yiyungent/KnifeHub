@@ -1,0 +1,98 @@
+name: KnifeHub - Sync to Others
+
+on:
+  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the Github Actions Workflow page directly
+  schedule: # Run workflow automatically
+    - cron: "0 * * * *" # 每 1 h 运行一次
+
+jobs:
+  # https://gitee.com/yiyungent
+  sync-to-gitee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@gitee.com:yiyungent/KnifeHub.git
+
+  # https://bitbucket.org/yiyungent/
+  sync-to-bitbucket:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Bitbucket
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@bitbucket.org:yiyungent/KnifeHub.git
+
+  # https://gitea.moeci.com/yiyungent
+  sync-to-gitea:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitea
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@gitea.moeci.com:yiyungent/KnifeHub.git
+
+  # https://gitlab.com/yiyungent
+  sync-to-gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to GitLab
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@gitlab.com:yiyungent/KnifeHub.git
+
+  # https://yiyungent.coding.net/user/projects
+  sync-to-coding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Coding
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@e.coding.net:yiyungent/yiyungent/KnifeHub.git
+
+  # 阿里云云效 Codeup
+  # https://codeup.aliyun.com/
+  sync-to-codeup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Codeup
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 在 Settings->Secrets 配置 SYNC_TO_OTHERS_SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SYNC_TO_OTHERS_SSH_PRIVATE_KEY }}
+        with:
+          # 源仓库地址
+          source-repo: git@github.com:yiyungent/KnifeHub.git
+          # 目标仓库地址
+          destination-repo: git@codeup.aliyun.com:651d0e808c5fee586761b459/yiyungent/KnifeHub.git
