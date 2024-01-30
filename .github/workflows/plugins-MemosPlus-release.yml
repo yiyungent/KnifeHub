@@ -37,9 +37,9 @@ jobs:
       - name: Build
         run: |
           cd ./plugins/MemosPlus
-          dotnet build --configuration Release
           dotnet pack --configuration Release
           dotnet pack --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+          dotnet build --configuration Release
           ls
           ls ./bin/Release/
           ls ./bin/Release/net6.0/
