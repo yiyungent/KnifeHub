@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
+    <OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -11,9 +12,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.5.3</Version>
-    <FileVersion>1.5.3.0</FileVersion>
-    <AssemblyVersion>1.5.3.0</AssemblyVersion>
+    <Version>1.5.4</Version>
+    <FileVersion>1.5.4.0</FileVersion>
+    <AssemblyVersion>1.5.4.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -16,6 +16,18 @@ jobs:
           # 为了让 git 有日志 (git log) 可寻，还得在检出的时候顺带把所有提交历史一并拉下来，指定 fetch-depth 就能做到
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
+      - name: Set outputs
+        id: vars
+        run: |
+          tagPrefix=refs/tags/KnifeHub-
+          # 获取字符串长度
+          tagPrefixLen=${#tagPrefix}
+          # 去掉前面的 refs/tags/KnifeHub-
+          RELEASE_VERSION=${GITHUB_REF:$tagPrefixLen}
+          # 提取出 v1.0.0
+          echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -43,13 +55,13 @@ jobs:
 
       - name: Zip the Build
         run: |
-          zip -r KnifeHub-net6.0-win-x64.zip ./win-x64/
-          zip -r KnifeHub-net6.0-win-x86.zip ./win-x86/
-          zip -r KnifeHub-net6.0-linux-x64.zip ./linux-x64/
-          zip -r KnifeHub-net6.0-linux-arm.zip ./linux-arm/
-          zip -r KnifeHub-net6.0-linux-arm64.zip ./linux-arm64/
-          zip -r KnifeHub-net6.0-osx-x64.zip ./osx-x64/
-          zip -r KnifeHub-net6.0-osx.10.10-x64.zip ./osx.10.10-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x64.zip ./win-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x86.zip ./win-x86/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-x64.zip ./linux-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm.zip ./linux-arm/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip ./linux-arm64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip ./osx-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./osx.10.10-x64/
 
       - name: Create temp-release-note.md
         run: |
@@ -70,10 +82,10 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            KnifeHub-net6.0-win-x64.zip
-            KnifeHub-net6.0-win-x86.zip
-            KnifeHub-net6.0-linux-x64.zip
-            KnifeHub-net6.0-linux-arm.zip
-            KnifeHub-net6.0-linux-arm64.zip
-            KnifeHub-net6.0-osx-x64.zip
-            KnifeHub-net6.0-osx.10.10-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x86.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip
