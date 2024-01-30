@@ -1,4 +1,4 @@
-name: MemosPlus Release
+name: plugins MemosPlus Release
 
 on:
   push:

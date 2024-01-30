@@ -1,4 +1,4 @@
-name: MemosPlus NuGet Push
+name: plugins MemosPlus NuGet Push
 
 on:
   push:
