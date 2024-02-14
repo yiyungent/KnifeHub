@@ -1,9 +1,9 @@
-name: KnifeHub.Sdk Release
+name: plugins MemosPlus Release
 
 on:
   push:
     tags:
-      - "KnifeHub.Sdk-v*"
+      - "MemosPlus-v*"
 
 jobs:
   build:
@@ -19,28 +19,27 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          tagPrefix=refs/tags/KnifeHub.Sdk-
+          tagPrefix=refs/tags/MemosPlus-
           # 获取字符串长度
           tagPrefixLen=${#tagPrefix}
-          # 去掉前面的 refs/tags/KnifeHub.Sdk-
+          # 去掉前面的 refs/tags/MemosPlus-
           RELEASE_VERSION=${GITHUB_REF:$tagPrefixLen}
           # 提取出 v1.0.0
           echo "RELEASE_VERSION=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: |
             6.0.100
-            7.0.401
 
       - name: Build
         run: |
-          cd ./src/KnifeHub.Sdk
-          dotnet build --configuration Release
+          cd ./plugins/MemosPlus
           dotnet pack --configuration Release
           dotnet pack --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+          dotnet build --configuration Release
           ls
           ls ./bin/Release/
           ls ./bin/Release/net6.0/
@@ -48,15 +47,15 @@ jobs:
 
       - name: Zip the Build - net6.0
         run: |
-          cd ./src/KnifeHub.Sdk/bin/Release/net6.0
-          zip -r KnifeHub.Sdk-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
+          cd ./plugins/MemosPlus/bin/Release/net6.0
+          zip -r MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip *
         shell: bash
 
       - name: Create temp-release-note.md
         run: |
           cp utils/generate-release-note.ps1 generate-release-note.ps1
-          $env:GitProjectTagName="KnifeHub.Sdk"
-          $env:GitProjectPath="src/KnifeHub.Sdk/*"
+          $env:GitProjectTagName="MemosPlus"
+          $env:GitProjectPath="plugins/MemosPlus/*"
           ./generate-release-note.ps1
         shell: pwsh
 
@@ -71,8 +70,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./src/KnifeHub.Sdk/bin/Release/*.nupkg
-            ./src/KnifeHub.Sdk/bin/Release/*.snupkg
-            ./src/KnifeHub.Sdk/bin/Release/net6.0/KnifeHub.Sdk-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip
-            README.md
-            LICENSE
+            ./plugins/MemosPlus/bin/Release/*.nupkg
+            ./plugins/MemosPlus/bin/Release/*.snupkg
+            ./plugins/MemosPlus/bin/Release/net6.0/MemosPlus-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0.zip
+            ./plugins/MemosPlus/README.md
+            ./plugins/MemosPlus/LICENSE

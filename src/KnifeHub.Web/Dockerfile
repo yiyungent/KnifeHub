@@ -14,7 +14,7 @@ WORKDIR "/src/src/KnifeHub.Web"
 RUN dotnet build "KnifeHub.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "KnifeHub.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish --framework net6.0 "KnifeHub.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -11,9 +12,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.5.1</Version>
-    <FileVersion>1.5.1.0</FileVersion>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+    <Version>1.5.5</Version>
+    <FileVersion>1.5.5.0</FileVersion>
+    <AssemblyVersion>1.5.5.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
