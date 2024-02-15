@@ -16,6 +16,19 @@ jobs:
           # 为了让 git 有日志 (git log) 可寻，还得在检出的时候顺带把所有提交历史一并拉下来，指定 fetch-depth 就能做到
           fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
+      - name: TimeZone
+        run: |
+          echo "Before:"
+          date --iso-8601=seconds
+          ls -l /etc/localtime
+          # Setting TimeZone
+          sudo rm -f /etc/localtime
+          sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+          echo "After:"
+          ls -l /etc/localtime
+          date --iso-8601=seconds
+        shell: bash
+
       - name: Set outputs
         id: vars
         run: |
