@@ -35,7 +35,9 @@ namespace KnifeHub.Web
                 .MinimumLevel.Debug()
                 .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
-                .WriteTo.File($"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(path: $"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day
+                    , retainedFileCountLimit: 31
+                    , retainedFileTimeLimit: TimeSpan.FromDays(31))
                 .CreateLogger();
 
             try
