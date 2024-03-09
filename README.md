@@ -33,6 +33,12 @@
 > **注意** : 本项目仅供学习使用, 所有第三方插件与本项目无关
 
 
+## 技术栈
+
+- 后端: .NET/C#: .NET Standard & .NET Core & .NET & ASP.NET Core
+- 前端: Next.js & React.js & TypeScript & Material UI & pnpm
+
+
 ## 功能
 
 - [x] **大部分功能由插件提供**
@@ -61,9 +67,9 @@
 
 ## Screenshots
 
-### PluginCore Admin
+<!-- ### PluginCore Admin -->
 
-![PluginCore Admin](./screenshots/PluginCore-Admin.png)
+<!-- ![PluginCore Admin](./screenshots/PluginCore-Admin.png) -->
 
 
 
