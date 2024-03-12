@@ -79,7 +79,8 @@ jobs:
           # osx.10.10-x64
           dotnet publish --framework net6.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net6.0-osx.10.10-x64 --self-contained true
           dotnet publish --framework net7.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net7.0-osx.10.10-x64 --self-contained true
-          dotnet publish --framework net8.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net8.0-osx.10.10-x64 --self-contained true
+          # error NETSDK1083: The specified RuntimeIdentifier 'osx.10.10-x64' is not recognized. See https://aka.ms/netsdk1083
+          # dotnet publish --framework net8.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net8.0-osx.10.10-x64 --self-contained true
 
       - name: Zip the Build
         run: |
@@ -110,7 +111,7 @@ jobs:
           # osx.10.10-x64
           zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./net6.0-osx.10.10-x64/
           zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip ./net7.0-osx.10.10-x64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip ./net8.0-osx.10.10-x64/
+          # zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip ./net8.0-osx.10.10-x64/
 
       - name: Create temp-release-note.md
         run: |
@@ -131,6 +132,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
+            # net6.0
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x86.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-x64.zip
@@ -138,6 +140,7 @@ jobs:
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip
+            # net7.0
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x86.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-x64.zip
@@ -145,12 +148,13 @@ jobs:
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip
+            # net8.0
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x86.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx-x64.zip
-            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip
+            # KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip
             README.md
             LICENSE
