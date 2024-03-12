@@ -47,7 +47,7 @@ COPY ["src/KnifeHub.Sdk/KnifeHub.Sdk.csproj", "src/KnifeHub.Sdk/"]
 RUN dotnet restore "src/KnifeHub.Web/KnifeHub.Web.csproj"
 COPY . .
 WORKDIR "/src/src/KnifeHub.Web"
-RUN dotnet build "KnifeHub.Web.csproj" -c Release -o /app/build
+RUN dotnet build --framework net8.0 "KnifeHub.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish --framework net8.0 "KnifeHub.Web.csproj" -c Release -o /app/publish
