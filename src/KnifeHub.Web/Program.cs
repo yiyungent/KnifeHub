@@ -28,6 +28,14 @@ namespace KnifeHub.Web
 
         public static void Main(string[] args)
         {
+            #region 配置选项
+            var config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+            ConfigOptions configOptions = new ConfigOptions();
+            config.GetSection(ConfigOptions.Config).Bind(configOptions);
+            #endregion
+
             // https://github.com/serilog/serilog-aspnetcore
             // https://github.com/serilog/serilog/wiki/Getting-Started
             // Serilog.AspNetCore 已依赖 Serilog.Sinks.Console , Serilog.Sinks.File
@@ -36,8 +44,8 @@ namespace KnifeHub.Web
                 .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
                 .WriteTo.File(path: $"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day
-                    , retainedFileCountLimit: 31
-                    , retainedFileTimeLimit: TimeSpan.FromDays(31))
+                    , retainedFileCountLimit: configOptions?.Log?.RetainedFileCountLimit ?? 31
+                    , retainedFileTimeLimit: TimeSpan.FromDays(configOptions?.Log?.RetainedFileTimeLimitDays ?? 31))
                 .CreateLogger();
 
             try
@@ -51,6 +59,7 @@ namespace KnifeHub.Web
                 string buildTime = AppBuildStampUtil.BuildTime;
                 Log.Information($"Git: {gitBranch} {gitHash}");
                 Log.Information($"Build: {version} {buildTime}");
+                Log.Information(DotNetUtil.ToString());
                 #endregion
 
                 {
@@ -77,7 +86,7 @@ namespace KnifeHub.Web
                     builder.Host.UseSerilog();
 
                     // 配置注入
-                    ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
+                    //ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
                     builder.Services.Configure<ConfigOptions>(builder.Configuration.GetSection(ConfigOptions.Config));
 
                     #region Sentry
