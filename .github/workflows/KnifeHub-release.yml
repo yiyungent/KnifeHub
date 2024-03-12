@@ -47,34 +47,70 @@ jobs:
           dotnet-version: |
             6.0.100
             7.0.401
+            8.0.201
 
       - name: Build
         run: |
           cd ./src/KnifeHub.Web
           # win-x64
-          dotnet publish --framework net6.0 --configuration Release --runtime win-x64 -p:PublishSingleFile=true --output ../../win-x64 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime win-x64 -p:PublishSingleFile=true --output ../../net6.0-win-x64 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime win-x64 -p:PublishSingleFile=true --output ../../net7.0-win-x64 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime win-x64 -p:PublishSingleFile=true --output ../../net8.0-win-x64 --self-contained true
           # win-x86
-          dotnet publish --framework net6.0 --configuration Release --runtime win-x86 -p:PublishSingleFile=true --output ../../win-x86 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime win-x86 -p:PublishSingleFile=true --output ../../net6.0-win-x86 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime win-x86 -p:PublishSingleFile=true --output ../../net7.0-win-x86 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime win-x86 -p:PublishSingleFile=true --output ../../net8.0-win-x86 --self-contained true
           # linux-x64
-          dotnet publish --framework net6.0 --configuration Release --runtime linux-x64 -p:PublishSingleFile=true --output ../../linux-x64 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime linux-x64 -p:PublishSingleFile=true --output ../../net6.0-linux-x64 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime linux-x64 -p:PublishSingleFile=true --output ../../net7.0-linux-x64 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime linux-x64 -p:PublishSingleFile=true --output ../../net8.0-linux-x64 --self-contained true
           # linux-arm
-          dotnet publish --framework net6.0 --configuration Release --runtime linux-arm -p:PublishSingleFile=true --output ../../linux-arm --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime linux-arm -p:PublishSingleFile=true --output ../../net6.0-linux-arm --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime linux-arm -p:PublishSingleFile=true --output ../../net7.0-linux-arm --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime linux-arm -p:PublishSingleFile=true --output ../../net8.0-linux-arm --self-contained true
           # linux-arm64
-          dotnet publish --framework net6.0 --configuration Release --runtime linux-arm64 -p:PublishSingleFile=true --output ../../linux-arm64 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime linux-arm64 -p:PublishSingleFile=true --output ../../net6.0-linux-arm64 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime linux-arm64 -p:PublishSingleFile=true --output ../../net7.0-linux-arm64 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime linux-arm64 -p:PublishSingleFile=true --output ../../net8.0-linux-arm64 --self-contained true
           # osx-x64
-          dotnet publish --framework net6.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../osx-x64 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../net6.0-osx-x64 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../net7.0-osx-x64 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../net8.0-osx-x64 --self-contained true
           # osx.10.10-x64
-          dotnet publish --framework net6.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../osx.10.10-x64 --self-contained true
+          dotnet publish --framework net6.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net6.0-osx.10.10-x64 --self-contained true
+          dotnet publish --framework net7.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net7.0-osx.10.10-x64 --self-contained true
+          dotnet publish --framework net8.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net8.0-osx.10.10-x64 --self-contained true
 
       - name: Zip the Build
         run: |
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x64.zip ./win-x64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x86.zip ./win-x86/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-x64.zip ./linux-x64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm.zip ./linux-arm/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip ./linux-arm64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip ./osx-x64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./osx.10.10-x64/
+          # win-x64
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x64.zip ./net6.0-win-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x64.zip ./net7.0-win-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x64.zip ./net8.0-win-x64/
+          # win-x86
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-win-x86.zip ./net6.0-win-x86/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x86.zip ./net7.0-win-x86/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x86.zip ./net8.0-win-x86/
+          # linux-x64
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-x64.zip ./net6.0-linux-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-x64.zip ./net7.0-linux-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-x64.zip ./net8.0-linux-x64/
+          # linux-arm
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm.zip ./net6.0-linux-arm/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm.zip ./net7.0-linux-arm/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm.zip ./net8.0-linux-arm/
+          # linux-arm64
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip ./net6.0-linux-arm64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm64.zip ./net7.0-linux-arm64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm64.zip ./net8.0-linux-arm64/
+          # osx-x64
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip ./net6.0-osx-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx-x64.zip ./net7.0-osx-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx-x64.zip ./net8.0-osx-x64/
+          # osx.10.10-x64
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./net6.0-osx.10.10-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip ./net7.0-osx.10.10-x64/
+          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip ./net8.0-osx.10.10-x64/
 
       - name: Create temp-release-note.md
         run: |
@@ -102,3 +138,19 @@ jobs:
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x86.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x86.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-linux-arm64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx-x64.zip
+            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip
+            README.md
+            LICENSE
