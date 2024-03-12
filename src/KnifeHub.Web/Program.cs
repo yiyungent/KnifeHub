@@ -66,18 +66,18 @@ namespace KnifeHub.Web
                     #region 启动参数
                     for (var i = 0; i < args.Length; i++)
                     {
-                        System.Console.WriteLine($"args[{i}]: {args[i]}");
+                        Log.Information($"args[{i}]: {args[i]}");
                     }
                     if (args.Contains("--no-console"))
                     {
-                        System.Console.WriteLine("--no-console: hidden current console window");
+                        Log.Information("--no-console: hidden current console window");
                         // 获取控制台窗口句柄
                         var handle = GetConsoleWindow();
                         // 隐藏控制台窗口
                         ShowWindow(handle, SW_HIDE);
                     }
                     // 输出当前平台信息
-                    Console.WriteLine($"CurrentPlatform: {Utils.OSUtil.PlatformInfo()}");
+                    Log.Information($"CurrentPlatform: {Utils.OSUtil.PlatformInfo()}");
                     #endregion
 
                     var builder = WebApplication.CreateBuilder(args);
@@ -119,12 +119,12 @@ namespace KnifeHub.Web
                     #region 跨域配置
                     if (configOptions.AllowAllCors)
                     {
-                        Console.WriteLine("跨域: AllowAllCors");
+                        Log.Information("Cors: AllowAllCors");
                         builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader()));
                     }
                     else
                     {
-                        Console.WriteLine("跨域: AllowedCorsOrigins");
+                        Log.Information("Cors: AllowedCorsOrigins");
                         #region CorsWhiteList
                         var corsWhiteList = configOptions.CorsWhiteList;
                         // 所有允许跨域的 Origin
@@ -177,12 +177,12 @@ namespace KnifeHub.Web
                     if (configOptions.AllowAllCors)
                     {
                         app.UseCors("AllowAllCors");
-                        Console.WriteLine("AllowAllCors");
+                        Log.Information("AllowAllCors");
                     }
                     else
                     {
                         app.UseCors("AllowedCorsOrigins");
-                        Console.WriteLine("AllowedCorsOrigins");
+                        Log.Information("AllowedCorsOrigins");
                     }
                     #endregion
 
