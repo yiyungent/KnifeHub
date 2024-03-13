@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <!-- 注意: 当 OpenApiGenerateDocuments 为 true 时, dotnet build 会尝试临时启动 Program, 未知原因 -->
+    <!-- 于是启动过程 PluginCore 尝试启用插件, 而 dotnet build 不指定 framework 则会尝试多个目标框架 -->
+    <!-- 于是插件 framework 与当前启动的 framework 不符, 则导致 Error 失败, 发现此时并不会框架向下兼容 -->
+    <!-- 因此, 需要本地调试时, 注释多目标框架, 启用下方单目标 -->
+    <!--<TargetFrameworks>net8.0</TargetFrameworks>-->
     <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
     <OpenApiGenerateDocumentsOnBuild>true</OpenApiGenerateDocumentsOnBuild>
     <Nullable>enable</Nullable>
