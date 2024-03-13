@@ -44,6 +44,9 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
+          # TODO: 发现虽安装多个版本, 但 dotnet cli 依然会使用最新版本, 
+          # 用 --framework net6.0 指定, 但最终执行仍然会由 dotnet\sdk\8.0.201 执行
+          # 可能只能多个环境容器(不同版本)执行了, 在 GitHub Actions 中可利用 Matrix 多环境
           dotnet-version: |
             6.0.100
             7.0.401
@@ -77,9 +80,9 @@ jobs:
           dotnet publish --framework net7.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../net7.0-osx-x64 --self-contained true
           dotnet publish --framework net8.0 --configuration Release --runtime osx-x64 -p:PublishSingleFile=true --output ../../net8.0-osx-x64 --self-contained true
           # osx.10.10-x64
-          dotnet publish --framework net6.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net6.0-osx.10.10-x64 --self-contained true
-          dotnet publish --framework net7.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net7.0-osx.10.10-x64 --self-contained true
           # error NETSDK1083: The specified RuntimeIdentifier 'osx.10.10-x64' is not recognized. See https://aka.ms/netsdk1083
+          # dotnet publish --framework net6.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net6.0-osx.10.10-x64 --self-contained true
+          # dotnet publish --framework net7.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net7.0-osx.10.10-x64 --self-contained true
           # dotnet publish --framework net8.0 --configuration Release --runtime osx.10.10-x64 -p:PublishSingleFile=true --output ../../net8.0-osx.10.10-x64 --self-contained true
 
       - name: Zip the Build
@@ -109,8 +112,8 @@ jobs:
           zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx-x64.zip ./net7.0-osx-x64/
           zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx-x64.zip ./net8.0-osx-x64/
           # osx.10.10-x64
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./net6.0-osx.10.10-x64/
-          zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip ./net7.0-osx.10.10-x64/
+          # zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip ./net6.0-osx.10.10-x64/
+          # zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip ./net7.0-osx.10.10-x64/
           # zip -r KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-osx.10.10-x64.zip ./net8.0-osx.10.10-x64/
 
       - name: Create temp-release-note.md
@@ -139,7 +142,7 @@ jobs:
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx-x64.zip
-            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip
+            # KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net6.0-osx.10.10-x64.zip
             # net7.0
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-win-x86.zip
@@ -147,7 +150,7 @@ jobs:
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-linux-arm64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx-x64.zip
-            KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip
+            # KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net7.0-osx.10.10-x64.zip
             # net8.0
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x64.zip
             KnifeHub-${{ steps.vars.outputs.RELEASE_VERSION }}-net8.0-win-x86.zip
