@@ -7,8 +7,8 @@
     <!-- 于是插件 framework 与当前启动的 framework 不符, 则导致 Error 失败, 发现此时并不会框架向下兼容 -->
     <!-- 因此, 需要本地调试时, 注释多目标框架, 启用下方单目标 -->
     <!--<TargetFrameworks>net8.0</TargetFrameworks>-->
-    <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
-    <OpenApiGenerateDocumentsOnBuild>true</OpenApiGenerateDocumentsOnBuild>
+    <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+    <OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -18,9 +18,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.6.1</Version>
-    <FileVersion>1.6.1.0</FileVersion>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <Version>1.6.2</Version>
+    <FileVersion>1.6.2.0</FileVersion>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +36,7 @@
 
   <!-- 方便开发debug,与发布到nuget -->
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="PluginCore.AspNetCore" Version="1.4.0" />
+    <PackageReference Include="PluginCore.AspNetCore" Version="1.4.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <ProjectReference Include="..\PluginCore\src\PluginCore.AspNetCore\PluginCore.AspNetCore.csproj" />
