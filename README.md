@@ -245,6 +245,7 @@ mkdir -p docker-data/App_Data/
 mkdir -p docker-data/Plugins/
 mkdir -p docker-data/Plugins_wwwroot/
 # 保存当前数据
+docker cp knifehub:/app/appsettings.json docker-data/appsettings.json
 docker cp knifehub:/app/App_Data/PluginCore.Config.json docker-data/App_Data/PluginCore.Config.json
 docker cp knifehub:/app/App_Data/plugin.config.json docker-data/App_Data/plugin.config.json
 docker cp knifehub:/app/Plugins/ docker-data/
@@ -264,6 +265,7 @@ docker run -d --restart=always -p 53213:80 -e ASPNETCORE_URLS="http://*:80" -e A
 # 这里我将原本备份的数据保存到了这个路径, 进入这个路径, 将备份数据覆盖到 docker 容器中
 cd docker-data
 
+docker cp appsettings.json knifehub:/app/appsettings.json
 docker cp App_Data/PluginCore.Config.json knifehub:/app/App_Data/PluginCore.Config.json
 docker cp App_Data/plugin.config.json knifehub:/app/App_Data/plugin.config.json
 docker cp Plugins/ knifehub:/app/
