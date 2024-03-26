@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PluginCore.Interfaces;
 using PluginCore.IPlugins;
@@ -11,6 +11,10 @@ namespace KnifeHub.Web.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
+        /// <summary>
+        /// 首页
+        /// </summary>
+        /// <returns></returns>
         [Route("")]
         [HttpGet]
         public async Task<ActionResult> Index()

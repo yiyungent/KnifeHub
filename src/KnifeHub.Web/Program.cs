@@ -28,6 +28,14 @@ namespace KnifeHub.Web
 
         public static void Main(string[] args)
         {
+            #region 配置选项
+            var config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+            ConfigOptions configOptions = new ConfigOptions();
+            config.GetSection(ConfigOptions.Config).Bind(configOptions);
+            #endregion
+
             // https://github.com/serilog/serilog-aspnetcore
             // https://github.com/serilog/serilog/wiki/Getting-Started
             // Serilog.AspNetCore 已依赖 Serilog.Sinks.Console , Serilog.Sinks.File
@@ -36,8 +44,8 @@ namespace KnifeHub.Web
                 .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
                 .WriteTo.File(path: $"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day
-                    , retainedFileCountLimit: 31
-                    , retainedFileTimeLimit: TimeSpan.FromDays(31))
+                    , retainedFileCountLimit: configOptions?.Log?.RetainedFileCountLimit ?? 31
+                    , retainedFileTimeLimit: TimeSpan.FromDays(configOptions?.Log?.RetainedFileTimeLimitDays ?? 31))
                 .CreateLogger();
 
             try
@@ -51,24 +59,25 @@ namespace KnifeHub.Web
                 string buildTime = AppBuildStampUtil.BuildTime;
                 Log.Information($"Git: {gitBranch} {gitHash}");
                 Log.Information($"Build: {version} {buildTime}");
+                Log.Information(DotNetUtil.ToString());
                 #endregion
 
                 {
                     #region 启动参数
                     for (var i = 0; i < args.Length; i++)
                     {
-                        System.Console.WriteLine($"args[{i}]: {args[i]}");
+                        Log.Information($"args[{i}]: {args[i]}");
                     }
                     if (args.Contains("--no-console"))
                     {
-                        System.Console.WriteLine("--no-console: hidden current console window");
+                        Log.Information("--no-console: hidden current console window");
                         // 获取控制台窗口句柄
                         var handle = GetConsoleWindow();
                         // 隐藏控制台窗口
                         ShowWindow(handle, SW_HIDE);
                     }
                     // 输出当前平台信息
-                    Console.WriteLine($"CurrentPlatform: {Utils.OSUtil.PlatformInfo()}");
+                    Log.Information($"CurrentPlatform: {Utils.OSUtil.PlatformInfo()}");
                     #endregion
 
                     var builder = WebApplication.CreateBuilder(args);
@@ -77,7 +86,7 @@ namespace KnifeHub.Web
                     builder.Host.UseSerilog();
 
                     // 配置注入
-                    ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
+                    //ConfigOptions configOptions = builder.Configuration.GetSection(ConfigOptions.Config).Get<ConfigOptions>();
                     builder.Services.Configure<ConfigOptions>(builder.Configuration.GetSection(ConfigOptions.Config));
 
                     #region Sentry
@@ -110,12 +119,12 @@ namespace KnifeHub.Web
                     #region 跨域配置
                     if (configOptions.AllowAllCors)
                     {
-                        Console.WriteLine("跨域: AllowAllCors");
+                        Log.Information("Cors: AllowAllCors");
                         builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader()));
                     }
                     else
                     {
-                        Console.WriteLine("跨域: AllowedCorsOrigins");
+                        Log.Information("Cors: AllowedCorsOrigins");
                         #region CorsWhiteList
                         var corsWhiteList = configOptions.CorsWhiteList;
                         // 所有允许跨域的 Origin
@@ -168,12 +177,12 @@ namespace KnifeHub.Web
                     if (configOptions.AllowAllCors)
                     {
                         app.UseCors("AllowAllCors");
-                        Console.WriteLine("AllowAllCors");
+                        Log.Information("AllowAllCors");
                     }
                     else
                     {
                         app.UseCors("AllowedCorsOrigins");
-                        Console.WriteLine("AllowedCorsOrigins");
+                        Log.Information("AllowedCorsOrigins");
                     }
                     #endregion
 
