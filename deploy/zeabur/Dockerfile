@@ -1,7 +1,7 @@
 # Zeabur Dockerfile
 
 # FROM yiyungent/knifehub:v1.4.3-amd-full
-FROM yiyungent/knifehub:v1.6.0-amd-chrome
+FROM yiyungent/knifehub:v1.6.3-amd-chrome
 
 # 处于 /app 目录下
 ADD zeabur-entrypoint.sh ./zeabur-entrypoint.sh
