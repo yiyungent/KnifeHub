@@ -1,3 +1,5 @@
+using Serilog.Events;
+
 namespace KnifeHub.Web.Config
 {
     public class ConfigOptions
@@ -17,6 +19,36 @@ namespace KnifeHub.Web.Config
 
         public class LogModel
         {
+            public string MinimumLevel { get; set; }
+
+            public LogEventLevel MinimumLevelEnum
+            {
+                get
+                {
+                    LogEventLevel rtn = LogEventLevel.Warning;
+                    switch (MinimumLevel.ToLower())
+                    {
+                        case "debug":
+                            rtn = LogEventLevel.Debug;
+                            break;
+                        case "information":
+                            rtn = LogEventLevel.Information;
+                            break;
+                        case "warning":
+                            rtn = LogEventLevel.Warning;
+                            break;
+                        case "error":
+                            rtn = LogEventLevel.Error;
+                            break;
+                        default:
+                            rtn = LogEventLevel.Warning;
+                            break;
+                    }
+
+                    return rtn;
+                }
+            }
+
             public int RetainedFileCountLimit { get; set; } = 31;
 
             public int RetainedFileTimeLimitDays { get; set; } = 31;

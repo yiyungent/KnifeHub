@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Serilog;
 using KnifeHub.Web.Utils;
+using Serilog.Events;
 
 namespace KnifeHub.Web
 {
@@ -40,7 +41,8 @@ namespace KnifeHub.Web
             // https://github.com/serilog/serilog/wiki/Getting-Started
             // Serilog.AspNetCore 已依赖 Serilog.Sinks.Console , Serilog.Sinks.File
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                //.MinimumLevel.Debug()
+                .MinimumLevel.Is(configOptions?.Log?.MinimumLevelEnum ?? LogEventLevel.Warning)
                 .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
                 .WriteTo.File(path: $"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day
