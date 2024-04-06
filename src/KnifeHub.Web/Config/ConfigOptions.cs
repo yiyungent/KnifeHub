@@ -26,7 +26,7 @@ namespace KnifeHub.Web.Config
                 get
                 {
                     LogEventLevel rtn = LogEventLevel.Warning;
-                    switch (MinimumLevel.ToLower())
+                    switch (MinimumLevel?.ToLower() ?? "")
                     {
                         case "debug":
                             rtn = LogEventLevel.Debug;
