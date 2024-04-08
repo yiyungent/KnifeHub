@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -48,6 +48,15 @@ namespace MemosPlus
         public class BackupModel 
         {
             public bool EnableBackupToGitHub { get;set; }
+
+            public AllowedExecuteModel AllowedExecute { get; set; }
+
+            public class AllowedExecuteModel
+            {
+                public int TimeHourFrom { get; set; }
+
+                public int TimeHourTo { get; set; }
+            }
         }
     }
 }

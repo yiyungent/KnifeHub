@@ -11,11 +11,15 @@ using System.Collections.Generic;
 using System.IO;
 using PluginCore;
 using Scriban;
+using Microsoft.Extensions.Logging;
 
 namespace MemosPlus
 {
     public class MemosPlus : BasePlugin, IWidgetPlugin, IStartupXPlugin, ITimeJobPlugin
     {
+        #region Fields
+        private readonly ILogger<MemosPlus> _logger;
+        #endregion
 
         #region Props
         public long SecondsPeriod
@@ -27,7 +31,35 @@ namespace MemosPlus
                 return settings.SecondsPeriod;
             }
         }
+
+        public static bool AllowedExecute
+        {
+            get
+            {
+                bool isAllowed = false;
+                var settings = PluginSettingsModelFactory.Create<SettingsModel>(nameof(MemosPlus));
+                DateTime currentTime = DateTime.Now;
+                if (settings?.Backup?.AllowedExecute != null)
+                {
+                    // 凌晨1点到5点的操作
+                    isAllowed = (currentTime.Hour >= (settings?.Backup?.AllowedExecute?.TimeHourFrom ?? 1))
+                                && 
+                                (currentTime.Hour < (settings?.Backup?.AllowedExecute?.TimeHourTo ?? 5));
+                }
+                else
+                {
+                    isAllowed = true;
+                }
+
+                return isAllowed;
+            }
+        }
         #endregion
+
+        public MemosPlus(ILogger<MemosPlus> logger)
+        {
+            this._logger = logger;
+        }
 
         public override (bool IsSuccess, string Message) AfterEnable()
         {
@@ -50,8 +82,10 @@ namespace MemosPlus
 
                 #region 备份到 GitHub
                 // 备份到 GitHub
-                if (settings.Backup.EnableBackupToGitHub)
+                if (settings.Backup.EnableBackupToGitHub && AllowedExecute)
                 {
+                    this._logger.LogWarning($"开始执行定时任务: 备份到 GitHub");
+
                     MemosUtil memosUtil = new MemosUtil(settings.Memos.BaseUrl);
                     int offset = 0;
                     bool isErrorMemosApi = false;
@@ -76,7 +110,7 @@ namespace MemosPlus
                     // https://github.com/scriban/scriban
                     var githubTemplate = Template.Parse(githubTemplateContent);
                     List<string> memoFilePaths = new List<string>();
-                    while (list != null && list.Count >= 1)
+                    while (list != null && list.Count >= 1 && AllowedExecute)
                     {
                         foreach (Utils.MemoItemModel item in list)
                         {
@@ -172,7 +206,7 @@ namespace MemosPlus
                     }
 
                     #region 清理不存在的文件
-                    if (!isErrorMemosApi && !isErrorMemosApiResource)
+                    if (!isErrorMemosApi && !isErrorMemosApiResource && AllowedExecute)
                     {
                         // 清理不存在的文件: 对于存放 memos 的文件夹, 清理 memos 中已删除的对应文件
                         try
@@ -211,13 +245,14 @@ namespace MemosPlus
                     }
                     #endregion
 
+                    this._logger.LogWarning($"完成执行定时任务: 备份到 GitHub");
                 }
                 #endregion
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"执行定时任务失败: {ex.ToString()}");
+                this._logger.LogError(ex, $"执行定时任务失败: {ex.ToString()}");
             }
 
             await Task.CompletedTask;
