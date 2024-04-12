@@ -4,6 +4,7 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
+    "@hono/swagger-ui": "^0.2.1",
     "hono": "^4.2.3"
   },
   "devDependencies": {

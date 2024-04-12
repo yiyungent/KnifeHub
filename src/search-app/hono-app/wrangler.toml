@@ -3,6 +3,8 @@ compatibility_date = "2023-12-01"
 
 # [vars]
 # MY_VAR = "my-variable"
+PLUGINS_BILIBILI_USER_COOKIE = "buvid4=98FCD548-69A9-1455-69CF-6A64B36BC4A000607-024031218-HyYFmR0Ivh2P1Xfp2yjdqg%3D%3D; buvid3=C63D509D-FF05-8A4E-8574-3343C6A9FBD216132infoc; b_nut=1712955316"
+
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
@@ -19,3 +21,4 @@ compatibility_date = "2023-12-01"
 
 # [ai]
 # binding = "AI"
+
