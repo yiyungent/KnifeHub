@@ -4,17 +4,17 @@ interface Gamme4399AccountDataItemModel {
   /**
    * 4399账号
    */
-  account: string;
+  账号: string;
   /**
    * 此账号在4399平台不存在
    * 此账号在4399平台已存在
    */
-  message: string;
+  提示: string;
 
   /**
    * https://www.4399.com
    */
-  url: string;
+  来源: string;
 }
 
 /**
@@ -69,9 +69,9 @@ export default async function query(
         responseModel.message = "成功";
         responseModel.data = [
           {
-            account: query.trim(),
-            message: "此账号在4399平台已存在",
-            url: "https://www.4399.com",
+            账号: query.trim(),
+            提示: "此账号在4399平台已存在",
+            来源: "https://www.4399.com",
           },
         ];
       } else if (text.indexOf(`"status":false`) > 0) {

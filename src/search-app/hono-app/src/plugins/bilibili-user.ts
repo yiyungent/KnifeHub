@@ -5,36 +5,36 @@ interface BilibiliUserDataItemModel {
   /**
    * 用户名
    */
-  uname: string;
+  用户名: string;
   /**
    * 头像
    */
-  upic: string;
+  头像: string;
 
   /**
    * 签名
    */
-  usign: string;
+  签名: string;
 
   /**
    * 投稿视频个数
    */
-  videos: number;
+  投稿视频数: number;
 
   /**
    * 粉丝个数
    */
-  fans: number;
+  粉丝数: number;
 
   /**
    * 等级
    */
-  level: number;
+  用户等级: number;
 
   /**
    * https://space.bilibili.com/25057459
    */
-  url: string;
+  个人空间: string;
 }
 
 export default async function query(
@@ -102,13 +102,13 @@ export default async function query(
       ) {
         resJson.data.result.forEach((item: any) => {
           responseModel.data.push({
-            uname: item.uname,
-            upic: `${item.upic.replace("//", "http://")}`,
-            usign: item.usign,
-            videos: item.videos,
-            fans: item.fans,
-            level: item.level,
-            url: `https://space.bilibili.com/${item.mid}`,
+            用户名: item.uname,
+            头像: `${item.upic.replace("//", "http://")}`,
+            签名: item.usign,
+            投稿视频数: item.videos,
+            粉丝数: item.fans,
+            用户等级: item.level,
+            个人空间: `https://space.bilibili.com/${item.mid}`,
           });
         });
       }
