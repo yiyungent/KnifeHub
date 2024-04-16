@@ -35,7 +35,8 @@
 
 ## 技术栈
 
-- 后端: .NET/C#: .NET Standard & .NET Core & .NET & ASP.NET Core
+- 后端: 主服务: ASP.NET Core (.NET/C#) & Nginx
+- 后端: 部分 API 服务: Hono (Node.js & TypeScript) & Flask (Python)
 - 前端: Next.js & React.js & TypeScript & Material UI & pnpm
 
 > 关联线上产品:         
