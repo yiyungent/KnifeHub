@@ -11,6 +11,13 @@ namespace KnifeHub.Web.Config
             this.Log = new LogModel();
         }
 
+        public SentryModel Sentry { get; set; }
+
+        public class SentryModel
+        {
+            public bool Enabled { get; set; }
+        }
+
         public bool AllowAllCors { get; set; } = false;
 
         public List<string> CorsWhiteList { get; set; }
