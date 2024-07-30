@@ -1,21 +1,31 @@
+
+
 namespace MemosPlus.Utils
 {
     public class MemosUtil
     {
+        private readonly HttpXUtil _httpXUtil;
+
         public string MemosBaseUrl { get; set; }
 
-        public MemosUtil(string memosBaseUrl)
+        public MemosUtil(string memosBaseUrl, HttpXUtil httpXUtil)
         {
             this.MemosBaseUrl = memosBaseUrl.Trim().TrimEnd('/');
+            this._httpXUtil = httpXUtil;
         }
 
-        public List<MemoItemModel> List(string memosSession, string rowStatus = "NORMAL", int offset = 0, int limit = 20)
+        public async Task<List<MemoItemModel>> List(string memosSession, string rowStatus = "NORMAL", int offset = 0, int limit = 20)
         {
             List<MemoItemModel> rtn = new List<MemoItemModel>();
             try
             {
-                string resJson = HttpUtil.HttpGet(url: $"{MemosBaseUrl}/api/memo?rowStatus={rowStatus}&offset={offset}&limit={limit}",
-                headers: new string[] { $"cookie: memos_session={memosSession}" });
+                (string resJson, _) = await this._httpXUtil.HttpGetAsync(
+                    url: $"{MemosBaseUrl}/api/memo?rowStatus={rowStatus}&offset={offset}&limit={limit}",
+                    //headers: new string[] { $"cookie: memos_session={memosSession}" }
+                    headers: new Dictionary<string, string> {
+                        { "cookie", $"memos_session={memosSession}" }
+                    }
+                );
                 var resModel = System.Text.Json.JsonSerializer.Deserialize<MemosListResponseModel>(resJson);
                 if (resModel != null && resModel.data.Count >= 1)
                 {
@@ -36,13 +46,13 @@ namespace MemosPlus.Utils
             return $"{MemosBaseUrl}/o/r/{resourceId}/{fileName}";
         }
 
-        public byte[] Resource(string resourceId, string fileName, string memosSession)
+        public async Task<byte[]> Resource(string resourceId, string fileName, string memosSession)
         {
             List<byte> rtn = new List<byte>();
             string url = ResourceLink(resourceId, fileName);
             try
             {
-                var temp = HttpUtil.HttpGetFile(url, cookie: $"memos_session={memosSession}");
+                var temp = await this._httpXUtil.HttpGetFileAsync(url, cookie: $"memos_session={memosSession}");
                 if (temp != null && temp.Length >= 1)
                 {
                     return temp;

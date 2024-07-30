@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +19,7 @@ namespace MemosPlus.Controllers
     [Route($"Plugins/{(nameof(MemosPlus))}")]
     public class HomeController : Controller
     {
+        [HttpGet]
         public async Task<ActionResult> Get()
         {
             string indexFilePath = System.IO.Path.Combine(PluginPathProvider.PluginWwwRootDir(nameof(MemosPlus)), "index.html");

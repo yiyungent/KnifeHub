@@ -23,9 +23,12 @@
     </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
+		<!--<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
+		</PackageReference>-->
+    <FrameworkReference Include="Microsoft.AspNetCore.App">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </FrameworkReference>
 		<PackageReference Include="PluginCore.IPlugins.AspNetCore" Version="0.1.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
@@ -61,5 +64,17 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
+
+  <!-- 移除重复引用 -->
+  <Target Name="DeleteFilesAfterBuild" AfterTargets="Build" Condition=" '$(ProjectDir)'!='' ">
+    <Delete Files="$(OutputPath)Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <Delete Files="$(OutputPath)Microsoft.Extensions.Logging.Abstractions.dll" />
+    <Delete Files="$(OutputPath)Microsoft.Extensions.Options.dll" />
+    <Delete Files="$(OutputPath)Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll" />
+    <Delete Files="$(OutputPath)Microsoft.Extensions.Diagnostics.HealthChecks.dll" />
+    <!-- System.IdentityModel.Tokens.Jwt 依赖于 Microsoft.IdentityModel.Tokens -->
+    <Delete Files="$(OutputPath)System.IdentityModel.Tokens.Jwt.dll" />
+    <Delete Files="$(OutputPath)Microsoft.IdentityModel.Tokens.dll" />
+  </Target>
 
 </Project>
