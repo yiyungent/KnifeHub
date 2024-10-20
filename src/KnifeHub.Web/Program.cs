@@ -153,7 +153,8 @@ namespace KnifeHub.Web
                                                 // 解决发送json,复杂请求问题: https://blog.csdn.net/yangyiboshigou/article/details/78738228
                                                 // 解决方法: Access-Control-Allow-Headers: Content-Type
                                                 // 参考: https://www.cnblogs.com/jpfss/p/10102132.html
-                                                .WithHeaders("Content-Type");
+                                                //.WithHeaders("Content-Type");
+                                                .WithHeaders(configOptions.CorsAllowHeaders?.ToArray() ?? new string[] { "Content-Type" });
                                     });
                             });
                         }
