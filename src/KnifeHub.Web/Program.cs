@@ -125,7 +125,15 @@ namespace KnifeHub.Web
                     if (configOptions.AllowAllCors)
                     {
                         Log.Information("Cors: AllowAllCors");
-                        builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+                        // System.InvalidOperationException: The CORS protocol does not allow specifying a wildcard (any) origin and credentials at the same time. Configure the CORS policy by listing individual origins if credentials needs to be supported.
+                        builder.Services.AddCors(m =>
+                            m.AddPolicy("AllowAllCors",
+                                a => a
+                                //.AllowAnyOrigin()
+                                .SetIsOriginAllowed(_ => true)
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .AllowCredentials()));
                     }
                     else
                     {
