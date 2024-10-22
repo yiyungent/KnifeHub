@@ -22,7 +22,7 @@ namespace KnifeHub.Web.Config
 
         public List<string> CorsWhiteList { get; set; }
 
-        public List<string> CorsAllowHeaders { get; set; }
+        //public List<string> CorsAllowHeaders { get; set; }
 
         public LogModel Log { get; set; }
 

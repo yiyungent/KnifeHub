@@ -125,7 +125,7 @@ namespace KnifeHub.Web
                     if (configOptions.AllowAllCors)
                     {
                         Log.Information("Cors: AllowAllCors");
-                        builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader()));
+                        builder.Services.AddCors(m => m.AddPolicy("AllowAllCors", a => a.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
                     }
                     else
                     {
@@ -154,7 +154,10 @@ namespace KnifeHub.Web
                                                 // 解决方法: Access-Control-Allow-Headers: Content-Type
                                                 // 参考: https://www.cnblogs.com/jpfss/p/10102132.html
                                                 //.WithHeaders("Content-Type");
-                                                .WithHeaders(configOptions.CorsAllowHeaders?.ToArray() ?? new string[] { "Content-Type" });
+                                                //.WithHeaders(configOptions.CorsAllowHeaders?.ToArray() ?? new string[] { "Content-Type" })
+                                                .AllowAnyHeader()
+                                                .AllowAnyMethod()
+                                                .AllowCredentials();
                                     });
                             });
                         }
