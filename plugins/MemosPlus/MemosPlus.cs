@@ -134,7 +134,25 @@ namespace MemosPlus
                                     StringBuilder resourceFileMdSb = new StringBuilder();
                                     foreach (var resourceItem in item.resourceList)
                                     {
-                                        string memoResourceFileName = $"image-{resourceItem.id}{Path.GetExtension(resourceItem.filename)}";
+                                        string fileExt = Path.GetExtension(resourceItem.filename);
+                                        string fileNameWithoutExt = Path.GetFileNameWithoutExtension(resourceItem.filename);
+                                        List<string> imageFileExtList = new List<string>()
+                                        {
+                                            ".jpg",
+                                            ".jpeg",
+                                            ".png",
+                                            ".gif",
+                                            ".svg",
+                                            ".bmp",
+                                            ".webp",
+                                            ".ico",
+                                        };
+                                        string memoResourceFileNamePrefix = "file";
+                                        if (imageFileExtList.Contains(fileExt))
+                                        {
+                                            memoResourceFileNamePrefix = "image";
+                                        }
+                                        string memoResourceFileName = $"{memoResourceFileNamePrefix}-{resourceItem.id}-{fileNameWithoutExt}{fileExt}";
                                         string repoTargetResourceFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName}";
                                         try
                                         {
