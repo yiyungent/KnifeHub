@@ -153,6 +153,8 @@ namespace MemosPlus
                                             memoResourceFileNamePrefix = "image";
                                         }
                                         string memoResourceFileName = $"{memoResourceFileNamePrefix}-{resourceItem.id}-{fileNameWithoutExt}{fileExt}";
+                                        // 合法化-资源文件名
+                                        memoResourceFileName = FileUtil.SoftFileName(memoResourceFileName);
                                         string repoTargetResourceFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName}";
                                         try
                                         {
