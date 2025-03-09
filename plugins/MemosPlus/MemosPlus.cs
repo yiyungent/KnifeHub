@@ -156,9 +156,10 @@ namespace MemosPlus
                                         // 合法化-资源文件名
                                         memoResourceFileName = FileUtil.SoftFileName(memoResourceFileName);
                                         string repoTargetResourceFilePath = $"{settings.GitHub.RepoTargetDirPath}/{item.creatorName}/{Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName}";
+                                        byte[]? resourceFile = null;
                                         try
                                         {
-                                            var resourceFile = await memosUtil.Resource(resourceId: resourceItem.id.ToString(), fileName: resourceItem.filename, memosSession: settings.Memos.MemosSession);
+                                            resourceFile = await memosUtil.Resource(resourceId: resourceItem.id.ToString(), fileName: resourceItem.filename, memosSession: settings.Memos.MemosSession);
                                             if (resourceFile != null && resourceFile.Length > 0)
                                             {
                                                 gitHubUtil.UpdateFile(
@@ -180,6 +181,74 @@ namespace MemosPlus
 
                                         // 注意: 对于资源文件的引用来说，无论资源文件是否成功获取, 它都是存在的，其在 md 文件中的引用字符串不会变
                                         resourceFileMdSb.AppendLine($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   ");
+
+                                        #region 纯文本文件-代码块
+                                        {
+                                            string codeBlockLanguage = string.Empty;
+                                            switch (fileExt)
+                                            {
+                                                case ".txt":
+                                                    codeBlockLanguage = "txt";
+                                                    break;
+                                                case ".md":
+                                                    codeBlockLanguage = "markdown";
+                                                    break;
+                                                case ".html":
+                                                    codeBlockLanguage = "html";
+                                                    break;
+                                                case ".css":
+                                                    codeBlockLanguage = "css";
+                                                    break;
+                                                case ".less":
+                                                    codeBlockLanguage = "less";
+                                                    break;
+                                                case ".scss":
+                                                    codeBlockLanguage = "scss";
+                                                    break;
+                                                case ".sass":
+                                                    codeBlockLanguage = "sass";
+                                                    break;
+                                                case ".vue":
+                                                    codeBlockLanguage = "vue";
+                                                    break;
+                                                case ".cs":
+                                                    codeBlockLanguage = "csharp";
+                                                    break;
+                                                case ".js":
+                                                    codeBlockLanguage = "javascript";
+                                                    break;
+                                                case ".ts":
+                                                    codeBlockLanguage = "typescript";
+                                                    break;
+                                                case ".tsx":
+                                                    codeBlockLanguage = "tsx";
+                                                    break;
+                                                case ".jsx":
+                                                    codeBlockLanguage = "jsx";
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                            if (!string.IsNullOrEmpty(codeBlockLanguage) && (resourceFile != null && resourceFile.Length > 0))
+                                            {
+                                                string content = string.Empty;
+                                                try
+                                                {
+                                                    content = Encoding.UTF8.GetString(resourceFile);
+                                                    if (!string.IsNullOrEmpty(content))
+                                                    {
+                                                        resourceFileMdSb.AppendLine($"```{codeBlockLanguage} {resourceItem.filename}");
+                                                        resourceFileMdSb.AppendLine(content);
+                                                        resourceFileMdSb.AppendLine("```");
+                                                    }
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    System.Console.WriteLine(ex.ToString());
+                                                }
+                                            }
+                                        }
+                                        #endregion
 
                                         // 注意: 资源文件路径也要放入其中
                                         memoFilePaths.Add(repoTargetResourceFilePath);

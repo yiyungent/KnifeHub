@@ -68,6 +68,7 @@ namespace MemosPlus.Utils
             catch (Exception ex)
             {
                 this._logger.LogError(ex, $"HttpXUtil.HttpGetFileAsync({url}, {cookie})");
+                throw;
             }
 
             return rtn;
