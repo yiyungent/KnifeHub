@@ -1,3 +1,8 @@
 {
-    "dotnet.defaultSolution": "KnifeHub.sln"
+  "dotnet.defaultSolution": "KnifeHub.sln",
+  "pasteImage.basePath": "${currentFileDir}",
+  "pasteImage.defaultName": "Y-MM-DD-HH-mm-ss",
+  "pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFilePath}${imageSyntaxSuffix}",
+  "pasteImage.namePrefix": "image-",
+  "pasteImage.path": "${currentFileDir}/${currentFileNameWithoutExt}"
 }

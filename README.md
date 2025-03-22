@@ -80,6 +80,15 @@
 
 <!-- ![PluginCore Admin](./screenshots/PluginCore-Admin.png) -->
 
+![](README/image-2025-03-22-15-52-06.png)
+![](README/image-2025-03-22-15-57-03.png)
+![](README/image-2025-03-22-15-59-50.png)
+![](README/image-2025-03-22-16-03-57.png)
+![](README/image-2025-03-22-16-04-55.png)
+![](README/image-2025-03-22-16-05-06.png)
+![](README/image-2025-03-22-16-07-07.png)
+![](README/image-2025-03-22-16-07-51.png)
+
 
 
 ## Quick Start
