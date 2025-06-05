@@ -365,7 +365,7 @@ dotnet add package KnifeHub.Sdk
 特别感谢 [JetBrains](https://www.jetbrains.com/?from=KnifeHub) 为开源项目提供免费的 [ReSharper](https://www.jetbrains.com/resharper/?from=KnifeHub) 等的授权  
 [<img src="README/image-jetbrains-variant-3.png" width="200"/>](https://www.jetbrains.com/?from=KnifeHub)
 
-特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:     
+特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:  
 [<img src="README/image-nodeseekdev.png" width="200"/>](https://yxvm.com)
 
 
