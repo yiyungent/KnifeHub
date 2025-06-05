@@ -356,6 +356,22 @@ dotnet add package KnifeHub.Sdk
 - [SweelLong/RandomImage: 这是基于QQBotHub的开源插件，主要功能是发送随机图片。（短期内不会更新）](https://github.com/SweelLong/RandomImage)       
 
 
+## 特别鸣谢
+
+<!-- https://www.jetbrains.com/shop/eform/opensource -->
+
+> [ReSharper](https://www.jetbrains.com/resharper/?from=PluginCore) 是一个强大的 Visual Studio 扩展，适用于 .NET 平台语言。
+
+特别感谢 [JetBrains](https://www.jetbrains.com/?from=KnifeHub) 为开源项目提供免费的 [ReSharper](https://www.jetbrains.com/resharper/?from=KnifeHub) 等的授权  
+[<img src="README/image-jetbrains-variant-3.png" width="200"/>](https://www.jetbrains.com/?from=KnifeHub)
+
+特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:
+<a href="https://yxvm.com">
+  <img src="README/image-nodeseekdev.png" alt="YxVm logo" width="200">
+</a>
+
+
+
 ## 赞助者
 
 本列表由 [afdian-action](https://github.com/yiyungent/afdian-action) 自动更新
