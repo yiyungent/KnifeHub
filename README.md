@@ -366,9 +366,8 @@ dotnet add package KnifeHub.Sdk
 [<img src="README/image-jetbrains-variant-3.png" width="200"/>](https://www.jetbrains.com/?from=KnifeHub)
 
 特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:
-<a href="https://yxvm.com">
-  <img src="README/image-nodeseekdev.png" alt="YxVm logo" width="200">
-</a>
+[<img src="README/image-nodeseekdev.png" width="200"/>](https://yxvm.com)
+
 
 
 
