@@ -45,9 +45,15 @@ namespace KnifeHub.Web
                 .MinimumLevel.Is(configOptions?.Log?.MinimumLevelEnum ?? LogEventLevel.Warning)
                 .Enrich.FromLogContext() // 使用 FromLogContext 方法启用默认的上下文信息
                 .WriteTo.Console()
-                .WriteTo.File(path: $"logs/{nameof(KnifeHub)}.txt", rollingInterval: RollingInterval.Day
+                .WriteTo.File(
+                    path: $"logs/{nameof(KnifeHub)}.txt"
+                    , rollingInterval: RollingInterval.Day
                     , retainedFileCountLimit: configOptions?.Log?.RetainedFileCountLimit ?? 31
-                    , retainedFileTimeLimit: TimeSpan.FromDays(configOptions?.Log?.RetainedFileTimeLimitDays ?? 31))
+                    , retainedFileTimeLimit: TimeSpan.FromDays(configOptions?.Log?.RetainedFileTimeLimitDays ?? 31)
+                    , fileSizeLimitBytes: 1024 * 1024 * 1024
+                    , rollOnFileSizeLimit: true
+                    , encoding: System.Text.Encoding.UTF8
+                    )
                 .CreateLogger();
 
             try
