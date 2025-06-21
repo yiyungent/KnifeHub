@@ -50,8 +50,8 @@ namespace KnifeHub.Web
                     , rollingInterval: RollingInterval.Day
                     , retainedFileCountLimit: configOptions?.Log?.RetainedFileCountLimit ?? 31
                     , retainedFileTimeLimit: TimeSpan.FromDays(configOptions?.Log?.RetainedFileTimeLimitDays ?? 31)
-                    , fileSizeLimitBytes: 1024 * 1024 * 1024
-                    , rollOnFileSizeLimit: true
+                    , fileSizeLimitBytes: configOptions?.Log?.FileSizeLimitBytes
+                    , rollOnFileSizeLimit: configOptions?.Log?.RollOnFileSizeLimit ?? true
                     , encoding: System.Text.Encoding.UTF8
                     )
                 .CreateLogger();

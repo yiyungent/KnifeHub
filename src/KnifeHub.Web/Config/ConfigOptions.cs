@@ -61,6 +61,12 @@ namespace KnifeHub.Web.Config
             public int RetainedFileCountLimit { get; set; } = 31;
 
             public int RetainedFileTimeLimitDays { get; set; } = 31;
+
+            public long? FileSizeLimitBytes { get; set; }
+
+            public bool RollOnFileSizeLimit { get; set; }
+
+
         }
     }
 }
