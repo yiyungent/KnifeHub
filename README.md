@@ -358,15 +358,22 @@ dotnet add package KnifeHub.Sdk
 
 ## 特别鸣谢
 
-<!-- https://www.jetbrains.com/shop/eform/opensource -->
+<!-- 本项目已加入 JetBrains & Netlify 开源项目计划 -->
+This project has joined the JetBrains & Netlify Open Source Program.
 
-> [ReSharper](https://www.jetbrains.com/resharper/?from=PluginCore) 是一个强大的 Visual Studio 扩展，适用于 .NET 平台语言。
+<!-- https://www.jetbrains.com/shop/eform/opensource -->
+<!-- https://www.netlify.com/legal/open-source-policy/ -->
+
+<!-- > [ReSharper](https://www.jetbrains.com/resharper/?from=PluginCore) 是一个强大的 Visual Studio 扩展，适用于 .NET 平台语言。 -->
 
 特别感谢 [JetBrains](https://www.jetbrains.com/?from=KnifeHub) 为开源项目提供免费的 [ReSharper](https://www.jetbrains.com/resharper/?from=KnifeHub) 等的授权  
 [<img src="README/image-jetbrains-variant-3.png" width="200"/>](https://www.jetbrains.com/?from=KnifeHub)
 
-特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:  
-[<img src="README/image-nodeseekdev.png" width="200"/>](https://yxvm.com)
+特别感谢 [Netlify](https://www.netlify.com) 为开源项目提供支持  
+[<img src="README/netlify-light.png" width="200"/>](https://www.netlify.com)
+
+<!-- 特别感谢 [YxVM](https://yxvm.com) & [NodeSeekDev](https://github.com/NodeSeekDev/NodeSupport) 赞助服务器以提供测试支持:  
+[<img src="README/image-nodeseekdev.png" width="200"/>](https://yxvm.com) -->
 
 
 
@@ -438,8 +445,8 @@ KnifeHub is an Apache-2.0 licensed open source project and completely free to us
 
 We accept donations through these channels:
 
-- <a href="https://afdian.net/@yiyun" target="_blank">爱发电</a> (￥5.00 起)
-- <a href="https://dun.mianbaoduo.com/@yiyun" target="_blank">面包多</a> (￥1.00 起)
+- <a href="https://afdian.com/a/yiyun" target="_blank">爱发电</a> (￥5.00 起)
+<!-- - <a href="https://dun.mianbaoduo.com/@yiyun" target="_blank">面包多</a> (￥1.00 起) -->
 
 
 ## License
