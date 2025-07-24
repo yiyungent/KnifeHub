@@ -1,0 +1,61 @@
+[
+  {
+    "category": "Online Tool",
+    "sites": [
+      {
+        "name": "沉浸式翻译",
+        "url": "https://app.immersivetranslate.com/",
+        "description": "无需登录 免费在线一键翻译 pdf, epub, txt, docx, md, 字幕文件 | 浏览器扩展 | 安卓 app"
+      },
+      {
+        "name": "inotherword.ai",
+        "url": "https://www.inotherword.ai/",
+        "description": "无需登录 免费在线一键翻译 pdf, pptx, epub, docx, txt等, 支持 large files: 500+ pages, 100+MB"
+      }
+    ]
+  },
+  {
+    "category": "World Paper",
+    "sites": [
+      {
+        "name": "Papers With Code",
+        "url": "https://paperswithcode.com/",
+        "description": "The latest in Machine Learning"
+      },
+      {
+        "name": "arXiv.org",
+        "url": "https://arxiv.org/",
+        "description": "arXiv 是一项免费分发服务和开放获取档案，收录了物理、数学、计算机科学、定量生物学、定量金融、统计学、电气工程和系统科学以及经济学领域的近 240 万篇学术文章。"
+      },
+      {
+        "name": "Google Scholar",
+        "url": "https://scholar.google.com/",
+        "description": "谷歌学术"
+      }
+    ]
+  },
+  {
+    "category": "World Literature",
+    "sites": []
+  },
+  {
+    "category": "World Literature (Network)",
+    "sites": [
+      {
+        "name": "QuickNovel",
+        "url": "https://github.com/LagradOst/QuickNovel",
+        "description": "国外小说 | Android app | 下载 epub | 多数据源 | 免费开源"
+      },
+      {
+        "name": "webnovel(起点国际)",
+        "url": "https://www.webnovel.com/ranking/hot",
+        "description": "国内外小说 | 免费 + 付费 | app 自带翻译"
+      },
+      {
+        "name": "Novel Bin",
+        "url": "https://novelbin.com",
+        "description": "国外小说 | 免费在线看 | 无需登录"
+      }
+    ]
+  }
+]
