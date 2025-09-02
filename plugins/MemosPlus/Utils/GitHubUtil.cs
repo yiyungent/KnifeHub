@@ -27,6 +27,13 @@ namespace MemosPlus.Utils
             string branch = repoBranch;
             string targetFilePath = repoTargetFilePath;
 
+            // 检查新内容是否为空或无效
+            if (string.IsNullOrEmpty(fileContent))
+            {
+                System.Console.WriteLine("GitHubUtil.CreateFile: 文件内容为空, 放弃提交");
+                return;
+            }
+
             #region 写入文件
             try
             {
@@ -37,7 +44,9 @@ namespace MemosPlus.Utils
             }
             catch (Exception ex)
             {
-
+                System.Console.WriteLine("GitHubUtil.CreateFile: 创建文件时发生异常");
+                System.Console.WriteLine($"异常信息: {ex.Message}");
+                throw; // 重新抛出异常，让调用者处理
             }
             #endregion
 
@@ -64,6 +73,13 @@ namespace MemosPlus.Utils
             string repo = repoName;
             string branch = repoBranch;
             string targetFilePath = repoTargetFilePath;
+
+            // 检查新内容是否为空或无效
+            if (string.IsNullOrEmpty(fileContent))
+            {
+                System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容为空, 放弃提交");
+                return;
+            }
 
             #region 写入文件
             // try to get the file (and with the file the last commit sha)
@@ -109,11 +125,14 @@ namespace MemosPlus.Utils
                         var temp = gitHubClient.Repository.Content.GetRawContentByRef(owner: owner, name: repo, path: targetFilePath, reference: branch).Result;
                         oldFileContent = Convert.ToBase64String(temp);
                     }
+                    
+                    // 比较文件内容，如果内容相同则跳过提交
                     if (oldFileContent == fileContent)
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容未变, 放弃提交");
                         return;
                     }
+                    
                     // update the file
                     var updateChangeSet = gitHubClient.Repository.Content.UpdateFile(owner, repo, targetFilePath,
                    new UpdateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
@@ -122,7 +141,8 @@ namespace MemosPlus.Utils
                 }
                 else
                 {
-                    // if file is not found, create it
+                    // 文件不存在，创建新文件
+                    System.Console.WriteLine("GitHubUtil.UpdateFile: 文件不存在，创建新文件");
                     var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
                     new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
                    content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
@@ -131,10 +151,20 @@ namespace MemosPlus.Utils
             //catch (Octokit.NotFoundException)
             catch (Exception ex)
             {
-                // if file is not found, create it
-                var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
-               content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
+                // 只有在文件确实不存在时才创建，避免重复创建
+                if (ex is Octokit.NotFoundException)
+                {
+                    System.Console.WriteLine("GitHubUtil.UpdateFile: 文件不存在(NotFoundException)，创建新文件");
+                    var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
+                    new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                   content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
+                }
+                else
+                {
+                    System.Console.WriteLine("GitHubUtil.UpdateFile: 发生异常，放弃提交");
+                    System.Console.WriteLine($"异常信息: {ex.Message}");
+                    throw; // 重新抛出非NotFoundException的异常
+                }
             }
             #endregion
 
