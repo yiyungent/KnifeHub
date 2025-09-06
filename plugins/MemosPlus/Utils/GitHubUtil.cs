@@ -118,16 +118,25 @@ namespace MemosPlus.Utils
                         // return;
                         isBinaryFile = true;
                     }
+                    string oldFileContentTxt = null;
                     if (isBinaryFile)
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 二进制文件");
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 获取 二进制文件 内容");
                         var temp = gitHubClient.Repository.Content.GetRawContentByRef(owner: owner, name: repo, path: targetFilePath, reference: branch).Result;
                         oldFileContent = Convert.ToBase64String(temp);
+                        try
+                        {
+                            oldFileContentTxt = System.Text.Encoding.UTF8.GetString(temp);
+                        }
+                        catch (Exception ex)
+                        {
+                            //System.Console.WriteLine(ex.ToString());
+                        }
                     }
 
                     // 比较文件内容，如果内容相同则跳过提交
-                    if (oldFileContent == fileContent)
+                    if (oldFileContent == fileContent || (oldFileContentTxt != null && oldFileContentTxt == fileContent))
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容未变, 放弃提交");
                         return;
