@@ -180,7 +180,7 @@ namespace MemosPlus
                                         }
 
                                         // 注意: 对于资源文件的引用来说，无论资源文件是否成功获取, 它都是存在的，其在 md 文件中的引用字符串不会变
-                                        resourceFileMdSb.AppendLine($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   ");
+                                        resourceFileMdSb.Append($"![{memoResourceFileName}]({Path.GetFileNameWithoutExtension(memoFileName)}/{memoResourceFileName})   " + "\n");
 
                                         #region 纯文本文件-代码块
                                         {
@@ -237,9 +237,9 @@ namespace MemosPlus
                                                     content = Encoding.UTF8.GetString(resourceFile);
                                                     if (!string.IsNullOrEmpty(content))
                                                     {
-                                                        resourceFileMdSb.AppendLine($"```{codeBlockLanguage} {resourceItem.filename}");
-                                                        resourceFileMdSb.AppendLine(content);
-                                                        resourceFileMdSb.AppendLine("```");
+                                                        resourceFileMdSb.Append($"```{codeBlockLanguage} {resourceItem.filename}" + "\n");
+                                                        resourceFileMdSb.Append(content + "\n");
+                                                        resourceFileMdSb.Append("```" + "\n");
                                                     }
                                                 }
                                                 catch (Exception ex)

@@ -125,17 +125,18 @@ namespace MemosPlus.Utils
                         var temp = gitHubClient.Repository.Content.GetRawContentByRef(owner: owner, name: repo, path: targetFilePath, reference: branch).Result;
                         oldFileContent = Convert.ToBase64String(temp);
                     }
-                    
+
                     // 比较文件内容，如果内容相同则跳过提交
                     if (oldFileContent == fileContent)
                     {
                         System.Console.WriteLine("GitHubUtil.UpdateFile: 文件内容未变, 放弃提交");
                         return;
                     }
-                    
+
                     // update the file
+                    System.Console.WriteLine("GitHubUtil.UpdateFile: 发生改变, 更新文件");
                     var updateChangeSet = gitHubClient.Repository.Content.UpdateFile(owner, repo, targetFilePath,
-                   new UpdateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                   new UpdateFileRequest(message: $"{nameof(MemosPlus)} UpdateFile {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} \n\n{repoTargetFilePath}",
                    content: fileContent, sha: existingFile.First().Sha, branch: branch, convertContentToBase64: convertContentToBase64))
                     .Result;
                 }
@@ -144,7 +145,7 @@ namespace MemosPlus.Utils
                     // 文件不存在，创建新文件
                     System.Console.WriteLine("GitHubUtil.UpdateFile: 文件不存在，创建新文件");
                     var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                    new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                    new CreateFileRequest(message: $"{nameof(MemosPlus)} CreateFile {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} \n\n{repoTargetFilePath}",
                    content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
                 }
             }
@@ -152,11 +153,15 @@ namespace MemosPlus.Utils
             catch (Exception ex)
             {
                 // 只有在文件确实不存在时才创建，避免重复创建
-                if (ex is Octokit.NotFoundException)
+                if (ex is Octokit.NotFoundException
+                    || ex is System.AggregateException ae
+                    && ae != null && ae.InnerException != null
+                    && ae.InnerException is Octokit.NotFoundException
+                    )
                 {
                     System.Console.WriteLine("GitHubUtil.UpdateFile: 文件不存在(NotFoundException)，创建新文件");
                     var createChangeSet = gitHubClient.Repository.Content.CreateFile(owner, repo, targetFilePath,
-                    new CreateFileRequest(message: $"{nameof(MemosPlus)} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}",
+                    new CreateFileRequest(message: $"{nameof(MemosPlus)} CreateFile {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} \n\n{repoTargetFilePath}",
                    content: fileContent, branch: branch, convertContentToBase64: convertContentToBase64)).Result;
                 }
                 else
